@@ -1,0 +1,29 @@
+.progress-bar {
+  position: relative;
+  height: 28px;
+  background: var(--surface2);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: var(--accent);
+  border-radius: var(--radius);
+  transition: width 0.2s ease;
+}
+
+.progress-bar-text {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+}

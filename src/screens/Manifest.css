@@ -1,0 +1,190 @@
+.manifest {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.manifest-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+}
+
+.manifest-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0 0 8px 0;
+}
+
+.manifest-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.manifest-select {
+  min-height: var(--tap);
+  padding: 12px 16px;
+  background: var(--surface);
+  border: 1px solid var(--surface2);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 1rem;
+  width: 100%;
+}
+
+.manifest-cargo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.manifest-add-row {
+  padding: 8px 12px;
+  color: var(--accent);
+  font-weight: 500;
+  min-height: var(--tap);
+  display: inline-flex;
+  align-items: center;
+}
+
+.manifest-add-row:hover {
+  text-decoration: underline;
+}
+
+.manifest-empty {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0;
+  padding: 12px 0;
+}
+
+.manifest-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.manifest-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.manifest-row-commodity {
+  flex: 1;
+  min-width: 120px;
+  min-height: var(--tap);
+  padding: 10px 12px;
+  background: var(--surface);
+  border: 1px solid var(--surface2);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.manifest-row-qty {
+  width: 80px;
+  min-height: var(--tap);
+  padding: 10px 12px;
+  background: var(--surface);
+  border: 1px solid var(--surface2);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.manifest-row-remove {
+  padding: 8px 12px;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.manifest-row-remove:hover {
+  color: var(--danger);
+}
+
+.manifest-submit {
+  margin-top: 8px;
+  min-height: var(--tap);
+  padding: 16px 24px;
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 600;
+  border-radius: var(--radius);
+  font-size: 1.1rem;
+}
+
+.manifest-submit:hover {
+  background: var(--accent-hover);
+}
+
+.manifest-report {
+  margin-top: 24px;
+  padding: 20px;
+  background: var(--surface);
+  border-radius: var(--radius);
+}
+
+.manifest-report-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+}
+
+.manifest-report-section {
+  margin-bottom: 16px;
+}
+
+.manifest-report-section:last-of-type {
+  margin-bottom: 0;
+}
+
+.manifest-report-heading {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin: 0 0 6px 0;
+}
+
+.manifest-report-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.manifest-report-list li {
+  padding: 4px 0;
+  font-size: 0.95rem;
+}
+
+.manifest-report-warnings .manifest-report-list li {
+  color: #eab308;
+}
+
+.manifest-report-risks .manifest-report-list li {
+  color: var(--danger);
+}
+
+.manifest-report-clear {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0 0 12px 0;
+}
+
+.manifest-back-checklist {
+  margin-top: 16px;
+  padding: 12px 16px;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.manifest-back-checklist:hover {
+  text-decoration: underline;
+}

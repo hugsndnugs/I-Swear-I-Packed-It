@@ -1,0 +1,69 @@
+.packlist {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.packlist-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+}
+
+.packlist-desc {
+  color: var(--text-muted);
+  margin: 0 0 8px 0;
+  font-size: 0.95rem;
+}
+
+.packlist-default-note {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin: 0 0 8px 0;
+  padding: 10px 12px;
+  background: var(--surface2);
+  border-radius: var(--radius);
+}
+
+.packlist-section {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.packlist-section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin: 0 0 12px 0;
+}
+
+.packlist-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.packlist-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 8px 0;
+  font-size: 1rem;
+}
+
+.packlist-item-check {
+  flex-shrink: 0;
+  font-size: 1.25rem;
+  color: var(--text-muted);
+}
+
+.packlist-note {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin: 0;
+}

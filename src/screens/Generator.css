@@ -1,0 +1,247 @@
+.generator {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.generator-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.generator-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+.generator-select,
+.generator-input {
+  min-height: var(--tap);
+  padding: 12px 16px;
+  background: var(--surface);
+  border: 1px solid var(--surface2);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 1rem;
+  width: 100%;
+}
+
+.generator-input {
+  max-width: 120px;
+}
+
+.generator-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.generator-chip {
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.generator-chip:hover {
+  color: var(--text);
+  background: var(--surface2);
+}
+
+.generator-chip.active {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.generator-roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.generator-role {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  min-height: var(--tap);
+}
+
+.generator-role input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent);
+}
+
+.generator-submit {
+  margin-top: 16px;
+  min-height: var(--tap);
+  padding: 16px 24px;
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 600;
+  border-radius: var(--radius);
+  font-size: 1.1rem;
+}
+
+.generator-submit:hover {
+  background: var(--accent-hover);
+}
+
+.generator-frequently-missed {
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px dashed var(--surface2);
+}
+
+.generator-frequently-missed-label {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.generator-context-warnings {
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--surface2);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.generator-context-alert {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--danger, #dc2626);
+}
+
+.generator-context-warning {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--warning, #ca8a04);
+}
+
+.generator-pack-link {
+  margin-top: 8px;
+  padding: 12px;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.generator-share {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.generator-share-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.generator-share-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.generator-share-btn {
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--surface2);
+  color: var(--text);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.generator-share-btn:hover {
+  background: var(--surface2);
+}
+
+.generator-qr-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.generator-qr-modal {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 100%;
+}
+
+.generator-qr-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.generator-qr-image {
+  display: block;
+  width: 260px;
+  height: 260px;
+}
+
+.generator-qr-loading {
+  min-width: 260px;
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+.generator-qr-close {
+  padding: 10px 20px;
+  background: var(--surface2);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-weight: 500;
+}
+
+.generator-qr-close:hover {
+  background: var(--surface);
+}
+
+.generator-pack-link:hover {
+  text-decoration: underline;
+}
+
+.generator-ship-search {
+  margin-bottom: 0;
+}
+
+.generator-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.generator-filter-row input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+}
