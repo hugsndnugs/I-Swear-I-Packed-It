@@ -1,0 +1,39 @@
+name: Update ships data
+
+on:
+  schedule:
+    # Weekly on Monday at 00:00 UTC
+    - cron: "0 0 * * 1"
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install
+        run: npm ci
+
+      - name: Fetch ships (no cache)
+        run: node scripts/fetch-ships-api.mjs
+        env:
+          PREFLIGHT_API_SKIP_CACHE: "1"
+
+      - name: Create PR if updated
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: "update-ships/auto"
+          commit-message: "chore: update ships data from API"
+          title: "chore: update ships data"
+          body: "Auto-update of ships.generated.ts from Star Citizen API."
+          labels: "dependencies"
