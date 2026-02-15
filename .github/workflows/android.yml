@@ -43,7 +43,7 @@ jobs:
           cd android && ./gradlew assembleDebug
 
       - name: Upload APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: app-debug
           path: android/app/build/outputs/apk/debug/*.apk
