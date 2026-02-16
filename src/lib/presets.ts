@@ -4,6 +4,12 @@ import {
   OPERATION_TYPES,
   CREW_ROLES
 } from '../data/contexts'
+import {
+  isCrewRoleCountsExport,
+  totalCrew,
+  roleCountsToRoles,
+  type CrewRoleCounts
+} from './crewRoleCounts'
 import { setStorageError } from './storageError'
 
 export interface PresetConfig {
@@ -13,6 +19,7 @@ export interface PresetConfig {
   operationType: OperationType
   crewCount: number
   crewRoles: CrewRole[]
+  crewRoleCounts?: CrewRoleCounts
   createdAt: number
 }
 
@@ -37,17 +44,31 @@ function isCrewRoles(v: unknown): v is CrewRole[] {
 function isValidPreset(item: unknown): item is PresetConfig {
   if (!item || typeof item !== 'object') return false
   const o = item as Record<string, unknown>
+  const hasCrewRoleCounts = isCrewRoleCountsExport(o.crewRoleCounts)
+  const hasLegacyCrew =
+    typeof o.crewCount === 'number' &&
+    Number.isInteger(o.crewCount) &&
+    o.crewCount >= 1 &&
+    isCrewRoles(o.crewRoles)
   return (
     typeof o.id === 'string' &&
     typeof o.name === 'string' &&
     typeof o.shipId === 'string' &&
     isOperationType(o.operationType) &&
-    typeof o.crewCount === 'number' &&
-    Number.isInteger(o.crewCount) &&
-    o.crewCount >= 1 &&
-    isCrewRoles(o.crewRoles) &&
+    (hasCrewRoleCounts || hasLegacyCrew) &&
     typeof o.createdAt === 'number'
   )
+}
+
+function normalizePreset(o: PresetConfig): PresetConfig {
+  if (o.crewRoleCounts) {
+    return {
+      ...o,
+      crewCount: totalCrew(o.crewRoleCounts),
+      crewRoles: roleCountsToRoles(o.crewRoleCounts)
+    }
+  }
+  return o
 }
 
 export function loadPresets(): PresetConfig[] {
@@ -56,7 +77,7 @@ export function loadPresets(): PresetConfig[] {
     if (!raw) return []
     const parsed = JSON.parse(raw) as unknown
     if (!Array.isArray(parsed)) return []
-    return parsed.filter(isValidPreset)
+    return parsed.filter(isValidPreset).map(normalizePreset)
   } catch {
     return []
   }
@@ -94,19 +115,34 @@ export interface LastRunConfig {
   operationType: OperationType
   crewCount: number
   crewRoles: CrewRole[]
+  crewRoleCounts?: CrewRoleCounts
 }
 
 function isValidLastRun(v: unknown): v is LastRunConfig {
   if (!v || typeof v !== 'object') return false
   const o = v as Record<string, unknown>
-  return (
-    typeof o.shipId === 'string' &&
-    isOperationType(o.operationType) &&
+  const hasCrewRoleCounts = isCrewRoleCountsExport(o.crewRoleCounts)
+  const hasLegacyCrew =
     typeof o.crewCount === 'number' &&
     Number.isInteger(o.crewCount) &&
     o.crewCount >= 1 &&
     isCrewRoles(o.crewRoles)
+  return (
+    typeof o.shipId === 'string' &&
+    isOperationType(o.operationType) &&
+    (hasCrewRoleCounts || hasLegacyCrew)
   )
+}
+
+function normalizeLastRun(o: LastRunConfig): LastRunConfig {
+  if (o.crewRoleCounts) {
+    return {
+      ...o,
+      crewCount: totalCrew(o.crewRoleCounts),
+      crewRoles: roleCountsToRoles(o.crewRoleCounts)
+    }
+  }
+  return o
 }
 
 export function loadLastRun(): LastRunConfig | null {
@@ -114,15 +150,29 @@ export function loadLastRun(): LastRunConfig | null {
     const raw = localStorage.getItem(LAST_RUN_KEY)
     if (!raw) return null
     const parsed = JSON.parse(raw) as unknown
-    return isValidLastRun(parsed) ? parsed : null
+    return isValidLastRun(parsed) ? normalizeLastRun(parsed) : null
   } catch {
     return null
   }
 }
 
-export function saveLastRun(config: LastRunConfig): void {
+export type SaveLastRunInput =
+  | LastRunConfig
+  | { shipId: string; operationType: OperationType; crewRoleCounts: CrewRoleCounts }
+
+export function saveLastRun(config: SaveLastRunInput): void {
   try {
-    localStorage.setItem(LAST_RUN_KEY, JSON.stringify(config))
+    const toStore: LastRunConfig =
+      'crewRoleCounts' in config && config.crewRoleCounts
+        ? {
+            shipId: config.shipId,
+            operationType: config.operationType,
+            crewCount: totalCrew(config.crewRoleCounts),
+            crewRoles: roleCountsToRoles(config.crewRoleCounts),
+            crewRoleCounts: config.crewRoleCounts
+          }
+        : (config as LastRunConfig)
+    localStorage.setItem(LAST_RUN_KEY, JSON.stringify(toStore))
     setStorageError(null)
   } catch {
     setStorageError('Could not save; check storage or use in normal browsing mode.')

@@ -3,6 +3,12 @@ import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 import { Star, Backpack } from 'lucide-react'
 import { ships } from '../data/ships'
 import { OPERATION_TYPES, CREW_ROLES, type OperationType, type CrewRole } from '../data/contexts'
+import {
+  totalCrew,
+  roleCountsToRoles,
+  normalizeToCrewRoleCounts,
+  type CrewRoleCounts
+} from '../lib/crewRoleCounts'
 import { generateChecklist } from '../lib/generateChecklist'
 import { saveLastRun } from '../lib/presets'
 import {
@@ -34,28 +40,31 @@ export default function Generator() {
   const urlPreset = useMemo(() => getPresetFromSearchParams(searchParams), [searchParams])
   const initial = urlPreset ?? preset ?? (state?.fromLastRun && lastRun ? lastRun : null)
 
+  const initialCounts = useMemo(() => normalizeToCrewRoleCounts(initial ?? {}), [initial])
+
   const [shipId, setShipId] = useState(initial?.shipId ?? 'cutlass-black')
   const [shipSearch, setShipSearch] = useState('')
   const [flightReadyOnly, setFlightReadyOnly] = useState(true)
   const [operationType, setOperationType] = useState<OperationType>(initial?.operationType ?? 'cargo-run')
-  const [crewCount, setCrewCount] = useState(initial?.crewCount ?? 1)
-  const [crewRoles, setCrewRoles] = useState<CrewRole[]>(initial?.crewRoles ?? ['pilot'])
+  const [crewRoleCounts, setCrewRoleCounts] = useState<CrewRoleCounts>(initialCounts)
   const [shareCopied, setShareCopied] = useState<'link' | 'code' | null>(null)
   const [showQr, setShowQr] = useState(false)
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null)
   const [prefsTick, setPrefsTick] = useState(0)
 
+  const crewCount = useMemo(() => totalCrew(crewRoleCounts), [crewRoleCounts])
+  const crewRoles = useMemo(() => roleCountsToRoles(crewRoleCounts), [crewRoleCounts])
+
   const sharedPayload: SharedPresetPayload = useMemo(
-    () => ({ shipId, operationType, crewCount, crewRoles }),
-    [shipId, operationType, crewCount, crewRoles]
+    () => ({ shipId, operationType, crewCount, crewRoles, crewRoleCounts }),
+    [shipId, operationType, crewCount, crewRoles, crewRoleCounts]
   )
 
   useEffect(() => {
     if (!urlPreset) return
     setShipId(urlPreset.shipId)
     setOperationType(urlPreset.operationType)
-    setCrewCount(urlPreset.crewCount)
-    setCrewRoles([...urlPreset.crewRoles])
+    setCrewRoleCounts(normalizeToCrewRoleCounts(urlPreset))
   }, [urlPreset])
 
   useEffect(() => {
@@ -63,7 +72,7 @@ export default function Generator() {
     const payload: SharedPresetPayload = { shipId, operationType, crewCount, crewRoles }
     const url = buildShareableUrl(payload)
     import('qrcode').then((QRCode) => QRCode.toDataURL(url, { width: 260, margin: 1 })).then(setQrDataUrl)
-  }, [showQr, shipId, operationType, crewCount, crewRoles.join(',')])
+  }, [showQr, shipId, operationType, crewCount, crewRoles])
 
   const closeQr = () => {
     setShowQr(false)
@@ -103,10 +112,9 @@ export default function Generator() {
     return { favShips, recentShips, shipsGroupOptions }
   }, [filteredShips, shipId, favoriteIds, recentIds])
 
-  const toggleRole = (role: CrewRole) => {
-    setCrewRoles((prev) =>
-      prev.includes(role) ? prev.filter((r) => r !== role) : [...prev, role]
-    )
+  const setRoleCount = (role: CrewRole, value: number) => {
+    const n = Math.max(0, Math.min(20, Math.floor(Number(value)) || 0))
+    setCrewRoleCounts((prev) => ({ ...prev, [role]: n }))
   }
 
   const ship = useMemo(() => ships.find((s) => s.id === shipId) ?? null, [shipId])
@@ -118,11 +126,12 @@ export default function Generator() {
   const frequentlyMissed = useMemo(() => getFrequentlyMissedTaskIds(3), [])
 
   const handleGenerate = () => {
+    if (crewCount === 0) return
     pushRecentShip(shipId)
     const checklist: GeneratedChecklist = generateChecklist(shipId, operationType, crewRoles)
-    saveLastRun({ shipId, operationType, crewCount, crewRoles })
+    saveLastRun({ shipId, operationType, crewRoleCounts })
     navigate('/checklist', {
-      state: { checklist, shipId, operationType, crewRoles, contextWarnings }
+      state: { checklist, shipId, operationType, crewRoles, crewRoleCounts, contextWarnings }
     })
   }
 
@@ -234,37 +243,33 @@ export default function Generator() {
         ))}
       </div>
 
-      <label className="generator-label" htmlFor="crew-count">
-        Crew count
-      </label>
-      <input
-        id="crew-count"
-        type="number"
-        min={1}
-        max={20}
-        value={crewCount}
-        onChange={(e) => setCrewCount(Number(e.target.value) || 1)}
-        className="generator-input input"
-        aria-label="Crew count"
-      />
-
-      {crewCount >= 1 && (
-        <>
-          <label className="generator-label">Crew roles</label>
-          <div className="generator-roles" role="group" aria-label="Crew roles">
-            {CREW_ROLES.map((r) => (
-              <label key={r.id} className="generator-role">
-                <input
-                  type="checkbox"
-                  checked={crewRoles.includes(r.id)}
-                  onChange={() => toggleRole(r.id)}
-                  aria-label={`Role: ${r.label}`}
-                />
-                <span>{r.label}</span>
-              </label>
-            ))}
+      <label className="generator-label">Crew by role</label>
+      <p className="generator-crew-summary" aria-live="polite">
+        Total crew: {crewCount} {crewCount === 1 ? 'person' : 'people'}
+      </p>
+      <div className="generator-roles" role="group" aria-label="Crew roles">
+        {CREW_ROLES.map((r) => (
+          <div key={r.id} className="generator-role-row">
+            <label htmlFor={`crew-role-${r.id}`} className="generator-role-label">
+              {r.label}
+            </label>
+            <input
+              id={`crew-role-${r.id}`}
+              type="number"
+              min={0}
+              max={20}
+              value={crewRoleCounts[r.id] ?? 0}
+              onChange={(e) => setRoleCount(r.id, e.target.value)}
+              className="generator-input input generator-role-input"
+              aria-label={`Number of ${r.label}s`}
+            />
           </div>
-        </>
+        ))}
+      </div>
+      {crewCount === 0 && (
+        <p className="generator-crew-warning" role="alert">
+          Add at least one crew member (e.g. Pilot) to generate a checklist.
+        </p>
       )}
 
       {frequentlyMissed.length > 0 && (
@@ -293,6 +298,7 @@ export default function Generator() {
       <button
         className="generator-submit btn-primary"
         onClick={handleGenerate}
+        disabled={crewCount === 0}
         aria-label="Generate checklist"
       >
         Generate
@@ -352,7 +358,7 @@ export default function Generator() {
       <button
         type="button"
         className="generator-pack-link btn-ghost"
-        onClick={() => navigate('/pack', { state: { crewRoles } })}
+        onClick={() => navigate('/pack', { state: { crewRoles, crewRoleCounts } })}
         aria-label="View pack list for selected roles"
       >
         <Backpack size={18} aria-hidden />

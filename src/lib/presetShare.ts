@@ -1,12 +1,14 @@
 import { OPERATION_TYPES, CREW_ROLES } from '../data/contexts'
 import type { OperationType, CrewRole } from '../data/contexts'
+import { isCrewRoleCountsExport, type CrewRoleCounts } from './crewRoleCounts'
 
 /** Payload for sharing a preset via link or code (no id/createdAt). */
 export interface SharedPresetPayload {
   shipId: string
   operationType: OperationType
-  crewCount: number
-  crewRoles: CrewRole[]
+  crewCount?: number
+  crewRoles?: CrewRole[]
+  crewRoleCounts?: CrewRoleCounts
   name?: string
 }
 
@@ -28,13 +30,16 @@ function isCrewRoles(v: unknown): v is CrewRole[] {
 function isValidPayload(o: unknown): o is SharedPresetPayload {
   if (!o || typeof o !== 'object') return false
   const r = o as Record<string, unknown>
-  return (
-    typeof r.shipId === 'string' &&
-    isOperationType(r.operationType) &&
+  const hasCrewRoleCounts = isCrewRoleCountsExport(r.crewRoleCounts)
+  const hasLegacyCrew =
     typeof r.crewCount === 'number' &&
     Number.isInteger(r.crewCount) &&
     r.crewCount >= 1 &&
-    isCrewRoles(r.crewRoles) &&
+    isCrewRoles(r.crewRoles)
+  return (
+    typeof r.shipId === 'string' &&
+    isOperationType(r.operationType) &&
+    (hasCrewRoleCounts || hasLegacyCrew) &&
     (r.name === undefined || typeof r.name === 'string')
   )
 }

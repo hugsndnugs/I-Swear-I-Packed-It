@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
-import { getLoadoutForRoles, LOADOUT_CATEGORY_LABELS } from './loadouts'
+import { getLoadoutForRoles, getLoadoutWithQuantities, LOADOUT_CATEGORY_LABELS } from './loadouts'
 import type { CrewRole } from './contexts'
+import type { CrewRoleCounts } from '../lib/crewRoleCounts'
 
 describe('getLoadoutForRoles', () => {
   it('returns pilot loadout for pilot only', () => {
@@ -35,5 +36,29 @@ describe('getLoadoutForRoles', () => {
     for (const item of result) {
       expect(Object.keys(LOADOUT_CATEGORY_LABELS)).toContain(item.category)
     }
+  })
+})
+
+describe('getLoadoutWithQuantities', () => {
+  it('returns quantities for single pilot', () => {
+    const counts: CrewRoleCounts = { pilot: 1, gunner: 0, medic: 0, escort: 0, loader: 0 }
+    const result = getLoadoutWithQuantities(counts)
+    const helmet = result.find((r) => r.id === 'helmet')
+    expect(helmet).toBeDefined()
+    expect(helmet?.quantity).toBe(1)
+  })
+
+  it('sums helmet quantity across roles', () => {
+    const counts: CrewRoleCounts = { pilot: 2, gunner: 1, medic: 0, escort: 0, loader: 0 }
+    const result = getLoadoutWithQuantities(counts)
+    const helmet = result.find((r) => r.id === 'helmet')
+    expect(helmet?.quantity).toBe(3)
+  })
+
+  it('uses quantityPerPerson for medpens', () => {
+    const counts: CrewRoleCounts = { pilot: 1, gunner: 0, medic: 0, escort: 0, loader: 0 }
+    const result = getLoadoutWithQuantities(counts)
+    const medpens = result.find((r) => r.id === 'medpens')
+    expect(medpens?.quantity).toBe(3)
   })
 })

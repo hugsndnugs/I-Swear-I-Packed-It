@@ -102,10 +102,40 @@
   color: var(--bg);
 }
 
+.generator-crew-summary {
+  margin: 0 0 var(--space-2) 0;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.generator-crew-warning {
+  margin: var(--space-2) 0 0 0;
+  font-size: var(--text-sm);
+  color: var(--warning);
+}
+
 .generator-roles {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: var(--space-2);
+}
+
+.generator-role-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--tap);
+}
+
+.generator-role-label {
+  flex: 1;
+  font-size: var(--text-base);
+  color: var(--text);
+}
+
+.generator-role-input {
+  width: 4ch;
+  text-align: center;
 }
 
 .generator-role {

@@ -2,12 +2,10 @@ import { useState, useMemo } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Heart, Shield, Wrench, Crosshair, Package } from 'lucide-react'
 import { loadLastRun } from '../lib/presets'
-import { getLoadoutForRoles, LOADOUT_CATEGORY_LABELS } from '../data/loadouts'
-import type { CrewRole } from '../data/contexts'
+import { getLoadoutWithQuantities, LOADOUT_CATEGORY_LABELS } from '../data/loadouts'
+import { normalizeToCrewRoleCounts } from '../lib/crewRoleCounts'
 import type { PackListLocationState } from '../types/navigation'
 import './PackList.css'
-
-const DEFAULT_ROLES: CrewRole[] = ['pilot']
 
 const CATEGORY_ICONS: Record<string, typeof Heart> = {
   medical: Heart,
@@ -21,10 +19,13 @@ export default function PackList() {
   const location = useLocation()
   const state = location.state as PackListLocationState | null
   const lastRun = loadLastRun()
-  const crewRoles = state?.crewRoles ?? lastRun?.crewRoles ?? DEFAULT_ROLES
+  const crewRoleCounts = useMemo(
+    () => normalizeToCrewRoleCounts(state ?? lastRun ?? {}),
+    [state?.crewRoleCounts, state?.crewRoles, lastRun?.crewRoleCounts, lastRun?.crewRoles, lastRun?.crewCount]
+  )
   const [checked, setChecked] = useState<Set<string>>(new Set())
 
-  const loadout = useMemo(() => getLoadoutForRoles(crewRoles), [crewRoles])
+  const loadout = useMemo(() => getLoadoutWithQuantities(crewRoleCounts), [crewRoleCounts])
 
   const toggleItem = (id: string) => {
     setChecked((prev) => {
@@ -46,7 +47,11 @@ export default function PackList() {
     return order.filter((c) => map.has(c)).map((cat) => ({ category: cat, items: map.get(cat)! }))
   }, [loadout])
 
-  const usingDefaultRoles = crewRoles.length === 1 && crewRoles[0] === 'pilot' && !state?.crewRoles
+  const usingDefaultRoles =
+    !state?.crewRoleCounts &&
+    !state?.crewRoles?.length &&
+    !lastRun?.crewRoleCounts &&
+    (!lastRun || (lastRun.crewRoles?.length === 1 && lastRun.crewRoles[0] === 'pilot'))
 
   return (
     <div className="packlist">
@@ -80,7 +85,7 @@ export default function PackList() {
                     {checked.has(item.id) ? '\u2713' : ''}
                   </button>
                   <span className={checked.has(item.id) ? 'packlist-item-label checked' : 'packlist-item-label'}>
-                    {item.label}
+                    {item.quantity > 1 ? `${item.quantity}\u00d7 ` : ''}{item.label}
                   </span>
                 </li>
               ))}

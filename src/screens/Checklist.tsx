@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { CheckCheck, ChevronRight } from 'lucide-react'
 import type { ChecklistSection, ChecklistTask } from '../lib/generateChecklist'
@@ -10,6 +10,7 @@ import {
   checklistProgressMatches
 } from '../lib/presets'
 import { recordRun } from '../lib/runHistory'
+import { roleCountsToRoles, totalCrew } from '../lib/crewRoleCounts'
 import { CREW_ROLES, OPERATION_TYPES } from '../data/contexts'
 import { ships } from '../data/ships'
 import { buildShareableUrl } from '../lib/presetShare'
@@ -22,9 +23,19 @@ export default function Checklist() {
   const state = location.state as ChecklistLocationState | null
 
   const checklist = state?.checklist
+  const crewRoles = useMemo(
+    () =>
+      state?.crewRoles ??
+      (state?.crewRoleCounts ? roleCountsToRoles(state.crewRoleCounts) : undefined),
+    [state?.crewRoles, state?.crewRoleCounts]
+  )
+  const crewCount = useMemo(
+    () => (state?.crewRoleCounts ? totalCrew(state.crewRoleCounts) : (crewRoles?.length ?? 1)),
+    [state?.crewRoleCounts, crewRoles?.length]
+  )
   const context =
-    state?.shipId && state?.operationType && state?.crewRoles
-      ? { shipId: state.shipId, operationType: state.operationType, crewRoles: state.crewRoles }
+    state?.shipId && state?.operationType && crewRoles
+      ? { shipId: state.shipId, operationType: state.operationType, crewRoles }
       : null
 
   const [completed, setCompleted] = useState<Set<string>>(() => {
@@ -74,14 +85,14 @@ export default function Checklist() {
   }, [checklist, activeSectionIndex, completed])
 
   useEffect(() => {
-    if (!checklist || !state?.shipId || !state?.operationType || !state?.crewRoles) return
+    if (!checklist || !state?.shipId || !state?.operationType || !crewRoles) return
     saveChecklistProgress({
       shipId: state.shipId,
       operationType: state.operationType,
-      crewRoles: state.crewRoles,
+      crewRoles,
       completedIds: [...completed]
     })
-  }, [completed, checklist, state?.shipId, state?.operationType, state?.crewRoles])
+  }, [completed, checklist, state?.shipId, state?.operationType, crewRoles])
 
   if (checklist && context) {
     const allTaskIds = checklist.sections.flatMap((s) => s.tasks.map((t) => t.id))
@@ -98,16 +109,16 @@ export default function Checklist() {
   }, [context])
 
   useEffect(() => {
-    if (!showQr || !state?.shipId || !state?.operationType || !state?.crewRoles) return
+    if (!showQr || !state?.shipId || !state?.operationType || !crewRoles) return
     const payload = {
       shipId: state.shipId,
       operationType: state.operationType,
-      crewCount: state.crewRoles.length || 1,
-      crewRoles: state.crewRoles
+      crewCount,
+      crewRoles
     }
     const url = buildShareableUrl(payload)
     import('qrcode').then((QRCode) => QRCode.toDataURL(url, { width: 260, margin: 1 })).then(setQrDataUrl)
-  }, [showQr, state?.shipId, state?.operationType, state?.crewRoles?.join(',')])
+  }, [showQr, state?.shipId, state?.operationType, crewRoles, crewCount])
 
   const closeQr = () => {
     setShowQr(false)
@@ -199,13 +210,14 @@ export default function Checklist() {
   }
 
   const handleSavePreset = () => {
-    if (!saveName.trim() || !state?.shipId || !state?.operationType || !state?.crewRoles) return
+    if (!saveName.trim() || !state?.shipId || !state?.operationType || !crewRoles) return
     savePreset({
       name: saveName.trim(),
       shipId: state.shipId,
       operationType: state.operationType,
-      crewCount: state.crewRoles.length || 1,
-      crewRoles: state.crewRoles
+      crewCount,
+      crewRoles,
+      ...(state?.crewRoleCounts && { crewRoleCounts: state.crewRoleCounts })
     })
     closeSaveModal()
   }
@@ -378,7 +390,7 @@ export default function Checklist() {
         >
           {exportCopied ? 'Copied' : 'Export summary'}
         </button>
-        {state?.shipId && state?.operationType && state?.crewRoles && (
+        {state?.shipId && state?.operationType && crewRoles && (
           <button
             type="button"
             className="checklist-share-phone-btn btn-ghost"
@@ -388,11 +400,15 @@ export default function Checklist() {
             Share to phone
           </button>
         )}
-        {state?.crewRoles && state.crewRoles.length > 0 && (
+        {crewRoles && crewRoles.length > 0 && (
           <button
             type="button"
             className="checklist-pack-link btn-ghost"
-            onClick={() => navigate('/pack', { state: { crewRoles: state.crewRoles } })}
+            onClick={() =>
+              navigate('/pack', {
+                state: { crewRoles, crewRoleCounts: state?.crewRoleCounts }
+              })
+            }
             aria-label="View pack list"
           >
             View Pack List

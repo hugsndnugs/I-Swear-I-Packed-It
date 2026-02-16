@@ -87,7 +87,8 @@ export default function Home() {
                   checklist,
                   shipId: lastRun.shipId,
                   operationType: lastRun.operationType,
-                  crewRoles: lastRun.crewRoles
+                  crewRoles: lastRun.crewRoles,
+                  crewRoleCounts: lastRun.crewRoleCounts
                 }
               })
             }}
@@ -163,7 +164,8 @@ export default function Home() {
                             shipId: p.shipId,
                             operationType: p.operationType,
                             crewCount: p.crewCount,
-                            crewRoles: p.crewRoles
+                            crewRoles: p.crewRoles,
+                            crewRoleCounts: p.crewRoleCounts
                           }
                         }
                       })
