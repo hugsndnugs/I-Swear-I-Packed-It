@@ -1,3 +1,5 @@
+import { playError } from './audioCues'
+
 let error: string | null = null
 const listeners: Array<() => void> = []
 
@@ -6,6 +8,13 @@ export function getStorageError(): string | null {
 }
 
 export function setStorageError(msg: string | null): void {
+  if (msg != null) {
+    try {
+      playError()
+    } catch {
+      // ignore
+    }
+  }
   error = msg
   listeners.forEach((l) => l())
 }

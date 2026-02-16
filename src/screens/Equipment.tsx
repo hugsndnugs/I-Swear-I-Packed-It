@@ -4,11 +4,16 @@ import {
   getEquipmentByCategory,
   EQUIPMENT_CATEGORY_LABELS,
   SUB_CATEGORY_LABELS,
+  type EquipmentItem,
   type EquipmentCategory,
 } from '../data/equipment'
 import { tasks } from '../data/tasks'
 import PullToRefresh from '../components/PullToRefresh'
+import VirtualList from '../components/VirtualList'
 import './Equipment.css'
+
+const VIRTUAL_LIST_THRESHOLD = 25
+const VIRTUAL_LIST_HEIGHT = 320
 
 const TASK_LABEL_BY_ID = Object.fromEntries(tasks.map((t) => [t.id, t.label]))
 
@@ -81,31 +86,66 @@ export default function Equipment() {
                 {Icon && <Icon size={18} aria-hidden />}
                 {EQUIPMENT_CATEGORY_LABELS[cat]}
               </h2>
-              <ul className="equipment-list">
-                {items.map((item) => (
-                  <li key={item.id} className="equipment-item">
-                    <div className="equipment-item-main">
-                      <span className="equipment-item-name">{item.name}</span>
-                      {item.subCategory && (
-                        <span className="equipment-item-sub">
-                          {SUB_CATEGORY_LABELS[item.subCategory] ?? item.subCategory}
-                        </span>
-                      )}
-                      {item.taskIds && item.taskIds.length > 0 && (
-                        <span className="equipment-item-tasks" aria-label="Related checklist tasks">
-                          →{' '}
-                          {item.taskIds
-                            .map((id) => TASK_LABEL_BY_ID[id] ?? id)
-                            .join(' · ')}
-                        </span>
+              {items.length > VIRTUAL_LIST_THRESHOLD ? (
+                <VirtualList<EquipmentItem>
+                  items={items}
+                  estimateSize={56}
+                  height={VIRTUAL_LIST_HEIGHT}
+                  getItemKey={(item) => item.id}
+                  ariaLabel={EQUIPMENT_CATEGORY_LABELS[cat]}
+                  role="list"
+                  className="equipment-list-virtual"
+                  renderItem={(item) => (
+                    <div className="equipment-item">
+                      <div className="equipment-item-main">
+                        <span className="equipment-item-name">{item.name}</span>
+                        {item.subCategory && (
+                          <span className="equipment-item-sub">
+                            {SUB_CATEGORY_LABELS[item.subCategory] ?? item.subCategory}
+                          </span>
+                        )}
+                        {item.taskIds && item.taskIds.length > 0 && (
+                          <span className="equipment-item-tasks" aria-label="Related checklist tasks">
+                            →{' '}
+                            {item.taskIds
+                              .map((id) => TASK_LABEL_BY_ID[id] ?? id)
+                              .join(' · ')}
+                          </span>
+                        )}
+                      </div>
+                      {item.description && (
+                        <p className="equipment-item-desc">{item.description}</p>
                       )}
                     </div>
-                    {item.description && (
-                      <p className="equipment-item-desc">{item.description}</p>
-                    )}
-                  </li>
-                ))}
-              </ul>
+                  )}
+                />
+              ) : (
+                <ul className="equipment-list">
+                  {items.map((item) => (
+                    <li key={item.id} className="equipment-item">
+                      <div className="equipment-item-main">
+                        <span className="equipment-item-name">{item.name}</span>
+                        {item.subCategory && (
+                          <span className="equipment-item-sub">
+                            {SUB_CATEGORY_LABELS[item.subCategory] ?? item.subCategory}
+                          </span>
+                        )}
+                        {item.taskIds && item.taskIds.length > 0 && (
+                          <span className="equipment-item-tasks" aria-label="Related checklist tasks">
+                            →{' '}
+                            {item.taskIds
+                              .map((id) => TASK_LABEL_BY_ID[id] ?? id)
+                              .join(' · ')}
+                          </span>
+                        )}
+                      </div>
+                      {item.description && (
+                        <p className="equipment-item-desc">{item.description}</p>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </section>
           )
         })}

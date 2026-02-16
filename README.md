@@ -83,6 +83,8 @@ npm run test:e2e:ui
 - vite-plugin-pwa (Workbox) for offline and installability
 - No backend; presets and last-run stored in `localStorage`
 
+**Images:** The app uses the logo and PWA icons only; there are no ship or equipment image assets. If you add images later (e.g. ship icons), prefer WebP and use lazy loading (`loading="lazy"` or Intersection Observer) for below-the-fold content.
+
 ## Project structure
 
 - `src/data/` — Ships, tasks, contexts, loadout definitions.

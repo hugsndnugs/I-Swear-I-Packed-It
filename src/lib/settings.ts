@@ -11,11 +11,13 @@ const STORAGE_KEY_PREFIX = 'preflight-settings-'
 const DEFAULT_SETTINGS = {
   fontSize: 'medium' as FontSize,
   highContrast: 'off' as HighContrastMode,
+  soundEffects: true,
 }
 
 export interface AppSettings {
   fontSize: FontSize
   highContrast: HighContrastMode
+  soundEffects: boolean
 }
 
 /**
@@ -29,10 +31,13 @@ export function getSettings(): AppSettings {
   try {
     const fontSize = (localStorage.getItem(`${STORAGE_KEY_PREFIX}fontSize`) as FontSize) || DEFAULT_SETTINGS.fontSize
     const highContrast = (localStorage.getItem(`${STORAGE_KEY_PREFIX}highContrast`) as HighContrastMode) || DEFAULT_SETTINGS.highContrast
+    const soundEffectsRaw = localStorage.getItem(`${STORAGE_KEY_PREFIX}soundEffects`)
+    const soundEffects = soundEffectsRaw === 'false' ? false : DEFAULT_SETTINGS.soundEffects
 
     return {
       fontSize,
       highContrast,
+      soundEffects,
     }
   } catch {
     return DEFAULT_SETTINGS
@@ -46,7 +51,7 @@ export function saveSetting<K extends keyof AppSettings>(key: K, value: AppSetti
   if (typeof window === 'undefined') return
 
   try {
-    localStorage.setItem(`${STORAGE_KEY_PREFIX}${key}`, value)
+    localStorage.setItem(`${STORAGE_KEY_PREFIX}${key}`, String(value))
     // Dispatch event for settings change
     window.dispatchEvent(new CustomEvent('settings-changed', { detail: { key, value } }))
   } catch (error) {

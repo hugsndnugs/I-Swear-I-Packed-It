@@ -80,3 +80,13 @@
   color: var(--text-muted);
   margin-left: auto;
 }
+
+.virtual-list-container {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.equipment-list-virtual.virtual-list-container {
+  border-radius: var(--radius);
+  margin: 0;
+}

@@ -14,6 +14,8 @@ import {
   type OpModeIntervals,
   type NextReminder
 } from '../lib/opModeTimers'
+import { syncOpModeToNative, clearOpModeNativeSync } from '../lib/opModeNativeSync'
+import { playOpModeReminder } from '../lib/audioCues'
 import { initializeNotificationChannels } from '../lib/notifications'
 import { hapticButtonPress } from '../lib/haptics'
 import './OpMode.css'
@@ -48,6 +50,7 @@ export default function OpMode() {
     initializeNotificationChannels()
   }, [])
 
+  // When OpMode is active: resume timer and set fire callback. On unmount, clear callback so we don't hold references.
   useEffect(() => {
     if (state) {
       resumeOpMode()
@@ -55,9 +58,13 @@ export default function OpMode() {
         const next = getNextReminders()
         setReminders(next)
         setLiveAnnounce(`Reminder: ${type}. Next in ${formatCountdown(next[0]?.inMs ?? 0)}`)
+        playOpModeReminder()
+        syncOpModeToNative(getState()).catch(() => {})
       })
     }
-    return () => setOnReminderFire(null)
+    return () => {
+      setOnReminderFire(null)
+    }
   }, [state])
 
   useEffect(() => {
@@ -77,6 +84,7 @@ export default function OpMode() {
     const next = startOpMode(intervals, { notificationsEnabled })
     setState(next)
     setReminders(getNextReminders())
+    syncOpModeToNative(next).catch(() => {})
   }, [intervals, notificationsEnabled])
 
   const handleStop = useCallback(() => {
@@ -84,6 +92,7 @@ export default function OpMode() {
     stopOpMode()
     setState(null)
     setReminders([])
+    clearOpModeNativeSync().catch(() => {})
   }, [])
 
   const handleToggleNotifications = useCallback(async () => {

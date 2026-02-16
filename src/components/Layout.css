@@ -1,8 +1,29 @@
 .layout {
+  position: relative;
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
   padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.layout-skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-4);
+  z-index: 100;
+  padding: var(--space-3) var(--space-4);
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 600;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: top var(--duration-fast) var(--ease-out);
+}
+
+.layout-skip-link:focus {
+  top: var(--space-2);
+  outline: 2px solid var(--bg);
+  outline-offset: 2px;
 }
 
 .layout-header {
@@ -101,6 +122,14 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.layout-offline-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
   flex-shrink: 0;
 }
 

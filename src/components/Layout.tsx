@@ -14,7 +14,7 @@ import { getPirateSettings, setPirateSettings } from '../lib/pirateSettings'
 import { pirateSpeak } from '../lib/pirateSpeak'
 import { ROUTES } from '../constants/routes'
 import { hapticButtonPress } from '../lib/haptics'
-import { Menu, Settings } from 'lucide-react'
+import { Menu, Settings, WifiOff } from 'lucide-react'
 import './Layout.css'
 
 const NAV_DRAWER_ID = 'nav-drawer'
@@ -145,8 +145,21 @@ export default function Layout() {
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
   const toggleDrawer = useCallback(() => setDrawerOpen((o) => !o), [])
 
+  // On route change, move focus to main content (first heading or focusable) for keyboard/screen reader users
+  useEffect(() => {
+    const main = document.getElementById('layout-main-content')
+    if (!main) return
+    const focusTarget = main.querySelector<HTMLElement>('h1, h2, button, a, input, select, [role="button"]')
+    if (focusTarget) {
+      requestAnimationFrame(() => focusTarget.focus({ preventScroll: true }))
+    }
+  }, [location.pathname])
+
   return (
     <div className="layout">
+      <a href="#layout-main-content" className="layout-skip-link">
+        Skip to main content
+      </a>
       <header className="layout-header">
         {isDesktop ? (
           <button
@@ -182,6 +195,11 @@ export default function Layout() {
           {pirateSpeak(pageTitle, pirateSettings.pirateSpeak)}
         </span>
         <div className="layout-header-actions">
+          {!isOnline && (
+            <span className="layout-offline-icon" role="status" aria-label="Offline — using cached content" title="Offline">
+              <WifiOff size={20} aria-hidden />
+            </span>
+          )}
           <Link
             to={ROUTES.SETTINGS}
             className="layout-settings-btn btn-icon"
@@ -193,7 +211,7 @@ export default function Layout() {
           <ThemeToggle />
         </div>
       </header>
-      <main className="layout-main">
+      <main id="layout-main-content" className="layout-main" tabIndex={-1}>
         <StorageErrorBanner />
         {!isOnline && (
           <div className="offline-indicator" role="status" aria-live="polite">

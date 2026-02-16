@@ -6,6 +6,7 @@ import ProgressBar from '../components/ProgressBar'
 import CircularProgress from '../components/CircularProgress'
 import BottomSheet from '../components/BottomSheet'
 import SwipeableItem from '../components/SwipeableItem'
+import CollapsibleSection from '../components/CollapsibleSection'
 import {
   savePreset,
   loadChecklistProgress,
@@ -23,6 +24,7 @@ import { getChecklistState } from '../lib/locationState'
 import { ROUTES } from '../constants/routes'
 import { getLocationById } from '../data/contexts'
 import { hapticTaskComplete, hapticButtonPress } from '../lib/haptics'
+import { playTaskComplete } from '../lib/audioCues'
 import Tooltip from '../components/Tooltip'
 import './Checklist.css'
 
@@ -73,6 +75,10 @@ export default function Checklist() {
   })
 
   const [activeSectionIndex, setActiveSectionIndex] = useState(0)
+  /** List view: which section ids are expanded (per session). */
+  const [expandedSectionIds, setExpandedSectionIds] = useState<Set<string>>(() => new Set())
+  /** View mode: tabs (one section at a time) or list (accordion). */
+  const [viewMode, setViewMode] = useState<'tabs' | 'list'>('tabs')
   const [saveName, setSaveName] = useState('')
   const [showSave, setShowSave] = useState(false)
   const [exportCopied, setExportCopied] = useState(false)
@@ -105,7 +111,10 @@ export default function Checklist() {
   }, [checklist, navigate])
 
   useEffect(() => {
-    if (checklist) setActiveSectionIndex(0)
+    if (checklist) {
+      setActiveSectionIndex(0)
+      setExpandedSectionIds(new Set(checklist.sections.map((s) => s.id)))
+    }
   }, [checklist])
 
   useEffect(() => {
@@ -260,8 +269,8 @@ export default function Checklist() {
         next.delete(id)
       } else {
         next.add(id)
-        // Trigger haptic feedback when completing a task
         hapticTaskComplete()
+        playTaskComplete()
       }
       return next
     })
@@ -271,6 +280,21 @@ export default function Checklist() {
     setCompleted((prev) => {
       const next = new Set(prev)
       section.tasks.forEach((t) => next.add(t.id))
+      return next
+    })
+  }
+
+  const expandAllSections = () => {
+    if (checklist) setExpandedSectionIds(new Set(checklist.sections.map((s) => s.id)))
+  }
+  const collapseAllSections = () => {
+    setExpandedSectionIds(new Set())
+  }
+  const toggleSectionExpanded = (sectionId: string) => {
+    setExpandedSectionIds((prev) => {
+      const next = new Set(prev)
+      if (next.has(sectionId)) next.delete(sectionId)
+      else next.add(sectionId)
       return next
     })
   }
@@ -331,6 +355,40 @@ export default function Checklist() {
         </div>
       )}
 
+      <div className="checklist-view-toolbar">
+        <div className="checklist-view-toggle" role="group" aria-label="Section view mode">
+          <button
+            type="button"
+            className={'checklist-view-btn' + (viewMode === 'tabs' ? ' checklist-view-btn--active' : '')}
+            onClick={() => setViewMode('tabs')}
+            aria-pressed={viewMode === 'tabs'}
+            aria-label="View sections as tabs"
+          >
+            Tabs
+          </button>
+          <button
+            type="button"
+            className={'checklist-view-btn' + (viewMode === 'list' ? ' checklist-view-btn--active' : '')}
+            onClick={() => setViewMode('list')}
+            aria-pressed={viewMode === 'list'}
+            aria-label="View all sections in a list"
+          >
+            List
+          </button>
+        </div>
+        {viewMode === 'list' && (
+          <div className="checklist-expand-toolbar" role="group" aria-label="Expand or collapse sections">
+            <button type="button" className="checklist-expand-btn btn-ghost" onClick={expandAllSections} aria-label="Expand all sections">
+              Expand all
+            </button>
+            <button type="button" className="checklist-expand-btn btn-ghost" onClick={collapseAllSections} aria-label="Collapse all sections">
+              Collapse all
+            </button>
+          </div>
+        )}
+      </div>
+
+      {viewMode === 'tabs' && (
       <div
         ref={tabListRef}
         className="checklist-tabs"
@@ -350,6 +408,8 @@ export default function Checklist() {
               role="tab"
               aria-selected={isActive}
               aria-controls={`checklist-panel-${section.id}`}
+              aria-setsize={checklist.sections.length}
+              aria-posinset={idx + 1}
               id={`checklist-tab-${section.id}`}
               tabIndex={isActive ? 0 : -1}
               className={'checklist-tab' + (isActive ? ' checklist-tab--active' : '')}
@@ -374,6 +434,7 @@ export default function Checklist() {
           )
         })}
       </div>
+      )}
 
       {roleProgress.length > 0 && (
         <div
@@ -395,12 +456,12 @@ export default function Checklist() {
       )}
 
       {(allDone || criticalDone) && (
-        <div className="checklist-ready" role="status" aria-live="polite" aria-atomic="true">
+        <div className="checklist-ready" role="status" aria-live="polite" aria-atomic="true" aria-label={allDone ? 'Checklist complete. Ready to launch.' : 'Critical section complete. Review rest when ready.'}>
           {allDone ? 'Ready to Launch ✅' : 'Critical complete — review rest when ready'}
         </div>
       )}
 
-      {checklist.sections.map((section, idx) => {
+      {viewMode === 'tabs' && checklist.sections.map((section, idx) => {
         const isActive = idx === activeSectionIndex
         return (
           <div
@@ -449,6 +510,64 @@ export default function Checklist() {
           </div>
         )
       })}
+
+      {viewMode === 'list' && (
+        <div className="checklist-list-view">
+          {checklist.sections.map((section) => {
+            const sectionTaskIds = section.tasks.map((t) => t.id)
+            const done = sectionTaskIds.filter((id) => completed.has(id)).length
+            const total = sectionTaskIds.length
+            const isCritical = section.id === 'critical'
+            return (
+              <CollapsibleSection
+                key={section.id}
+                sectionKey={section.id}
+                title={pirateSpeak(section.label, ps)}
+                alwaysOpen={isCritical}
+                completedCount={done}
+                totalCount={total}
+                open={expandedSectionIds.has(section.id)}
+                onToggle={isCritical ? undefined : () => toggleSectionExpanded(section.id)}
+                actions={
+                  <button
+                    type="button"
+                    className="checklist-mark-all btn-ghost checklist-mark-all-inline"
+                    onClick={() => {
+                      hapticButtonPress()
+                      markSectionComplete(section)
+                    }}
+                    aria-label={`Mark all ${section.label} complete`}
+                  >
+                    <CheckCheck size={18} aria-hidden />
+                    Mark all
+                  </button>
+                }
+              >
+                <ul className="checklist-tasks">
+                  {section.tasks.map((task) => (
+                    <li key={task.id}>
+                      <SwipeableItem
+                        onSwipeRight={() => {
+                          if (!completed.has(task.id)) {
+                            toggleTask(task.id)
+                          }
+                        }}
+                        swipeRightLabel="Complete"
+                      >
+                        <TaskRow
+                          task={task}
+                          completed={completed.has(task.id)}
+                          onToggle={() => toggleTask(task.id)}
+                        />
+                      </SwipeableItem>
+                    </li>
+                  ))}
+                </ul>
+              </CollapsibleSection>
+            )
+          })}
+        </div>
+      )}
 
       <div className="checklist-actions">
         <button

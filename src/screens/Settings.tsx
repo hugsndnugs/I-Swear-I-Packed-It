@@ -1,12 +1,14 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Settings as SettingsIcon, ArrowLeft, Type, Contrast, Download, Upload, Database, Fingerprint } from 'lucide-react'
+import { Settings as SettingsIcon, ArrowLeft, Type, Contrast, Download, Upload, Database, Fingerprint, HardDrive, Volume2 } from 'lucide-react'
 import { getSettings, saveSetting, type FontSize, type HighContrastMode } from '../lib/settings'
 import { getPirateSettings } from '../lib/pirateSettings'
 import { pirateSpeak } from '../lib/pirateSpeak'
 import { hapticButtonPress } from '../lib/haptics'
 import { exportAllData, exportPresets, exportRunHistory, downloadJSON, importFromFile } from '../lib/exportImport'
 import { checkBiometricAvailability, getBiometricEnabled, setBiometricEnabled, authenticateBiometric } from '../lib/biometric'
+import { getStorageStats, formatBytes, clearPwaCaches, type StorageStats } from '../lib/storageStats'
+import { getBackupTimestamps, restoreBackup } from '../lib/exportImport'
 import { Capacitor } from '@capacitor/core'
 import Tooltip from '../components/Tooltip'
 import './Settings.css'
@@ -19,8 +21,24 @@ export default function Settings() {
   const [importSuccess, setImportSuccess] = useState<string | null>(null)
   const [biometricEnabled, setBiometricEnabledState] = useState(getBiometricEnabled())
   const [biometricAvailable, setBiometricAvailable] = useState(false)
+  const [storageStats, setStorageStats] = useState<StorageStats | null>(null)
+  const [cacheClearing, setCacheClearing] = useState(false)
+  const [backupTimestamps, setBackupTimestamps] = useState<number[]>([])
   const fileInputRef = useRef<HTMLInputElement>(null)
   const ps = getPirateSettings().pirateSpeak
+
+  const refreshStorageStats = useCallback(async () => {
+    const stats = await getStorageStats()
+    setStorageStats(stats)
+  }, [])
+
+  useEffect(() => {
+    refreshStorageStats()
+  }, [refreshStorageStats])
+
+  useEffect(() => {
+    setBackupTimestamps(getBackupTimestamps())
+  }, [importSuccess])
 
   useEffect(() => {
     // Check biometric availability on mount
@@ -86,12 +104,20 @@ export default function Settings() {
     const result = await importFromFile(file)
     if (result.success) {
       const parts: string[] = []
-      if (result.imported.presets) parts.push(`${result.imported.presets} presets`)
-      if (result.imported.runHistory) parts.push(`${result.imported.runHistory} history entries`)
-      if (result.imported.checklistProgress) parts.push(`${result.imported.checklistProgress} progress items`)
-      setImportSuccess(`Imported: ${parts.join(', ')}`)
+      if (result.imported.presets != null) parts.push(`${result.imported.presets} presets`)
+      if (result.imported.runHistory != null) parts.push(`${result.imported.runHistory} history entries`)
+      if (result.imported.checklistProgress != null) parts.push(`${result.imported.checklistProgress} progress items`)
+      if (result.skippedInvalid) {
+        const skipParts: string[] = []
+        if (result.skippedInvalid.presets) skipParts.push(`${result.skippedInvalid.presets} invalid presets`)
+        if (result.skippedInvalid.runHistory) skipParts.push(`${result.skippedInvalid.runHistory} invalid history`)
+        if (result.skippedInvalid.checklistProgress) skipParts.push(`${result.skippedInvalid.checklistProgress} invalid progress`)
+        if (skipParts.length) parts.push(`(${skipParts.join(', ')} skipped)`)
+      }
+      setImportSuccess(`Imported: ${parts.join('; ')}`)
+      setBackupTimestamps(getBackupTimestamps())
       setTimeout(() => setImportSuccess(null), 5000)
-      setTick((t) => t + 1) // Refresh UI
+      setTick((t) => t + 1)
     } else {
       setImportError(result.error || 'Import failed')
       setTimeout(() => setImportError(null), 5000)
@@ -120,6 +146,32 @@ export default function Settings() {
       hapticButtonPress()
       setBiometricEnabled(false)
       setBiometricEnabledState(false)
+    }
+  }
+
+  const handleClearCache = async () => {
+    hapticButtonPress()
+    setCacheClearing(true)
+    try {
+      await clearPwaCaches()
+      await refreshStorageStats()
+    } finally {
+      setCacheClearing(false)
+    }
+  }
+
+  const handleRestoreBackup = () => {
+    const latest = backupTimestamps[0]
+    if (latest == null) return
+    hapticButtonPress()
+    if (restoreBackup(latest)) {
+      setImportSuccess('Restored from backup.')
+      setBackupTimestamps(getBackupTimestamps())
+      setTick((t) => t + 1)
+      setTimeout(() => setImportSuccess(null), 5000)
+    } else {
+      setImportError('Failed to restore backup')
+      setTimeout(() => setImportError(null), 5000)
     }
   }
 
@@ -197,6 +249,81 @@ export default function Settings() {
         </section>
 
         <section className="settings-section card">
+          <h2 className="settings-section-title">
+            <Volume2 size={20} aria-hidden />
+            {pirateSpeak('Sound effects', ps)}
+          </h2>
+          <p className="settings-section-description">
+            Play sounds for task completion, Op Mode reminders, and errors.
+          </p>
+          <div className="settings-toggle">
+            <label className="settings-toggle-label">
+              <input
+                type="checkbox"
+                checked={settings.soundEffects}
+                onChange={() => {
+                  const next = !settings.soundEffects
+                  saveSetting('soundEffects', next)
+                  setSettings((prev) => ({ ...prev, soundEffects: next }))
+                  hapticButtonPress()
+                }}
+                className="settings-toggle-input"
+                aria-label="Sound effects on or off"
+              />
+              <span className="settings-toggle-slider" />
+              <span className="settings-toggle-text">
+                {settings.soundEffects ? 'On' : 'Off'}
+              </span>
+            </label>
+          </div>
+        </section>
+
+        {storageStats && (
+          <section className="settings-section card" aria-label="Storage and cache">
+            <h2 className="settings-section-title">
+              <HardDrive size={20} aria-hidden />
+              {pirateSpeak('Storage', ps)}
+            </h2>
+            <p className="settings-section-description">
+              Data and cache usage. Clearing cache frees space but does not delete your presets or history.
+            </p>
+            <dl className="settings-storage-stats">
+              <div className="settings-storage-row">
+                <dt>App data (localStorage)</dt>
+                <dd>{formatBytes(storageStats.localStorageBytes)}</dd>
+              </div>
+              {storageStats.cacheBytes != null && (
+                <div className="settings-storage-row">
+                  <dt>Cache</dt>
+                  <dd>{formatBytes(storageStats.cacheBytes)}</dd>
+                </div>
+              )}
+              <div className="settings-storage-row">
+                <dt>Presets</dt>
+                <dd>{storageStats.presetsCount}</dd>
+              </div>
+              <div className="settings-storage-row">
+                <dt>Run history entries</dt>
+                <dd>{storageStats.runHistoryCount}</dd>
+              </div>
+              <div className="settings-storage-row">
+                <dt>Checklist progress entries</dt>
+                <dd>{storageStats.checklistProgressCount}</dd>
+              </div>
+            </dl>
+            <button
+              type="button"
+              className="settings-clear-cache-btn btn-secondary"
+              onClick={handleClearCache}
+              disabled={cacheClearing}
+              aria-label="Clear cache to free space"
+            >
+              {cacheClearing ? 'Clearing…' : 'Clear cache'}
+            </button>
+          </section>
+        )}
+
+        <section className="settings-section card">
           <Tooltip content="Export your data for backup or import previously exported data." position="bottom">
             <h2 className="settings-section-title">
               <Database size={20} aria-hidden />
@@ -251,6 +378,16 @@ export default function Settings() {
               <Upload size={18} aria-hidden />
               Import Data
             </button>
+            {backupTimestamps.length > 0 && (
+              <button
+                type="button"
+                className="settings-restore-backup-btn btn-secondary"
+                onClick={handleRestoreBackup}
+                aria-label="Restore from last backup"
+              >
+                Restore last backup
+              </button>
+            )}
             {importError && (
               <p className="settings-import-error" role="alert">
                 {importError}
