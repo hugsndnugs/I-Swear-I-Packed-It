@@ -8,6 +8,8 @@ export interface CommodityType {
   id: string
   label: string
   category: CommodityCategory
+  /** SCU per unit (box/crate). Default 1 for backward compatibility. */
+  scuPerUnit?: number
 }
 
 export const COMMODITY_CATEGORIES: Record<CommodityCategory, string> = {
@@ -20,22 +22,22 @@ export const COMMODITY_CATEGORIES: Record<CommodityCategory, string> = {
 }
 
 export const COMMODITIES: CommodityType[] = [
-  { id: 'scrap-metal', label: 'Scrap metal', category: 'scrap' },
-  { id: 'recyclables', label: 'Recyclables', category: 'scrap' },
-  { id: 'construction-materials', label: 'Construction materials', category: 'scrap' },
-  { id: 'agricium', label: 'Agricium', category: 'ore' },
-  { id: 'laranite', label: 'Laranite', category: 'ore' },
-  { id: 'titanium', label: 'Titanium', category: 'ore' },
-  { id: 'quantanium', label: 'Quantanium', category: 'ore' },
-  { id: 'medical-supplies', label: 'Medical supplies', category: 'medical' },
-  { id: 'stims', label: 'Stims / medpens', category: 'medical' },
-  { id: 'food-crates', label: 'Food crates', category: 'food' },
-  { id: 'water', label: 'Water', category: 'food' },
-  { id: 'general-cargo', label: 'General cargo', category: 'general' },
-  { id: 'consumer-goods', label: 'Consumer goods', category: 'general' },
-  { id: 'waste', label: 'Waste', category: 'general' },
-  { id: 'refined-commodities', label: 'Refined commodities', category: 'high-value' },
-  { id: 'processed-goods', label: 'Processed goods', category: 'high-value' }
+  { id: 'scrap-metal', label: 'Scrap metal', category: 'scrap', scuPerUnit: 1 },
+  { id: 'recyclables', label: 'Recyclables', category: 'scrap', scuPerUnit: 1 },
+  { id: 'construction-materials', label: 'Construction materials', category: 'scrap', scuPerUnit: 1 },
+  { id: 'agricium', label: 'Agricium', category: 'ore', scuPerUnit: 1 },
+  { id: 'laranite', label: 'Laranite', category: 'ore', scuPerUnit: 1 },
+  { id: 'titanium', label: 'Titanium', category: 'ore', scuPerUnit: 1 },
+  { id: 'quantanium', label: 'Quantanium', category: 'ore', scuPerUnit: 1 },
+  { id: 'medical-supplies', label: 'Medical supplies', category: 'medical', scuPerUnit: 1 },
+  { id: 'stims', label: 'Stims / medpens', category: 'medical', scuPerUnit: 1 },
+  { id: 'food-crates', label: 'Food crates', category: 'food', scuPerUnit: 1 },
+  { id: 'water', label: 'Water', category: 'food', scuPerUnit: 1 },
+  { id: 'general-cargo', label: 'General cargo', category: 'general', scuPerUnit: 1 },
+  { id: 'consumer-goods', label: 'Consumer goods', category: 'general', scuPerUnit: 1 },
+  { id: 'waste', label: 'Waste', category: 'general', scuPerUnit: 1 },
+  { id: 'refined-commodities', label: 'Refined commodities', category: 'high-value', scuPerUnit: 1 },
+  { id: 'processed-goods', label: 'Processed goods', category: 'high-value', scuPerUnit: 1 }
 ]
 
 export interface CargoManifestEntry {

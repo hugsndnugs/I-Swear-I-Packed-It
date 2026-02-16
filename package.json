@@ -10,7 +10,8 @@
     "build:android": "npm run build && npx cap sync android",
     "generate:ships": "node scripts/generate-ships.mjs",
     "fetch:ships": "node scripts/fetch-ships-api.mjs",
-    "update:routes": "node scripts/update-routes.mjs",
+    "fetch:routes": "node scripts/fetch-routes-api.mjs",
+    "update:routes": "node scripts/fetch-routes-api.mjs",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest"

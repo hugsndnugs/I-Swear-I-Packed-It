@@ -5,7 +5,7 @@ import { getPirateSettings } from '../lib/pirateSettings'
 import { pirateSpeak } from '../lib/pirateSpeak'
 import './Nav.css'
 
-const NAV_ITEMS = [
+export const NAV_ITEMS = [
   { to: '/', icon: Home, label: 'Home', end: true },
   { to: '/generate', icon: Zap, label: 'Generate', end: false },
   { to: '/manifest', icon: FileText, label: 'Manifest', end: false },
@@ -14,7 +14,14 @@ const NAV_ITEMS = [
   { to: '/op-mode', icon: Timer, label: 'Op Mode', end: false }
 ] as const
 
-export default function Nav() {
+export type NavVariant = 'bottom' | 'drawer'
+
+interface NavProps {
+  variant?: NavVariant
+  onNavigate?: () => void
+}
+
+export default function Nav({ variant = 'bottom', onNavigate }: NavProps) {
   const [, setTick] = useState(0)
   const ps = getPirateSettings().pirateSpeak
 
@@ -24,14 +31,17 @@ export default function Nav() {
     return () => window.removeEventListener('pirate-settings-changed', handler)
   }, [])
 
+  const navClassName = variant === 'drawer' ? 'nav nav--drawer' : 'nav'
+
   return (
-    <nav className="nav" aria-label="Main navigation">
+    <nav className={navClassName} aria-label="Main navigation">
       {NAV_ITEMS.map(({ to, icon: Icon, label, end }) => (
         <NavLink
           key={to}
           to={to}
           className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
           end={end}
+          onClick={onNavigate}
         >
           <Icon size={20} aria-hidden />
           <span className="nav-link-label">{pirateSpeak(label, ps)}</span>

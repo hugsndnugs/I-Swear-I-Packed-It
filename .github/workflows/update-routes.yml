@@ -24,9 +24,10 @@ jobs:
           cache: "npm"
 
       - name: Update routes
-        run: node scripts/update-routes.mjs
+        run: npm run update:routes
         env:
           PREFLIGHT_ROUTES_URL: ${{ secrets.PREFLIGHT_ROUTES_URL }}
+          UEX_API_TOKEN: ${{ secrets.UEX_API_TOKEN }}
 
       - name: Commit if changed
         run: |

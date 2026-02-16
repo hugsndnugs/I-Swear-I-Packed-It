@@ -8,6 +8,10 @@ export interface ManifestValidationReport {
   suggestedBackup: string[]
   warnings: string[]
   risks: string[]
+  /** Total SCU used by cargo (for capacity summary). */
+  totalScuUsed?: number
+  /** Ship cargo capacity SCU (for capacity summary). */
+  shipCargoScu?: number
 }
 
 /**
@@ -50,15 +54,19 @@ export function validateManifest(
     suggestedBackup.push('Food / water')
   }
 
-  // Capacity sanity (basic)
-  if (ship.cargoScu != null && entries.length > 0) {
-    const totalQuantity = entries.reduce((sum, e) => sum + e.quantity, 0)
-    const roughScu = Math.ceil(totalQuantity / 10)
-    if (roughScu > ship.cargoScu) {
-      warnings.push(
-        `Rough estimate (${roughScu} SCU) may exceed ship capacity (${ship.cargoScu} SCU). Verify load.`
-      )
-    }
+  // Capacity validation (real SCU per commodity)
+  const totalScuUsed =
+    entries.length > 0
+      ? entries.reduce((sum, e) => {
+          const commodity = getCommodityById(e.commodityId)
+          const scuPerUnit = commodity?.scuPerUnit ?? 1
+          return sum + e.quantity * scuPerUnit
+        }, 0)
+      : undefined
+  if (ship.cargoScu != null && totalScuUsed != null && totalScuUsed > ship.cargoScu) {
+    warnings.push(
+      `Manifest total (${Math.ceil(totalScuUsed)} SCU) exceeds ship capacity (${ship.cargoScu} SCU). Verify load.`
+    )
   }
 
   // High-value cargo
@@ -88,6 +96,8 @@ export function validateManifest(
     requiredTools: [...new Set(requiredTools)],
     suggestedBackup: [...new Set(suggestedBackup)],
     warnings,
-    risks
+    risks,
+    ...(totalScuUsed != null && entries.length > 0 && { totalScuUsed }),
+    ...(ship.cargoScu != null && { shipCargoScu: ship.cargoScu }),
   }
 }

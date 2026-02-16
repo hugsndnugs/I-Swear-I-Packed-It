@@ -105,6 +105,12 @@
   font-size: var(--text-base);
 }
 
+.manifest-row-scu {
+  min-width: 4rem;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
 .manifest-row-remove {
   padding: var(--space-2) var(--space-3);
   font-size: var(--text-sm);
@@ -128,6 +134,15 @@
   font-size: var(--text-xl);
   font-weight: 700;
   margin: 0 0 var(--space-4) 0;
+}
+
+.manifest-report-capacity {
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin: 0 0 var(--space-4) 0;
+  padding: var(--space-3);
+  background: var(--bg);
+  border-radius: var(--radius);
 }
 
 .manifest-report-section {
@@ -168,4 +183,21 @@
   font-size: var(--text-sm);
   color: var(--text-muted);
   margin: 0 0 var(--space-3) 0;
+}
+
+.manifest-report-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.manifest-report-actions .manifest-continue-checklist {
+  flex: 1;
+  min-width: 160px;
+}
+
+.manifest-report-actions .manifest-copy-summary,
+.manifest-report-actions .manifest-print {
+  min-height: var(--tap);
 }

@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Plus } from 'lucide-react'
+import CollapsibleSection from '../components/CollapsibleSection'
 import { ships } from '../data/ships'
-import { ROUTE_PRESETS } from '../data/routes'
+import { ROUTE_PRESETS, getRouteById } from '../data/routes'
 import { COMMODITIES, getCommodityById, type CargoManifestEntry } from '../data/commodities'
 import { validateManifest, type ManifestValidationReport } from '../lib/validateManifest'
 import { loadLastManifest, saveLastManifest } from '../lib/presets'
@@ -79,6 +80,71 @@ export default function Manifest() {
     if (c) updateRow(rowId, { commodityId, label: c.label })
   }
 
+  const handleContinueToChecklist = () => {
+    navigate('/generate', {
+      state: {
+        preset: {
+          shipId,
+          operationType: 'cargo-run' as const,
+          crewCount: 1,
+          crewRoles: ['pilot'] as const
+        }
+      }
+    })
+  }
+
+  const buildManifestSummary = () => {
+    const shipName = ship?.name ?? shipId
+    const routeLabel = routeId === 'none' ? 'No route' : (getRouteById(routeId)?.label ?? routeId)
+    const cargoLines = rows.map((r) => {
+      const c = getCommodityById(r.commodityId)
+      const scu = (c?.scuPerUnit ?? 1) * r.quantity
+      return `  ${r.label}: ${r.quantity} (${scu} SCU)`
+    })
+    const reportLines: string[] = []
+    if (report) {
+      reportLines.push('', 'Validation report:')
+      if (report.totalScuUsed != null && report.shipCargoScu != null) {
+        reportLines.push(`  ${Math.ceil(report.totalScuUsed)} / ${report.shipCargoScu} SCU used`)
+      }
+      if (report.requiredTools.length > 0) {
+        reportLines.push('  Required tools: ' + report.requiredTools.join(', '))
+      }
+      if (report.suggestedBackup.length > 0) {
+        reportLines.push('  Suggested backup: ' + report.suggestedBackup.join(', '))
+      }
+      if (report.warnings.length > 0) {
+        reportLines.push('  Warnings: ' + report.warnings.join('; '))
+      }
+      if (report.risks.length > 0) {
+        reportLines.push('  Risks: ' + report.risks.join('; '))
+      }
+    }
+    const lines = [
+      'Cargo Manifest',
+      '---------------',
+      `Ship: ${shipName}`,
+      `Route: ${routeLabel}`,
+      '',
+      'Cargo:',
+      ...cargoLines,
+      ...reportLines
+    ]
+    return lines.join('\n')
+  }
+
+  const handleCopySummary = async () => {
+    try {
+      await navigator.clipboard.writeText(buildManifestSummary())
+    } catch {
+      // Clipboard API not available or denied
+    }
+  }
+
+  const handlePrint = () => {
+    globalThis.print?.()
+  }
+
   return (
     <div className="manifest">
       <h1 className="manifest-title">Cargo Manifest</h1>
@@ -127,41 +193,49 @@ export default function Manifest() {
       </div>
 
       {rows.length === 0 ? (
-        <p className="manifest-empty">No cargo added. Add rows to validate tools and capacity.</p>
+        <p className="manifest-empty">No cargo added. Add rows to build your manifest and validate tools and capacity.</p>
       ) : (
         <ul className="manifest-rows" aria-label="Cargo entries">
-          {rows.map((row) => (
-            <li key={row.id} className="manifest-row">
-              <select
-                className="manifest-row-commodity"
-                value={row.commodityId}
-                onChange={(e) => onCommodityChange(row.id, e.target.value)}
-                aria-label="Commodity type"
-              >
-                {COMMODITIES.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.label}
-                  </option>
-                ))}
-              </select>
-              <input
-                type="number"
-                className="manifest-row-qty"
-                min={1}
-                value={row.quantity}
-                onChange={(e) => updateRow(row.id, { quantity: Number(e.target.value) || 1 })}
-                aria-label="Quantity"
-              />
-              <button
-                type="button"
-                className="manifest-row-remove"
-                onClick={() => removeRow(row.id)}
-                aria-label="Remove row"
-              >
-                Remove
-              </button>
-            </li>
-          ))}
+          {rows.map((row) => {
+            const commodity = getCommodityById(row.commodityId)
+            const scuPerUnit = commodity?.scuPerUnit ?? 1
+            const rowScu = row.quantity * scuPerUnit
+            return (
+              <li key={row.id} className="manifest-row">
+                <select
+                  className="manifest-row-commodity"
+                  value={row.commodityId}
+                  onChange={(e) => onCommodityChange(row.id, e.target.value)}
+                  aria-label="Commodity type"
+                >
+                  {COMMODITIES.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.label}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  type="number"
+                  className="manifest-row-qty"
+                  min={1}
+                  value={row.quantity}
+                  onChange={(e) => updateRow(row.id, { quantity: Number(e.target.value) || 1 })}
+                  aria-label="Quantity"
+                />
+                <span className="manifest-row-scu" aria-hidden>
+                  {rowScu} SCU
+                </span>
+                <button
+                  type="button"
+                  className="manifest-row-remove"
+                  onClick={() => removeRow(row.id)}
+                  aria-label="Remove row"
+                >
+                  Remove
+                </button>
+              </li>
+            )
+          })}
         </ul>
       )}
 
@@ -175,10 +249,20 @@ export default function Manifest() {
       </button>
 
       {report && (
-        <section className="manifest-report" aria-labelledby="manifest-report-title">
-          <h2 id="manifest-report-title" className="manifest-report-title">Validation report</h2>
+        <CollapsibleSection
+          title="Validation report"
+          sectionKey="manifest-report"
+          defaultOpen
+          alwaysOpen={false}
+        >
+          <div className="manifest-report">
+            {report.totalScuUsed != null && report.shipCargoScu != null && (
+              <p className="manifest-report-capacity" aria-live="polite">
+                {Math.ceil(report.totalScuUsed)} / {report.shipCargoScu} SCU used
+              </p>
+            )}
 
-          {report.requiredTools.length > 0 && (
+            {report.requiredTools.length > 0 && (
             <section className="manifest-report-section" aria-label="Required tools">
               <h3 className="manifest-report-heading">Required tools</h3>
               <ul className="manifest-report-list">
@@ -222,22 +306,41 @@ export default function Manifest() {
             </section>
           )}
 
-          {report.requiredTools.length === 0 &&
-            report.suggestedBackup.length === 0 &&
-            report.warnings.length === 0 &&
-            report.risks.length === 0 && (
-              <p className="manifest-report-clear">No issues found. Review required tools and backup gear above if shown.</p>
-            )}
+            {report.requiredTools.length === 0 &&
+              report.suggestedBackup.length === 0 &&
+              report.warnings.length === 0 &&
+              report.risks.length === 0 && (
+                <p className="manifest-report-clear">No issues found. Review required tools and backup gear above if shown.</p>
+              )}
 
-          <button
-            type="button"
-            className="manifest-back-checklist btn-ghost"
-            onClick={() => navigate('/generate', { state: {} })}
-            aria-label="Go to checklist generator"
-          >
-            Back to checklist
-          </button>
-        </section>
+            <div className="manifest-report-actions">
+              <button
+                type="button"
+                className="manifest-continue-checklist btn-primary"
+                onClick={handleContinueToChecklist}
+                aria-label="Continue to checklist generator"
+              >
+                Continue to checklist
+              </button>
+              <button
+                type="button"
+                className="manifest-copy-summary btn-ghost"
+                onClick={handleCopySummary}
+                aria-label="Copy manifest summary"
+              >
+                Copy manifest summary
+              </button>
+              <button
+                type="button"
+                className="manifest-print btn-ghost"
+                onClick={handlePrint}
+                aria-label="Print manifest"
+              >
+                Print manifest
+              </button>
+            </div>
+          </div>
+        </CollapsibleSection>
       )}
     </div>
   )
