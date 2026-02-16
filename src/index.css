@@ -310,6 +310,45 @@ a:focus-visible,
   outline-offset: 2px;
 }
 
+/* Page transitions */
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.layout-main > * {
+  animation: page-fade-in var(--duration-normal) var(--ease-out);
+}
+
+/* Button press animations */
+.btn-primary:active,
+.btn-secondary:active,
+.btn-danger:active {
+  transform: scale(0.98);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+/* Card hover animations */
+.card-interactive {
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.card-interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.card-interactive:active {
+  transform: translateY(0);
+}
+
 /* Respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -319,6 +358,10 @@ a:focus-visible,
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  
+  .layout-main > * {
+    animation: none;
   }
 }
 

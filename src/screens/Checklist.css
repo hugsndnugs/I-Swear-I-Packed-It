@@ -126,7 +126,28 @@
   border-radius: var(--radius);
   color: var(--text);
   font-size: var(--text-base);
-  transition: background var(--duration-fast) var(--ease-out);
+  transition: background var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out),
+    opacity var(--duration-normal) var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.checklist-task::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.checklist-task.completed::before {
+  transform: scaleY(1);
 }
 
 .checklist-task:hover {
@@ -135,15 +156,42 @@
 
 .checklist-task.completed {
   opacity: 0.85;
+  animation: task-complete var(--duration-normal) var(--ease-out);
+}
+
+@keyframes task-complete {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .checklist-task.completed .checklist-task-label {
   text-decoration: line-through;
   color: var(--text-muted);
+  transition: text-decoration var(--duration-normal) var(--ease-out),
+    color var(--duration-normal) var(--ease-out);
 }
 
 .checklist-task.completed .checklist-task-check {
   color: var(--success);
+  animation: checkmark-appear var(--duration-fast) var(--ease-out);
+}
+
+@keyframes checkmark-appear {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
 }
 
 .checklist-task-check {

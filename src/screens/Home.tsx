@@ -9,7 +9,9 @@ import { OPERATION_TYPES } from '../data/contexts'
 import { getPirateSettings } from '../lib/pirateSettings'
 import { pirateSpeak } from '../lib/pirateSpeak'
 import EmptyState from '../components/EmptyState'
+import SwipeableItem from '../components/SwipeableItem'
 import { hapticButtonPress } from '../lib/haptics'
+import { deletePreset } from '../lib/presets'
 import './Home.css'
 
 export default function Home() {
@@ -185,28 +187,37 @@ export default function Home() {
                 OPERATION_TYPES.find((o) => o.id === p.operationType)?.label ?? p.operationType
               const opLabel = pirateSpeak(opLabelRaw, ps)
               return (
-                <li key={p.id}>
-                  <button
-                    className="home-preset-btn card card-interactive"
-                    onClick={() =>
-                      navigate('/generate', {
-                        state: {
-                          preset: {
-                            shipId: p.shipId,
-                            operationType: p.operationType,
-                            crewCount: p.crewCount,
-                            crewRoles: p.crewRoles,
-                            crewRoleCounts: p.crewRoleCounts
-                          }
-                        }
-                      })
-                    }
+                <li key={p.id} style={{ listStyle: 'none' }}>
+                  <SwipeableItem
+                    onSwipeLeft={() => {
+                      hapticButtonPress()
+                      deletePreset(p.id)
+                      setTick((t) => t + 1)
+                    }}
+                    swipeLeftLabel="Delete"
                   >
-                    <span className="home-preset-name">{p.name}</span>
-                    <span className="home-preset-subtitle">
-                      {shipName} · {opLabel}
-                    </span>
-                  </button>
+                    <button
+                      className="home-preset-btn card card-interactive"
+                      onClick={() =>
+                        navigate('/generate', {
+                          state: {
+                            preset: {
+                              shipId: p.shipId,
+                              operationType: p.operationType,
+                              crewCount: p.crewCount,
+                              crewRoles: p.crewRoles,
+                              crewRoleCounts: p.crewRoleCounts
+                            }
+                          }
+                        })
+                      }
+                    >
+                      <span className="home-preset-name">{p.name}</span>
+                      <span className="home-preset-subtitle">
+                        {shipName} · {opLabel}
+                      </span>
+                    </button>
+                  </SwipeableItem>
                 </li>
               )
             })}

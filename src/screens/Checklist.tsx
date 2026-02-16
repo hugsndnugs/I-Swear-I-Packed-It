@@ -5,6 +5,7 @@ import type { ChecklistSection, ChecklistTask } from '../lib/generateChecklist'
 import ProgressBar from '../components/ProgressBar'
 import CircularProgress from '../components/CircularProgress'
 import BottomSheet from '../components/BottomSheet'
+import SwipeableItem from '../components/SwipeableItem'
 import {
   savePreset,
   loadChecklistProgress,
@@ -417,12 +418,22 @@ export default function Checklist() {
             </div>
             <ul className="checklist-tasks">
               {section.tasks.map((task) => (
-                <TaskRow
-                  key={task.id}
-                  task={task}
-                  completed={completed.has(task.id)}
-                  onToggle={() => toggleTask(task.id)}
-                />
+                <li key={task.id}>
+                  <SwipeableItem
+                    onSwipeRight={() => {
+                      if (!completed.has(task.id)) {
+                        toggleTask(task.id)
+                      }
+                    }}
+                    swipeRightLabel="Complete"
+                  >
+                    <TaskRow
+                      task={task}
+                      completed={completed.has(task.id)}
+                      onToggle={() => toggleTask(task.id)}
+                    />
+                  </SwipeableItem>
+                </li>
               ))}
             </ul>
           </div>

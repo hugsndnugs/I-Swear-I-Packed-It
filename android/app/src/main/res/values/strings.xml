@@ -12,4 +12,8 @@
     <string name="shortcut_resume_last_long">Resume last checklist</string>
     <string name="shortcut_opmode">Op Mode Timer</string>
     <string name="shortcut_opmode_long">Open Op Mode timers</string>
+    
+    <!-- Widget descriptions -->
+    <string name="widget_checklist_description">Shows current checklist progress</string>
+    <string name="widget_opmode_description">Shows next OpMode reminder time</string>
 </resources>

@@ -1,17 +1,34 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Settings as SettingsIcon, ArrowLeft, Type, Contrast } from 'lucide-react'
+import { Settings as SettingsIcon, ArrowLeft, Type, Contrast, Download, Upload, Database, Fingerprint } from 'lucide-react'
 import { getSettings, saveSetting, type FontSize, type HighContrastMode } from '../lib/settings'
 import { getPirateSettings } from '../lib/pirateSettings'
 import { pirateSpeak } from '../lib/pirateSpeak'
 import { hapticButtonPress } from '../lib/haptics'
+import { exportAllData, exportPresets, exportRunHistory, downloadJSON, importFromFile } from '../lib/exportImport'
+import { checkBiometricAvailability, getBiometricEnabled, setBiometricEnabled, authenticateBiometric } from '../lib/biometric'
+import { Capacitor } from '@capacitor/core'
 import './Settings.css'
 
 export default function Settings() {
   const navigate = useNavigate()
   const [settings, setSettings] = useState(getSettings())
   const [, setTick] = useState(0)
+  const [importError, setImportError] = useState<string | null>(null)
+  const [importSuccess, setImportSuccess] = useState<string | null>(null)
+  const [biometricEnabled, setBiometricEnabledState] = useState(getBiometricEnabled())
+  const [biometricAvailable, setBiometricAvailable] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
   const ps = getPirateSettings().pirateSpeak
+
+  useEffect(() => {
+    // Check biometric availability on mount
+    if (Capacitor.isNativePlatform()) {
+      checkBiometricAvailability().then((result) => {
+        setBiometricAvailable(result.isAvailable)
+      })
+    }
+  }, [])
 
   useEffect(() => {
     const handler = () => {
@@ -33,6 +50,76 @@ export default function Settings() {
     saveSetting('highContrast', newValue)
     setSettings((prev) => ({ ...prev, highContrast: newValue }))
     hapticButtonPress()
+  }
+
+  const handleExportAll = async () => {
+    hapticButtonPress()
+    const data = exportAllData()
+    await downloadJSON(data, `preflight-export-${new Date().toISOString().split('T')[0]}.json`)
+  }
+
+  const handleExportPresets = async () => {
+    hapticButtonPress()
+    const data = exportPresets()
+    await downloadJSON(data, `preflight-presets-${new Date().toISOString().split('T')[0]}.json`)
+  }
+
+  const handleExportHistory = async () => {
+    hapticButtonPress()
+    const data = exportRunHistory()
+    await downloadJSON(data, `preflight-history-${new Date().toISOString().split('T')[0]}.json`)
+  }
+
+  const handleImportClick = () => {
+    hapticButtonPress()
+    fileInputRef.current?.click()
+  }
+
+  const handleFileImport = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setImportError(null)
+    setImportSuccess(null)
+
+    const result = await importFromFile(file)
+    if (result.success) {
+      const parts: string[] = []
+      if (result.imported.presets) parts.push(`${result.imported.presets} presets`)
+      if (result.imported.runHistory) parts.push(`${result.imported.runHistory} history entries`)
+      if (result.imported.checklistProgress) parts.push(`${result.imported.checklistProgress} progress items`)
+      setImportSuccess(`Imported: ${parts.join(', ')}`)
+      setTimeout(() => setImportSuccess(null), 5000)
+      setTick((t) => t + 1) // Refresh UI
+    } else {
+      setImportError(result.error || 'Import failed')
+      setTimeout(() => setImportError(null), 5000)
+    }
+
+    // Reset file input
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''
+    }
+  }
+
+  const handleBiometricToggle = async () => {
+    if (!biometricEnabled) {
+      // Enable biometric - require authentication first
+      const result = await authenticateBiometric('Enable biometric authentication for app access')
+      if (result.success) {
+        setBiometricEnabled(true)
+        setBiometricEnabledState(true)
+        hapticButtonPress()
+      } else {
+        setImportError(result.error || 'Biometric authentication failed')
+        setTimeout(() => setImportError(null), 5000)
+      }
+    } else {
+      // Disable biometric
+      hapticButtonPress()
+      setBiometricEnabled(false)
+      setBiometricEnabledState(false)
+    }
   }
 
   return (
@@ -105,6 +192,98 @@ export default function Settings() {
             </label>
           </div>
         </section>
+
+        <section className="settings-section card">
+          <h2 className="settings-section-title">
+            <Database size={20} aria-hidden />
+            {pirateSpeak('Data Management', ps)}
+          </h2>
+          <p className="settings-section-description">
+            Export your data for backup or import previously exported data.
+          </p>
+          
+          <div className="settings-export-actions">
+            <button
+              className="settings-export-btn btn-secondary"
+              onClick={handleExportAll}
+              aria-label="Export all data"
+            >
+              <Download size={18} aria-hidden />
+              Export All
+            </button>
+            <button
+              className="settings-export-btn btn-secondary"
+              onClick={handleExportPresets}
+              aria-label="Export presets only"
+            >
+              <Download size={18} aria-hidden />
+              Export Presets
+            </button>
+            <button
+              className="settings-export-btn btn-secondary"
+              onClick={handleExportHistory}
+              aria-label="Export run history"
+            >
+              <Download size={18} aria-hidden />
+              Export History
+            </button>
+          </div>
+
+          <div className="settings-import">
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".json"
+              onChange={handleFileImport}
+              style={{ display: 'none' }}
+              aria-label="Import file"
+            />
+            <button
+              className="settings-import-btn btn-primary"
+              onClick={handleImportClick}
+              aria-label="Import data from file"
+            >
+              <Upload size={18} aria-hidden />
+              Import Data
+            </button>
+            {importError && (
+              <p className="settings-import-error" role="alert">
+                {importError}
+              </p>
+            )}
+            {importSuccess && (
+              <p className="settings-import-success" role="status">
+                {importSuccess}
+              </p>
+            )}
+          </div>
+        </section>
+
+        {biometricAvailable && (
+          <section className="settings-section card">
+            <h2 className="settings-section-title">
+              <Fingerprint size={20} aria-hidden />
+              {pirateSpeak('Biometric Authentication', ps)}
+            </h2>
+            <p className="settings-section-description">
+              Use fingerprint or face recognition to protect app access.
+            </p>
+            <div className="settings-toggle">
+              <label className="settings-toggle-label">
+                <input
+                  type="checkbox"
+                  checked={biometricEnabled}
+                  onChange={handleBiometricToggle}
+                  className="settings-toggle-input"
+                />
+                <span className="settings-toggle-slider" />
+                <span className="settings-toggle-text">
+                  {biometricEnabled ? 'On' : 'Off'}
+                </span>
+              </label>
+            </div>
+          </section>
+        )}
       </div>
     </div>
   )

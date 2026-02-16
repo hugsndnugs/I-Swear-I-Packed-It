@@ -145,3 +145,41 @@
   font-weight: 500;
   min-width: 40px;
 }
+
+.settings-export-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.settings-export-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  justify-content: center;
+}
+
+.settings-import {
+  margin-top: var(--space-4);
+}
+
+.settings-import-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  justify-content: center;
+  width: 100%;
+}
+
+.settings-import-error {
+  margin-top: var(--space-2);
+  color: var(--danger);
+  font-size: var(--text-sm);
+}
+
+.settings-import-success {
+  margin-top: var(--space-2);
+  color: var(--success);
+  font-size: var(--text-sm);
+}
