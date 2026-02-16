@@ -168,7 +168,13 @@ export async function cancelAllNotifications(): Promise<void> {
   if (!Capacitor.isNativePlatform()) return
 
   try {
-    await LocalNotifications.cancelAll()
+    // Get all pending notifications and cancel them individually
+    const pending = await LocalNotifications.getPending()
+    if (pending.notifications && pending.notifications.length > 0) {
+      await LocalNotifications.cancel({
+        notifications: pending.notifications.map((n) => ({ id: n.id }))
+      })
+    }
   } catch (error) {
     console.error('Failed to cancel all notifications:', error)
   }

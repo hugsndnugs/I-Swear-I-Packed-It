@@ -1,5 +1,5 @@
 import { setStorageError } from './storageError'
-import { showNotification, requestNotificationPermission as requestNativePermission, checkNotificationPermission as checkNativePermission } from './notifications'
+import { showNotification, requestNotificationPermission as requestNativePermission } from './notifications'
 
 const STORAGE_KEY = 'preflight-opmode'
 const TICK_MS = 10_000 // check every 10s

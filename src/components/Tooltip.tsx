@@ -37,9 +37,7 @@ export default function Tooltip({ content, children, position = 'top', delay = 3
     if (!isVisible || !tooltipRef.current || !triggerRef.current) return
 
     const tooltip = tooltipRef.current
-    const trigger = triggerRef.current
     const rect = tooltip.getBoundingClientRect()
-    const triggerRect = trigger.getBoundingClientRect()
 
     let newPosition = position
 

@@ -16,7 +16,6 @@ export default function DeepLinkHandler() {
     const handleDeepLink = () => {
       // Check if we're coming from a deep link (Android app shortcuts use custom URL scheme)
       // The URL might be in window.location or passed via Capacitor App plugin
-      const currentPath = location.pathname
       
       // For Android shortcuts, we check URL params or hash
       const searchParams = new URLSearchParams(location.search)

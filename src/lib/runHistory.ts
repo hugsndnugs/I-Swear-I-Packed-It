@@ -29,7 +29,7 @@ function isValidRunSummary(v: unknown): v is RunSummary {
   )
 }
 
-function loadRunHistory(): RunSummary[] {
+export function loadRunHistory(): RunSummary[] {
   try {
     const raw = localStorage.getItem(RUN_HISTORY_KEY)
     if (!raw) return []

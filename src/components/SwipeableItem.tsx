@@ -23,7 +23,6 @@ export default function SwipeableItem({
 }: SwipeableItemProps) {
   const [swipeOffset, setSwipeOffset] = useState(0)
   const [isSwiping, setIsSwiping] = useState(false)
-  const [swipeDirection, setSwipeDirection] = useState<'left' | 'right' | null>(null)
   const touchStartRef = useRef<{ x: number; time: number } | null>(null)
   const itemRef = useRef<HTMLDivElement>(null)
 
@@ -42,14 +41,6 @@ export default function SwipeableItem({
     const touch = e.touches[0]
     const deltaX = touch.clientX - touchStartRef.current.x
     setSwipeOffset(deltaX)
-
-    if (deltaX > 0 && onSwipeRight) {
-      setSwipeDirection('right')
-    } else if (deltaX < 0 && onSwipeLeft) {
-      setSwipeDirection('left')
-    } else {
-      setSwipeDirection(null)
-    }
   }
 
   const handleTouchEnd = () => {
@@ -73,7 +64,6 @@ export default function SwipeableItem({
     // Reset
     setSwipeOffset(0)
     setIsSwiping(false)
-    setSwipeDirection(null)
     touchStartRef.current = null
   }
 
