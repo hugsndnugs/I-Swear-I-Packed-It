@@ -4,7 +4,7 @@
  * Do not edit manually.
  */
 
-import type { CommodityType, CommodityCategory } from './commodities'
+import type { CommodityType } from './commodities'
 
 export const COMMODITIES_GENERATED: CommodityType[] = [
   { id: "agricium", label: "Agricium", category: "ore" },

@@ -27,7 +27,7 @@ export const LOCATION_TYPES: { id: LocationType; label: string }[] = [
   { id: 'none', label: 'None' }
 ]
 
-export const LOCATIONS: Location[] = LOCATIONS_GENERATED
+export const LOCATIONS: Location[] = LOCATIONS_GENERATED as Location[]
 
 export function getLocationById(id: string): Location | undefined {
   return LOCATIONS.find((l) => l.id === id)
