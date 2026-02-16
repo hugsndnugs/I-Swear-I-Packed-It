@@ -13,6 +13,7 @@
     "fetch:routes": "node scripts/fetch-routes-api.mjs",
     "fetch:top-routes": "node scripts/fetch-top-routes.mjs",
     "fetch:commodities": "node scripts/fetch-commodities.mjs",
+    "fetch:locations": "node scripts/fetch-locations.mjs",
     "update:routes": "node scripts/fetch-routes-api.mjs",
     "preview": "vite preview",
     "test": "vitest run",
