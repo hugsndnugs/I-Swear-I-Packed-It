@@ -53,6 +53,7 @@ export default defineConfig({
         ]
       },
       workbox: {
+        maximumFileSizeToCacheInBytes: 3 * 1024 * 1024, // 3 MiB (logo and PWA icons are ~2.34 MB)
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
         // Use NetworkFirst for HTML, CacheFirst for assets
         runtimeCaching: [
