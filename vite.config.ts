@@ -2,9 +2,14 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
+import { copyFileSync } from 'node:fs'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
-  base: process.env.GITHUB_PAGES === '1' ? '/I-Swear-I-Packed-It/' : '/',
+  base: '/',
   test: {
     environment: 'node',
     include: ['src/**/*.test.ts', 'src/**/*.test.tsx'],
@@ -37,6 +42,15 @@ export default defineConfig({
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}']
       }
-    })
-  ]
+    }),
+    {
+      name: 'copy-404',
+      closeBundle() {
+        copyFileSync(
+          join(__dirname, 'dist', 'index.html'),
+          join(__dirname, 'dist', '404.html')
+        )
+      },
+    },
+  ],
 })
