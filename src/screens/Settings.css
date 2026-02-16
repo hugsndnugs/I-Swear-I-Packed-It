@@ -219,3 +219,61 @@
 .settings-clear-cache-btn {
   width: 100%;
 }
+
+.settings-quiet-hours-times {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.settings-label-inline {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.settings-label-inline span {
+  min-width: 2.5rem;
+}
+
+.settings-time-input {
+  max-width: 8rem;
+}
+
+.settings-channel-block {
+  margin-bottom: var(--space-4);
+  padding: var(--space-3);
+  background: var(--surface2);
+  border-radius: var(--radius-sm);
+}
+
+.settings-channel-block:last-child {
+  margin-bottom: 0;
+}
+
+.settings-channel-name {
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin: 0 0 var(--space-2) 0;
+}
+
+.settings-channel-toggles {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.settings-channel-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--text-sm);
+  cursor: pointer;
+}
+
+.settings-channel-label {
+  color: var(--text);
+}

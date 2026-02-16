@@ -1,5 +1,6 @@
 import { setStorageError } from './storageError'
 import { showNotification, requestNotificationPermission as requestNativePermission } from './notifications'
+import { isInQuietHours } from './quietHours'
 
 const STORAGE_KEY = 'preflight-opmode'
 const TICK_MS = 10_000 // check every 10s
@@ -102,13 +103,14 @@ function nextFireTime(state: OpModeState, type: ReminderType): number {
 
 async function maybeShowNotification(type: ReminderType, enabled: boolean): Promise<void> {
   if (!enabled) return
-  
+  if (isInQuietHours()) return
+
   const messages: Record<ReminderType, string> = {
     restock: 'Time to restock supplies.',
     hydrate: 'Time to hydrate.',
     refuel: 'Time to refuel.'
   }
-  
+
   await showNotification('Pre-Flight', messages[type], 'opmode')
 }
 

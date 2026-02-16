@@ -7,6 +7,11 @@ import { Capacitor } from '@capacitor/core'
 
 export type NotificationChannel = 'opmode' | 'checklist' | 'general'
 
+export interface ChannelSettings {
+  sound: boolean
+  vibration: boolean
+}
+
 const CHANNEL_IDS: Record<NotificationChannel, string> = {
   opmode: 'preflight-opmode',
   checklist: 'preflight-checklist',
@@ -19,42 +24,91 @@ const CHANNEL_NAMES: Record<NotificationChannel, string> = {
   general: 'General Notifications'
 }
 
+const CHANNEL_DESCRIPTIONS: Record<NotificationChannel, string> = {
+  opmode: 'Reminders for restock, hydrate, and refuel during Op Mode',
+  checklist: 'Updates and reminders for checklist completion',
+  general: 'General app notifications'
+}
+
+const DEFAULT_CHANNEL_SETTINGS: Record<NotificationChannel, ChannelSettings> = {
+  opmode: { sound: true, vibration: true },
+  checklist: { sound: true, vibration: false },
+  general: { sound: true, vibration: false }
+}
+
+const STORAGE_PREFIX = 'preflight-channel-'
+
+function getStoredChannelSettings(channel: NotificationChannel): ChannelSettings {
+  if (typeof window === 'undefined') return DEFAULT_CHANNEL_SETTINGS[channel]
+  try {
+    const raw = localStorage.getItem(`${STORAGE_PREFIX}${channel}`)
+    if (!raw) return DEFAULT_CHANNEL_SETTINGS[channel]
+    const parsed = JSON.parse(raw) as unknown
+    if (parsed && typeof parsed === 'object' && 'sound' in parsed && 'vibration' in parsed) {
+      return {
+        sound: Boolean((parsed as ChannelSettings).sound),
+        vibration: Boolean((parsed as ChannelSettings).vibration)
+      }
+    }
+  } catch {
+    /* ignore */
+  }
+  return DEFAULT_CHANNEL_SETTINGS[channel]
+}
+
+export function getChannelSettings(channel: NotificationChannel): ChannelSettings {
+  return getStoredChannelSettings(channel)
+}
+
+export function setChannelSettings(channel: NotificationChannel, settings: Partial<ChannelSettings>): void {
+  if (typeof window === 'undefined') return
+  try {
+    const current = getStoredChannelSettings(channel)
+    const next: ChannelSettings = { ...current, ...settings }
+    localStorage.setItem(`${STORAGE_PREFIX}${channel}`, JSON.stringify(next))
+  } catch {
+    /* ignore */
+  }
+}
+
+async function createOneChannel(channel: NotificationChannel): Promise<void> {
+  const settings = getStoredChannelSettings(channel)
+  const importance = channel === 'opmode' ? 4 : 3
+  await LocalNotifications.createChannel({
+    id: CHANNEL_IDS[channel],
+    name: CHANNEL_NAMES[channel],
+    description: CHANNEL_DESCRIPTIONS[channel],
+    importance,
+    sound: settings.sound ? 'default' : undefined,
+    vibration: settings.vibration
+  })
+}
+
 /**
- * Initialize notification channels (Android)
+ * Initialize notification channels (Android) using stored per-channel settings
  */
 export async function initializeNotificationChannels(): Promise<void> {
   if (!Capacitor.isNativePlatform()) return
 
   try {
-    // Create notification channels for Android
-    await LocalNotifications.createChannel({
-      id: CHANNEL_IDS.opmode,
-      name: CHANNEL_NAMES.opmode,
-      description: 'Reminders for restock, hydrate, and refuel during Op Mode',
-      importance: 4, // High importance
-      sound: 'default',
-      vibration: true
-    })
-
-    await LocalNotifications.createChannel({
-      id: CHANNEL_IDS.checklist,
-      name: CHANNEL_NAMES.checklist,
-      description: 'Updates and reminders for checklist completion',
-      importance: 3, // Default importance
-      sound: 'default',
-      vibration: false
-    })
-
-    await LocalNotifications.createChannel({
-      id: CHANNEL_IDS.general,
-      name: CHANNEL_NAMES.general,
-      description: 'General app notifications',
-      importance: 3, // Default importance
-      sound: 'default',
-      vibration: false
-    })
+    await createOneChannel('opmode')
+    await createOneChannel('checklist')
+    await createOneChannel('general')
   } catch (error) {
     console.error('Failed to create notification channels:', error)
+  }
+}
+
+/**
+ * Update one channel's settings and re-create the channel so new notifications use them
+ */
+export async function updateChannelSettingsAndRecreate(channel: NotificationChannel, settings: ChannelSettings): Promise<void> {
+  setChannelSettings(channel, settings)
+  if (!Capacitor.isNativePlatform()) return
+  try {
+    await createOneChannel(channel)
+  } catch (error) {
+    console.error('Failed to update notification channel:', error)
   }
 }
 

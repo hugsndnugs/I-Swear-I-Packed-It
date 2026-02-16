@@ -1,7 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Settings as SettingsIcon, ArrowLeft, Type, Contrast, Download, Upload, Database, Fingerprint, HardDrive, Volume2 } from 'lucide-react'
+import { Settings as SettingsIcon, ArrowLeft, Type, Contrast, Download, Upload, Database, Fingerprint, HardDrive, Volume2, Moon, Bell } from 'lucide-react'
 import { getSettings, saveSetting, type FontSize, type HighContrastMode } from '../lib/settings'
+import { getStoredOledDark, setStoredOledDark, getStoredThemePalette, setStoredThemePalette, type ThemePalette } from '../lib/theme'
+import { getQuietHours, setQuietHours } from '../lib/quietHours'
+import { getChannelSettings, updateChannelSettingsAndRecreate, type NotificationChannel } from '../lib/notifications'
+import { Capacitor } from '@capacitor/core'
 import { getPirateSettings } from '../lib/pirateSettings'
 import { pirateSpeak } from '../lib/pirateSpeak'
 import { hapticButtonPress } from '../lib/haptics'
@@ -247,6 +251,180 @@ export default function Settings() {
             </label>
           </div>
         </section>
+
+        <section className="settings-section card">
+          <h2 className="settings-section-title">
+            {pirateSpeak('True black (OLED)', ps)}
+          </h2>
+          <p className="settings-section-description">
+            Use true black backgrounds in dark mode to reduce glow on OLED screens and save power.
+          </p>
+          <div className="settings-toggle">
+            <label className="settings-toggle-label">
+              <input
+                type="checkbox"
+                checked={getStoredOledDark()}
+                onChange={() => {
+                  const next = !getStoredOledDark()
+                  setStoredOledDark(next)
+                  setTick((t) => t + 1)
+                  hapticButtonPress()
+                }}
+                className="settings-toggle-input"
+                aria-label="True black dark mode on or off"
+              />
+              <span className="settings-toggle-slider" />
+              <span className="settings-toggle-text">
+                {getStoredOledDark() ? 'On' : 'Off'}
+              </span>
+            </label>
+          </div>
+        </section>
+
+        <section className="settings-section card">
+          <h2 className="settings-section-title">
+            {pirateSpeak('Color theme', ps)}
+          </h2>
+          <p className="settings-section-description">
+            Choose an accent color theme. High contrast improves visibility; Star Citizen uses a warm gold; Material You follows your system accent (Android 12+).
+          </p>
+          <div className="settings-options">
+            {(['default', 'high-contrast', 'star-citizen', 'material-you'] as ThemePalette[]).map((palette) => (
+              <button
+                key={palette}
+                className={`settings-option ${getStoredThemePalette() === palette ? 'settings-option--active' : ''}`}
+                onClick={() => {
+                  setStoredThemePalette(palette)
+                  setTick((t) => t + 1)
+                  hapticButtonPress()
+                }}
+                aria-pressed={getStoredThemePalette() === palette}
+              >
+                <span className="settings-option-label">
+                  {{
+                    default: 'Default',
+                    'high-contrast': 'High contrast',
+                    'star-citizen': 'Star Citizen',
+                    'material-you': 'Material You'
+                  }[palette]}
+                </span>
+                {getStoredThemePalette() === palette && (
+                  <span className="settings-option-check" aria-hidden>✓</span>
+                )}
+              </button>
+            ))}
+          </div>
+        </section>
+
+        <section className="settings-section card">
+          <h2 className="settings-section-title">
+            <Moon size={20} aria-hidden />
+            {pirateSpeak('Quiet hours', ps)}
+          </h2>
+          <p className="settings-section-description">
+            Suppress Op Mode reminder notifications during this time window (e.g. overnight).
+          </p>
+          <div className="settings-toggle">
+            <label className="settings-toggle-label">
+              <input
+                type="checkbox"
+                checked={getQuietHours().enabled}
+                onChange={() => {
+                  setQuietHours({ enabled: !getQuietHours().enabled })
+                  setTick((t) => t + 1)
+                  hapticButtonPress()
+                }}
+                className="settings-toggle-input"
+                aria-label="Quiet hours on or off"
+              />
+              <span className="settings-toggle-slider" />
+              <span className="settings-toggle-text">
+                {getQuietHours().enabled ? 'On' : 'Off'}
+              </span>
+            </label>
+          </div>
+          {getQuietHours().enabled && (
+            <div className="settings-quiet-hours-times">
+              <label className="settings-label-inline">
+                <span>From</span>
+                <input
+                  type="time"
+                  className="input settings-time-input"
+                  value={getQuietHours().start}
+                  onChange={(e) => {
+                    setQuietHours({ start: e.target.value })
+                    setTick((t) => t + 1)
+                  }}
+                  aria-label="Quiet hours start time"
+                />
+              </label>
+              <label className="settings-label-inline">
+                <span>To</span>
+                <input
+                  type="time"
+                  className="input settings-time-input"
+                  value={getQuietHours().end}
+                  onChange={(e) => {
+                    setQuietHours({ end: e.target.value })
+                    setTick((t) => t + 1)
+                  }}
+                  aria-label="Quiet hours end time"
+                />
+              </label>
+            </div>
+          )}
+        </section>
+
+        {Capacitor.isNativePlatform() && (
+          <section className="settings-section card" aria-label="Notification channels">
+            <h2 className="settings-section-title">
+              <Bell size={20} aria-hidden />
+              {pirateSpeak('Notification channels', ps)}
+            </h2>
+            <p className="settings-section-description">
+              Per-channel settings for Op Mode, Checklist, and General notifications. Sound and vibration apply to new notifications.
+            </p>
+            {(['opmode', 'checklist', 'general'] as NotificationChannel[]).map((channel) => (
+              <div key={channel} className="settings-channel-block">
+                <h3 className="settings-channel-name">
+                  {channel === 'opmode' ? 'Op Mode Reminders' : channel === 'checklist' ? 'Checklist Updates' : 'General'}
+                </h3>
+                <div className="settings-channel-toggles">
+                  <label className="settings-channel-row">
+                    <span className="settings-channel-label">Sound</span>
+                    <input
+                      type="checkbox"
+                      checked={getChannelSettings(channel).sound}
+                      onChange={async () => {
+                        const next = !getChannelSettings(channel).sound
+                        await updateChannelSettingsAndRecreate(channel, { ...getChannelSettings(channel), sound: next })
+                        setTick((t) => t + 1)
+                        hapticButtonPress()
+                      }}
+                      className="settings-toggle-input"
+                      aria-label={`${channel} notifications sound`}
+                    />
+                  </label>
+                  <label className="settings-channel-row">
+                    <span className="settings-channel-label">Vibration</span>
+                    <input
+                      type="checkbox"
+                      checked={getChannelSettings(channel).vibration}
+                      onChange={async () => {
+                        const next = !getChannelSettings(channel).vibration
+                        await updateChannelSettingsAndRecreate(channel, { ...getChannelSettings(channel), vibration: next })
+                        setTick((t) => t + 1)
+                        hapticButtonPress()
+                      }}
+                      className="settings-toggle-input"
+                      aria-label={`${channel} notifications vibration`}
+                    />
+                  </label>
+                </div>
+              </div>
+            ))}
+          </section>
+        )}
 
         <section className="settings-section card">
           <h2 className="settings-section-title">
