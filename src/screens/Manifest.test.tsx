@@ -67,6 +67,6 @@ describe('Manifest', () => {
 
   it('displays generate report button', () => {
     renderManifest()
-    expect(screen.getByText(/Generate report/i)).toBeInTheDocument()
+    expect(screen.getByText(/Generate validation report/i)).toBeInTheDocument()
   })
 })
