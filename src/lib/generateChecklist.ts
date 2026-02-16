@@ -22,7 +22,7 @@ export interface GeneratedChecklist {
 }
 
 function sectionsForOperation(op: OperationType): TaskSection[] {
-  const always: TaskSection[] = ['critical', 'flight']
+  const always: TaskSection[] = ['ship-readiness', 'critical', 'flight']
   switch (op) {
     case 'cargo-run':
       return [...always, 'tools', 'cargo', 'crew']

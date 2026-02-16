@@ -12,7 +12,7 @@ describe('equipment', () => {
     expect(names).toContain('TruHold Tractor Beam Attachment')
     expect(names).toContain('LifeGuard Medical Attachment')
     expect(names).toContain('CureLife Med-Pen')
-    expect(names).toContain('Medgun')
+    expect(names.some((n) => n.startsWith('Medgun'))).toBe(true)
   })
 
   it('tractor attachment links to multitool-tractor task', () => {
@@ -48,6 +48,13 @@ describe('equipment', () => {
     for (const cat of used) {
       expect(EQUIPMENT_CATEGORY_LABELS[cat]).toBeDefined()
       expect(EQUIPMENT_CATEGORY_LABELS[cat].length).toBeGreaterThan(0)
+    }
+  })
+
+  it('every catalog item has a non-empty name', () => {
+    for (const item of equipmentCatalog) {
+      expect(item.name).toBeDefined()
+      expect(item.name.trim().length).toBeGreaterThan(0)
     }
   })
 })

@@ -43,13 +43,26 @@
 
 .equipment-item {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--space-2);
+  flex-direction: column;
+  gap: var(--space-1);
   padding: var(--space-3) var(--space-4);
   background: var(--surface2);
   border-radius: var(--radius);
   font-size: var(--text-base);
+}
+
+.equipment-item-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.equipment-item-desc {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.4;
 }
 
 .equipment-item-name {

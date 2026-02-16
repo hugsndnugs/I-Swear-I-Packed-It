@@ -2,14 +2,23 @@ import { describe, it, expect } from 'vitest'
 import { generateChecklist } from './generateChecklist'
 
 describe('generateChecklist', () => {
-  it('returns critical and flight sections for cargo-run with pilot only', () => {
+  it('returns ship-readiness, critical, and flight sections for cargo-run with pilot only', () => {
     const result = generateChecklist('cutlass-black', 'cargo-run', ['pilot'])
     const sectionIds = result.sections.map((s) => s.id)
+    expect(sectionIds).toContain('ship-readiness')
     expect(sectionIds).toContain('critical')
     expect(sectionIds).toContain('flight')
     expect(sectionIds).toContain('tools')
     expect(sectionIds).toContain('cargo')
     expect(sectionIds).toContain('crew')
+  })
+
+  it('includes ship-readiness tasks: insurance-status and claim-timer', () => {
+    const result = generateChecklist('cutlass-black', 'cargo-run', ['pilot'])
+    const shipReadiness = result.sections.find((s) => s.id === 'ship-readiness')
+    const taskIds = shipReadiness?.tasks.map((t) => t.taskId) ?? []
+    expect(taskIds).toContain('insurance-status')
+    expect(taskIds).toContain('claim-timer')
   })
 
   it('includes mining-tool task only for mining operation', () => {
@@ -46,6 +55,8 @@ describe('generateChecklist', () => {
 
   it('uses SECTION_LABELS for section labels', () => {
     const result = generateChecklist('cutlass-black', 'cargo-run', ['pilot'])
+    const shipReadiness = result.sections.find((s) => s.id === 'ship-readiness')
+    expect(shipReadiness?.label).toBe('Ship readiness')
     const critical = result.sections.find((s) => s.id === 'critical')
     expect(critical?.label).toBe('Critical')
     const flight = result.sections.find((s) => s.id === 'flight')

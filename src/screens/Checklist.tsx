@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { CheckCheck, ChevronRight } from 'lucide-react'
 import type { ChecklistSection, ChecklistTask } from '../lib/generateChecklist'
-import CollapsibleSection from '../components/CollapsibleSection'
 import ProgressBar from '../components/ProgressBar'
 import {
   savePreset,
@@ -37,11 +36,42 @@ export default function Checklist() {
     return new Set(valid)
   })
 
+  const [activeSectionIndex, setActiveSectionIndex] = useState(0)
+  const [saveName, setSaveName] = useState('')
+  const [showSave, setShowSave] = useState(false)
+  const [exportCopied, setExportCopied] = useState(false)
+  const [showQr, setShowQr] = useState(false)
+  const [qrDataUrl, setQrDataUrl] = useState<string | null>(null)
+  const savePresetButtonRef = useRef<HTMLButtonElement>(null)
+  const modalRef = useRef<HTMLDivElement>(null)
+  const runRecordRef = useRef<{ completed: Set<string>; allTaskIds: string[] } | null>(null)
+  const tabListRef = useRef<HTMLDivElement>(null)
+  const tabRefsRef = useRef<(HTMLButtonElement | null)[]>([])
+
   useEffect(() => {
     if (!checklist) {
       navigate('/', { replace: true })
     }
   }, [checklist, navigate])
+
+  useEffect(() => {
+    if (checklist) setActiveSectionIndex(0)
+  }, [checklist])
+
+  useEffect(() => {
+    if (!checklist || checklist.sections.length === 0) return
+    const section = checklist.sections[activeSectionIndex]
+    if (!section) return
+    const taskIds = section.tasks.map((t) => t.id)
+    const allDoneInSection = taskIds.length > 0 && taskIds.every((id) => completed.has(id))
+    if (allDoneInSection && activeSectionIndex < checklist.sections.length - 1) {
+      const nextIndex = Math.min(activeSectionIndex + 1, checklist.sections.length - 1)
+      setActiveSectionIndex(nextIndex)
+      queueMicrotask(() => {
+        tabRefsRef.current[nextIndex]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+      })
+    }
+  }, [checklist, activeSectionIndex, completed])
 
   useEffect(() => {
     if (!checklist || !state?.shipId || !state?.operationType || !state?.crewRoles) return
@@ -53,14 +83,6 @@ export default function Checklist() {
     })
   }, [completed, checklist, state?.shipId, state?.operationType, state?.crewRoles])
 
-  const [saveName, setSaveName] = useState('')
-  const [showSave, setShowSave] = useState(false)
-  const [exportCopied, setExportCopied] = useState(false)
-  const [showQr, setShowQr] = useState(false)
-  const [qrDataUrl, setQrDataUrl] = useState<string | null>(null)
-  const savePresetButtonRef = useRef<HTMLButtonElement>(null)
-  const modalRef = useRef<HTMLDivElement>(null)
-  const runRecordRef = useRef<{ completed: Set<string>; allTaskIds: string[] } | null>(null)
   if (checklist && context) {
     const allTaskIds = checklist.sections.flatMap((s) => s.tasks.map((t) => t.id))
     runRecordRef.current = { completed, allTaskIds }
@@ -199,7 +221,6 @@ export default function Checklist() {
     return { roleId, roleLabel, done, total, green }
   }).filter((r) => r.total > 0)
 
-  const criticalSectionId = criticalSection ? `section-${criticalSection.id}` : undefined
   const contextWarnings = state?.contextWarnings
 
   return (
@@ -224,11 +245,49 @@ export default function Checklist() {
         </div>
       )}
 
-      {criticalSectionId && (
-        <a href={`#${criticalSectionId}`} className="checklist-skip-link">
-          Skip to Critical
-        </a>
-      )}
+      <div
+        ref={tabListRef}
+        className="checklist-tabs"
+        role="tablist"
+        aria-label="Checklist sections"
+      >
+        {checklist.sections.map((section, idx) => {
+          const sectionTaskIds = section.tasks.map((t) => t.id)
+          const done = sectionTaskIds.filter((id) => completed.has(id)).length
+          const total = sectionTaskIds.length
+          const isActive = idx === activeSectionIndex
+          return (
+            <button
+              key={section.id}
+              ref={(el) => { tabRefsRef.current[idx] = el }}
+              type="button"
+              role="tab"
+              aria-selected={isActive}
+              aria-controls={`checklist-panel-${section.id}`}
+              id={`checklist-tab-${section.id}`}
+              tabIndex={isActive ? 0 : -1}
+              className={'checklist-tab' + (isActive ? ' checklist-tab--active' : '')}
+              onClick={() => setActiveSectionIndex(idx)}
+              onKeyDown={(e) => {
+                if (e.key === 'ArrowLeft' && idx > 0) {
+                  e.preventDefault()
+                  setActiveSectionIndex(idx - 1)
+                  tabRefsRef.current[idx - 1]?.focus()
+                } else if (e.key === 'ArrowRight' && idx < checklist.sections.length - 1) {
+                  e.preventDefault()
+                  setActiveSectionIndex(idx + 1)
+                  tabRefsRef.current[idx + 1]?.focus()
+                }
+              }}
+            >
+              <span className="checklist-tab-label">{section.label}</span>
+              <span className="checklist-tab-progress" aria-hidden>
+                {done}/{total}
+              </span>
+            </button>
+          )
+        })}
+      </div>
 
       {roleProgress.length > 0 && (
         <div
@@ -255,37 +314,42 @@ export default function Checklist() {
         </div>
       )}
 
-      {checklist.sections.map((section) => (
-        <CollapsibleSection
-          key={section.id}
-          sectionKey={section.id}
-          title={section.label}
-          defaultOpen={section.id === 'critical'}
-          alwaysOpen={section.id === 'critical'}
-          actions={
-            <button
-              type="button"
-              className="checklist-mark-all btn-ghost"
-              onClick={() => markSectionComplete(section)}
-              aria-label={`Mark all ${section.label} complete`}
-            >
-              <CheckCheck size={18} aria-hidden />
-              Mark all
-            </button>
-          }
-        >
-          <ul className="checklist-tasks">
-            {section.tasks.map((task) => (
-              <TaskRow
-                key={task.id}
-                task={task}
-                completed={completed.has(task.id)}
-                onToggle={() => toggleTask(task.id)}
-              />
-            ))}
-          </ul>
-        </CollapsibleSection>
-      ))}
+      {checklist.sections.map((section, idx) => {
+        const isActive = idx === activeSectionIndex
+        return (
+          <div
+            key={section.id}
+            id={`checklist-panel-${section.id}`}
+            role="tabpanel"
+            aria-labelledby={`checklist-tab-${section.id}`}
+            hidden={!isActive}
+            className="checklist-panel"
+          >
+            <div className="checklist-panel-header">
+              <h2 className="checklist-panel-title">{section.label}</h2>
+              <button
+                type="button"
+                className="checklist-mark-all btn-ghost"
+                onClick={() => markSectionComplete(section)}
+                aria-label={`Mark all ${section.label} complete`}
+              >
+                <CheckCheck size={18} aria-hidden />
+                Mark all
+              </button>
+            </div>
+            <ul className="checklist-tasks">
+              {section.tasks.map((task) => (
+                <TaskRow
+                  key={task.id}
+                  task={task}
+                  completed={completed.has(task.id)}
+                  onToggle={() => toggleTask(task.id)}
+                />
+              ))}
+            </ul>
+          </div>
+        )
+      })}
 
       <div className="checklist-actions">
         <button

@@ -14,6 +14,8 @@ export interface EquipmentItem {
   name: string
   category: EquipmentCategory
   subCategory?: string
+  /** Short in-world or gameplay clarification. Optional. */
+  description?: string
   roles?: CrewRole[]
   taskIds?: string[]
 }
@@ -28,34 +30,44 @@ export const EQUIPMENT_CATEGORY_LABELS: Record<EquipmentCategory, string> = {
   armor: 'Armor',
 }
 
-/** Canonical equipment catalog (multi-tool attachments, medical, gadgets). */
+/** Human-readable labels for subcategories. */
+export const SUB_CATEGORY_LABELS: Record<string, string> = {
+  'multi-tool-attachment': 'Multi-tool attachment',
+  medpen: 'Med pen',
+  diagnostic: 'Diagnostic',
+  revive: 'Revive',
+  gadget: 'Gadget',
+}
+
+/** Star Citizen equipment catalog (multi-tool attachments, medical, survival, gadgets). */
 export const equipmentCatalog: EquipmentItem[] = [
   // Multi-tool attachments (Greycat)
   {
     id: 'orebit-mining',
     name: 'OreBit Mining Attachment',
     category: 'tools',
-    subCategory: 'multi-tool-attachment',
+    description: 'Attaches to Greycat Multi-Tool for mining ore and gem deposits.',
     taskIds: ['mining-tool'],
   },
   {
     id: 'oxytorch-cutter',
     name: 'OxyTorch Cutter Attachment',
     category: 'tools',
-    subCategory: 'multi-tool-attachment',
+    description: 'Multi-tool attachment for cutting and salvage operations.',
+    taskIds: ['salvage-tool'],
   },
   {
     id: 'truhold-tractor',
     name: 'TruHold Tractor Beam Attachment',
     category: 'tools',
-    subCategory: 'multi-tool-attachment',
+    description: 'Attaches to Greycat Multi-Tool for moving cargo crates (1–32 SCU) and boxes.',
     taskIds: ['multitool-tractor', 'tractor-ready', 'loader-tractor'],
   },
   {
     id: 'lifeguard-medical',
     name: 'LifeGuard Medical Attachment',
     category: 'medical',
-    subCategory: 'multi-tool-attachment',
+    description: 'Multi-tool attachment for field healing. Medic role.',
     roles: ['medic'],
     taskIds: ['medgun'],
   },
@@ -63,125 +75,111 @@ export const equipmentCatalog: EquipmentItem[] = [
     id: 'cambio-lite-srt',
     name: 'Cambio-Lite SRT Attachment',
     category: 'tools',
-    subCategory: 'multi-tool-attachment',
+    description: 'Specialized multi-tool attachment for repair and salvage.',
+    taskIds: ['salvage-tool'],
   },
   // Medical
   {
     id: 'medpen',
     name: 'CureLife Med-Pen',
     category: 'medical',
-    subCategory: 'medpen',
+    description: 'Single-use quick heal. Essential for every crew member.',
     taskIds: ['medpens'],
   },
   {
     id: 'dynapak',
-    name: 'CureLife DYNAPAK',
+    name: 'ParaMed Medical Device',
     category: 'medical',
-    subCategory: 'medpen',
+    description: 'Handheld device for sustained healing in the field; alternative to Med-Pen.',
     taskIds: ['medpens'],
   },
   {
     id: 'hemozal',
-    name: 'Hemozal',
+    name: 'MedPen (Hemozal)',
     category: 'medical',
-    subCategory: 'revive',
+    description: 'Health, stops bleeding, recovers from incapacitated. One of four trauma med pens.',
+    taskIds: ['trauma-meds'],
+  },
+  {
+    id: 'adrenapen',
+    name: 'AdrenaPen (Demexatrine)',
+    category: 'medical',
+    description: 'Reduces concussion symptoms, normalizes weapon handling and movement speed.',
+    taskIds: ['trauma-meds'],
+  },
+  {
+    id: 'corticopen',
+    name: 'CorticoPen (Sterogen)',
+    category: 'medical',
+    description: 'Reduces vision and hearing symptoms, normalizes stamina.',
+    taskIds: ['trauma-meds'],
+  },
+  {
+    id: 'opiopen',
+    name: 'OpioPen (Roxaphen)',
+    category: 'medical',
+    description: 'Reduces pain symptoms, normalizes movement ability.',
+    taskIds: ['trauma-meds'],
   },
   {
     id: 'paramed-device',
-    name: 'ParaMed Medical Device',
+    name: 'ParaMed Medical Device (diagnostic)',
     category: 'medical',
-    subCategory: 'diagnostic',
+    description: 'Handheld diagnostic tool for reading patient vitals.',
+    taskIds: ['medgun'],
   },
   {
     id: 'medgun',
-    name: 'Medgun',
+    name: 'Medgun (PyroMed / CureLife)',
     category: 'medical',
+    description: 'Handheld healing device; use with LifeGuard attachment for field healing. Medic role.',
     roles: ['medic'],
     taskIds: ['medgun'],
   },
   {
     id: 'medgun-refills',
-    name: 'Medgun refills',
+    name: 'Medgun refill canisters',
     category: 'medical',
+    description: 'Ammo canisters for medgun healing charges. Bring 2–3+ charges. Medic role.',
     roles: ['medic'],
     taskIds: ['refills'],
-  },
-  {
-    id: 'trauma-meds',
-    name: 'Trauma meds',
-    category: 'medical',
-    roles: ['medic'],
-    taskIds: ['trauma-meds'],
-  },
-  {
-    id: 'extraction-tools',
-    name: 'Extraction tools',
-    category: 'medical',
-    roles: ['medic'],
-    taskIds: ['extraction-tools'],
   },
   // Survival
   {
     id: 'helmet',
-    name: 'Helmet',
+    name: 'Flight helmet',
     category: 'survival',
+    description: 'Standard EVA/flight helmet; required for life support in vacuum.',
     taskIds: ['helmet'],
   },
   {
     id: 'spare-undersuit',
     name: 'Spare undersuit',
     category: 'survival',
-    taskIds: ['spare-undersuit'],
+    description: 'Backup EVA undersuit in case of damage or loss.',
   },
   // Tools (general)
   {
     id: 'personal-multitool',
     name: 'Greycat Personal Multi-Tool',
     category: 'tools',
+    description: 'Base multi-tool; use with tractor, mining, or cutting attachments.',
     taskIds: ['multitool-tractor'],
   },
-  {
-    id: 'industrial-cutting-tool',
-    name: 'Industrial Cutting Tool',
-    category: 'tools',
-    subCategory: 'gadget',
-  },
   // Gadgets (utility)
-  {
-    id: 'door-breach-charge',
-    name: 'Door Breach Charge',
-    category: 'utility',
-    subCategory: 'gadget',
-  },
-  {
-    id: 'doubletime-hologram',
-    name: 'Doubletime Personal Hologram',
-    category: 'utility',
-    subCategory: 'gadget',
-  },
-  {
-    id: 'qdb-12-shield',
-    name: 'QDB-12 QuiKCade',
-    category: 'utility',
-    subCategory: 'gadget',
-  },
-  {
-    id: 'pk-1-sweeper',
-    name: 'PK-1 Sweeper',
-    category: 'utility',
-    subCategory: 'gadget',
-  },
   {
     id: 'xdl-rangefinder',
     name: 'XDL Monocular Rangefinder',
     category: 'utility',
-    subCategory: 'gadget',
+    description: 'Rangefinding monocular for distance and targeting.',
+    taskIds: ['Gadget'],
   },
   // Ammo
   {
     id: 'ammo-magazines',
-    name: 'Ammo / magazines',
+    name: 'Ammo and magazines',
     category: 'ammo',
+    description: 'FPS weapon magazines; match weapon type. Ship weapon ammo as needed.',
     taskIds: ['ammo'],
   },
 ]

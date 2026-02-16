@@ -2,9 +2,13 @@ import { Heart, Shield, Wrench, Crosshair, Package, Swords, ShieldCheck } from '
 import {
   getEquipmentByCategory,
   EQUIPMENT_CATEGORY_LABELS,
+  SUB_CATEGORY_LABELS,
   type EquipmentCategory,
 } from '../data/equipment'
+import { tasks } from '../data/tasks'
 import './Equipment.css'
+
+const TASK_LABEL_BY_ID = Object.fromEntries(tasks.map((t) => [t.id, t.label]))
 
 const CATEGORY_ICONS: Record<EquipmentCategory, typeof Heart> = {
   medical: Heart,
@@ -33,7 +37,7 @@ export default function Equipment() {
     <div className="equipment">
       <h1 className="equipment-title">Equipment Reference</h1>
       <p className="equipment-desc">
-        In-world items and tools for pre-flight loadouts. Linked to checklist tasks where relevant.
+        Star Citizen in-world items and tools for pre-flight loadouts. Linked to checklist tasks where relevant.
       </p>
 
       {CATEGORY_ORDER.map((cat) => {
@@ -53,14 +57,24 @@ export default function Equipment() {
             <ul className="equipment-list">
               {items.map((item) => (
                 <li key={item.id} className="equipment-item">
-                  <span className="equipment-item-name">{item.name}</span>
-                  {item.subCategory && (
-                    <span className="equipment-item-sub">{item.subCategory}</span>
-                  )}
-                  {item.taskIds && item.taskIds.length > 0 && (
-                    <span className="equipment-item-tasks" aria-label="Related checklist tasks">
-                      → {item.taskIds.join(', ')}
-                    </span>
+                  <div className="equipment-item-main">
+                    <span className="equipment-item-name">{item.name}</span>
+                    {item.subCategory && (
+                      <span className="equipment-item-sub">
+                        {SUB_CATEGORY_LABELS[item.subCategory] ?? item.subCategory}
+                      </span>
+                    )}
+                    {item.taskIds && item.taskIds.length > 0 && (
+                      <span className="equipment-item-tasks" aria-label="Related checklist tasks">
+                        →{' '}
+                        {item.taskIds
+                          .map((id) => TASK_LABEL_BY_ID[id] ?? id)
+                          .join(' · ')}
+                      </span>
+                    )}
+                  </div>
+                  {item.description && (
+                    <p className="equipment-item-desc">{item.description}</p>
                   )}
                 </li>
               ))}
