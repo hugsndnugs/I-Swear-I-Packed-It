@@ -14,6 +14,8 @@ import { roleCountsToRoles, totalCrew } from '../lib/crewRoleCounts'
 import { CREW_ROLES, OPERATION_TYPES } from '../data/contexts'
 import { ships } from '../data/ships'
 import { buildShareableUrl } from '../lib/presetShare'
+import { getPirateSettings } from '../lib/pirateSettings'
+import { pirateSpeak } from '../lib/pirateSpeak'
 import type { ChecklistLocationState } from '../types/navigation'
 import './Checklist.css'
 
@@ -53,11 +55,19 @@ export default function Checklist() {
   const [exportCopied, setExportCopied] = useState(false)
   const [showQr, setShowQr] = useState(false)
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null)
+  const [, setPirateTick] = useState(0)
   const savePresetButtonRef = useRef<HTMLButtonElement>(null)
   const modalRef = useRef<HTMLDivElement>(null)
   const runRecordRef = useRef<{ completed: Set<string>; allTaskIds: string[] } | null>(null)
   const tabListRef = useRef<HTMLDivElement>(null)
   const tabRefsRef = useRef<(HTMLButtonElement | null)[]>([])
+  const ps = getPirateSettings().pirateSpeak
+
+  useEffect(() => {
+    const handler = () => setPirateTick((t) => t + 1)
+    window.addEventListener('pirate-settings-changed', handler)
+    return () => window.removeEventListener('pirate-settings-changed', handler)
+  }, [])
 
   useEffect(() => {
     if (!checklist) {
@@ -126,9 +136,10 @@ export default function Checklist() {
   }
 
   const shipName = state?.shipId ? ships.find((s) => s.id === state.shipId)?.name ?? state.shipId : '—'
-  const opLabel = state?.operationType
+  const opLabelRaw = state?.operationType
     ? OPERATION_TYPES.find((o) => o.id === state.operationType)?.label ?? state.operationType
     : '—'
+  const opLabel = pirateSpeak(opLabelRaw, ps)
 
   const copyExportSummary = async () => {
     if (!checklist || !state?.shipId || !state?.operationType) return
@@ -292,7 +303,7 @@ export default function Checklist() {
                 }
               }}
             >
-              <span className="checklist-tab-label">{section.label}</span>
+              <span className="checklist-tab-label">{pirateSpeak(section.label, ps)}</span>
               <span className="checklist-tab-progress" aria-hidden>
                 {done}/{total}
               </span>
@@ -308,7 +319,7 @@ export default function Checklist() {
           aria-live="polite"
           aria-atomic="true"
         >
-          <h2 className="checklist-readiness-title">Crew readiness</h2>
+          <h2 className="checklist-readiness-title">{pirateSpeak('Crew readiness', ps)}</h2>
           <ul className="checklist-readiness-list">
             {roleProgress.map((r) => (
               <li key={r.roleId} className={r.green ? 'ready' : ''}>
@@ -338,7 +349,7 @@ export default function Checklist() {
             className="checklist-panel"
           >
             <div className="checklist-panel-header">
-              <h2 className="checklist-panel-title">{section.label}</h2>
+              <h2 className="checklist-panel-title">{pirateSpeak(section.label, ps)}</h2>
               <button
                 type="button"
                 className="checklist-mark-all btn-ghost"
@@ -371,7 +382,7 @@ export default function Checklist() {
           aria-label="Back to Generator"
         >
           <ChevronRight size={18} className="checklist-back-icon" aria-hidden />
-          Back to Generator
+          {pirateSpeak('Back to Generator', ps)}
         </button>
         <button
           ref={savePresetButtonRef}
@@ -411,7 +422,7 @@ export default function Checklist() {
             }
             aria-label="View pack list"
           >
-            View Pack List
+            {pirateSpeak('View Pack List', ps)}
           </button>
         )}
       </div>

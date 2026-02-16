@@ -18,6 +18,8 @@ import {
   toggleFavorite,
   isFavorite
 } from '../lib/shipPreferences'
+import { getPirateSettings, isPirateShip } from '../lib/pirateSettings'
+import { pirateSpeak } from '../lib/pirateSpeak'
 import { getContextWarnings } from '../lib/contextWarnings'
 import {
   getPresetFromSearchParams,
@@ -74,14 +76,27 @@ export default function Generator() {
     import('qrcode').then((QRCode) => QRCode.toDataURL(url, { width: 260, margin: 1 })).then(setQrDataUrl)
   }, [showQr, shipId, operationType, crewCount, crewRoles])
 
+  useEffect(() => {
+    const handler = () => setPrefsTick((t) => t + 1)
+    window.addEventListener('pirate-settings-changed', handler)
+    return () => window.removeEventListener('pirate-settings-changed', handler)
+  }, [])
+
   const closeQr = () => {
     setShowQr(false)
     setQrDataUrl(null)
   }
 
+  const pirateShipFilter = useMemo(() => getPirateSettings().shipFilter, [prefsTick])
+  const pirateSpeakOn = useMemo(() => getPirateSettings().pirateSpeak, [prefsTick])
+  const visibleOperationTypes = useMemo(() => {
+    const { pirateOpMode } = getPirateSettings()
+    return pirateOpMode ? OPERATION_TYPES : OPERATION_TYPES.filter((op) => op.id !== 'piracy')
+  }, [prefsTick])
   const filteredShips = useMemo(() => {
     const q = shipSearch.trim().toLowerCase()
     return ships.filter((s) => {
+      if (pirateShipFilter && !isPirateShip(s)) return false
       if (flightReadyOnly && s.status && s.status !== 'flight-ready') return false
       if (!q) return true
       return (
@@ -89,7 +104,7 @@ export default function Generator() {
         (s.manufacturer?.toLowerCase().includes(q) ?? false)
       )
     })
-  }, [shipSearch, flightReadyOnly])
+  }, [shipSearch, flightReadyOnly, pirateShipFilter])
 
   const favoriteIds = useMemo(() => getFavoriteShipIds(), [prefsTick])
   const recentIds = useMemo(() => getRecentShipIds(), [prefsTick])
@@ -156,10 +171,10 @@ export default function Generator() {
 
   return (
     <div className="generator">
-      <h1 className="generator-title">Generate Checklist</h1>
+      <h1 className="generator-title">{pirateSpeak('Generate Checklist', pirateSpeakOn)}</h1>
 
       <section className="generator-ship-card card" aria-labelledby="ship-section-label">
-        <h2 id="ship-section-label" className="generator-section-label">Ship</h2>
+        <h2 id="ship-section-label" className="generator-section-label">{pirateSpeak('Ship', pirateSpeakOn)}</h2>
         <input
           id="ship-search"
           type="search"
@@ -229,7 +244,7 @@ export default function Generator() {
 
       <label className="generator-label">Operation type</label>
       <div className="generator-chips" role="group" aria-label="Operation type">
-        {OPERATION_TYPES.map((op) => (
+        {visibleOperationTypes.map((op) => (
           <button
             key={op.id}
             type="button"
@@ -238,7 +253,7 @@ export default function Generator() {
             aria-pressed={operationType === op.id}
             aria-label={`Operation: ${op.label}`}
           >
-            {op.label}
+            {pirateSpeak(op.label, pirateSpeakOn)}
           </button>
         ))}
       </div>
@@ -259,7 +274,7 @@ export default function Generator() {
               min={0}
               max={20}
               value={crewRoleCounts[r.id] ?? 0}
-              onChange={(e) => setRoleCount(r.id, e.target.value)}
+              onChange={(e) => setRoleCount(r.id, Number(e.target.value) || 0)}
               className="generator-input input generator-role-input"
               aria-label={`Number of ${r.label}s`}
             />

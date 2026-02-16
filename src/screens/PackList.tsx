@@ -1,9 +1,11 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Heart, Shield, Wrench, Crosshair, Package } from 'lucide-react'
 import { loadLastRun } from '../lib/presets'
 import { getLoadoutWithQuantities, LOADOUT_CATEGORY_LABELS } from '../data/loadouts'
 import { normalizeToCrewRoleCounts } from '../lib/crewRoleCounts'
+import { getPirateSettings } from '../lib/pirateSettings'
+import { pirateSpeak } from '../lib/pirateSpeak'
 import type { PackListLocationState } from '../types/navigation'
 import './PackList.css'
 
@@ -19,6 +21,15 @@ export default function PackList() {
   const location = useLocation()
   const state = location.state as PackListLocationState | null
   const lastRun = loadLastRun()
+  const [, setTick] = useState(0)
+  const ps = getPirateSettings().pirateSpeak
+
+  useEffect(() => {
+    const handler = () => setTick((t) => t + 1)
+    window.addEventListener('pirate-settings-changed', handler)
+    return () => window.removeEventListener('pirate-settings-changed', handler)
+  }, [])
+
   const crewRoleCounts = useMemo(
     () => normalizeToCrewRoleCounts(state ?? lastRun ?? {}),
     [state?.crewRoleCounts, state?.crewRoles, lastRun?.crewRoleCounts, lastRun?.crewRoles, lastRun?.crewCount]
@@ -55,7 +66,7 @@ export default function PackList() {
 
   return (
     <div className="packlist">
-      <h1 className="packlist-title">Pack List</h1>
+      <h1 className="packlist-title">{pirateSpeak('Pack List', ps)}</h1>
       <p className="packlist-desc">Pull these from inventory before launch.</p>
       {usingDefaultRoles && (
         <p className="packlist-default-note" role="status">

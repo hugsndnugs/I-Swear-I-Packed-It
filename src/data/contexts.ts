@@ -5,6 +5,7 @@ export type OperationType =
   | 'org-op'
   | 'salvage'
   | 'mining'
+  | 'piracy'
 
 export type CrewRole = 'pilot' | 'gunner' | 'medic' | 'escort' | 'loader'
 
@@ -14,7 +15,8 @@ export const OPERATION_TYPES: { id: OperationType; label: string }[] = [
   { id: 'medical-rescue', label: 'Medical rescue' },
   { id: 'org-op', label: 'Org op' },
   { id: 'salvage', label: 'Salvage' },
-  { id: 'mining', label: 'Mining' }
+  { id: 'mining', label: 'Mining' },
+  { id: 'piracy', label: 'Piracy' }
 ]
 
 export const CREW_ROLES: { id: CrewRole; label: string }[] = [

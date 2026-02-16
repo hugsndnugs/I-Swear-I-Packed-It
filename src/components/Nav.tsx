@@ -1,5 +1,8 @@
+import { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Home, Zap, FileText, Backpack, Wrench, Timer } from 'lucide-react'
+import { getPirateSettings } from '../lib/pirateSettings'
+import { pirateSpeak } from '../lib/pirateSpeak'
 import './Nav.css'
 
 const NAV_ITEMS = [
@@ -12,6 +15,15 @@ const NAV_ITEMS = [
 ] as const
 
 export default function Nav() {
+  const [, setTick] = useState(0)
+  const ps = getPirateSettings().pirateSpeak
+
+  useEffect(() => {
+    const handler = () => setTick((t) => t + 1)
+    window.addEventListener('pirate-settings-changed', handler)
+    return () => window.removeEventListener('pirate-settings-changed', handler)
+  }, [])
+
   return (
     <nav className="nav" aria-label="Main navigation">
       {NAV_ITEMS.map(({ to, icon: Icon, label, end }) => (
@@ -22,7 +34,7 @@ export default function Nav() {
           end={end}
         >
           <Icon size={20} aria-hidden />
-          <span className="nav-link-label">{label}</span>
+          <span className="nav-link-label">{pirateSpeak(label, ps)}</span>
         </NavLink>
       ))}
     </nav>

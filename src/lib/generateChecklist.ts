@@ -36,6 +36,8 @@ function sectionsForOperation(op: OperationType): TaskSection[] {
       return [...always, 'tools', 'cargo', 'crew']
     case 'mining':
       return [...always, 'tools', 'crew']
+    case 'piracy':
+      return [...always, 'tools', 'cargo', 'crew']
     default:
       return [...always, 'crew']
   }

@@ -311,6 +311,19 @@ a:focus-visible,
   text-decoration: underline;
 }
 
+/* Pirate theme overlay (amber accent, keeps light/dark) */
+[data-pirate-theme="true"] {
+  --accent: #d97706;
+  --accent-hover: #f59e0b;
+  --accent-muted: rgba(217, 119, 6, 0.2);
+}
+
+[data-theme="light"][data-pirate-theme="true"] {
+  --accent: #b45309;
+  --accent-hover: #d97706;
+  --accent-muted: rgba(180, 83, 9, 0.15);
+}
+
 @media (max-width: 768px) {
   :root {
     font-size: 16px;

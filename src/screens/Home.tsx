@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Zap, Rocket, Timer, Link2, ChevronRight } from 'lucide-react'
 import { loadLastRun, loadPresets } from '../lib/presets'
@@ -6,14 +6,24 @@ import { generateChecklist } from '../lib/generateChecklist'
 import { decodePreset, PRESET_DECODE_MAX_LENGTH } from '../lib/presetShare'
 import { ships } from '../data/ships'
 import { OPERATION_TYPES } from '../data/contexts'
+import { getPirateSettings } from '../lib/pirateSettings'
+import { pirateSpeak } from '../lib/pirateSpeak'
 import './Home.css'
 
 export default function Home() {
   const navigate = useNavigate()
   const [importCode, setImportCode] = useState('')
   const [importError, setImportError] = useState<string | null>(null)
+  const [, setTick] = useState(0)
   const lastRun = loadLastRun()
   const presets = loadPresets()
+  const ps = getPirateSettings().pirateSpeak
+
+  useEffect(() => {
+    const handler = () => setTick((t) => t + 1)
+    window.addEventListener('pirate-settings-changed', handler)
+    return () => window.removeEventListener('pirate-settings-changed', handler)
+  }, [])
 
   const handleImportPreset = () => {
     const raw = importCode.trim()
@@ -50,7 +60,7 @@ export default function Home() {
   return (
     <div className="home">
       <div className="home-hero">
-        <h1 className="home-title">Pre-Flight Assistant</h1>
+        <h1 className="home-title">{pirateSpeak('Pre-Flight Assistant', ps)}</h1>
         <p className="home-tagline">From hangar to hyperspace without the "oh no" moment.</p>
         <button
           className="home-cta btn-primary"
@@ -58,7 +68,7 @@ export default function Home() {
           aria-label="Start pre-flight checklist"
         >
           <Zap size={20} aria-hidden />
-          Start Pre-Flight
+          {pirateSpeak('Start Pre-Flight', ps)}
         </button>
       </div>
 
@@ -72,7 +82,7 @@ export default function Home() {
             aria-label={`Quick-start with ${lastShipName}`}
           >
             <Rocket size={18} aria-hidden />
-            Quick-start: {lastShipName}
+            {pirateSpeak('Quick-start', ps)}: {lastShipName}
           </button>
           <button
             className="home-resume btn-secondary"
@@ -147,12 +157,13 @@ export default function Home() {
 
       {presets.length > 0 && (
         <section className="home-presets" aria-label="Saved presets">
-          <h2 className="home-presets-title">Presets</h2>
+          <h2 className="home-presets-title">{pirateSpeak('Presets', ps)}</h2>
           <ul className="home-presets-list">
             {presets.map((p) => {
               const shipName = ships.find((s) => s.id === p.shipId)?.name ?? p.shipId
-              const opLabel =
+              const opLabelRaw =
                 OPERATION_TYPES.find((o) => o.id === p.operationType)?.label ?? p.operationType
+              const opLabel = pirateSpeak(opLabelRaw, ps)
               return (
                 <li key={p.id}>
                   <button
