@@ -1,31 +1,48 @@
 .generator {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--space-4);
 }
 
 .generator-title {
-  font-size: 1.5rem;
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
   font-weight: 700;
-  margin: 0 0 8px 0;
+  margin: 0 0 var(--space-2) 0;
+}
+
+.generator-section-label,
+.generator-label {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 0;
+}
+
+.generator-section-label {
+  margin-bottom: var(--space-2);
 }
 
 .generator-label {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  margin-top: 8px;
+  margin-top: var(--space-2);
+}
+
+.generator-ship-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
 .generator-select,
 .generator-input {
   min-height: var(--tap);
-  padding: 12px 16px;
+  padding: var(--space-3) var(--space-4);
   background: var(--surface);
   border: 1px solid var(--surface2);
   border-radius: var(--radius);
   color: var(--text);
-  font-size: 1rem;
+  font-size: var(--text-base);
   width: 100%;
 }
 
@@ -36,7 +53,7 @@
 .generator-ship-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 .generator-ship-row .generator-select {
@@ -47,8 +64,12 @@
   min-width: var(--tap);
   min-height: var(--tap);
   padding: 0;
-  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
 .generator-favorite-btn:hover {
@@ -58,15 +79,17 @@
 .generator-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 .generator-chip {
-  padding: 10px 16px;
+  padding: var(--space-3) var(--space-4);
   border-radius: var(--radius);
   background: var(--surface);
   color: var(--text-muted);
   font-weight: 500;
+  transition: background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
 }
 
 .generator-chip:hover {
@@ -82,40 +105,40 @@
 .generator-roles {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--space-2);
 }
 
 .generator-role {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
   cursor: pointer;
   min-height: var(--tap);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--surface2);
+  transition: background var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.generator-role:has(input:checked) {
+  background: var(--accent-muted);
+  border-color: var(--accent);
 }
 
 .generator-role input {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   accent-color: var(--accent);
 }
 
 .generator-submit {
-  margin-top: 16px;
-  min-height: var(--tap);
-  padding: 16px 24px;
-  background: var(--accent);
-  color: var(--bg);
-  font-weight: 600;
-  border-radius: var(--radius);
-  font-size: 1.1rem;
-}
-
-.generator-submit:hover {
-  background: var(--accent-hover);
+  margin-top: var(--space-2);
 }
 
 .generator-frequently-missed {
-  padding: 10px 14px;
+  padding: var(--space-3) var(--space-4);
   border-radius: var(--radius);
   background: var(--surface);
   border: 1px dashed var(--surface2);
@@ -123,130 +146,71 @@
 
 .generator-frequently-missed-label {
   margin: 0;
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
   color: var(--text-muted);
 }
 
 .generator-context-warnings {
-  padding: 12px 16px;
+  padding: var(--space-3) var(--space-4);
   border-radius: var(--radius);
   background: var(--surface);
   border: 1px solid var(--surface2);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 .generator-context-alert {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--danger, #dc2626);
+  color: var(--danger);
 }
 
 .generator-context-warning {
   margin: 0;
-  font-size: 0.9rem;
-  color: var(--warning, #ca8a04);
+  font-size: var(--text-sm);
+  color: var(--warning);
 }
 
 .generator-pack-link {
-  margin-top: 8px;
-  padding: 12px;
-  color: var(--accent);
-  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
 }
 
 .generator-share {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 .generator-share-label {
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
   font-weight: 600;
   color: var(--text-muted);
 }
 
 .generator-share-buttons {
   display: flex;
-  gap: 8px;
+  gap: var(--space-2);
   flex-wrap: wrap;
 }
 
 .generator-share-btn {
-  padding: 10px 16px;
+  padding: var(--space-3) var(--space-4);
   border-radius: var(--radius);
   background: var(--surface);
   border: 1px solid var(--surface2);
   color: var(--text);
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
+  transition: background var(--duration-fast) var(--ease-out);
 }
 
 .generator-share-btn:hover {
   background: var(--surface2);
-}
-
-.generator-qr-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 16px;
-}
-
-.generator-qr-modal {
-  background: var(--bg);
-  border-radius: var(--radius);
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  max-width: 100%;
-}
-
-.generator-qr-title {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text);
-}
-
-.generator-qr-image {
-  display: block;
-  width: 260px;
-  height: 260px;
-}
-
-.generator-qr-loading {
-  min-width: 260px;
-  min-height: 260px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-muted);
-}
-
-.generator-qr-close {
-  padding: 10px 20px;
-  background: var(--surface2);
-  border-radius: var(--radius);
-  color: var(--text);
-  font-weight: 500;
-}
-
-.generator-qr-close:hover {
-  background: var(--surface);
-}
-
-.generator-pack-link:hover {
-  text-decoration: underline;
 }
 
 .generator-ship-search {
@@ -256,9 +220,9 @@
 .generator-filter-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
   cursor: pointer;
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
   color: var(--text-muted);
 }
 

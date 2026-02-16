@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
+import { Sun, Moon, Monitor } from 'lucide-react'
 import { getStoredTheme, setStoredTheme, type ThemePreference } from '../lib/theme'
 import './ThemeToggle.css'
 
-const OPTIONS: { value: ThemePreference; label: string }[] = [
-  { value: 'light', label: 'Light' },
-  { value: 'dark', label: 'Dark' },
-  { value: 'system', label: 'System' }
+const OPTIONS: { value: ThemePreference; label: string; icon: typeof Sun }[] = [
+  { value: 'light', label: 'Light', icon: Sun },
+  { value: 'dark', label: 'Dark', icon: Moon },
+  { value: 'system', label: 'System', icon: Monitor }
 ]
 
 export default function ThemeToggle() {
@@ -22,20 +23,23 @@ export default function ThemeToggle() {
 
   return (
     <div className="theme-toggle" role="group" aria-label="Theme">
-      <span className="theme-toggle-label">Theme</span>
       <div className="theme-toggle-options">
-        {OPTIONS.map((opt) => (
-          <button
-            key={opt.value}
-            type="button"
-            className={'theme-toggle-btn' + (theme === opt.value ? ' active' : '')}
-            onClick={() => handleChange(opt.value)}
-            aria-pressed={theme === opt.value}
-            aria-label={`Theme: ${opt.label}`}
-          >
-            {opt.label}
-          </button>
-        ))}
+        {OPTIONS.map((opt) => {
+          const Icon = opt.icon
+          return (
+            <button
+              key={opt.value}
+              type="button"
+              className={'theme-toggle-btn' + (theme === opt.value ? ' active' : '')}
+              onClick={() => handleChange(opt.value)}
+              aria-pressed={theme === opt.value}
+              aria-label={`Theme: ${opt.label}`}
+              title={opt.label}
+            >
+              <Icon size={18} aria-hidden />
+            </button>
+          )
+        })}
       </div>
     </div>
   )

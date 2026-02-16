@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
+import { Play, Square } from 'lucide-react'
 import {
   getState,
   getNextReminders,
@@ -118,10 +119,11 @@ export default function OpMode() {
 
         <button
           type="button"
-          className="opmode-stop"
+          className="opmode-stop btn-danger"
           onClick={handleStop}
           aria-label="Stop Op Mode and clear timers"
         >
+          <Square size={18} aria-hidden />
           Stop Op Mode
         </button>
       </div>
@@ -207,10 +209,11 @@ export default function OpMode() {
 
       <button
         type="button"
-        className="opmode-start"
+        className="opmode-start btn-primary"
         onClick={handleStart}
         aria-label="Start Op Mode timers"
       >
+        <Play size={20} aria-hidden />
         Start Op Mode
       </button>
     </div>

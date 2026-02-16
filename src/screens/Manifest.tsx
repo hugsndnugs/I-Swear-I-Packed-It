@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Plus } from 'lucide-react'
 import { ships } from '../data/ships'
 import { ROUTE_PRESETS } from '../data/routes'
 import { COMMODITIES, getCommodityById, type CargoManifestEntry } from '../data/commodities'
@@ -119,7 +120,8 @@ export default function Manifest() {
 
       <div className="manifest-cargo-header">
         <span className="manifest-label">Cargo</span>
-        <button type="button" className="manifest-add-row" onClick={addRow} aria-label="Add cargo row">
+        <button type="button" className="manifest-add-row btn-ghost" onClick={addRow} aria-label="Add cargo row">
+          <Plus size={18} aria-hidden />
           Add row
         </button>
       </div>
@@ -165,7 +167,7 @@ export default function Manifest() {
 
       <button
         type="button"
-        className="manifest-submit"
+        className="manifest-submit btn-primary"
         onClick={handleGenerate}
         aria-label="Generate validation report"
       >
@@ -229,7 +231,7 @@ export default function Manifest() {
 
           <button
             type="button"
-            className="manifest-back-checklist"
+            className="manifest-back-checklist btn-ghost"
             onClick={() => navigate('/generate', { state: {} })}
             aria-label="Go to checklist generator"
           >

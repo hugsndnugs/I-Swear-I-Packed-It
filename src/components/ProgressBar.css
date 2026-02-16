@@ -1,6 +1,6 @@
 .progress-bar {
   position: relative;
-  height: 28px;
+  height: 32px;
   background: var(--surface2);
   border-radius: var(--radius);
   overflow: hidden;
@@ -11,9 +11,22 @@
   left: 0;
   top: 0;
   bottom: 0;
-  background: var(--accent);
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-hover) 100%);
   border-radius: var(--radius);
-  transition: width 0.2s ease;
+  transition: width var(--duration-normal) var(--ease-out);
+}
+
+.progress-bar.progress-bar--complete .progress-bar-fill {
+  animation: progress-pulse 2s ease-in-out infinite;
+}
+
+@keyframes progress-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.9;
+  }
 }
 
 .progress-bar-text {
@@ -23,7 +36,8 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
   font-weight: 600;
+  font-family: var(--font-heading);
   color: var(--text);
 }

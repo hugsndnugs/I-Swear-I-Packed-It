@@ -8,9 +8,10 @@ interface ProgressBarProps {
 
 export default function ProgressBar({ value, max, 'aria-label': ariaLabel }: ProgressBarProps) {
   const pct = max > 0 ? Math.round((value / max) * 100) : 0
+  const isComplete = max > 0 && value >= max
   return (
     <div
-      className="progress-bar"
+      className={'progress-bar' + (isComplete ? ' progress-bar--complete' : '')}
       role="progressbar"
       aria-valuenow={value}
       aria-valuemin={0}

@@ -1,9 +1,20 @@
+import { Heart, Shield, Wrench, Crosshair, Package, Swords, ShieldCheck } from 'lucide-react'
 import {
   getEquipmentByCategory,
   EQUIPMENT_CATEGORY_LABELS,
   type EquipmentCategory,
 } from '../data/equipment'
 import './Equipment.css'
+
+const CATEGORY_ICONS: Record<EquipmentCategory, typeof Heart> = {
+  medical: Heart,
+  survival: Shield,
+  tools: Wrench,
+  ammo: Crosshair,
+  utility: Package,
+  weapon: Swords,
+  armor: ShieldCheck
+}
 
 const CATEGORY_ORDER: EquipmentCategory[] = [
   'medical',
@@ -28,13 +39,17 @@ export default function Equipment() {
       {CATEGORY_ORDER.map((cat) => {
         const items = byCategory.get(cat) ?? []
         if (items.length === 0) return null
+        const Icon = CATEGORY_ICONS[cat]
         return (
           <section
             key={cat}
-            className="equipment-section"
+            className="equipment-section card"
             aria-label={EQUIPMENT_CATEGORY_LABELS[cat]}
           >
-            <h2 className="equipment-section-title">{EQUIPMENT_CATEGORY_LABELS[cat]}</h2>
+            <h2 className="equipment-section-title">
+              {Icon && <Icon size={18} aria-hidden />}
+              {EQUIPMENT_CATEGORY_LABELS[cat]}
+            </h2>
             <ul className="equipment-list">
               {items.map((item) => (
                 <li key={item.id} className="equipment-item">

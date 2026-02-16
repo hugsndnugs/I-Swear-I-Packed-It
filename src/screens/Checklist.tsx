@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { CheckCheck, ChevronRight } from 'lucide-react'
 import type { ChecklistSection, ChecklistTask } from '../lib/generateChecklist'
 import CollapsibleSection from '../components/CollapsibleSection'
 import ProgressBar from '../components/ProgressBar'
@@ -264,10 +265,11 @@ export default function Checklist() {
           actions={
             <button
               type="button"
-              className="checklist-mark-all"
+              className="checklist-mark-all btn-ghost"
               onClick={() => markSectionComplete(section)}
               aria-label={`Mark all ${section.label} complete`}
             >
+              <CheckCheck size={18} aria-hidden />
               Mark all
             </button>
           }
@@ -288,16 +290,17 @@ export default function Checklist() {
       <div className="checklist-actions">
         <button
           type="button"
-          className="checklist-back-generator"
+          className="checklist-back-generator btn-ghost"
           onClick={() => navigate('/generate')}
           aria-label="Back to Generator"
         >
+          <ChevronRight size={18} className="checklist-back-icon" aria-hidden />
           Back to Generator
         </button>
         <button
           ref={savePresetButtonRef}
           type="button"
-          className="checklist-save-preset"
+          className="checklist-save-preset btn-ghost"
           onClick={() => setShowSave(true)}
           aria-label="Save as preset"
         >
@@ -305,7 +308,7 @@ export default function Checklist() {
         </button>
         <button
           type="button"
-          className="checklist-export-btn"
+          className="checklist-export-btn btn-ghost"
           onClick={copyExportSummary}
           aria-label="Copy checklist summary"
         >
@@ -314,7 +317,7 @@ export default function Checklist() {
         {state?.shipId && state?.operationType && state?.crewRoles && (
           <button
             type="button"
-            className="checklist-share-phone-btn"
+            className="checklist-share-phone-btn btn-ghost"
             onClick={() => setShowQr(true)}
             aria-label="Show QR code to share to phone"
           >
@@ -324,7 +327,7 @@ export default function Checklist() {
         {state?.crewRoles && state.crewRoles.length > 0 && (
           <button
             type="button"
-            className="checklist-pack-link"
+            className="checklist-pack-link btn-ghost"
             onClick={() => navigate('/pack', { state: { crewRoles: state.crewRoles } })}
             aria-label="View pack list"
           >
@@ -404,7 +407,7 @@ function TaskRow({
         aria-pressed={completed}
       >
         <span className="checklist-task-check" aria-hidden>
-          {completed ? '✓' : ''}
+          {completed ? '\u2713' : ''}
         </span>
         <span className="checklist-task-label">{task.label}</span>
       </button>

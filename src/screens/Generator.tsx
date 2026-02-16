@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from 'react'
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
+import { Star, Backpack } from 'lucide-react'
 import { ships } from '../data/ships'
 import { OPERATION_TYPES, CREW_ROLES, type OperationType, type CrewRole } from '../data/contexts'
 import { generateChecklist } from '../lib/generateChecklist'
@@ -148,35 +149,34 @@ export default function Generator() {
     <div className="generator">
       <h1 className="generator-title">Generate Checklist</h1>
 
-      <label className="generator-label" htmlFor="ship-search">
-        Ship
-      </label>
-      <input
-        id="ship-search"
-        type="search"
-        className="generator-select generator-ship-search"
-        value={shipSearch}
-        onChange={(e) => setShipSearch(e.target.value)}
-        placeholder="Search by name or manufacturer…"
-        aria-label="Search ships"
-      />
-      <label className="generator-filter-row">
+      <section className="generator-ship-card card" aria-labelledby="ship-section-label">
+        <h2 id="ship-section-label" className="generator-section-label">Ship</h2>
         <input
-          type="checkbox"
-          checked={flightReadyOnly}
-          onChange={(e) => setFlightReadyOnly(e.target.checked)}
-          aria-label="Show only flight-ready ships"
+          id="ship-search"
+          type="search"
+          className="generator-select generator-ship-search input"
+          value={shipSearch}
+          onChange={(e) => setShipSearch(e.target.value)}
+          placeholder="Search by name or manufacturer…"
+          aria-label="Search ships"
         />
-        <span>Flight ready only</span>
-      </label>
-      <div className="generator-ship-row">
-        <select
-          id="ship-picker"
-          className="generator-select"
-          value={shipId}
-          onChange={(e) => setShipId(e.target.value)}
-          aria-label="Select ship"
-        >
+        <label className="generator-filter-row">
+          <input
+            type="checkbox"
+            checked={flightReadyOnly}
+            onChange={(e) => setFlightReadyOnly(e.target.checked)}
+            aria-label="Show only flight-ready ships"
+          />
+          <span>Flight ready only</span>
+        </label>
+        <div className="generator-ship-row">
+          <select
+            id="ship-picker"
+            className="generator-select input"
+            value={shipId}
+            onChange={(e) => setShipId(e.target.value)}
+            aria-label="Select ship"
+          >
           {shipOptions.favShips.length > 0 && (
             <optgroup label="Favorites">
               {shipOptions.favShips.map((s) => (
@@ -213,9 +213,10 @@ export default function Generator() {
           aria-label={isFavorite(shipId) ? 'Remove from favorites' : 'Add to favorites'}
           title={isFavorite(shipId) ? 'Remove from favorites' : 'Add to favorites'}
         >
-          {isFavorite(shipId) ? '★' : '☆'}
+          <Star size={22} fill={isFavorite(shipId) ? 'currentColor' : 'none'} />
         </button>
       </div>
+      </section>
 
       <label className="generator-label">Operation type</label>
       <div className="generator-chips" role="group" aria-label="Operation type">
@@ -243,7 +244,7 @@ export default function Generator() {
         max={20}
         value={crewCount}
         onChange={(e) => setCrewCount(Number(e.target.value) || 1)}
-        className="generator-input"
+        className="generator-input input"
         aria-label="Crew count"
       />
 
@@ -290,7 +291,7 @@ export default function Generator() {
       )}
 
       <button
-        className="generator-submit"
+        className="generator-submit btn-primary"
         onClick={handleGenerate}
         aria-label="Generate checklist"
       >
@@ -350,10 +351,11 @@ export default function Generator() {
 
       <button
         type="button"
-        className="generator-pack-link"
+        className="generator-pack-link btn-ghost"
         onClick={() => navigate('/pack', { state: { crewRoles } })}
         aria-label="View pack list for selected roles"
       >
+        <Backpack size={18} aria-hidden />
         View Pack List
       </button>
     </div>

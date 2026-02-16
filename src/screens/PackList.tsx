@@ -1,5 +1,6 @@
-import { useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import { useLocation } from 'react-router-dom'
+import { Heart, Shield, Wrench, Crosshair, Package } from 'lucide-react'
 import { loadLastRun } from '../lib/presets'
 import { getLoadoutForRoles, LOADOUT_CATEGORY_LABELS } from '../data/loadouts'
 import type { CrewRole } from '../data/contexts'
@@ -8,13 +9,31 @@ import './PackList.css'
 
 const DEFAULT_ROLES: CrewRole[] = ['pilot']
 
+const CATEGORY_ICONS: Record<string, typeof Heart> = {
+  medical: Heart,
+  survival: Shield,
+  tools: Wrench,
+  ammo: Crosshair,
+  utility: Package
+}
+
 export default function PackList() {
   const location = useLocation()
   const state = location.state as PackListLocationState | null
   const lastRun = loadLastRun()
   const crewRoles = state?.crewRoles ?? lastRun?.crewRoles ?? DEFAULT_ROLES
+  const [checked, setChecked] = useState<Set<string>>(new Set())
 
   const loadout = useMemo(() => getLoadoutForRoles(crewRoles), [crewRoles])
+
+  const toggleItem = (id: string) => {
+    setChecked((prev) => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
+  }
 
   const byCategory = useMemo(() => {
     const map = new Map<string, typeof loadout>()
@@ -40,19 +59,35 @@ export default function PackList() {
         </p>
       )}
 
-      {byCategory.map(({ category, items }) => (
-        <section key={category} className="packlist-section" aria-label={LOADOUT_CATEGORY_LABELS[category]}>
-          <h2 className="packlist-section-title">{LOADOUT_CATEGORY_LABELS[category]}</h2>
-          <ul className="packlist-list">
-            {items.map((item) => (
-              <li key={item.id} className="packlist-item">
-                <span className="packlist-item-check" aria-hidden>□</span>
-                <span>{item.label}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ))}
+      {byCategory.map(({ category, items }) => {
+        const Icon = CATEGORY_ICONS[category] ?? Package
+        return (
+          <section key={category} className="packlist-section card" aria-label={LOADOUT_CATEGORY_LABELS[category]}>
+            <h2 className="packlist-section-title">
+              <Icon size={18} aria-hidden />
+              {LOADOUT_CATEGORY_LABELS[category]}
+            </h2>
+            <ul className="packlist-list">
+              {items.map((item) => (
+                <li key={item.id} className="packlist-item">
+                  <button
+                    type="button"
+                    className={'packlist-item-check' + (checked.has(item.id) ? ' checked' : '')}
+                    onClick={() => toggleItem(item.id)}
+                    aria-label={item.label}
+                    aria-pressed={checked.has(item.id)}
+                  >
+                    {checked.has(item.id) ? '\u2713' : ''}
+                  </button>
+                  <span className={checked.has(item.id) ? 'packlist-item-label checked' : 'packlist-item-label'}>
+                    {item.label}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      })}
 
       <p className="packlist-note">
         Generate a checklist from the Generate screen to see a role-specific pack list and save it

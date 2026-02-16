@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ChevronDown, ChevronRight } from 'lucide-react'
 import './CollapsibleSection.css'
 
 interface CollapsibleSectionProps {
@@ -32,7 +33,7 @@ export default function CollapsibleSection({
       <div className="collapsible-section-header">
         {alwaysOpen ? (
           <span className="collapsible-section-trigger" id={`trigger-${id}`}>
-            <span className="collapsible-section-icon" aria-hidden>▼</span>
+            <ChevronDown size={18} className="collapsible-section-icon" aria-hidden />
             <span>{title}</span>
           </span>
         ) : (
@@ -45,7 +46,7 @@ export default function CollapsibleSection({
             id={`trigger-${id}`}
           >
             <span className="collapsible-section-icon" aria-hidden>
-              {open ? '▼' : '▶'}
+              {isOpen ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
             </span>
             <span>{title}</span>
           </button>
@@ -55,11 +56,11 @@ export default function CollapsibleSection({
       <div
         id={`section-${id}`}
         className={'collapsible-section-content' + (isOpen ? ' open' : '')}
-        hidden={!isOpen}
+        aria-hidden={!isOpen}
         role="region"
         aria-labelledby={`trigger-${id}`}
       >
-        {children}
+        <div className="collapsible-section-inner">{children}</div>
       </div>
     </section>
   )
