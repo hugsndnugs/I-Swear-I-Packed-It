@@ -1,0 +1,108 @@
+/* FAB sits above the bottom nav (nav ~56px + padding). Only show on mobile (nav visible). */
+.fab-container {
+  position: fixed;
+  right: var(--space-4);
+  bottom: 5.5rem;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-2);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+@media (min-width: 768px) {
+  .fab-container {
+    display: none;
+  }
+}
+
+.fab-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-2);
+}
+
+.fab-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: transform var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.fab-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.fab-btn-primary {
+  background: var(--accent);
+  color: var(--accent-contrast, var(--bg));
+}
+
+.fab-btn-primary:hover {
+  background: var(--accent-hover);
+  transform: scale(1.05);
+}
+
+.fab-btn-expand {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--surface2);
+}
+
+.fab-btn-expand:hover {
+  background: var(--surface2);
+}
+
+.fab-btn-expand[aria-expanded="true"] {
+  background: var(--surface2);
+}
+
+.fab-menu {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--space-1);
+  margin-bottom: var(--space-1);
+  padding: var(--space-2);
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--surface2);
+}
+
+.fab-menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border: none;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.fab-menu-item:hover,
+.fab-menu-item:focus-visible {
+  background: var(--surface2);
+  outline: none;
+}
+
+.fab-menu-item:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { Zap, Rocket, Timer, Link2, ChevronRight, FolderOpen } from 'lucide-react'
+import { Zap, Rocket, Timer, Link2, ChevronRight, FolderOpen, History, Ship } from 'lucide-react'
 import FirstTimeTutorial, { getTutorialDone } from '../components/FirstTimeTutorial'
 import { loadLastRun, loadPresets } from '../lib/presets'
 import { generateChecklist } from '../lib/generateChecklist'
@@ -14,6 +14,10 @@ import SwipeableItem from '../components/SwipeableItem'
 import Tooltip from '../components/Tooltip'
 import { hapticButtonPress } from '../lib/haptics'
 import { deletePreset } from '../lib/presets'
+import { getRecentShipIds } from '../lib/shipPreferences'
+import { getRecentRoutes } from '../lib/recentItems'
+import { ROUTES } from '../constants/routes'
+import FAB from '../components/FAB'
 import './Home.css'
 
 export default function Home() {
@@ -77,6 +81,14 @@ export default function Home() {
   const lastShipName = lastRun
     ? ships.find((s) => s.id === lastRun.shipId)?.name ?? 'Last ship'
     : null
+
+  const recentRouteEntries = getRecentRoutes().filter((e) => e.path !== ROUTES.HOME)
+  const recentShipIds = getRecentShipIds()
+  const recentShipsWithNames = recentShipIds.map((id) => ({
+    id,
+    name: ships.find((s) => s.id === id)?.name ?? id
+  }))
+  const hasRecent = recentRouteEntries.length > 0 || recentShipsWithNames.length > 0
 
   return (
     <div className="home">
@@ -164,6 +176,59 @@ export default function Home() {
         <Timer size={18} aria-hidden />
         Op Mode — Start timers
       </Link>
+
+      {hasRecent && (
+        <section className="home-recent card" aria-label="Recent items">
+          <h2 className="home-presets-title">
+            <History size={18} aria-hidden />
+            {pirateSpeak('Recent', ps)}
+          </h2>
+          <div className="home-recent-grid">
+            {recentShipsWithNames.length > 0 && (
+              <div className="home-recent-group">
+                <span className="home-recent-group-label">{pirateSpeak('Ships', ps)}</span>
+                <ul className="home-recent-list" aria-label="Recent ships">
+                  {recentShipsWithNames.map(({ id, name }) => (
+                    <li key={id} style={{ listStyle: 'none' }}>
+                      <button
+                        type="button"
+                        className="home-recent-btn card card-interactive"
+                        onClick={() => {
+                          hapticButtonPress()
+                          navigate(ROUTES.GENERATE, { state: { preset: { shipId: id } } })
+                        }}
+                        aria-label={`Open generator for ${name}`}
+                      >
+                        <Ship size={16} aria-hidden />
+                        {name}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {recentRouteEntries.length > 0 && (
+              <div className="home-recent-group">
+                <span className="home-recent-group-label">{pirateSpeak('Screens', ps)}</span>
+                <ul className="home-recent-list" aria-label="Recent screens">
+                  {recentRouteEntries.map((e) => (
+                    <li key={e.path} style={{ listStyle: 'none' }}>
+                      <Link
+                        to={e.path}
+                        className="home-recent-btn card card-interactive"
+                        onClick={() => hapticButtonPress()}
+                        aria-label={`Go to ${e.label}`}
+                      >
+                        {e.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       <section className="home-import card" aria-label="Import shared preset">
         <h2 className="home-import-title">
@@ -306,6 +371,48 @@ export default function Home() {
           </ul>
         </section>
       )}
+
+      <FAB
+        primary={{
+          label: 'Start Pre-Flight',
+          ariaLabel: 'Start pre-flight checklist',
+          onClick: () => navigate(ROUTES.GENERATE),
+          icon: Zap
+        }}
+        actions={[
+          ...(lastRun && lastShipName
+            ? [
+                {
+                  label: `Resume: ${lastShipName}`,
+                  ariaLabel: `Resume checklist for ${lastShipName}`,
+                  onClick: () => {
+                    const checklist = generateChecklist(
+                      lastRun.shipId,
+                      lastRun.operationType,
+                      lastRun.crewRoles
+                    )
+                    navigate(ROUTES.CHECKLIST, {
+                      state: {
+                        checklist,
+                        shipId: lastRun.shipId,
+                        operationType: lastRun.operationType,
+                        crewRoles: lastRun.crewRoles,
+                        crewRoleCounts: lastRun.crewRoleCounts
+                      }
+                    })
+                  },
+                  icon: ChevronRight
+                }
+              ]
+            : []),
+          {
+            label: 'Op Mode',
+            ariaLabel: 'Open Op Mode timers',
+            onClick: () => navigate(ROUTES.OP_MODE),
+            icon: Timer
+          }
+        ]}
+      />
     </div>
   )
 }

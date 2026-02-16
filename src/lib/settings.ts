@@ -12,12 +12,14 @@ const DEFAULT_SETTINGS = {
   fontSize: 'medium' as FontSize,
   highContrast: 'off' as HighContrastMode,
   soundEffects: true,
+  oneHandedMode: false,
 }
 
 export interface AppSettings {
   fontSize: FontSize
   highContrast: HighContrastMode
   soundEffects: boolean
+  oneHandedMode: boolean
 }
 
 /**
@@ -33,11 +35,14 @@ export function getSettings(): AppSettings {
     const highContrast = (localStorage.getItem(`${STORAGE_KEY_PREFIX}highContrast`) as HighContrastMode) || DEFAULT_SETTINGS.highContrast
     const soundEffectsRaw = localStorage.getItem(`${STORAGE_KEY_PREFIX}soundEffects`)
     const soundEffects = soundEffectsRaw === 'false' ? false : DEFAULT_SETTINGS.soundEffects
+    const oneHandedModeRaw = localStorage.getItem(`${STORAGE_KEY_PREFIX}oneHandedMode`)
+    const oneHandedMode = oneHandedModeRaw === 'true'
 
     return {
       fontSize,
       highContrast,
       soundEffects,
+      oneHandedMode,
     }
   } catch {
     return DEFAULT_SETTINGS

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 import { CheckCheck, ChevronRight, CheckCircle2, Circle } from 'lucide-react'
+import FAB from '../components/FAB'
 import type { ChecklistSection, ChecklistTask } from '../lib/generateChecklist'
 import ProgressBar from '../components/ProgressBar'
 import CircularProgress from '../components/CircularProgress'
@@ -690,6 +691,21 @@ export default function Checklist() {
           </button>
         </div>
       </BottomSheet>
+
+      {!allDone && totalCount > 0 && (
+        <FAB
+          primary={{
+            label: 'Complete all',
+            ariaLabel: 'Mark all checklist tasks complete',
+            onClick: () => {
+              setCompleted(new Set(allTaskIds))
+              allTaskIds.forEach(() => hapticTaskComplete())
+              playTaskComplete()
+            },
+            icon: CheckCheck
+          }}
+        />
+      )}
     </div>
   )
 }

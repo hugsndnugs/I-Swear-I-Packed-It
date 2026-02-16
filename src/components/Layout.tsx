@@ -14,7 +14,10 @@ import { getPirateSettings, setPirateSettings } from '../lib/pirateSettings'
 import { pirateSpeak } from '../lib/pirateSpeak'
 import { ROUTES } from '../constants/routes'
 import { hapticButtonPress } from '../lib/haptics'
-import { Menu, Settings, WifiOff } from 'lucide-react'
+import { pushRecentRoute } from '../lib/recentItems'
+import { getSettings } from '../lib/settings'
+import { Menu, Settings, WifiOff, Search } from 'lucide-react'
+import GlobalSearch from './GlobalSearch'
 import './Layout.css'
 
 const NAV_DRAWER_ID = 'nav-drawer'
@@ -43,8 +46,11 @@ export default function Layout() {
   const navigate = useNavigate()
   const pageTitle = getPageTitle(location.pathname)
   const [refresh, setRefresh] = useState(0)
+  const [, setSettingsRefresh] = useState(0)
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
   const [isOnline, setIsOnline] = useState(navigator.onLine)
+  const oneHandedMode = getSettings().oneHandedMode
   const hamburgerRef = useRef<HTMLButtonElement>(null)
   const drawerRef = useRef<HTMLDivElement>(null)
 
@@ -80,6 +86,12 @@ export default function Layout() {
       window.removeEventListener('online', handleOnline)
       window.removeEventListener('offline', handleOffline)
     }
+  }, [])
+
+  useEffect(() => {
+    const handler = () => setSettingsRefresh((r) => r + 1)
+    window.addEventListener('settings-changed', handler)
+    return () => window.removeEventListener('settings-changed', handler)
   }, [])
 
   const handlePirateSettingsChange = useCallback(() => {
@@ -142,8 +154,25 @@ export default function Layout() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [drawerOpen])
 
+  /* Ctrl+K / Cmd+K opens global search */
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault()
+        setSearchOpen(true)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
+
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
   const toggleDrawer = useCallback(() => setDrawerOpen((o) => !o), [])
+
+  // Track recent routes for Recent Items quick access
+  useEffect(() => {
+    pushRecentRoute(location.pathname)
+  }, [location.pathname])
 
   // On route change, move focus to main content (first heading or focusable) for keyboard/screen reader users
   useEffect(() => {
@@ -156,7 +185,7 @@ export default function Layout() {
   }, [location.pathname])
 
   return (
-    <div className="layout">
+    <div className="layout" data-one-handed={oneHandedMode || undefined}>
       <a href="#layout-main-content" className="layout-skip-link">
         Skip to main content
       </a>
@@ -200,6 +229,17 @@ export default function Layout() {
               <WifiOff size={20} aria-hidden />
             </span>
           )}
+          <button
+            type="button"
+            className="layout-search-btn btn-icon"
+            onClick={() => {
+              hapticButtonPress()
+              setSearchOpen(true)
+            }}
+            aria-label="Open search"
+          >
+            <Search size={20} aria-hidden />
+          </button>
           <Link
             to={ROUTES.SETTINGS}
             className="layout-settings-btn btn-icon"
@@ -247,6 +287,7 @@ export default function Layout() {
           onSettingsChange={handlePirateSettingsChange}
         />
       )}
+      <GlobalSearch isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </div>
   )
 }

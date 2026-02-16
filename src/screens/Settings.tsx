@@ -282,6 +282,35 @@ export default function Settings() {
 
         <section className="settings-section card">
           <h2 className="settings-section-title">
+            {pirateSpeak('One-handed mode', ps)}
+          </h2>
+          <p className="settings-section-description">
+            Optimize layout for thumb reach: larger tap targets and bottom-aligned actions. Best on phones.
+          </p>
+          <div className="settings-toggle">
+            <label className="settings-toggle-label">
+              <input
+                type="checkbox"
+                checked={settings.oneHandedMode}
+                onChange={() => {
+                  const next = !settings.oneHandedMode
+                  saveSetting('oneHandedMode', next)
+                  setSettings((prev) => ({ ...prev, oneHandedMode: next }))
+                  hapticButtonPress()
+                }}
+                className="settings-toggle-input"
+                aria-label="One-handed mode on or off"
+              />
+              <span className="settings-toggle-slider" />
+              <span className="settings-toggle-text">
+                {settings.oneHandedMode ? 'On' : 'Off'}
+              </span>
+            </label>
+          </div>
+        </section>
+
+        <section className="settings-section card">
+          <h2 className="settings-section-title">
             {pirateSpeak('Color theme', ps)}
           </h2>
           <p className="settings-section-description">

@@ -133,7 +133,8 @@
   flex-shrink: 0;
 }
 
-.layout-settings-btn {
+.layout-settings-btn,
+.layout-search-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -147,9 +148,16 @@
     background var(--duration-fast) var(--ease-out);
 }
 
-.layout-settings-btn:hover {
+.layout-settings-btn:hover,
+.layout-search-btn:hover {
   color: var(--text);
   background: var(--surface2);
+}
+
+.layout-search-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
 .layout-main {
@@ -170,6 +178,17 @@
 @media (min-width: 641px) {
   .layout-main {
     max-width: 640px;
+  }
+}
+
+/* One-handed mode: thumb zone padding so key actions sit in lower third */
+.layout[data-one-handed] .layout-main {
+  padding-bottom: 120px;
+}
+
+@media (min-width: 768px) {
+  .layout[data-one-handed] .layout-main {
+    padding-bottom: var(--space-6);
   }
 }
 
