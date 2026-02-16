@@ -1,4 +1,4 @@
-import type { OperationType, CrewRole } from '../data/contexts'
+import type { OperationType } from '../data/contexts'
 import type { CrewRoleCounts } from './crewRoleCounts'
 import { setStorageError } from './storageError'
 

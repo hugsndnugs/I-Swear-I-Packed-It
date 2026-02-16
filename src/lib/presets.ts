@@ -116,6 +116,7 @@ export interface LastRunConfig {
   crewCount: number
   crewRoles: CrewRole[]
   crewRoleCounts?: CrewRoleCounts
+  locationId?: string
 }
 
 function isValidLastRun(v: unknown): v is LastRunConfig {
@@ -130,7 +131,8 @@ function isValidLastRun(v: unknown): v is LastRunConfig {
   return (
     typeof o.shipId === 'string' &&
     isOperationType(o.operationType) &&
-    (hasCrewRoleCounts || hasLegacyCrew)
+    (hasCrewRoleCounts || hasLegacyCrew) &&
+    (o.locationId === undefined || typeof o.locationId === 'string')
   )
 }
 
@@ -158,7 +160,7 @@ export function loadLastRun(): LastRunConfig | null {
 
 export type SaveLastRunInput =
   | LastRunConfig
-  | { shipId: string; operationType: OperationType; crewRoleCounts: CrewRoleCounts }
+  | { shipId: string; operationType: OperationType; crewRoleCounts: CrewRoleCounts; locationId?: string }
 
 export function saveLastRun(config: SaveLastRunInput): void {
   try {
@@ -169,7 +171,8 @@ export function saveLastRun(config: SaveLastRunInput): void {
             operationType: config.operationType,
             crewCount: totalCrew(config.crewRoleCounts),
             crewRoles: roleCountsToRoles(config.crewRoleCounts),
-            crewRoleCounts: config.crewRoleCounts
+            crewRoleCounts: config.crewRoleCounts,
+            locationId: config.locationId
           }
         : (config as LastRunConfig)
     localStorage.setItem(LAST_RUN_KEY, JSON.stringify(toStore))

@@ -18,7 +18,7 @@ export default class ErrorBoundary extends Component<Props, State> {
     return { hasError: true }
   }
 
-  componentDidUpdate(prevProps: Props, prevState: State) {
+  componentDidUpdate(_prevProps: Props, prevState: State) {
     // Focus the home link when error boundary mounts for accessibility
     if (this.state.hasError && !prevState.hasError && this.homeLinkRef.current) {
       this.homeLinkRef.current.focus()

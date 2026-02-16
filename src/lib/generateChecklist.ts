@@ -61,7 +61,7 @@ export function generateChecklist(
   _shipId: string,
   operationType: OperationType,
   crewRoles: CrewRole[],
-  location?: Location | null
+  _location?: Location | null
 ): GeneratedChecklist {
   const includedSections = sectionsForOperation(operationType)
   const sectionSet = new Set(includedSections)

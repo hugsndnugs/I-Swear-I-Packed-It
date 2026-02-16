@@ -1,4 +1,4 @@
-import type { OperationType, CrewRole, Location } from '../data/contexts'
+import type { OperationType, CrewRole } from '../data/contexts'
 import type { GeneratedChecklist } from '../lib/generateChecklist'
 import type { ContextWarningsResult } from '../lib/contextWarnings'
 import type { CrewRoleCounts } from '../lib/crewRoleCounts'

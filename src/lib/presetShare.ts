@@ -1,5 +1,5 @@
 import { OPERATION_TYPES, CREW_ROLES, LOCATIONS } from '../data/contexts'
-import type { OperationType, CrewRole, Location } from '../data/contexts'
+import type { OperationType, CrewRole } from '../data/contexts'
 import { isCrewRoleCountsExport, type CrewRoleCounts } from './crewRoleCounts'
 
 /** Payload for sharing a preset via link or code (no id/createdAt). */

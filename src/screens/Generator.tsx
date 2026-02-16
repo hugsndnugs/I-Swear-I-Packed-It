@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect, useRef } from 'react'
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 import { Star, Backpack } from 'lucide-react'
 import type { OperationType, CrewRole } from '../data/contexts'
-import { CREW_ROLES, LOCATIONS, getLocationById, type Location } from '../data/contexts'
+import { CREW_ROLES, LOCATIONS, getLocationById } from '../data/contexts'
 import {
   totalCrew,
   roleCountsToRoles,
