@@ -1,67 +1,88 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { Outlet, useLocation, Link, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, Link } from 'react-router-dom'
 import Nav from './Nav'
 import ThemeToggle from './ThemeToggle'
 import StorageErrorBanner from './StorageErrorBanner'
 import PirateSettingsModal from './PirateSettingsModal'
 import { useKonami } from '../hooks/useKonami'
 import { useMediaQuery } from '../hooks/useMediaQuery'
+import { usePirateUnlock } from '../hooks/usePirateUnlock'
 import { DESKTOP_MEDIA_QUERY } from '../constants/breakpoints'
 import { getPirateSettings, setPirateSettings } from '../lib/pirateSettings'
 import { pirateSpeak } from '../lib/pirateSpeak'
+import { ROUTES } from '../constants/routes'
 import { Rocket, Skull, Menu } from 'lucide-react'
 import './Layout.css'
 
 const NAV_DRAWER_ID = 'nav-drawer'
 
 const PAGE_TITLES: Record<string, string> = {
-  '/': 'Pre-Flight Assistant',
-  '/generate': 'Generate Checklist',
-  '/checklist': 'Pre-Flight Checklist',
-  '/manifest': 'Cargo Manifest',
-  '/pack': 'Pack List',
-  '/equipment': 'Equipment Reference',
-  '/op-mode': 'Op Mode'
+  [ROUTES.HOME]: 'Pre-Flight Assistant',
+  [ROUTES.GENERATE]: 'Generate Checklist',
+  [ROUTES.CHECKLIST]: 'Pre-Flight Checklist',
+  [ROUTES.MANIFEST]: 'Cargo Manifest',
+  [ROUTES.PACK]: 'Pack List',
+  [ROUTES.EQUIPMENT]: 'Equipment Reference',
+  [ROUTES.OP_MODE]: 'Op Mode'
 }
 
 function getPageTitle(pathname: string): string {
   for (const [path, title] of Object.entries(PAGE_TITLES)) {
-    if (path === '/' ? pathname === path : pathname.startsWith(path)) {
+    if (path === ROUTES.HOME ? pathname === path : pathname.startsWith(path)) {
       return title
     }
   }
   return 'Pre-Flight Assistant'
 }
 
-const LONG_PRESS_MS = 800
-const FAST_CLICKS_REQUIRED = 15
-const FAST_CLICK_RESET_MS = 2000
-const SINGLE_CLICK_NAV_DELAY_MS = 400
-
 export default function Layout() {
   const location = useLocation()
   const pageTitle = getPageTitle(location.pathname)
-  const [showPirateModal, setShowPirateModal] = useState(false)
   const [refresh, setRefresh] = useState(0)
   const [drawerOpen, setDrawerOpen] = useState(false)
-  const longPressTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const navigate = useNavigate()
-  const fastClickCountRef = useRef(0)
-  const fastClickResetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const singleClickNavTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const [isOnline, setIsOnline] = useState(navigator.onLine)
   const hamburgerRef = useRef<HTMLButtonElement>(null)
   const drawerRef = useRef<HTMLDivElement>(null)
 
   const isDesktop = useMediaQuery(DESKTOP_MEDIA_QUERY)
   const pirateSettings = getPirateSettings()
   const pirateThemeOn = pirateSettings.theme
-  const pirateUnlocked = pirateSettings.unlocked
+
+  // Track online/offline status
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true)
+    const handleOffline = () => setIsOnline(false)
+    window.addEventListener('online', handleOnline)
+    window.addEventListener('offline', handleOffline)
+    return () => {
+      window.removeEventListener('online', handleOnline)
+      window.removeEventListener('offline', handleOffline)
+    }
+  }, [])
+
+  const handlePirateSettingsChange = useCallback(() => {
+    setRefresh((r) => r + 1)
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('pirate-settings-changed'))
+    }
+  }, [])
+
+  const {
+    showPirateModal,
+    setShowPirateModal,
+    handleBrandPointerDown,
+    handleBrandPointerUp,
+    handleBrandPointerLeave,
+    handleBrandClick
+  } = usePirateUnlock(() => {
+    setShowPirateModal(true)
+  })
 
   useKonami(
     useCallback(() => {
       setPirateSettings({ unlocked: true })
       setShowPirateModal(true)
-    }, [])
+    }, [setShowPirateModal])
   )
 
   useEffect(() => {
@@ -99,80 +120,8 @@ export default function Layout() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [drawerOpen])
 
-  const handlePirateSettingsChange = useCallback(() => {
-    setRefresh((r) => r + 1)
-    if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('pirate-settings-changed'))
-    }
-  }, [])
-
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
   const toggleDrawer = useCallback(() => setDrawerOpen((o) => !o), [])
-
-  const handleBrandPointerDown = useCallback(() => {
-    if (!pirateUnlocked) return
-    longPressTimerRef.current = setTimeout(() => {
-      longPressTimerRef.current = null
-      setShowPirateModal(true)
-    }, LONG_PRESS_MS)
-  }, [pirateUnlocked])
-
-  const handleBrandPointerUp = useCallback(() => {
-    if (longPressTimerRef.current) {
-      clearTimeout(longPressTimerRef.current)
-      longPressTimerRef.current = null
-    }
-  }, [])
-
-  const handleBrandPointerLeave = useCallback(() => {
-    if (longPressTimerRef.current) {
-      clearTimeout(longPressTimerRef.current)
-      longPressTimerRef.current = null
-    }
-  }, [])
-
-  const openPirateModal = useCallback(() => {
-    setPirateSettings({ unlocked: true })
-    setShowPirateModal(true)
-  }, [])
-
-  const handleBrandClick = useCallback(
-    (e: React.MouseEvent) => {
-      if (singleClickNavTimerRef.current) {
-        clearTimeout(singleClickNavTimerRef.current)
-        singleClickNavTimerRef.current = null
-      }
-      if (fastClickResetTimerRef.current) {
-        clearTimeout(fastClickResetTimerRef.current)
-        fastClickResetTimerRef.current = null
-      }
-
-      fastClickCountRef.current += 1
-      const count = fastClickCountRef.current
-
-      if (count >= FAST_CLICKS_REQUIRED) {
-        fastClickCountRef.current = 0
-        openPirateModal()
-        e.preventDefault()
-        return
-      }
-
-      if (count === 1) {
-        singleClickNavTimerRef.current = setTimeout(() => {
-          singleClickNavTimerRef.current = null
-          navigate('/')
-        }, SINGLE_CLICK_NAV_DELAY_MS)
-      }
-
-      fastClickResetTimerRef.current = setTimeout(() => {
-        fastClickResetTimerRef.current = null
-        fastClickCountRef.current = 0
-      }, FAST_CLICK_RESET_MS)
-
-      e.preventDefault()
-    },
-    [navigate, openPirateModal]
-  )
 
   return (
     <div className="layout">
@@ -191,7 +140,7 @@ export default function Layout() {
           </button>
         ) : null}
         <Link
-          to="/"
+          to={ROUTES.HOME}
           className="layout-brand"
           aria-label="Pre-Flight Assistant home"
           onClick={handleBrandClick}
@@ -213,6 +162,11 @@ export default function Layout() {
       </header>
       <main className="layout-main">
         <StorageErrorBanner />
+        {!isOnline && (
+          <div className="offline-indicator" role="status" aria-live="polite">
+            <span>Offline — Using cached content</span>
+          </div>
+        )}
         <Outlet />
       </main>
       {!isDesktop && <Nav />}

@@ -12,6 +12,7 @@
     "fetch:ships": "node scripts/fetch-ships-api.mjs",
     "fetch:routes": "node scripts/fetch-routes-api.mjs",
     "fetch:top-routes": "node scripts/fetch-top-routes.mjs",
+    "fetch:commodities": "node scripts/fetch-commodities.mjs",
     "update:routes": "node scripts/fetch-routes-api.mjs",
     "preview": "vite preview",
     "test": "vitest run",
@@ -29,10 +30,14 @@
     "react-router-dom": "^7.13.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/qrcode": "^1.5.6",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.3",
+    "jsdom": "^28.1.0",
     "typescript": "~5.9.3",
     "vite": "^5.4.10",
     "vite-plugin-pwa": "^1.2.0",

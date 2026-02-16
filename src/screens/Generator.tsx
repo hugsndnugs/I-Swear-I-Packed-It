@@ -1,8 +1,8 @@
 import { useState, useMemo, useEffect } from 'react'
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 import { Star, Backpack } from 'lucide-react'
-import { ships } from '../data/ships'
-import { OPERATION_TYPES, CREW_ROLES, type OperationType, type CrewRole } from '../data/contexts'
+import type { OperationType, CrewRole } from '../data/contexts'
+import { CREW_ROLES, LOCATIONS, getLocationById, type Location } from '../data/contexts'
 import {
   totalCrew,
   roleCountsToRoles,
@@ -27,7 +27,7 @@ import {
   encodePreset,
   type SharedPresetPayload
 } from '../lib/presetShare'
-import { getFrequentlyMissedTaskIds, getTaskLabel } from '../lib/runHistory'
+import { getFrequentlyMissedTaskIds, getFrequentlyCompletedTaskIds, getSuggestedReminders, getTaskLabel } from '../lib/runHistory'
 import type { GeneratedChecklist } from '../lib/generateChecklist'
 import type { GeneratorLocationState } from '../types/navigation'
 import './Generator.css'
@@ -53,13 +53,17 @@ export default function Generator() {
   const [showQr, setShowQr] = useState(false)
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null)
   const [prefsTick, setPrefsTick] = useState(0)
+  const [ships, setShips] = useState<typeof import('../data/ships').ships>([])
+  const [operationTypes, setOperationTypes] = useState<typeof import('../data/contexts').OPERATION_TYPES>([])
+  const [locationId, setLocationId] = useState<string>(initial?.locationId ?? 'none')
 
   const crewCount = useMemo(() => totalCrew(crewRoleCounts), [crewRoleCounts])
   const crewRoles = useMemo(() => roleCountsToRoles(crewRoleCounts), [crewRoleCounts])
+  const selectedLocation = useMemo(() => locationId === 'none' ? null : getLocationById(locationId), [locationId])
 
   const sharedPayload: SharedPresetPayload = useMemo(
-    () => ({ shipId, operationType, crewCount, crewRoles, crewRoleCounts }),
-    [shipId, operationType, crewCount, crewRoles, crewRoleCounts]
+    () => ({ shipId, operationType, crewCount, crewRoles, crewRoleCounts, locationId: locationId === 'none' ? undefined : locationId }),
+    [shipId, operationType, crewCount, crewRoles, crewRoleCounts, locationId]
   )
 
   useEffect(() => {
@@ -67,6 +71,7 @@ export default function Generator() {
     setShipId(urlPreset.shipId)
     setOperationType(urlPreset.operationType)
     setCrewRoleCounts(normalizeToCrewRoleCounts(urlPreset))
+    if (urlPreset.locationId) setLocationId(urlPreset.locationId)
   }, [urlPreset])
 
   useEffect(() => {
@@ -82,6 +87,17 @@ export default function Generator() {
     return () => window.removeEventListener('pirate-settings-changed', handler)
   }, [])
 
+  // Lazy load ships and operation types
+  useEffect(() => {
+    Promise.all([
+      import('../data/ships').then(m => m.ships),
+      import('../data/contexts').then(m => m.OPERATION_TYPES)
+    ]).then(([shipsData, opTypes]) => {
+      setShips(shipsData)
+      setOperationTypes(opTypes)
+    })
+  }, [])
+
   const closeQr = () => {
     setShowQr(false)
     setQrDataUrl(null)
@@ -91,8 +107,8 @@ export default function Generator() {
   const pirateSpeakOn = useMemo(() => getPirateSettings().pirateSpeak, [prefsTick])
   const visibleOperationTypes = useMemo(() => {
     const { pirateOpMode } = getPirateSettings()
-    return pirateOpMode ? OPERATION_TYPES : OPERATION_TYPES.filter((op) => op.id !== 'piracy')
-  }, [prefsTick])
+    return pirateOpMode ? operationTypes : operationTypes.filter((op) => op.id !== 'piracy')
+  }, [prefsTick, operationTypes])
   const filteredShips = useMemo(() => {
     const q = shipSearch.trim().toLowerCase()
     return ships.filter((s) => {
@@ -139,14 +155,18 @@ export default function Generator() {
   }, [ship, operationType, crewCount, crewRoles])
 
   const frequentlyMissed = useMemo(() => getFrequentlyMissedTaskIds(3), [])
+  const frequentlyCompleted = useMemo(() => getFrequentlyCompletedTaskIds(5), [])
+  const suggestedReminders = useMemo(() => getSuggestedReminders(3), [])
 
   const handleGenerate = () => {
     if (crewCount === 0) return
     pushRecentShip(shipId)
-    const checklist: GeneratedChecklist = generateChecklist(shipId, operationType, crewRoles)
-    saveLastRun({ shipId, operationType, crewRoleCounts })
-    navigate('/checklist', {
-      state: { checklist, shipId, operationType, crewRoles, crewRoleCounts, contextWarnings }
+    const checklist: GeneratedChecklist = generateChecklist(shipId, operationType, crewRoles, selectedLocation)
+    saveLastRun({ shipId, operationType, crewRoleCounts, locationId: locationId === 'none' ? undefined : locationId })
+    // Store state in URL params for shareability/bookmarkability
+    const url = buildShareableUrl({ shipId, operationType, crewRoles, crewRoleCounts, locationId: locationId === 'none' ? undefined : locationId })
+    navigate(url.replace('/generate', '/checklist'), {
+      state: { checklist, shipId, operationType, crewRoles, crewRoleCounts, locationId, contextWarnings }
     })
   }
 
@@ -169,9 +189,16 @@ export default function Generator() {
     setTimeout(() => setShareCopied(null), 2000)
   }
 
+  const titleRef = useRef<HTMLHeadingElement>(null)
+
+  // Focus main heading on mount for accessibility
+  useEffect(() => {
+    titleRef.current?.focus()
+  }, [])
+
   return (
     <div className="generator">
-      <h1 className="generator-title">{pirateSpeak('Generate Checklist', pirateSpeakOn)}</h1>
+      <h1 ref={titleRef} className="generator-title" tabIndex={-1}>{pirateSpeak('Generate Checklist', pirateSpeakOn)}</h1>
 
       <section className="generator-ship-card card" aria-labelledby="ship-section-label">
         <h2 id="ship-section-label" className="generator-section-label">{pirateSpeak('Ship', pirateSpeakOn)}</h2>
@@ -258,6 +285,21 @@ export default function Generator() {
         ))}
       </div>
 
+      <label className="generator-label" htmlFor="location-select">Location (optional)</label>
+      <select
+        id="location-select"
+        className="generator-select input"
+        value={locationId}
+        onChange={(e) => setLocationId(e.target.value)}
+        aria-label="Select location"
+      >
+        {LOCATIONS.map((loc) => (
+          <option key={loc.id} value={loc.id}>
+            {loc.label} {loc.system ? `(${loc.system})` : ''}
+          </option>
+        ))}
+      </select>
+
       <label className="generator-label">Crew by role</label>
       <p className="generator-crew-summary" aria-live="polite">
         Total crew: {crewCount} {crewCount === 1 ? 'person' : 'people'}
@@ -291,6 +333,22 @@ export default function Generator() {
         <div className="generator-frequently-missed" role="status" aria-live="polite">
           <p className="generator-frequently-missed-label">
             You often skip: {frequentlyMissed.map(getTaskLabel).join(', ')}
+          </p>
+        </div>
+      )}
+
+      {frequentlyCompleted.length > 0 && (
+        <div className="generator-suggested-items" role="status" aria-live="polite">
+          <p className="generator-suggested-items-label">
+            Frequently used: {frequentlyCompleted.map(getTaskLabel).join(', ')}
+          </p>
+        </div>
+      )}
+
+      {suggestedReminders.length > 0 && (
+        <div className="generator-suggested-reminders" role="status" aria-live="polite">
+          <p className="generator-suggested-reminders-label">
+            Suggested reminders: {suggestedReminders.map(getTaskLabel).join(', ')}
           </p>
         </div>
       )}

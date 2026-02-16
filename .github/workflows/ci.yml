@@ -21,6 +21,10 @@ jobs:
       - name: Install
         run: npm ci
 
+      - name: Security audit
+        run: npm audit --production --audit-level=moderate || true
+        continue-on-error: true
+
       - name: Test
         run: npm run test
 

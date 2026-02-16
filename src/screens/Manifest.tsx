@@ -2,9 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Plus } from 'lucide-react'
 import CollapsibleSection from '../components/CollapsibleSection'
-import { ships } from '../data/ships'
-import { ROUTE_PRESETS, getRouteById } from '../data/routes'
-import { COMMODITIES, getCommodityById, type CargoManifestEntry } from '../data/commodities'
+import type { CargoManifestEntry } from '../data/commodities'
 import { validateManifest, type ManifestValidationReport } from '../lib/validateManifest'
 import { loadLastManifest, saveLastManifest } from '../lib/presets'
 import './Manifest.css'
@@ -26,8 +24,29 @@ export default function Manifest() {
   const [routeId, setRouteId] = useState<string>('none')
   const [rows, setRows] = useState<CargoRow[]>([])
   const [report, setReport] = useState<ManifestValidationReport | null>(null)
+  const [ships, setShips] = useState<typeof import('../data/ships').ships>([])
+  const [routePresets, setRoutePresets] = useState<typeof import('../data/routes').ROUTE_PRESETS>([])
+  const [commodities, setCommodities] = useState<typeof import('../data/commodities').COMMODITIES>([])
+  const [getCommodityById, setGetCommodityById] = useState<typeof import('../data/commodities').getCommodityById>(() => () => undefined)
+  const [getRouteById, setGetRouteById] = useState<typeof import('../data/routes').getRouteById>(() => () => undefined)
+
+  // Lazy load data modules
+  useEffect(() => {
+    Promise.all([
+      import('../data/ships').then(m => m.ships),
+      import('../data/routes').then(m => ({ presets: m.ROUTE_PRESETS, getById: m.getRouteById })),
+      import('../data/commodities').then(m => ({ commodities: m.COMMODITIES, getById: m.getCommodityById }))
+    ]).then(([shipsData, routesData, commoditiesData]) => {
+      setShips(shipsData)
+      setRoutePresets(routesData.presets)
+      setGetRouteById(() => routesData.getById)
+      setCommodities(commoditiesData.commodities)
+      setGetCommodityById(() => commoditiesData.getById)
+    })
+  }, [])
 
   useEffect(() => {
+    if (commodities.length === 0) return
     const last = loadLastManifest()
     if (last) {
       setShipId(last.shipId)
@@ -41,7 +60,7 @@ export default function Manifest() {
         }))
       )
     }
-  }, [])
+  }, [commodities])
 
   const ship = ships.find((s) => s.id === shipId)
   const handleGenerate = () => {
@@ -53,7 +72,8 @@ export default function Manifest() {
   }
 
   const addRow = () => {
-    const first = COMMODITIES[0]
+    if (commodities.length === 0) return
+    const first = commodities[0]
     setRows((prev) => [
       ...prev,
       {
@@ -177,7 +197,7 @@ export default function Manifest() {
         onChange={(e) => setRouteId(e.target.value)}
         aria-label="Select route"
       >
-        {ROUTE_PRESETS.map((r) => (
+        {routePresets.map((r) => (
           <option key={r.id} value={r.id}>
             {r.label}
           </option>
@@ -208,7 +228,7 @@ export default function Manifest() {
                   onChange={(e) => onCommodityChange(row.id, e.target.value)}
                   aria-label="Commodity type"
                 >
-                  {COMMODITIES.map((c) => (
+                  {commodities.map((c) => (
                     <option key={c.id} value={c.id}>
                       {c.label}
                     </option>

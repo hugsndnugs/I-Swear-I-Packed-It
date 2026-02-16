@@ -7,7 +7,7 @@ Thanks for your interest in contributing. This document covers how to get set up
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/YOUR_ORG/I-Swear-I-Packed-It.git
+   git clone https://github.com/hugsndnugs/I-Swear-I-Packed-It.git
    cd I-Swear-I-Packed-It
    ```
 

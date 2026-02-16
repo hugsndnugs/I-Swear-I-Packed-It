@@ -39,6 +39,7 @@ export default function OpMode() {
   const [notificationsEnabled, setNotificationsEnabled] = useState(state?.notificationsEnabled ?? false)
   const [intervals, setIntervals] = useState<OpModeIntervals>(() => getDefaultIntervals())
   const [liveAnnounce, setLiveAnnounce] = useState<string | null>(null)
+  const [notificationError, setNotificationError] = useState<string | null>(null)
 
   useEffect(() => {
     if (state) {
@@ -80,7 +81,16 @@ export default function OpMode() {
     const next = !notificationsEnabled
     if (next) {
       const perm = await requestNotificationPermission()
-      if (perm !== 'granted') return
+      if (perm !== 'granted') {
+        setNotificationError(
+          perm === 'denied'
+            ? 'Notification permission denied. Enable it in your browser settings to receive reminders.'
+            : 'Notification permission not granted. Please enable it to receive reminders.'
+        )
+        setTimeout(() => setNotificationError(null), 5000)
+        return
+      }
+      setNotificationError(null)
     }
     setNotificationsEnabled(next)
     if (state) updateOpModeNotifications(next)
@@ -203,8 +213,14 @@ export default function OpMode() {
           checked={notificationsEnabled}
           onChange={handleToggleNotifications}
           aria-label="Enable browser notifications for reminders"
+          aria-describedby={notificationError ? 'notification-error' : undefined}
         />
         <label htmlFor="opmode-notifications">Notify me (browser notifications)</label>
+        {notificationError && (
+          <p id="notification-error" className="opmode-error" role="alert">
+            {notificationError}
+          </p>
+        )}
       </div>
 
       <button

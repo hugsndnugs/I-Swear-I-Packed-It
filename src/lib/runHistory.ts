@@ -103,3 +103,38 @@ export function getTaskLabel(taskId: string): string {
   const t = tasks.find((x) => x.id === taskId)
   return t?.label ?? taskId
 }
+
+/**
+ * Returns task IDs that the user has frequently completed,
+ * ordered by how often they were completed. Uses task id (e.g. "helmet") not checklist row id.
+ */
+export function getFrequentlyCompletedTaskIds(limit = 5): string[] {
+  const runs = loadRunHistory()
+  const completedCount: Record<string, number> = {}
+  const validTaskIds = new Set(tasks.map((t) => t.id))
+  for (const run of runs) {
+    const completedSet = new Set(run.completedIds)
+    for (const rowId of run.allTaskIds) {
+      const taskId = rowId.includes('-') ? rowId.split('-').slice(1).join('-') : rowId
+      if (completedSet.has(rowId) && validTaskIds.has(taskId)) {
+        completedCount[taskId] = (completedCount[taskId] ?? 0) + 1
+      }
+    }
+  }
+  return Object.entries(completedCount)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, limit)
+    .map(([id]) => id)
+}
+
+/**
+ * Get suggested reminders based on past behavior patterns.
+ * Returns tasks that are frequently completed but might be forgotten.
+ */
+export function getSuggestedReminders(limit = 3): string[] {
+  const frequentlyCompleted = getFrequentlyCompletedTaskIds(10)
+  const frequentlyMissed = getFrequentlyMissedTaskIds(10)
+  const missedSet = new Set(frequentlyMissed)
+  // Return items that are frequently completed but also sometimes missed
+  return frequentlyCompleted.filter((id) => missedSet.has(id)).slice(0, limit)
+}

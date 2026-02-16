@@ -1,4 +1,4 @@
-import type { OperationType, CrewRole } from '../data/contexts'
+import type { OperationType, CrewRole, Location } from '../data/contexts'
 import type { TaskSection } from '../data/tasks'
 import { tasks, SECTION_ORDER_LIST, SECTION_LABELS, type TaskDefinition } from '../data/tasks'
 
@@ -60,7 +60,8 @@ function taskMatchesOperation(task: TaskDefinition, op: OperationType): boolean 
 export function generateChecklist(
   _shipId: string,
   operationType: OperationType,
-  crewRoles: CrewRole[]
+  crewRoles: CrewRole[],
+  location?: Location | null
 ): GeneratedChecklist {
   const includedSections = sectionsForOperation(operationType)
   const sectionSet = new Set(includedSections)

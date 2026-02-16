@@ -1,4 +1,4 @@
-import type { OperationType, CrewRole } from '../data/contexts'
+import type { OperationType, CrewRole, Location } from '../data/contexts'
 import type { GeneratedChecklist } from '../lib/generateChecklist'
 import type { ContextWarningsResult } from '../lib/contextWarnings'
 import type { CrewRoleCounts } from '../lib/crewRoleCounts'
@@ -10,6 +10,7 @@ export interface GeneratorLocationState {
     crewCount: number
     crewRoles: CrewRole[]
     crewRoleCounts?: CrewRoleCounts
+    locationId?: string
   }
   fromLastRun?: boolean
   lastRun?: {
@@ -18,6 +19,7 @@ export interface GeneratorLocationState {
     crewCount: number
     crewRoles: CrewRole[]
     crewRoleCounts?: CrewRoleCounts
+    locationId?: string
   }
 }
 
@@ -27,6 +29,7 @@ export interface ChecklistLocationState {
   operationType?: OperationType
   crewRoles?: CrewRole[]
   crewRoleCounts?: CrewRoleCounts
+  locationId?: string
   contextWarnings?: ContextWarningsResult
 }
 

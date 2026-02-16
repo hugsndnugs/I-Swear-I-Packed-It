@@ -4,7 +4,7 @@ import { Zap, Rocket, Timer, Link2, ChevronRight } from 'lucide-react'
 import { loadLastRun, loadPresets } from '../lib/presets'
 import { generateChecklist } from '../lib/generateChecklist'
 import { decodePreset, PRESET_DECODE_MAX_LENGTH } from '../lib/presetShare'
-import { ships } from '../data/ships'
+import { loadOrgPresets } from '../lib/orgPresets'
 import { OPERATION_TYPES } from '../data/contexts'
 import { getPirateSettings } from '../lib/pirateSettings'
 import { pirateSpeak } from '../lib/pirateSpeak'
@@ -15,14 +15,21 @@ export default function Home() {
   const [importCode, setImportCode] = useState('')
   const [importError, setImportError] = useState<string | null>(null)
   const [, setTick] = useState(0)
+  const [ships, setShips] = useState<typeof import('../data/ships').ships>([])
   const lastRun = loadLastRun()
   const presets = loadPresets()
+  const orgPresets = loadOrgPresets()
   const ps = getPirateSettings().pirateSpeak
 
   useEffect(() => {
     const handler = () => setTick((t) => t + 1)
     window.addEventListener('pirate-settings-changed', handler)
     return () => window.removeEventListener('pirate-settings-changed', handler)
+  }, [])
+
+  // Lazy load ships
+  useEffect(() => {
+    import('../data/ships').then(m => setShips(m.ships))
   }, [])
 
   const handleImportPreset = () => {
@@ -70,6 +77,14 @@ export default function Home() {
           <Zap size={20} aria-hidden />
           {pirateSpeak('Start Pre-Flight', ps)}
         </button>
+        <a
+          href="https://github.com/hugsndnugs/I-Swear-I-Packed-It/releases/latest/download/app-release.apk"
+          className="home-android-download btn-secondary"
+          aria-label="Download Android app"
+          download
+        >
+          Download Android App
+        </a>
       </div>
 
       {lastShipName && lastRun && (
@@ -183,6 +198,44 @@ export default function Home() {
                     }
                   >
                     <span className="home-preset-name">{p.name}</span>
+                    <span className="home-preset-subtitle">
+                      {shipName} · {opLabel}
+                    </span>
+                  </button>
+                </li>
+              )
+            })}
+          </ul>
+        </section>
+      )}
+
+      {orgPresets.length > 0 && (
+        <section className="home-org-presets" aria-label="Org presets">
+          <h2 className="home-presets-title">{pirateSpeak('Org Presets', ps)}</h2>
+          <ul className="home-presets-list">
+            {orgPresets.map((p) => {
+              const shipName = ships.find((s) => s.id === p.shipId)?.name ?? p.shipId
+              const opLabelRaw =
+                OPERATION_TYPES.find((o) => o.id === p.operationType)?.label ?? p.operationType
+              const opLabel = pirateSpeak(opLabelRaw, ps)
+              return (
+                <li key={p.id}>
+                  <button
+                    className="home-preset-btn card card-interactive"
+                    onClick={() =>
+                      navigate('/generate', {
+                        state: {
+                          preset: {
+                            shipId: p.shipId,
+                            operationType: p.operationType,
+                            crewRoleCounts: p.crewRoleCounts,
+                            locationId: p.locationId
+                          }
+                        }
+                      })
+                    }
+                  >
+                    <span className="home-preset-name">{p.name} {p.role ? `(${p.role})` : ''}</span>
                     <span className="home-preset-subtitle">
                       {shipName} · {opLabel}
                     </span>

@@ -254,6 +254,10 @@ a:focus-visible,
 
 /* Error boundary */
 .error-boundary {
+  /* Ensure sufficient contrast for accessibility */
+  color: var(--text);
+  background: var(--surface);
+  border: 2px solid var(--error);
   padding: var(--space-8);
   text-align: center;
   min-height: 50vh;
@@ -271,6 +275,31 @@ a:focus-visible,
 
 .error-boundary-link {
   padding: var(--space-3) var(--space-4);
+  font-weight: 500;
+  /* Ensure focus is visible for accessibility */
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Offline indicator */
+.offline-indicator {
+  background: var(--warning);
+  color: var(--bg);
+  padding: var(--space-2) var(--space-4);
+  text-align: center;
+  font-size: var(--text-sm);
   font-weight: 500;
 }
 

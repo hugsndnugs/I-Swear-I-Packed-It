@@ -31,10 +31,36 @@ jobs:
       - name: Zip web dist
         run: cd dist && zip -r ../dist.zip . && cd ..
 
+      - name: Sync to Android
+        run: npx cap sync android
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: "temurin"
+          java-version: "21"
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          packages: "tools platform-tools platforms;android-35 build-tools;35.0.0"
+
+      - name: Build Android Release APK
+        run: |
+          chmod +x android/gradlew
+          cd android && ./gradlew assembleRelease
+
+      - name: Build Android App Bundle
+        run: |
+          cd android && ./gradlew bundleRelease
+
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist.zip
+          files: |
+            dist.zip
+            android/app/build/outputs/apk/release/*.apk
+            android/app/build/outputs/bundle/release/*.aab
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

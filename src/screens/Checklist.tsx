@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 import { CheckCheck, ChevronRight } from 'lucide-react'
 import type { ChecklistSection, ChecklistTask } from '../lib/generateChecklist'
 import ProgressBar from '../components/ProgressBar'
@@ -10,34 +10,52 @@ import {
   checklistProgressMatches
 } from '../lib/presets'
 import { recordRun } from '../lib/runHistory'
-import { roleCountsToRoles, totalCrew } from '../lib/crewRoleCounts'
+import { roleCountsToRoles, totalCrew, normalizeToCrewRoleCounts } from '../lib/crewRoleCounts'
 import { CREW_ROLES, OPERATION_TYPES } from '../data/contexts'
-import { ships } from '../data/ships'
-import { buildShareableUrl } from '../lib/presetShare'
+import { buildShareableUrl, getPresetFromSearchParams } from '../lib/presetShare'
+import { generateChecklist } from '../lib/generateChecklist'
 import { getPirateSettings } from '../lib/pirateSettings'
 import { pirateSpeak } from '../lib/pirateSpeak'
-import type { ChecklistLocationState } from '../types/navigation'
+import { getChecklistState } from '../lib/locationState'
+import { ROUTES } from '../constants/routes'
+import { getLocationById } from '../data/contexts'
 import './Checklist.css'
 
 export default function Checklist() {
   const navigate = useNavigate()
   const location = useLocation()
-  const state = location.state as ChecklistLocationState | null
+  const [searchParams] = useSearchParams()
+  const state = getChecklistState(location)
+  
+  // Try to get state from URL params if not in location.state
+  const urlPreset = useMemo(() => getPresetFromSearchParams(searchParams), [searchParams])
+  const urlChecklist = useMemo(() => {
+    if (!urlPreset) return null
+    const crewRoles = urlPreset.crewRoles ?? roleCountsToRoles(normalizeToCrewRoleCounts(urlPreset))
+    const location = urlPreset.locationId ? getLocationById(urlPreset.locationId) : null
+    return generateChecklist(urlPreset.shipId, urlPreset.operationType, crewRoles, location)
+  }, [urlPreset])
 
-  const checklist = state?.checklist
+  const checklist = state?.checklist ?? urlChecklist
   const crewRoles = useMemo(
     () =>
       state?.crewRoles ??
-      (state?.crewRoleCounts ? roleCountsToRoles(state.crewRoleCounts) : undefined),
-    [state?.crewRoles, state?.crewRoleCounts]
+      urlPreset?.crewRoles ??
+      (state?.crewRoleCounts ? roleCountsToRoles(state.crewRoleCounts) : 
+       urlPreset?.crewRoleCounts ? roleCountsToRoles(normalizeToCrewRoleCounts(urlPreset)) : undefined),
+    [state?.crewRoles, state?.crewRoleCounts, urlPreset]
   )
   const crewCount = useMemo(
     () => (state?.crewRoleCounts ? totalCrew(state.crewRoleCounts) : (crewRoles?.length ?? 1)),
     [state?.crewRoleCounts, crewRoles?.length]
   )
+  const shipId = state?.shipId ?? urlPreset?.shipId
+  const operationType = state?.operationType ?? urlPreset?.operationType
+  const locationId = state?.locationId ?? urlPreset?.locationId
+  const selectedLocation = locationId ? getLocationById(locationId) : null
   const context =
-    state?.shipId && state?.operationType && crewRoles
-      ? { shipId: state.shipId, operationType: state.operationType, crewRoles }
+    shipId && operationType && crewRoles
+      ? { shipId, operationType, crewRoles }
       : null
 
   const [completed, setCompleted] = useState<Set<string>>(() => {
@@ -56,6 +74,7 @@ export default function Checklist() {
   const [showQr, setShowQr] = useState(false)
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null)
   const [, setPirateTick] = useState(0)
+  const [ships, setShips] = useState<typeof import('../data/ships').ships>([])
   const savePresetButtonRef = useRef<HTMLButtonElement>(null)
   const modalRef = useRef<HTMLDivElement>(null)
   const runRecordRef = useRef<{ completed: Set<string>; allTaskIds: string[] } | null>(null)
@@ -69,9 +88,14 @@ export default function Checklist() {
     return () => window.removeEventListener('pirate-settings-changed', handler)
   }, [])
 
+  // Lazy load ships
+  useEffect(() => {
+    import('../data/ships').then(m => setShips(m.ships))
+  }, [])
+
   useEffect(() => {
     if (!checklist) {
-      navigate('/', { replace: true })
+      navigate(ROUTES.HOME, { replace: true })
     }
   }, [checklist, navigate])
 
@@ -140,6 +164,7 @@ export default function Checklist() {
     ? OPERATION_TYPES.find((o) => o.id === state.operationType)?.label ?? state.operationType
     : '—'
   const opLabel = pirateSpeak(opLabelRaw, ps)
+  const locationLabel = selectedLocation ? selectedLocation.label : null
 
   const copyExportSummary = async () => {
     if (!checklist || !state?.shipId || !state?.operationType) return
@@ -147,7 +172,8 @@ export default function Checklist() {
     const done = allIds.filter((id) => completed.has(id)).length
     const total = allIds.length
     const date = new Date().toISOString().slice(0, 10)
-    const summary = `Pre-Flight Checklist — ${shipName} · ${opLabel} — ${done}/${total} complete — ${date}`
+    const locationText = locationLabel ? ` · ${locationLabel}` : ''
+    const summary = `Pre-Flight Checklist — ${shipName} · ${opLabel}${locationText} — ${done}/${total} complete — ${date}`
     await navigator.clipboard.writeText(summary)
     setExportCopied(true)
     setTimeout(() => setExportCopied(false), 2000)
@@ -192,6 +218,15 @@ export default function Checklist() {
     modal.addEventListener('keydown', handleKeyDown)
     return () => modal.removeEventListener('keydown', handleKeyDown)
   }, [showSave])
+
+  const titleRef = useRef<HTMLHeadingElement>(null)
+
+  // Focus main heading on mount for accessibility
+  useEffect(() => {
+    if (checklist && titleRef.current) {
+      titleRef.current.focus()
+    }
+  }, [checklist])
 
   if (!checklist) return null
 
@@ -249,7 +284,12 @@ export default function Checklist() {
   return (
     <div className="checklist">
       <div className="checklist-header">
-        <h1 className="checklist-title">Pre-Flight Checklist</h1>
+        <h1 ref={titleRef} className="checklist-title" tabIndex={-1}>Pre-Flight Checklist</h1>
+        {locationLabel && (
+          <p className="checklist-location" aria-label="Location">
+            Location: {locationLabel}
+          </p>
+        )}
         <ProgressBar value={completedCount} max={totalCount} aria-label="Checklist progress" />
       </div>
 
