@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Plus, Package } from 'lucide-react'
 import CollapsibleSection from '../components/CollapsibleSection'
 import EmptyState from '../components/EmptyState'
+import PullToRefresh from '../components/PullToRefresh'
+import Tooltip from '../components/Tooltip'
 import type { CargoManifestEntry } from '../data/commodities'
 import { validateManifest, type ManifestValidationReport } from '../lib/validateManifest'
 import { loadLastManifest, saveLastManifest } from '../lib/presets'
@@ -31,9 +33,8 @@ export default function Manifest() {
   const [getCommodityById, setGetCommodityById] = useState<typeof import('../data/commodities').getCommodityById>(() => () => undefined)
   const [getRouteById, setGetRouteById] = useState<typeof import('../data/routes').getRouteById>(() => () => undefined)
 
-  // Lazy load data modules
-  useEffect(() => {
-    Promise.all([
+  const loadData = useCallback(() => {
+    return Promise.all([
       import('../data/ships').then(m => m.ships),
       import('../data/routes').then(m => ({ presets: m.ROUTE_PRESETS, getById: m.getRouteById })),
       import('../data/commodities').then(m => ({ commodities: m.COMMODITIES, getById: m.getCommodityById }))
@@ -45,6 +46,10 @@ export default function Manifest() {
       setGetCommodityById(() => commoditiesData.getById)
     })
   }, [])
+
+  useEffect(() => {
+    loadData()
+  }, [loadData])
 
   useEffect(() => {
     if (commodities.length === 0) return
@@ -166,14 +171,31 @@ export default function Manifest() {
     globalThis.print?.()
   }
 
+  const dataReady = ships.length > 0 && commodities.length > 0
+
+  if (!dataReady) {
+    return (
+      <div className="manifest">
+        <h1 className="manifest-title">Cargo Manifest</h1>
+        <div className="loading" aria-live="polite">
+          <span className="loading-spinner" aria-hidden />
+          <span>Loading cargo data…</span>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="manifest">
-      <h1 className="manifest-title">Cargo Manifest</h1>
-      <p className="manifest-desc">Validate your load: required tools, backup gear, and risk prompts.</p>
+      <PullToRefresh onRefresh={loadData}>
+        <h1 className="manifest-title">Cargo Manifest</h1>
+        <p className="manifest-desc">Validate your load: required tools, backup gear, and risk prompts.</p>
 
-      <label className="manifest-label" htmlFor="manifest-ship">
-        Ship
-      </label>
+        <Tooltip content="Select the ship to validate cargo capacity and tools." position="top">
+          <label className="manifest-label" htmlFor="manifest-ship">
+            Ship
+          </label>
+        </Tooltip>
       <select
         id="manifest-ship"
         className="manifest-select"
@@ -270,14 +292,16 @@ export default function Manifest() {
         </ul>
       )}
 
-      <button
-        type="button"
-        className="manifest-submit btn-primary"
-        onClick={handleGenerate}
-        aria-label="Generate validation report"
-      >
-        Generate validation report
-      </button>
+      <Tooltip content="Check cargo vs capacity, required tools, and risks." position="top">
+        <button
+          type="button"
+          className="manifest-submit btn-primary"
+          onClick={handleGenerate}
+          aria-label="Generate validation report"
+        >
+          Generate validation report
+        </button>
+      </Tooltip>
 
       {report && (
         <CollapsibleSection
@@ -373,6 +397,7 @@ export default function Manifest() {
           </div>
         </CollapsibleSection>
       )}
+      </PullToRefresh>
     </div>
   )
 }

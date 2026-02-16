@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import Manifest from './Manifest'
 
@@ -45,28 +45,38 @@ describe('Manifest', () => {
     expect(screen.getByText('Cargo Manifest')).toBeInTheDocument()
   })
 
-  it('displays ship selector', () => {
+  it('displays ship selector', async () => {
     renderManifest()
-    expect(screen.getByLabelText('Select ship')).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByLabelText('Select ship')).toBeInTheDocument()
+    })
   })
 
-  it('displays route selector', () => {
+  it('displays route selector', async () => {
     renderManifest()
-    expect(screen.getByLabelText('Select route')).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByLabelText('Select route')).toBeInTheDocument()
+    })
   })
 
-  it('displays add row button', () => {
+  it('displays add row button', async () => {
     renderManifest()
-    expect(screen.getByText('Add row')).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText('Add row')).toBeInTheDocument()
+    })
   })
 
-  it('shows empty state when no cargo rows', () => {
+  it('shows empty state when no cargo rows', async () => {
     renderManifest()
-    expect(screen.getByText(/No cargo added/)).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText(/No cargo added/)).toBeInTheDocument()
+    })
   })
 
-  it('displays generate report button', () => {
+  it('displays generate report button', async () => {
     renderManifest()
-    expect(screen.getByText(/Generate validation report/i)).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText(/Generate validation report/i)).toBeInTheDocument()
+    })
   })
 })

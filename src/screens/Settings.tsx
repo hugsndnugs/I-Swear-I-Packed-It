@@ -8,6 +8,7 @@ import { hapticButtonPress } from '../lib/haptics'
 import { exportAllData, exportPresets, exportRunHistory, downloadJSON, importFromFile } from '../lib/exportImport'
 import { checkBiometricAvailability, getBiometricEnabled, setBiometricEnabled, authenticateBiometric } from '../lib/biometric'
 import { Capacitor } from '@capacitor/core'
+import Tooltip from '../components/Tooltip'
 import './Settings.css'
 
 export default function Settings() {
@@ -143,10 +144,12 @@ export default function Settings() {
 
       <div className="settings-content">
         <section className="settings-section card">
-          <h2 className="settings-section-title">
-            <Type size={20} aria-hidden />
-            {pirateSpeak('Font Size', ps)}
-          </h2>
+          <Tooltip content="Adjust the text size throughout the app for better readability." position="bottom">
+            <h2 className="settings-section-title">
+              <Type size={20} aria-hidden />
+              {pirateSpeak('Font Size', ps)}
+            </h2>
+          </Tooltip>
           <p className="settings-section-description">
             Adjust the text size throughout the app for better readability.
           </p>
@@ -194,10 +197,12 @@ export default function Settings() {
         </section>
 
         <section className="settings-section card">
-          <h2 className="settings-section-title">
-            <Database size={20} aria-hidden />
-            {pirateSpeak('Data Management', ps)}
-          </h2>
+          <Tooltip content="Export your data for backup or import previously exported data." position="bottom">
+            <h2 className="settings-section-title">
+              <Database size={20} aria-hidden />
+              {pirateSpeak('Data Management', ps)}
+            </h2>
+          </Tooltip>
           <p className="settings-section-description">
             Export your data for backup or import previously exported data.
           </p>

@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from 'react'
+import { useState, useMemo, useEffect, useRef, useCallback } from 'react'
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 import { Star, Backpack } from 'lucide-react'
 import type { OperationType, CrewRole } from '../data/contexts'
@@ -21,6 +21,8 @@ import {
 import { getPirateSettings, isPirateShip } from '../lib/pirateSettings'
 import { pirateSpeak } from '../lib/pirateSpeak'
 import { getContextWarnings } from '../lib/contextWarnings'
+import PullToRefresh from '../components/PullToRefresh'
+import Tooltip from '../components/Tooltip'
 import {
   getPresetFromSearchParams,
   buildShareableUrl,
@@ -87,9 +89,8 @@ export default function Generator() {
     return () => window.removeEventListener('pirate-settings-changed', handler)
   }, [])
 
-  // Lazy load ships and operation types
-  useEffect(() => {
-    Promise.all([
+  const loadShipsAndOps = useCallback(() => {
+    return Promise.all([
       import('../data/ships').then(m => m.ships),
       import('../data/contexts').then(m => m.OPERATION_TYPES)
     ]).then(([shipsData, opTypes]) => {
@@ -97,6 +98,10 @@ export default function Generator() {
       setOperationTypes(opTypes)
     })
   }, [])
+
+  useEffect(() => {
+    loadShipsAndOps()
+  }, [loadShipsAndOps])
 
   const closeQr = () => {
     setShowQr(false)
@@ -190,17 +195,31 @@ export default function Generator() {
   }
 
   const titleRef = useRef<HTMLHeadingElement>(null)
+  const dataReady = ships.length > 0 && operationTypes.length > 0
 
   // Focus main heading on mount for accessibility
   useEffect(() => {
     titleRef.current?.focus()
   }, [])
 
+  if (!dataReady) {
+    return (
+      <div className="generator">
+        <h1 ref={titleRef} className="generator-title" tabIndex={-1}>{pirateSpeak('Generate Checklist', pirateSpeakOn)}</h1>
+        <div className="loading" aria-live="polite">
+          <span className="loading-spinner" aria-hidden />
+          <span>Loading ship data…</span>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="generator">
-      <h1 ref={titleRef} className="generator-title" tabIndex={-1}>{pirateSpeak('Generate Checklist', pirateSpeakOn)}</h1>
+      <PullToRefresh onRefresh={loadShipsAndOps}>
+        <h1 ref={titleRef} className="generator-title" tabIndex={-1}>{pirateSpeak('Generate Checklist', pirateSpeakOn)}</h1>
 
-      <section className="generator-ship-card card" aria-labelledby="ship-section-label">
+        <section className="generator-ship-card card" aria-labelledby="ship-section-label">
         <h2 id="ship-section-label" className="generator-section-label">{pirateSpeak('Ship', pirateSpeakOn)}</h2>
         <input
           id="ship-search"
@@ -221,13 +240,14 @@ export default function Generator() {
           <span>Flight ready only</span>
         </label>
         <div className="generator-ship-row">
-          <select
-            id="ship-picker"
-            className="generator-select input"
-            value={shipId}
-            onChange={(e) => setShipId(e.target.value)}
-            aria-label="Select ship"
-          >
+          <Tooltip content="Choose the ship for your checklist. Use search or favorites to find it quickly." position="top">
+            <select
+              id="ship-picker"
+              className="generator-select input"
+              value={shipId}
+              onChange={(e) => setShipId(e.target.value)}
+              aria-label="Select ship"
+            >
           {shipOptions.favShips.length > 0 && (
             <optgroup label="Favorites">
               {shipOptions.favShips.map((s) => (
@@ -256,7 +276,8 @@ export default function Generator() {
               </option>
             ))}
           </optgroup>
-        </select>
+            </select>
+          </Tooltip>
         <button
           type="button"
           className="generator-favorite-btn"
@@ -269,7 +290,9 @@ export default function Generator() {
       </div>
       </section>
 
-      <label className="generator-label">Operation type</label>
+      <Tooltip content="Pick the type of operation: cargo, bounty, medical, etc." position="top">
+        <label className="generator-label">Operation type</label>
+      </Tooltip>
       <div className="generator-chips" role="group" aria-label="Operation type">
         {visibleOperationTypes.map((op) => (
           <button
@@ -368,17 +391,21 @@ export default function Generator() {
         </div>
       )}
 
-      <button
-        className="generator-submit btn-primary"
-        onClick={handleGenerate}
-        disabled={crewCount === 0}
-        aria-label="Generate checklist"
-      >
-        Generate
-      </button>
+      <Tooltip content="Create a pre-flight checklist for your ship and crew." position="top">
+        <button
+          className="generator-submit btn-primary"
+          onClick={handleGenerate}
+          disabled={crewCount === 0}
+          aria-label="Generate checklist"
+        >
+          Generate
+        </button>
+      </Tooltip>
 
       <div className="generator-share">
-        <span className="generator-share-label">Share preset</span>
+        <Tooltip content="Share your ship and operation as a link, code, or QR code." position="top">
+          <span className="generator-share-label">Share preset</span>
+        </Tooltip>
         <div className="generator-share-buttons">
           <button
             type="button"
@@ -437,6 +464,7 @@ export default function Generator() {
         <Backpack size={18} aria-hidden />
         View Pack List
       </button>
+    </PullToRefresh>
     </div>
   )
 }

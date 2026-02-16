@@ -16,7 +16,14 @@ const Equipment = lazy(() => import('./screens/Equipment'))
 const Manifest = lazy(() => import('./screens/Manifest'))
 const OpMode = lazy(() => import('./screens/OpMode'))
 
-const lazyFallback = <div className="loading" aria-live="polite">Loading…</div>
+function LoadingFallback({ message }: { message: string }) {
+  return (
+    <div className="loading" aria-live="polite">
+      <span className="loading-spinner" aria-hidden />
+      <span>{message}</span>
+    </div>
+  )
+}
 
 function App() {
   const [biometricChecked, setBiometricChecked] = useState(false)
@@ -89,7 +96,7 @@ function App() {
         <Route
           path="/manifest"
           element={
-            <Suspense fallback={lazyFallback}>
+            <Suspense fallback={<LoadingFallback message="Loading Cargo Manifest…" />}>
               <Manifest />
             </Suspense>
           }
@@ -97,7 +104,7 @@ function App() {
         <Route
           path="/equipment"
           element={
-            <Suspense fallback={lazyFallback}>
+            <Suspense fallback={<LoadingFallback message="Loading Equipment…" />}>
               <Equipment />
             </Suspense>
           }
@@ -105,7 +112,7 @@ function App() {
         <Route
           path="/op-mode"
           element={
-            <Suspense fallback={lazyFallback}>
+            <Suspense fallback={<LoadingFallback message="Loading Op Mode…" />}>
               <OpMode />
             </Suspense>
           }
@@ -113,7 +120,7 @@ function App() {
         <Route
           path="/pack"
           element={
-            <Suspense fallback={lazyFallback}>
+            <Suspense fallback={<LoadingFallback message="Loading Pack List…" />}>
               <PackList />
             </Suspense>
           }

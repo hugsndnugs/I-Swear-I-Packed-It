@@ -23,6 +23,7 @@ import { getChecklistState } from '../lib/locationState'
 import { ROUTES } from '../constants/routes'
 import { getLocationById } from '../data/contexts'
 import { hapticTaskComplete, hapticButtonPress } from '../lib/haptics'
+import Tooltip from '../components/Tooltip'
 import './Checklist.css'
 
 export default function Checklist() {
@@ -232,7 +233,16 @@ export default function Checklist() {
     }
   }, [checklist])
 
-  if (!checklist) return null
+  if (!checklist) {
+    return (
+      <div className="checklist">
+        <div className="loading" aria-live="polite">
+          <span className="loading-spinner" aria-hidden />
+          <span>Preparing checklist…</span>
+        </div>
+      </div>
+    )
+  }
 
   const allTaskIds = checklist.sections.flatMap((s) => s.tasks.map((t) => t.id))
   const completedCount = allTaskIds.filter((id) => completed.has(id)).length
@@ -460,7 +470,9 @@ export default function Checklist() {
           }}
           aria-label="Save as preset"
         >
-          Save as preset
+          <Tooltip content="Save this ship and operation as a preset for quick access later." position="bottom">
+            <span>Save as preset</span>
+          </Tooltip>
         </button>
         <button
           type="button"

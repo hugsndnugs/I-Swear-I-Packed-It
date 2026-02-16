@@ -1,5 +1,8 @@
-import { ReactNode, useState, useRef, useEffect } from 'react'
+import { ReactNode, useState, useRef, useEffect, useCallback } from 'react'
 import './Tooltip.css'
+
+const LONG_PRESS_MS = 500
+const TOOLTIP_AUTO_HIDE_MS = 3000
 
 interface TooltipProps {
   content: ReactNode
@@ -12,25 +15,68 @@ export default function Tooltip({ content, children, position = 'top', delay = 3
   const [isVisible, setIsVisible] = useState(false)
   const [tooltipPosition, setTooltipPosition] = useState(position)
   const timeoutRef = useRef<number | null>(null)
+  const hideTimeoutRef = useRef<number | null>(null)
   const tooltipRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLDivElement>(null)
 
-  const showTooltip = () => {
+  const showTooltip = useCallback(() => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current)
     }
-    timeoutRef.current = window.setTimeout(() => {
+    timeoutRef.current = globalThis.setTimeout(() => {
+      timeoutRef.current = null
       setIsVisible(true)
+      if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current)
+      hideTimeoutRef.current = globalThis.setTimeout(() => {
+        hideTimeoutRef.current = null
+        setIsVisible(false)
+      }, TOOLTIP_AUTO_HIDE_MS)
     }, delay)
-  }
+  }, [delay])
 
-  const hideTooltip = () => {
+  const hideTooltip = useCallback(() => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current)
       timeoutRef.current = null
     }
+    if (hideTimeoutRef.current) {
+      clearTimeout(hideTimeoutRef.current)
+      hideTimeoutRef.current = null
+    }
     setIsVisible(false)
-  }
+  }, [])
+
+  const handleLongPressStart = useCallback(() => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    timeoutRef.current = globalThis.setTimeout(() => {
+      timeoutRef.current = null
+      setIsVisible(true)
+      if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current)
+      hideTimeoutRef.current = globalThis.setTimeout(() => {
+        hideTimeoutRef.current = null
+        setIsVisible(false)
+      }, TOOLTIP_AUTO_HIDE_MS)
+    }, LONG_PRESS_MS)
+  }, [])
+
+  const handleLongPressEnd = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+      timeoutRef.current = null
+    }
+  }, [])
+
+  // Hide tooltip when touching outside (touch devices)
+  useEffect(() => {
+    if (!isVisible) return
+    const handleDocTouch = (e: TouchEvent) => {
+      const target = e.target as Node
+      if (triggerRef.current?.contains(target) || tooltipRef.current?.contains(target)) return
+      hideTooltip()
+    }
+    document.addEventListener('touchstart', handleDocTouch, { passive: true })
+    return () => document.removeEventListener('touchstart', handleDocTouch)
+  }, [isVisible, hideTooltip])
 
   // Adjust tooltip position if it would go off-screen
   useEffect(() => {
@@ -41,14 +87,13 @@ export default function Tooltip({ content, children, position = 'top', delay = 3
 
     let newPosition = position
 
-    // Check boundaries and adjust
     if (position === 'top' && rect.top < 0) {
       newPosition = 'bottom'
-    } else if (position === 'bottom' && rect.bottom > window.innerHeight) {
+    } else if (position === 'bottom' && rect.bottom > (globalThis.window?.innerHeight ?? 0)) {
       newPosition = 'top'
     } else if (position === 'left' && rect.left < 0) {
       newPosition = 'right'
-    } else if (position === 'right' && rect.right > window.innerWidth) {
+    } else if (position === 'right' && rect.right > (globalThis.window?.innerWidth ?? 0)) {
       newPosition = 'left'
     }
 
@@ -63,6 +108,9 @@ export default function Tooltip({ content, children, position = 'top', delay = 3
       onMouseLeave={hideTooltip}
       onFocus={showTooltip}
       onBlur={hideTooltip}
+      onTouchStart={handleLongPressStart}
+      onTouchEnd={handleLongPressEnd}
+      onTouchCancel={handleLongPressEnd}
     >
       {children}
       {isVisible && (

@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, ReactNode, TouchEvent } from 'react'
+import { ChevronRight } from 'lucide-react'
 import './SwipeableItem.css'
 
 interface SwipeableItemProps {
@@ -104,7 +105,14 @@ export default function SwipeableItem({
           {swipeLeftLabel}
         </div>
       )}
-      <div className="swipeable-content">{children}</div>
+      <div className="swipeable-content">
+        <div className="swipeable-content-inner">{children}</div>
+        {(onSwipeRight || onSwipeLeft) && !disabled && (
+          <span className="swipeable-hint" aria-hidden title="Swipe to complete or delete">
+            <ChevronRight size={16} />
+          </span>
+        )}
+      </div>
     </div>
   )
 }

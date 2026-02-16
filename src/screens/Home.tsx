@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Zap, Rocket, Timer, Link2, ChevronRight, FolderOpen } from 'lucide-react'
+import FirstTimeTutorial, { getTutorialDone } from '../components/FirstTimeTutorial'
 import { loadLastRun, loadPresets } from '../lib/presets'
 import { generateChecklist } from '../lib/generateChecklist'
 import { decodePreset, PRESET_DECODE_MAX_LENGTH } from '../lib/presetShare'
@@ -10,6 +11,7 @@ import { getPirateSettings } from '../lib/pirateSettings'
 import { pirateSpeak } from '../lib/pirateSpeak'
 import EmptyState from '../components/EmptyState'
 import SwipeableItem from '../components/SwipeableItem'
+import Tooltip from '../components/Tooltip'
 import { hapticButtonPress } from '../lib/haptics'
 import { deletePreset } from '../lib/presets'
 import './Home.css'
@@ -20,6 +22,7 @@ export default function Home() {
   const [importError, setImportError] = useState<string | null>(null)
   const [, setTick] = useState(0)
   const [ships, setShips] = useState<typeof import('../data/ships').ships>([])
+  const [showTutorial, setShowTutorial] = useState(false)
   const lastRun = loadLastRun()
   const presets = loadPresets()
   const orgPresets = loadOrgPresets()
@@ -34,6 +37,13 @@ export default function Home() {
   // Lazy load ships
   useEffect(() => {
     import('../data/ships').then(m => setShips(m.ships))
+  }, [])
+
+  // Show first-time tutorial once per install
+  useEffect(() => {
+    if (!getTutorialDone()) {
+      setShowTutorial(true)
+    }
   }, [])
 
   const handleImportPreset = () => {
@@ -70,6 +80,9 @@ export default function Home() {
 
   return (
     <div className="home">
+      {showTutorial && (
+        <FirstTimeTutorial onDismiss={() => setShowTutorial(false)} />
+      )}
       <div className="home-hero">
         <img 
           src="/assets/logo.png" 
@@ -79,17 +92,19 @@ export default function Home() {
         <h1 className="home-title">{pirateSpeak('Pre-Flight Assistant', ps)}</h1>
         <p className="home-tagline">From hangar to hyperspace without the "oh no" moment.</p>
         <div className="home-actions">
-          <button
-            className="home-cta btn-primary"
-            onClick={() => {
-              hapticButtonPress()
-              navigate('/generate')
-            }}
-            aria-label="Start pre-flight checklist"
-          >
-            <Zap size={20} aria-hidden />
-            {pirateSpeak('Start Pre-Flight', ps)}
-          </button>
+          <Tooltip content="Pick a ship and operation to generate your checklist." position="bottom">
+            <button
+              className="home-cta btn-primary"
+              onClick={() => {
+                hapticButtonPress()
+                navigate('/generate')
+              }}
+              aria-label="Start pre-flight checklist"
+            >
+              <Zap size={20} aria-hidden />
+              {pirateSpeak('Start Pre-Flight', ps)}
+            </button>
+          </Tooltip>
           <a
             href="https://github.com/hugsndnugs/I-Swear-I-Packed-It/releases/latest/download/app-release.apk"
             className="home-android-download btn-secondary"
@@ -103,16 +118,18 @@ export default function Home() {
 
       {lastShipName && lastRun && (
         <div className="home-quick-actions">
-          <button
-            className="home-quick btn-secondary"
-            onClick={() =>
-              navigate('/generate', { state: { fromLastRun: true, lastRun } })
-            }
-            aria-label={`Quick-start with ${lastShipName}`}
-          >
-            <Rocket size={18} aria-hidden />
-            {pirateSpeak('Quick-start', ps)}: {lastShipName}
-          </button>
+          <Tooltip content="Generate a new checklist with your last ship and operation." position="bottom">
+            <button
+              className="home-quick btn-secondary"
+              onClick={() =>
+                navigate('/generate', { state: { fromLastRun: true, lastRun } })
+              }
+              aria-label={`Quick-start with ${lastShipName}`}
+            >
+              <Rocket size={18} aria-hidden />
+              {pirateSpeak('Quick-start', ps)}: {lastShipName}
+            </button>
+          </Tooltip>
           <button
             className="home-resume btn-secondary"
             onClick={() => {

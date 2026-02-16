@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { Outlet, useLocation, Link } from 'react-router-dom'
+import { Outlet, useLocation, Link, useNavigate } from 'react-router-dom'
+import { Capacitor } from '@capacitor/core'
+import { App } from '@capacitor/app'
 import Nav from './Nav'
 import ThemeToggle from './ThemeToggle'
 import StorageErrorBanner from './StorageErrorBanner'
@@ -38,6 +40,7 @@ function getPageTitle(pathname: string): string {
 
 export default function Layout() {
   const location = useLocation()
+  const navigate = useNavigate()
   const pageTitle = getPageTitle(location.pathname)
   const [refresh, setRefresh] = useState(0)
   const [drawerOpen, setDrawerOpen] = useState(false)
@@ -46,6 +49,24 @@ export default function Layout() {
   const drawerRef = useRef<HTMLDivElement>(null)
 
   const isDesktop = useMediaQuery(DESKTOP_MEDIA_QUERY)
+
+  // Android back button / gesture: go back in history when possible
+  useEffect(() => {
+    if (!Capacitor.isNativePlatform()) return
+    let handle: { remove: () => Promise<void> } | null = null
+    App.addListener('backButton', () => {
+      if (globalThis.window?.history && globalThis.window.history.length > 1) {
+        navigate(-1)
+      } else {
+        App.exitApp()
+      }
+    }).then((h) => {
+      handle = h
+    })
+    return () => {
+      handle?.remove()
+    }
+  }, [navigate])
   const pirateSettings = getPirateSettings()
   const pirateThemeOn = pirateSettings.theme
 

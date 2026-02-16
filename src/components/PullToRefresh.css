@@ -1,0 +1,25 @@
+.pull-to-refresh {
+  display: block;
+}
+
+.pull-to-refresh-indicator {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  min-height: 48px;
+  padding: var(--space-2) var(--space-4);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.pull-to-refresh-indicator .loading-spinner {
+  width: 24px;
+  height: 24px;
+  border-width: 2px;
+}
+
+.pull-to-refresh-content {
+  transition: transform 0.2s ease-out;
+}

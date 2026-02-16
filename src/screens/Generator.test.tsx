@@ -74,9 +74,11 @@ describe('Generator', () => {
     expect(screen.getByText('Generate Checklist')).toBeInTheDocument()
   })
 
-  it('displays ship selector', () => {
+  it('displays ship selector', async () => {
     renderGenerator()
-    expect(screen.getByLabelText('Select ship')).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByLabelText('Select ship')).toBeInTheDocument()
+    })
     expect(screen.getByLabelText('Search ships')).toBeInTheDocument()
   })
 
@@ -90,9 +92,11 @@ describe('Generator', () => {
     expect(screen.getByText('Medical rescue')).toBeInTheDocument()
   })
 
-  it('displays crew role inputs', () => {
+  it('displays crew role inputs', async () => {
     renderGenerator()
-    expect(screen.getByLabelText('Number of Pilots')).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByLabelText('Number of Pilots')).toBeInTheDocument()
+    })
     expect(screen.getByLabelText('Number of Gunners')).toBeInTheDocument()
     expect(screen.getByLabelText('Number of Medics')).toBeInTheDocument()
   })
@@ -113,22 +117,26 @@ describe('Generator', () => {
 
   it('enables generate button when crew count > 0', async () => {
     renderGenerator()
-    const pilotInput = screen.getByLabelText('Number of Pilots')
+    const pilotInput = await screen.findByLabelText('Number of Pilots')
     pilotInput.setAttribute('value', '1')
     // Note: In a real test, we'd use userEvent to properly trigger React state updates
     // This is a simplified version
   })
 
-  it('displays share preset buttons', () => {
+  it('displays share preset buttons', async () => {
     renderGenerator()
-    expect(screen.getByText('Share preset')).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText('Share preset')).toBeInTheDocument()
+    })
     expect(screen.getByText('Copy link')).toBeInTheDocument()
     expect(screen.getByText('Copy code')).toBeInTheDocument()
     expect(screen.getByText('Share to phone')).toBeInTheDocument()
   })
 
-  it('displays pack list link', () => {
+  it('displays pack list link', async () => {
     renderGenerator()
-    expect(screen.getByText('View Pack List')).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText('View Pack List')).toBeInTheDocument()
+    })
   })
 })
