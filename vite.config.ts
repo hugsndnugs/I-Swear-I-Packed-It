@@ -20,7 +20,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg'],
+      includeAssets: ['favicon.svg', 'assets/logo.png', 'assets/icons/icon-192.png', 'assets/icons/icon-512.png'],
       manifest: {
         name: 'Pre-Flight Assistant',
         short_name: 'PreFlight',
@@ -37,6 +37,18 @@ export default defineConfig({
             sizes: 'any',
             type: 'image/svg+xml',
             purpose: 'any'
+          },
+          {
+            src: 'assets/icons/icon-192.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'any maskable'
+          },
+          {
+            src: 'assets/icons/icon-512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable'
           }
         ]
       },

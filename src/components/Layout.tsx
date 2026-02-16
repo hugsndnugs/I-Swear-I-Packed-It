@@ -12,7 +12,7 @@ import { getPirateSettings, setPirateSettings } from '../lib/pirateSettings'
 import { pirateSpeak } from '../lib/pirateSpeak'
 import { ROUTES } from '../constants/routes'
 import { hapticButtonPress } from '../lib/haptics'
-import { Rocket, Skull, Menu, Settings } from 'lucide-react'
+import { Menu, Settings } from 'lucide-react'
 import './Layout.css'
 
 const NAV_DRAWER_ID = 'nav-drawer'
@@ -149,11 +149,12 @@ export default function Layout() {
           onPointerUp={handleBrandPointerUp}
           onPointerLeave={handleBrandPointerLeave}
         >
-          {pirateThemeOn ? (
-            <Skull size={24} aria-hidden />
-          ) : (
-            <Rocket size={24} aria-hidden />
-          )}
+          <img 
+            src="/assets/logo.png" 
+            alt="Pre-Flight Assistant" 
+            className="layout-brand-logo"
+            aria-hidden="true"
+          />
           <span className="layout-brand-text">Pre-Flight</span>
         </Link>
         <span className="layout-page-title" aria-hidden>

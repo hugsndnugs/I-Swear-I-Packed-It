@@ -71,27 +71,34 @@ export default function Home() {
   return (
     <div className="home">
       <div className="home-hero">
+        <img 
+          src="/assets/logo.png" 
+          alt="Pre-Flight Assistant" 
+          className="home-logo"
+        />
         <h1 className="home-title">{pirateSpeak('Pre-Flight Assistant', ps)}</h1>
         <p className="home-tagline">From hangar to hyperspace without the "oh no" moment.</p>
-        <button
-          className="home-cta btn-primary"
-          onClick={() => {
-            hapticButtonPress()
-            navigate('/generate')
-          }}
-          aria-label="Start pre-flight checklist"
-        >
-          <Zap size={20} aria-hidden />
-          {pirateSpeak('Start Pre-Flight', ps)}
-        </button>
-        <a
-          href="https://github.com/hugsndnugs/I-Swear-I-Packed-It/releases/latest/download/app-release.apk"
-          className="home-android-download btn-secondary"
-          aria-label="Download Android app"
-          download
-        >
-          Download Android App
-        </a>
+        <div className="home-actions">
+          <button
+            className="home-cta btn-primary"
+            onClick={() => {
+              hapticButtonPress()
+              navigate('/generate')
+            }}
+            aria-label="Start pre-flight checklist"
+          >
+            <Zap size={20} aria-hidden />
+            {pirateSpeak('Start Pre-Flight', ps)}
+          </button>
+          <a
+            href="https://github.com/hugsndnugs/I-Swear-I-Packed-It/releases/latest/download/app-release.apk"
+            className="home-android-download btn-secondary"
+            aria-label="Download Android app"
+            download
+          >
+            Download Android App
+          </a>
+        </div>
       </div>
 
       {lastShipName && lastRun && (

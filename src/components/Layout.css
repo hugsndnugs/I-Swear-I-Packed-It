@@ -61,6 +61,13 @@
   color: var(--accent);
 }
 
+.layout-brand-logo {
+  height: 24px;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+}
+
 .layout-brand-text {
   display: none;
 }
