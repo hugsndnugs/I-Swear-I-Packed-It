@@ -13,7 +13,6 @@ import { exportAllData, exportPresets, exportRunHistory, downloadJSON, importFro
 import { checkBiometricAvailability, getBiometricEnabled, setBiometricEnabled, authenticateBiometric } from '../lib/biometric'
 import { getStorageStats, formatBytes, clearPwaCaches, type StorageStats } from '../lib/storageStats'
 import { getBackupTimestamps, restoreBackup } from '../lib/exportImport'
-import { Capacitor } from '@capacitor/core'
 import Tooltip from '../components/Tooltip'
 import './Settings.css'
 
