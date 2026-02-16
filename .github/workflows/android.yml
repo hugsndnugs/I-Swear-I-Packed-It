@@ -42,8 +42,13 @@ jobs:
           chmod +x android/gradlew
           cd android && ./gradlew assembleDebug
 
+      - name: Rename APK
+        run: |
+          cd android/app/build/outputs/apk/debug
+          mv app-debug.apk preflight-apk.apk
+
       - name: Upload APK
         uses: actions/upload-artifact@v6
         with:
-          name: app-debug
-          path: android/app/build/outputs/apk/debug/*.apk
+          name: preflight-apk
+          path: android/app/build/outputs/apk/debug/preflight-apk.apk
