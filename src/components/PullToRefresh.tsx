@@ -22,7 +22,7 @@ export default function PullToRefresh({
   const scrollTopAtStart = useRef(0)
   const containerRef = useRef<HTMLDivElement>(null)
 
-  const timeoutRef = useRef<number | null>(null)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const triggerRefresh = useCallback(async () => {
     if (disabled) return
