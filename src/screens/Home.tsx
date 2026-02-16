@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { Zap, Rocket, Timer, Link2, ChevronRight } from 'lucide-react'
+import { Zap, Rocket, Timer, Link2, ChevronRight, FolderOpen } from 'lucide-react'
 import { loadLastRun, loadPresets } from '../lib/presets'
 import { generateChecklist } from '../lib/generateChecklist'
 import { decodePreset, PRESET_DECODE_MAX_LENGTH } from '../lib/presetShare'
@@ -8,6 +8,8 @@ import { loadOrgPresets } from '../lib/orgPresets'
 import { OPERATION_TYPES } from '../data/contexts'
 import { getPirateSettings } from '../lib/pirateSettings'
 import { pirateSpeak } from '../lib/pirateSpeak'
+import EmptyState from '../components/EmptyState'
+import { hapticButtonPress } from '../lib/haptics'
 import './Home.css'
 
 export default function Home() {
@@ -71,7 +73,10 @@ export default function Home() {
         <p className="home-tagline">From hangar to hyperspace without the "oh no" moment.</p>
         <button
           className="home-cta btn-primary"
-          onClick={() => navigate('/generate')}
+          onClick={() => {
+            hapticButtonPress()
+            navigate('/generate')
+          }}
           aria-label="Start pre-flight checklist"
         >
           <Zap size={20} aria-hidden />
@@ -170,7 +175,7 @@ export default function Home() {
         )}
       </section>
 
-      {presets.length > 0 && (
+      {presets.length > 0 ? (
         <section className="home-presets" aria-label="Saved presets">
           <h2 className="home-presets-title">{pirateSpeak('Presets', ps)}</h2>
           <ul className="home-presets-list">
@@ -206,6 +211,26 @@ export default function Home() {
               )
             })}
           </ul>
+        </section>
+      ) : (
+        <section className="home-presets" aria-label="Saved presets">
+          <h2 className="home-presets-title">{pirateSpeak('Presets', ps)}</h2>
+          <EmptyState
+            icon={<FolderOpen size={48} />}
+            title="No presets saved"
+            description="Save your favorite ship and operation configurations for quick access."
+            action={
+              <button
+                className="btn-secondary"
+                onClick={() => {
+                  hapticButtonPress()
+                  navigate('/generate')
+                }}
+              >
+                Create your first preset
+              </button>
+            }
+          />
         </section>
       )}
 

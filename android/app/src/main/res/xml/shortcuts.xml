@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="start_new_checklist"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/shortcut_start_new"
+        android:shortcutLongLabel="@string/shortcut_start_new_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.preflight.assistant"
+            android:targetClass="com.preflight.assistant.MainActivity"
+            android:data="preflight://generate" />
+    </shortcut>
+    
+    <shortcut
+        android:shortcutId="resume_last_checklist"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/shortcut_resume_last"
+        android:shortcutLongLabel="@string/shortcut_resume_last_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.preflight.assistant"
+            android:targetClass="com.preflight.assistant.MainActivity"
+            android:data="preflight://checklist?resume=true" />
+    </shortcut>
+    
+    <shortcut
+        android:shortcutId="opmode_timer"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/shortcut_opmode"
+        android:shortcutLongLabel="@string/shortcut_opmode_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.preflight.assistant"
+            android:targetClass="com.preflight.assistant.MainActivity"
+            android:data="preflight://op-mode" />
+    </shortcut>
+</shortcuts>

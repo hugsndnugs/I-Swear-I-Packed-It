@@ -90,6 +90,32 @@
   }
 }
 
+.layout-header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.layout-settings-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tap);
+  min-width: var(--tap);
+  height: var(--tap);
+  padding: 0;
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  transition: color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out);
+}
+
+.layout-settings-btn:hover {
+  color: var(--text);
+  background: var(--surface2);
+}
+
 .layout-main {
   flex: 1;
   padding: var(--space-4);

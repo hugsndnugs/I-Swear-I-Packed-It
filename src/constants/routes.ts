@@ -10,6 +10,7 @@ export const ROUTES = {
   EQUIPMENT: '/equipment',
   OP_MODE: '/op-mode',
   PACK: '/pack',
+  SETTINGS: '/settings',
 } as const
 
 export type RoutePath = typeof ROUTES[keyof typeof ROUTES]

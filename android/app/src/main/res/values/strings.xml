@@ -4,4 +4,12 @@
     <string name="title_activity_main">PreFlight</string>
     <string name="package_name">com.preflight.assistant</string>
     <string name="custom_url_scheme">com.preflight.assistant</string>
+    
+    <!-- App shortcuts -->
+    <string name="shortcut_start_new">Start New Checklist</string>
+    <string name="shortcut_start_new_long">Start a new pre-flight checklist</string>
+    <string name="shortcut_resume_last">Resume Last</string>
+    <string name="shortcut_resume_last_long">Resume last checklist</string>
+    <string name="shortcut_opmode">Op Mode Timer</string>
+    <string name="shortcut_opmode_long">Open Op Mode timers</string>
 </resources>

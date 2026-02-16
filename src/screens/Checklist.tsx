@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
-import { CheckCheck, ChevronRight } from 'lucide-react'
+import { CheckCheck, ChevronRight, CheckCircle2, Circle } from 'lucide-react'
 import type { ChecklistSection, ChecklistTask } from '../lib/generateChecklist'
 import ProgressBar from '../components/ProgressBar'
+import CircularProgress from '../components/CircularProgress'
+import BottomSheet from '../components/BottomSheet'
 import {
   savePreset,
   loadChecklistProgress,
@@ -19,6 +21,7 @@ import { pirateSpeak } from '../lib/pirateSpeak'
 import { getChecklistState } from '../lib/locationState'
 import { ROUTES } from '../constants/routes'
 import { getLocationById } from '../data/contexts'
+import { hapticTaskComplete, hapticButtonPress } from '../lib/haptics'
 import './Checklist.css'
 
 export default function Checklist() {
@@ -241,8 +244,14 @@ export default function Checklist() {
   const toggleTask = (id: string) => {
     setCompleted((prev) => {
       const next = new Set(prev)
-      if (next.has(id)) next.delete(id)
-      else next.add(id)
+      const wasCompleted = next.has(id)
+      if (wasCompleted) {
+        next.delete(id)
+      } else {
+        next.add(id)
+        // Trigger haptic feedback when completing a task
+        hapticTaskComplete()
+      }
       return next
     })
   }
@@ -284,7 +293,10 @@ export default function Checklist() {
   return (
     <div className="checklist">
       <div className="checklist-header">
-        <h1 ref={titleRef} className="checklist-title" tabIndex={-1}>Pre-Flight Checklist</h1>
+        <div className="checklist-header-top">
+          <h1 ref={titleRef} className="checklist-title" tabIndex={-1}>Pre-Flight Checklist</h1>
+          <CircularProgress value={completedCount} max={totalCount} size={56} aria-label="Checklist completion percentage" />
+        </div>
         {locationLabel && (
           <p className="checklist-location" aria-label="Location">
             Location: {locationLabel}
@@ -393,7 +405,10 @@ export default function Checklist() {
               <button
                 type="button"
                 className="checklist-mark-all btn-ghost"
-                onClick={() => markSectionComplete(section)}
+                onClick={() => {
+                  hapticButtonPress()
+                  markSectionComplete(section)
+                }}
                 aria-label={`Mark all ${section.label} complete`}
               >
                 <CheckCheck size={18} aria-hidden />
@@ -428,7 +443,10 @@ export default function Checklist() {
           ref={savePresetButtonRef}
           type="button"
           className="checklist-save-preset btn-ghost"
-          onClick={() => setShowSave(true)}
+          onClick={() => {
+            hapticButtonPress()
+            setShowSave(true)
+          }}
           aria-label="Save as preset"
         >
           Save as preset
@@ -488,33 +506,48 @@ export default function Checklist() {
         </div>
       )}
 
-      {showSave && (
-        <div
-          ref={modalRef}
-          className="checklist-save-modal"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="preset-name-label"
-        >
-          <label id="preset-name-label" htmlFor="preset-name">Preset name</label>
-          <input
-            id="preset-name"
-            type="text"
-            value={saveName}
-            onChange={(e) => setSaveName(e.target.value)}
-            placeholder="e.g. C2 Cargo Run"
-            aria-label="Preset name"
-          />
-          <div className="checklist-save-buttons">
-            <button type="button" onClick={closeSaveModal}>
-              Cancel
-            </button>
-            <button type="button" onClick={handleSavePreset} disabled={!saveName.trim()}>
-              Save
-            </button>
-          </div>
+      <BottomSheet
+        isOpen={showSave}
+        onClose={closeSaveModal}
+        title="Save as preset"
+        aria-label="Save preset"
+      >
+        <label id="preset-name-label" htmlFor="preset-name" className="bottom-sheet-label">
+          Preset name
+        </label>
+        <input
+          id="preset-name"
+          type="text"
+          value={saveName}
+          onChange={(e) => setSaveName(e.target.value)}
+          placeholder="e.g. C2 Cargo Run"
+          aria-label="Preset name"
+          className="bottom-sheet-input"
+          autoFocus
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && saveName.trim()) {
+              handleSavePreset()
+            }
+          }}
+        />
+        <div className="bottom-sheet-actions">
+          <button
+            type="button"
+            className="btn-secondary"
+            onClick={closeSaveModal}
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            className="btn-primary"
+            onClick={handleSavePreset}
+            disabled={!saveName.trim()}
+          >
+            Save
+          </button>
         </div>
-      )}
+      </BottomSheet>
     </div>
   )
 }
@@ -538,7 +571,7 @@ function TaskRow({
         aria-pressed={completed}
       >
         <span className="checklist-task-check" aria-hidden>
-          {completed ? '\u2713' : ''}
+          {completed ? <CheckCircle2 size={20} /> : <Circle size={20} />}
         </span>
         <span className="checklist-task-label">{task.label}</span>
       </button>

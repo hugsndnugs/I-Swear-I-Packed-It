@@ -94,6 +94,35 @@
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
+/* High contrast mode */
+[data-high-contrast="on"] {
+  --bg: #000000;
+  --surface: #1a1a1a;
+  --surface2: #2a2a2a;
+  --text: #ffffff;
+  --text-muted: #cccccc;
+  --accent: #00aaff;
+  --accent-hover: #00ccff;
+  --success: #00ff00;
+  --warning: #ffff00;
+  --danger: #ff0000;
+  --shadow-sm: 0 0 0 1px var(--text);
+  --shadow-md: 0 0 0 2px var(--text);
+}
+
+[data-theme="light"][data-high-contrast="on"] {
+  --bg: #ffffff;
+  --surface: #f0f0f0;
+  --surface2: #e0e0e0;
+  --text: #000000;
+  --text-muted: #333333;
+  --accent: #0066cc;
+  --accent-hover: #0055aa;
+  --success: #008800;
+  --warning: #cc8800;
+  --danger: #cc0000;
+}
+
 * {
   box-sizing: border-box;
 }

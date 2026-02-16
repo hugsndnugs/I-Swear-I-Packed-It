@@ -1,4 +1,5 @@
 import { setStorageError } from './storageError'
+import { showNotification, requestNotificationPermission as requestNativePermission, checkNotificationPermission as checkNativePermission } from './notifications'
 
 const STORAGE_KEY = 'preflight-opmode'
 const TICK_MS = 10_000 // check every 10s
@@ -99,17 +100,19 @@ function nextFireTime(state: OpModeState, type: ReminderType): number {
   return base + intervalMin * 60 * 1000
 }
 
-function maybeShowNotification(type: ReminderType, enabled: boolean): void {
-  if (!enabled || typeof Notification === 'undefined' || Notification.permission !== 'granted') return
+async function maybeShowNotification(type: ReminderType, enabled: boolean): Promise<void> {
+  if (!enabled) return
+  
   const messages: Record<ReminderType, string> = {
     restock: 'Time to restock supplies.',
     hydrate: 'Time to hydrate.',
     refuel: 'Time to refuel.'
   }
-  new Notification('Pre-Flight', { body: messages[type] })
+  
+  await showNotification('Pre-Flight', messages[type], 'opmode')
 }
 
-function tick(): void {
+async function tick(): Promise<void> {
   const state = loadRaw()
   if (!state || !onFire) return
   const now = Date.now()
@@ -122,7 +125,7 @@ function tick(): void {
       nextLastFired[type] = now
       updated = true
       onFire(type)
-      maybeShowNotification(type, state.notificationsEnabled === true)
+      await maybeShowNotification(type, state.notificationsEnabled === true)
     }
   }
   if (updated) {
@@ -204,9 +207,9 @@ export function setOnReminderFire(callback: ((type: ReminderType) => void) | nul
   onFire = callback
 }
 
-export function requestNotificationPermission(): Promise<NotificationPermission> {
-  if (typeof Notification === 'undefined') return Promise.resolve('denied')
-  return Notification.requestPermission()
+export async function requestNotificationPermission(): Promise<'granted' | 'denied' | 'default'> {
+  const granted = await requestNativePermission()
+  return granted ? 'granted' : 'denied'
 }
 
 export function getDefaultIntervals(): OpModeIntervals {

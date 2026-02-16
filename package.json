@@ -22,6 +22,8 @@
     "@capacitor/android": "^7.0.0",
     "@capacitor/cli": "^7.0.0",
     "@capacitor/core": "^7.0.0",
+    "@capacitor/haptics": "^7.0.0",
+    "@capacitor/local-notifications": "^7.0.0",
     "discord-interactions": "^4.4.0",
     "lucide-react": "^0.564.0",
     "qrcode": "^1.5.4",

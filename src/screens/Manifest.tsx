@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Plus } from 'lucide-react'
+import { Plus, Package } from 'lucide-react'
 import CollapsibleSection from '../components/CollapsibleSection'
+import EmptyState from '../components/EmptyState'
 import type { CargoManifestEntry } from '../data/commodities'
 import { validateManifest, type ManifestValidationReport } from '../lib/validateManifest'
 import { loadLastManifest, saveLastManifest } from '../lib/presets'
@@ -213,7 +214,17 @@ export default function Manifest() {
       </div>
 
       {rows.length === 0 ? (
-        <p className="manifest-empty">No cargo added. Add rows to build your manifest and validate tools and capacity.</p>
+        <EmptyState
+          icon={<Package size={48} />}
+          title="No cargo added"
+          description="Add cargo rows to build your manifest and validate tools and capacity."
+          action={
+            <button type="button" className="btn-primary" onClick={addRow}>
+              <Plus size={18} aria-hidden />
+              Add first cargo row
+            </button>
+          }
+        />
       ) : (
         <ul className="manifest-rows" aria-label="Cargo entries">
           {rows.map((row) => {

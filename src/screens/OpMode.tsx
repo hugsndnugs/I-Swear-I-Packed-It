@@ -14,6 +14,8 @@ import {
   type OpModeIntervals,
   type NextReminder
 } from '../lib/opModeTimers'
+import { initializeNotificationChannels } from '../lib/notifications'
+import { hapticButtonPress } from '../lib/haptics'
 import './OpMode.css'
 
 const INTERVAL_OPTIONS = [
@@ -41,6 +43,11 @@ export default function OpMode() {
   const [liveAnnounce, setLiveAnnounce] = useState<string | null>(null)
   const [notificationError, setNotificationError] = useState<string | null>(null)
 
+  // Initialize notification channels on mount
+  useEffect(() => {
+    initializeNotificationChannels()
+  }, [])
+
   useEffect(() => {
     if (state) {
       resumeOpMode()
@@ -66,12 +73,14 @@ export default function OpMode() {
   }, [liveAnnounce])
 
   const handleStart = useCallback(() => {
+    hapticButtonPress()
     const next = startOpMode(intervals, { notificationsEnabled })
     setState(next)
     setReminders(getNextReminders())
   }, [intervals, notificationsEnabled])
 
   const handleStop = useCallback(() => {
+    hapticButtonPress()
     stopOpMode()
     setState(null)
     setReminders([])

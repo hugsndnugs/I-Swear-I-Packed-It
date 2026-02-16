@@ -11,7 +11,8 @@ import { DESKTOP_MEDIA_QUERY } from '../constants/breakpoints'
 import { getPirateSettings, setPirateSettings } from '../lib/pirateSettings'
 import { pirateSpeak } from '../lib/pirateSpeak'
 import { ROUTES } from '../constants/routes'
-import { Rocket, Skull, Menu } from 'lucide-react'
+import { hapticButtonPress } from '../lib/haptics'
+import { Rocket, Skull, Menu, Settings } from 'lucide-react'
 import './Layout.css'
 
 const NAV_DRAWER_ID = 'nav-drawer'
@@ -158,7 +159,17 @@ export default function Layout() {
         <span className="layout-page-title" aria-hidden>
           {pirateSpeak(pageTitle, pirateSettings.pirateSpeak)}
         </span>
-        <ThemeToggle />
+        <div className="layout-header-actions">
+          <Link
+            to={ROUTES.SETTINGS}
+            className="layout-settings-btn btn-icon"
+            aria-label="Settings"
+            onClick={() => hapticButtonPress()}
+          >
+            <Settings size={20} aria-hidden />
+          </Link>
+          <ThemeToggle />
+        </div>
       </header>
       <main className="layout-main">
         <StorageErrorBanner />
