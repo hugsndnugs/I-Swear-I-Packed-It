@@ -19,6 +19,9 @@ export default function Nav() {
       <NavLink to="/equipment" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
         Equipment
       </NavLink>
+      <NavLink to="/op-mode" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
+        Op Mode
+      </NavLink>
     </nav>
   )
 }

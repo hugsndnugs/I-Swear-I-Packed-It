@@ -1,0 +1,151 @@
+.opmode {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.opmode-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.opmode-tagline {
+  color: var(--text-muted);
+  margin: 0;
+  font-size: 1rem;
+}
+
+.opmode-status {
+  padding: 16px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--surface2);
+}
+
+.opmode-live {
+  margin: 0 0 8px 0;
+  font-size: 0.875rem;
+  color: var(--accent);
+}
+
+.opmode-next {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.opmode-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.opmode-item {
+  min-height: var(--tap);
+  padding: 12px 16px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.opmode-item-label {
+  font-weight: 500;
+}
+
+.opmode-item-time {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.opmode-intervals {
+  padding: 16px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--surface2);
+}
+
+.opmode-section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  color: var(--text-muted);
+}
+
+.opmode-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.opmode-row:last-child {
+  margin-bottom: 0;
+}
+
+.opmode-label {
+  flex: 0 0 80px;
+  font-weight: 500;
+}
+
+.opmode-row select {
+  flex: 1;
+  min-height: var(--tap);
+  padding: 10px 14px;
+  background: var(--bg);
+  border: 1px solid var(--surface2);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.opmode-row select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.opmode-notify {
+  margin-bottom: 0;
+}
+
+.opmode-notify input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent);
+}
+
+.opmode-notify label {
+  flex: 1;
+  cursor: pointer;
+}
+
+.opmode-start {
+  min-height: var(--tap);
+  padding: 16px 24px;
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 600;
+  border-radius: var(--radius);
+  font-size: 1.1rem;
+}
+
+.opmode-start:hover {
+  background: var(--accent-hover);
+}
+
+.opmode-stop {
+  min-height: var(--tap);
+  padding: 14px 20px;
+  background: var(--danger);
+  color: white;
+  font-weight: 600;
+  border-radius: var(--radius);
+}
+
+.opmode-stop:hover {
+  filter: brightness(1.1);
+}

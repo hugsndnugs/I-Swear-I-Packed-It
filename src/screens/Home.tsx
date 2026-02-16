@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { loadLastRun, loadPresets } from '../lib/presets'
 import { generateChecklist } from '../lib/generateChecklist'
 import { decodePreset } from '../lib/presetShare'
@@ -89,6 +89,14 @@ export default function Home() {
           </button>
         </>
       )}
+
+      <Link
+        to="/op-mode"
+        className="home-opmode"
+        aria-label="Open Op Mode timers for restock, hydrate, refuel reminders"
+      >
+        Op Mode — Start timers
+      </Link>
 
       <section className="home-import" aria-label="Import shared preset">
         <h2 className="home-import-title">Import shared preset</h2>

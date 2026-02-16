@@ -6,6 +6,7 @@ import Generator from './screens/Generator'
 import Checklist from './screens/Checklist'
 import Equipment from './screens/Equipment'
 import Manifest from './screens/Manifest'
+import OpMode from './screens/OpMode'
 
 const PackList = lazy(() => import('./screens/PackList'))
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/checklist" element={<Checklist />} />
         <Route path="/manifest" element={<Manifest />} />
         <Route path="/equipment" element={<Equipment />} />
+        <Route path="/op-mode" element={<OpMode />} />
         <Route
           path="/pack"
           element={

@@ -56,6 +56,23 @@
   background: var(--surface);
 }
 
+.home-opmode {
+  min-height: var(--tap);
+  padding: 14px 20px;
+  background: var(--surface2);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.home-opmode:hover {
+  background: var(--surface);
+}
+
 .home-import {
   padding: 16px;
   background: var(--surface);
