@@ -1,5 +1,5 @@
-# Optional: refresh "best routes" from data/best-routes.json (or PREFLIGHT_ROUTES_URL).
-# Runs on the first day of each month. To use a remote list, set PREFLIGHT_ROUTES_URL in repo secrets.
+# Optional: refresh top 100 profitable routes from UEX Corp API.
+# Runs on the first day of each month. Set UEX_API_TOKEN in repo secrets to fetch; otherwise uses existing data/top-100-routes.json.
 
 name: Update routes
 
@@ -24,16 +24,15 @@ jobs:
           cache: "npm"
 
       - name: Update routes
-        run: npm run update:routes
+        run: npm run fetch:top-routes
         env:
-          PREFLIGHT_ROUTES_URL: ${{ secrets.PREFLIGHT_ROUTES_URL }}
           UEX_API_TOKEN: ${{ secrets.UEX_API_TOKEN }}
 
       - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add src/data/routes.generated.ts
-          git diff --staged --quiet || (git commit -m "chore: update best routes" && git push)
+          git add src/data/routes.generated.ts data/top-100-routes.json
+          git diff --staged --quiet || (git commit -m "chore: update top 100 routes" && git push)
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
