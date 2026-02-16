@@ -179,10 +179,15 @@
   align-items: center;
 }
 
+.checklist-back-generator,
 .checklist-save-preset {
   padding: 12px 16px;
   color: var(--accent);
   font-weight: 500;
+}
+
+.checklist-back-generator:hover {
+  text-decoration: underline;
 }
 
 .checklist-save-preset:hover {

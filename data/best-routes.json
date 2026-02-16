@@ -1,0 +1,5 @@
+[
+  { "id": "stanton-loop", "label": "Stanton loop", "longHaul": true },
+  { "id": "lyria-mining", "label": "Lyria mining run" },
+  { "id": "city-trade", "label": "City trade route" }
+]

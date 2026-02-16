@@ -28,6 +28,13 @@ jobs:
       - name: Install
         run: npm ci
 
+      - name: Test
+        run: npm run test
+
+      - name: Audit
+        run: npm audit --omit=dev
+        continue-on-error: true
+
       - name: Build
         run: npm run build:ci
         env:

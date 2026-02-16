@@ -287,6 +287,14 @@ export default function Checklist() {
 
       <div className="checklist-actions">
         <button
+          type="button"
+          className="checklist-back-generator"
+          onClick={() => navigate('/generate')}
+          aria-label="Back to Generator"
+        >
+          Back to Generator
+        </button>
+        <button
           ref={savePresetButtonRef}
           type="button"
           className="checklist-save-preset"

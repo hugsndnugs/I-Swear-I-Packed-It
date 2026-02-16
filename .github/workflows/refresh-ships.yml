@@ -1,0 +1,44 @@
+# Optional: refresh ship data from API and commit if changed.
+# Enable by uncommenting the job and adding a token with repo write (e.g. GH_TOKEN or PAT).
+# Schedule: weekly (Monday 00:00 UTC).
+
+name: Refresh ships
+
+on:
+  schedule:
+    - cron: "0 0 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install
+        run: npm ci
+
+      - name: Fetch ships
+        run: node scripts/fetch-ships-api.mjs
+        env:
+          PREFLIGHT_API_SKIP_CACHE: "1"
+          PREFLIGHT_FLIGHT_READY_ONLY: "1"
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/ships.generated.ts
+          git diff --staged --quiet || (git commit -m "chore: refresh ships from API" && git push)
+        env:
+          # Use a PAT with repo write as GH_TOKEN secret to allow push from scheduled run.
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}

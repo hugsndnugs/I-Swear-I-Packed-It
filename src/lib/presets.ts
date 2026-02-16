@@ -4,6 +4,7 @@ import {
   OPERATION_TYPES,
   CREW_ROLES
 } from '../data/contexts'
+import { setStorageError } from './storageError'
 
 export interface PresetConfig {
   id: string
@@ -69,13 +70,23 @@ export function savePreset(preset: Omit<PresetConfig, 'id' | 'createdAt'>): Pres
     createdAt: Date.now()
   }
   presets.push(full)
-  localStorage.setItem(PRESETS_KEY, JSON.stringify(presets))
+  try {
+    localStorage.setItem(PRESETS_KEY, JSON.stringify(presets))
+    setStorageError(null)
+  } catch {
+    setStorageError('Could not save; check storage or use in normal browsing mode.')
+  }
   return full
 }
 
 export function deletePreset(id: string): void {
   const presets = loadPresets().filter((p) => p.id !== id)
-  localStorage.setItem(PRESETS_KEY, JSON.stringify(presets))
+  try {
+    localStorage.setItem(PRESETS_KEY, JSON.stringify(presets))
+    setStorageError(null)
+  } catch {
+    setStorageError('Could not save; check storage or use in normal browsing mode.')
+  }
 }
 
 export interface LastRunConfig {
@@ -110,7 +121,12 @@ export function loadLastRun(): LastRunConfig | null {
 }
 
 export function saveLastRun(config: LastRunConfig): void {
-  localStorage.setItem(LAST_RUN_KEY, JSON.stringify(config))
+  try {
+    localStorage.setItem(LAST_RUN_KEY, JSON.stringify(config))
+    setStorageError(null)
+  } catch {
+    setStorageError('Could not save; check storage or use in normal browsing mode.')
+  }
 }
 
 const CHECKLIST_PROGRESS_KEY = 'preflight-checklist-progress'
@@ -158,7 +174,12 @@ export function loadChecklistProgress(): ChecklistProgress | null {
 }
 
 export function saveChecklistProgress(data: ChecklistProgress): void {
-  localStorage.setItem(CHECKLIST_PROGRESS_KEY, JSON.stringify(data))
+  try {
+    localStorage.setItem(CHECKLIST_PROGRESS_KEY, JSON.stringify(data))
+    setStorageError(null)
+  } catch {
+    setStorageError('Could not save; check storage or use in normal browsing mode.')
+  }
 }
 
 const LAST_MANIFEST_KEY = 'preflight-last-manifest'
@@ -198,5 +219,10 @@ export function loadLastManifest(): LastManifestConfig | null {
 }
 
 export function saveLastManifest(config: LastManifestConfig): void {
-  localStorage.setItem(LAST_MANIFEST_KEY, JSON.stringify(config))
+  try {
+    localStorage.setItem(LAST_MANIFEST_KEY, JSON.stringify(config))
+    setStorageError(null)
+  } catch {
+    setStorageError('Could not save; check storage or use in normal browsing mode.')
+  }
 }

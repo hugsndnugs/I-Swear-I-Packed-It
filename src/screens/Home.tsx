@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { loadLastRun, loadPresets } from '../lib/presets'
 import { generateChecklist } from '../lib/generateChecklist'
-import { decodePreset } from '../lib/presetShare'
+import { decodePreset, PRESET_DECODE_MAX_LENGTH } from '../lib/presetShare'
 import { ships } from '../data/ships'
 import { OPERATION_TYPES } from '../data/contexts'
 import './Home.css'
@@ -18,6 +18,10 @@ export default function Home() {
     const raw = importCode.trim()
     if (!raw) return
     setImportError(null)
+    if (raw.length > PRESET_DECODE_MAX_LENGTH) {
+      setImportError('Code or link too long.')
+      return
+    }
     let payload = decodePreset(raw)
     if (!payload) {
       try {

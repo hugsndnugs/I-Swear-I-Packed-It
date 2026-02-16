@@ -1,5 +1,6 @@
 import type { OperationType, CrewRole } from '../data/contexts'
 import { tasks } from '../data/tasks'
+import { setStorageError } from './storageError'
 
 const RUN_HISTORY_KEY = 'preflight-run-history'
 const MAX_RUNS = 50
@@ -41,7 +42,12 @@ function loadRunHistory(): RunSummary[] {
 }
 
 function saveRunHistory(runs: RunSummary[]): void {
-  localStorage.setItem(RUN_HISTORY_KEY, JSON.stringify(runs))
+  try {
+    localStorage.setItem(RUN_HISTORY_KEY, JSON.stringify(runs))
+    setStorageError(null)
+  } catch {
+    setStorageError('Could not save; check storage or use in normal browsing mode.')
+  }
 }
 
 /**

@@ -1,3 +1,5 @@
+import { setStorageError } from './storageError'
+
 const STORAGE_KEY = 'preflight-opmode'
 const TICK_MS = 10_000 // check every 10s
 
@@ -78,8 +80,9 @@ function loadRaw(): OpModeState | null {
 function persist(state: OpModeState): void {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
+    setStorageError(null)
   } catch {
-    /* ignore */
+    setStorageError('Could not save; check storage or use in normal browsing mode.')
   }
 }
 

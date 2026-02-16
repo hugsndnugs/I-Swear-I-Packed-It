@@ -33,6 +33,28 @@
   max-width: 120px;
 }
 
+.generator-ship-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.generator-ship-row .generator-select {
+  flex: 1;
+}
+
+.generator-favorite-btn {
+  min-width: var(--tap);
+  min-height: var(--tap);
+  padding: 0;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+}
+
+.generator-favorite-btn:hover {
+  color: var(--accent);
+}
+
 .generator-chips {
   display: flex;
   flex-wrap: wrap;

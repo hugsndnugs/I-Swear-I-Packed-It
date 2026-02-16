@@ -46,8 +46,12 @@ export function encodePreset(payload: SharedPresetPayload): string {
   return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
 }
 
+/** Maximum length for preset code/URL param to avoid client-side DoS (8 KB). */
+export const PRESET_DECODE_MAX_LENGTH = 8192
+
 /** Decode a base64url string to payload, or null if invalid. */
 export function decodePreset(encoded: string): SharedPresetPayload | null {
+  if (encoded.length > PRESET_DECODE_MAX_LENGTH) return null
   try {
     const base64 = encoded.replace(/-/g, '+').replace(/_/g, '/')
     const padded = base64 + '='.repeat((4 - (base64.length % 4)) % 4)

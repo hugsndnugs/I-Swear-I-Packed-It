@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { useLocation } from 'react-router-dom'
+import { loadLastRun } from '../lib/presets'
 import { getLoadoutForRoles, LOADOUT_CATEGORY_LABELS } from '../data/loadouts'
 import type { CrewRole } from '../data/contexts'
 import type { PackListLocationState } from '../types/navigation'
@@ -10,7 +11,8 @@ const DEFAULT_ROLES: CrewRole[] = ['pilot']
 export default function PackList() {
   const location = useLocation()
   const state = location.state as PackListLocationState | null
-  const crewRoles = state?.crewRoles ?? DEFAULT_ROLES
+  const lastRun = loadLastRun()
+  const crewRoles = state?.crewRoles ?? lastRun?.crewRoles ?? DEFAULT_ROLES
 
   const loadout = useMemo(() => getLoadoutForRoles(crewRoles), [crewRoles])
 
@@ -25,7 +27,7 @@ export default function PackList() {
     return order.filter((c) => map.has(c)).map((cat) => ({ category: cat, items: map.get(cat)! }))
   }, [loadout])
 
-  const usingDefaultRoles = !state?.crewRoles || state.crewRoles.length === 0
+  const usingDefaultRoles = crewRoles.length === 1 && crewRoles[0] === 'pilot' && !state?.crewRoles
 
   return (
     <div className="packlist">

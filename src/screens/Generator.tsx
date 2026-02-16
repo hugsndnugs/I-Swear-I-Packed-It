@@ -4,6 +4,13 @@ import { ships } from '../data/ships'
 import { OPERATION_TYPES, CREW_ROLES, type OperationType, type CrewRole } from '../data/contexts'
 import { generateChecklist } from '../lib/generateChecklist'
 import { saveLastRun } from '../lib/presets'
+import {
+  pushRecentShip,
+  getRecentShipIds,
+  getFavoriteShipIds,
+  toggleFavorite,
+  isFavorite
+} from '../lib/shipPreferences'
 import { getContextWarnings } from '../lib/contextWarnings'
 import {
   getPresetFromSearchParams,
@@ -35,6 +42,7 @@ export default function Generator() {
   const [shareCopied, setShareCopied] = useState<'link' | 'code' | null>(null)
   const [showQr, setShowQr] = useState(false)
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null)
+  const [prefsTick, setPrefsTick] = useState(0)
 
   const sharedPayload: SharedPresetPayload = useMemo(
     () => ({ shipId, operationType, crewCount, crewRoles }),
@@ -73,12 +81,26 @@ export default function Generator() {
     })
   }, [shipSearch, flightReadyOnly])
 
+  const favoriteIds = useMemo(() => getFavoriteShipIds(), [prefsTick])
+  const recentIds = useMemo(() => getRecentShipIds(), [prefsTick])
+
   const shipOptions = useMemo(() => {
     const selected = ships.find((s) => s.id === shipId)
-    if (!selected) return filteredShips
-    if (filteredShips.some((s) => s.id === shipId)) return filteredShips
-    return [selected, ...filteredShips]
-  }, [filteredShips, shipId])
+    const inFiltered = (s: (typeof ships)[0]) => filteredShips.some((f) => f.id === s.id)
+    const favShips = favoriteIds
+      .map((id) => ships.find((s) => s.id === id))
+      .filter((s): s is (typeof ships)[0] => !!s && inFiltered(s))
+    const recentShips = recentIds
+      .filter((id) => !favoriteIds.includes(id))
+      .map((id) => ships.find((s) => s.id === id))
+      .filter((s): s is (typeof ships)[0] => !!s && inFiltered(s))
+    const rest = filteredShips.filter(
+      (s) => !favoriteIds.includes(s.id) && !recentIds.includes(s.id)
+    )
+    const needSelected = selected && !filteredShips.some((s) => s.id === shipId)
+    const shipsGroupOptions = needSelected ? [selected, ...filteredShips] : rest
+    return { favShips, recentShips, shipsGroupOptions }
+  }, [filteredShips, shipId, favoriteIds, recentIds])
 
   const toggleRole = (role: CrewRole) => {
     setCrewRoles((prev) =>
@@ -95,11 +117,17 @@ export default function Generator() {
   const frequentlyMissed = useMemo(() => getFrequentlyMissedTaskIds(3), [])
 
   const handleGenerate = () => {
+    pushRecentShip(shipId)
     const checklist: GeneratedChecklist = generateChecklist(shipId, operationType, crewRoles)
     saveLastRun({ shipId, operationType, crewCount, crewRoles })
     navigate('/checklist', {
       state: { checklist, shipId, operationType, crewRoles, contextWarnings }
     })
+  }
+
+  const handleToggleFavorite = () => {
+    toggleFavorite(shipId)
+    setPrefsTick((t) => t + 1)
   }
 
   const copyShareLink = async () => {
@@ -141,20 +169,53 @@ export default function Generator() {
         />
         <span>Flight ready only</span>
       </label>
-      <select
-        id="ship-picker"
-        className="generator-select"
-        value={shipId}
-        onChange={(e) => setShipId(e.target.value)}
-        aria-label="Select ship"
-      >
-        {shipOptions.map((s) => (
-          <option key={s.id} value={s.id}>
-            {s.name}
-            {s.manufacturer ? ` · ${s.manufacturer}` : ''}
-          </option>
-        ))}
-      </select>
+      <div className="generator-ship-row">
+        <select
+          id="ship-picker"
+          className="generator-select"
+          value={shipId}
+          onChange={(e) => setShipId(e.target.value)}
+          aria-label="Select ship"
+        >
+          {shipOptions.favShips.length > 0 && (
+            <optgroup label="Favorites">
+              {shipOptions.favShips.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.name}
+                  {s.manufacturer ? ` · ${s.manufacturer}` : ''}
+                </option>
+              ))}
+            </optgroup>
+          )}
+          {shipOptions.recentShips.length > 0 && (
+            <optgroup label="Recent">
+              {shipOptions.recentShips.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.name}
+                  {s.manufacturer ? ` · ${s.manufacturer}` : ''}
+                </option>
+              ))}
+            </optgroup>
+          )}
+          <optgroup label="Ships">
+            {shipOptions.shipsGroupOptions.map((s) => (
+              <option key={s.id} value={s.id}>
+                {s.name}
+                {s.manufacturer ? ` · ${s.manufacturer}` : ''}
+              </option>
+            ))}
+          </optgroup>
+        </select>
+        <button
+          type="button"
+          className="generator-favorite-btn"
+          onClick={handleToggleFavorite}
+          aria-label={isFavorite(shipId) ? 'Remove from favorites' : 'Add to favorites'}
+          title={isFavorite(shipId) ? 'Remove from favorites' : 'Add to favorites'}
+        >
+          {isFavorite(shipId) ? '★' : '☆'}
+        </button>
+      </div>
 
       <label className="generator-label">Operation type</label>
       <div className="generator-chips" role="group" aria-label="Operation type">
