@@ -1060,6 +1060,20 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 96
   },
   {
+    "id": "moth",
+    "name": "MOTH",
+    "roles": [
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Argo Astronautics",
+    "size": "medium",
+    "status": "flight-ready",
+    "crewMin": 3,
+    "crewMax": 3,
+    "cargoScu": 224
+  },
+  {
     "id": "mpuv-cargo",
     "name": "MPUV Cargo",
     "roles": [
