@@ -620,7 +620,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 2
+    "cargoScu": 0
   },
   {
     "id": "f7c-hornet-mk-ii",
@@ -648,7 +648,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 2
+    "cargoScu": 0
   },
   {
     "id": "f7c-m-hornet-heartseeker-mk-i",
@@ -1015,7 +1015,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 5,
     "crewMax": 5,
-    "cargoScu": 96
+    "cargoScu": 32
   },
   {
     "id": "mole-carbon",
@@ -1057,7 +1057,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 5,
     "crewMax": 5,
-    "cargoScu": 96
+    "cargoScu": 32
   },
   {
     "id": "moth",
@@ -1516,6 +1516,20 @@ export const shipsGenerated: ShipProfile[] = [
     "crewMin": 1,
     "crewMax": 1,
     "cargoScu": 0
+  },
+  {
+    "id": "caterpillar",
+    "name": "Caterpillar",
+    "roles": [
+      "cargo"
+    ],
+    "storageBehavior": "ship",
+    "manufacturer": "Drake Interplanetary",
+    "size": "large",
+    "status": "flight-ready",
+    "crewMin": 1,
+    "crewMax": 1,
+    "cargoScu": 576
   },
   {
     "id": "caterpillar",
@@ -2611,7 +2625,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 12
+    "cargoScu": 8
   },
   {
     "id": "315p",
@@ -2887,8 +2901,23 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "aurora-cl",
-    "name": "Aurora CL",
+    "id": "apollo-triage-wikelo-sneak-special",
+    "name": "Apollo Triage Wikelo Sneak Special",
+    "roles": [
+      "medical",
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Roberts Space Industries",
+    "size": "large",
+    "status": "flight-ready",
+    "crewMin": 2,
+    "crewMax": 2,
+    "cargoScu": 32
+  },
+  {
+    "id": "aurora-mk-i-cl",
+    "name": "Aurora Mk I CL",
     "roles": [
       "cargo"
     ],
@@ -2901,8 +2930,8 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 6
   },
   {
-    "id": "aurora-es",
-    "name": "Aurora ES",
+    "id": "aurora-mk-i-es",
+    "name": "Aurora Mk I ES",
     "roles": [
       "cargo"
     ],
@@ -2915,8 +2944,23 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 3
   },
   {
-    "id": "aurora-ln",
-    "name": "Aurora LN",
+    "id": "aurora-mk-ii",
+    "name": "Aurora Mk II",
+    "roles": [
+      "cargo",
+      "combat"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Roberts Space Industries",
+    "size": "small",
+    "status": "flight-ready",
+    "crewMin": 1,
+    "crewMax": 1,
+    "cargoScu": 2
+  },
+  {
+    "id": "aurora-mk-i-ln",
+    "name": "Aurora Mk I LN",
     "roles": [
       "cargo",
       "combat"
@@ -2930,8 +2974,8 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 3
   },
   {
-    "id": "aurora-lx",
-    "name": "Aurora LX",
+    "id": "aurora-mk-i-lx",
+    "name": "Aurora Mk I LX",
     "roles": [
       "cargo"
     ],
@@ -2944,8 +2988,8 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 3
   },
   {
-    "id": "aurora-mr",
-    "name": "Aurora MR",
+    "id": "aurora-mk-i-mr",
+    "name": "Aurora Mk I MR",
     "roles": [
       "cargo",
       "combat"
@@ -2957,6 +3001,21 @@ export const shipsGenerated: ShipProfile[] = [
     "crewMin": 1,
     "crewMax": 1,
     "cargoScu": 3
+  },
+  {
+    "id": "aurora-mk-i-se",
+    "name": "Aurora Mk I SE",
+    "roles": [
+      "cargo",
+      "combat"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Roberts Space Industries",
+    "size": "small",
+    "status": "flight-ready",
+    "crewMin": 1,
+    "crewMax": 1,
+    "cargoScu": 6
   },
   {
     "id": "constellation-andromeda",
@@ -2999,7 +3058,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 176
+    "cargoScu": 80
   },
   {
     "id": "constellation-phoenix-emerald",
@@ -3027,7 +3086,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 270
+    "cargoScu": 174
   },
   {
     "id": "constellation-taurus-wikelo-war-special",
@@ -3041,7 +3100,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 270
+    "cargoScu": 174
   },
   {
     "id": "hermes",
