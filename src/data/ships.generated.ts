@@ -2376,6 +2376,21 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 64
   },
   {
+    "id": "hull-b",
+    "name": "Hull B",
+    "roles": [
+      "cargo",
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Musashi Industrial & Starflight Concern",
+    "size": "medium",
+    "status": "flight-ready",
+    "crewMin": 2,
+    "crewMax": 2,
+    "cargoScu": 512
+  },
+  {
     "id": "hull-c",
     "name": "Hull C",
     "roles": [
