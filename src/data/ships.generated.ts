@@ -4,7 +4,7 @@ import type { ShipProfile } from './shipTypes'
 
 export const shipsGenerated: ShipProfile[] = [
   {
-    "id": "avenger-stalker",
+    "id": "aegs-avenger-stalker",
     "name": "Avenger Stalker",
     "roles": [
       "combat"
@@ -18,7 +18,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "avenger-titan",
+    "id": "aegs-avenger-titan",
     "name": "Avenger Titan",
     "roles": [
       "cargo"
@@ -32,7 +32,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 8
   },
   {
-    "id": "avenger-titan-renegade",
+    "id": "aegs-avenger-titan-renegade",
     "name": "Avenger Titan Renegade",
     "roles": [
       "cargo"
@@ -46,7 +46,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 8
   },
   {
-    "id": "avenger-warlock",
+    "id": "aegs-avenger-warlock",
     "name": "Avenger Warlock",
     "roles": [
       "combat"
@@ -60,7 +60,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "eclipse",
+    "id": "aegs-eclipse-bis2950",
     "name": "Eclipse",
     "roles": [
       "combat"
@@ -74,7 +74,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "eclipse",
+    "id": "aegs-eclipse",
     "name": "Eclipse",
     "roles": [
       "combat"
@@ -88,7 +88,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "gladius",
+    "id": "aegs-gladius",
     "name": "Gladius",
     "roles": [
       "combat"
@@ -102,7 +102,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "gladius-dunlevy",
+    "id": "aegs-gladius-dunlevy",
     "name": "Gladius Dunlevy",
     "roles": [
       "combat"
@@ -116,7 +116,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "gladius-pirate",
+    "id": "aegs-gladius-pir",
     "name": "Gladius Pirate",
     "roles": [
       "combat"
@@ -130,7 +130,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "gladius-valiant",
+    "id": "aegs-gladius-valiant",
     "name": "Gladius Valiant",
     "roles": [
       "combat"
@@ -144,7 +144,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "hammerhead",
+    "id": "aegs-hammerhead",
     "name": "Hammerhead",
     "roles": [
       "combat",
@@ -159,7 +159,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 40
   },
   {
-    "id": "hammerhead-2949-best-in-show-edition",
+    "id": "aegs-hammerhead-showdown",
     "name": "Hammerhead 2949 Best In Show Edition",
     "roles": [
       "combat",
@@ -174,7 +174,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 40
   },
   {
-    "id": "idris-m",
+    "id": "aegs-idris-m",
     "name": "Idris-M",
     "roles": [
       "combat"
@@ -188,7 +188,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 1326
   },
   {
-    "id": "idris-p",
+    "id": "aegs-idris-p",
     "name": "Idris-P",
     "roles": [
       "combat"
@@ -202,7 +202,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 1374
   },
   {
-    "id": "idris-p",
+    "id": "aegs-idris-p-fw-25",
     "name": "Idris-P",
     "roles": [
       "combat"
@@ -216,7 +216,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 1374
   },
   {
-    "id": "idris-p-wikelo-war-special",
+    "id": "aegs-idris-p-collector-military",
     "name": "Idris-P Wikelo War Special",
     "roles": [
       "combat"
@@ -230,7 +230,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 1374
   },
   {
-    "id": "reclaimer",
+    "id": "aegs-reclaimer",
     "name": "Reclaimer",
     "roles": [
       "cargo"
@@ -244,7 +244,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 420
   },
   {
-    "id": "reclaimer-2949-best-in-show-edition",
+    "id": "aegs-reclaimer-showdown",
     "name": "Reclaimer 2949 Best In Show Edition",
     "roles": [
       "cargo"
@@ -258,7 +258,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 420
   },
   {
-    "id": "reclaimer-teachs-special",
+    "id": "aegs-reclaimer-teach",
     "name": "Reclaimer Teach's Special",
     "roles": [
       "cargo"
@@ -272,7 +272,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 420
   },
   {
-    "id": "redeemer",
+    "id": "aegs-redeemer",
     "name": "Redeemer",
     "roles": [
       "combat",
@@ -287,7 +287,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 2
   },
   {
-    "id": "retaliator",
+    "id": "aegs-retaliator",
     "name": "Retaliator",
     "roles": [
       "combat"
@@ -301,7 +301,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 8
   },
   {
-    "id": "sabre",
+    "id": "aegs-sabre",
     "name": "Sabre",
     "roles": [
       "combat"
@@ -315,7 +315,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "sabre-comet",
+    "id": "aegs-sabre-comet",
     "name": "Sabre Comet",
     "roles": [
       "combat"
@@ -329,7 +329,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "sabre-firebird",
+    "id": "aegs-sabre-firebird",
     "name": "Sabre Firebird",
     "roles": [
       "combat"
@@ -343,7 +343,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "sabre-firebird-wikelo-war-special",
+    "id": "aegs-sabre-firebird-collector-milt",
     "name": "Sabre Firebird Wikelo War Special",
     "roles": [
       "combat"
@@ -357,7 +357,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "sabre-peregrine",
+    "id": "aegs-sabre-peregrine",
     "name": "Sabre Peregrine",
     "roles": [
       "cargo"
@@ -371,7 +371,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "sabre-peregrine-wikelo-speedy-special",
+    "id": "aegs-sabre-peregrine-collector-competition",
     "name": "Sabre Peregrine Wikelo Speedy Special",
     "roles": [
       "cargo"
@@ -385,7 +385,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "sabre-raven",
+    "id": "aegs-sabre-raven",
     "name": "Sabre Raven",
     "roles": [
       "combat"
@@ -399,7 +399,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "vanguard-harbinger",
+    "id": "aegs-vanguard-harbinger",
     "name": "Vanguard Harbinger",
     "roles": [
       "combat"
@@ -413,7 +413,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "vanguard-hoplite",
+    "id": "aegs-vanguard-hoplite",
     "name": "Vanguard Hoplite",
     "roles": [
       "combat"
@@ -427,7 +427,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "vanguard-sentinel",
+    "id": "aegs-vanguard-sentinel",
     "name": "Vanguard Sentinel",
     "roles": [
       "combat"
@@ -441,7 +441,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "vanguard-warden",
+    "id": "aegs-vanguard",
     "name": "Vanguard Warden",
     "roles": [
       "combat"
@@ -455,7 +455,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "arrow",
+    "id": "anvl-arrow",
     "name": "Arrow",
     "roles": [
       "combat"
@@ -469,7 +469,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "asgard",
+    "id": "anvl-asgard",
     "name": "Asgard",
     "roles": [
       "combat"
@@ -483,7 +483,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 180
   },
   {
-    "id": "asgard-wikelo-war-special",
+    "id": "anvl-asgard-collector-military",
     "name": "Asgard Wikelo War Special",
     "roles": [
       "combat"
@@ -497,7 +497,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 180
   },
   {
-    "id": "c8-pisces",
+    "id": "anvl-c8-pisces",
     "name": "C8 Pisces",
     "roles": [
       "cargo"
@@ -511,7 +511,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 4
   },
   {
-    "id": "c8r-pisces-rescue",
+    "id": "anvl-c8r-pisces",
     "name": "C8R Pisces Rescue",
     "roles": [
       "medical"
@@ -525,7 +525,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "c8x-pisces-expedition",
+    "id": "anvl-c8x-pisces-expedition",
     "name": "C8X Pisces Expedition",
     "roles": [
       "cargo"
@@ -539,7 +539,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 4
   },
   {
-    "id": "carrack",
+    "id": "anvl-carrack",
     "name": "Carrack",
     "roles": [
       "multi-crew"
@@ -553,7 +553,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 456
   },
   {
-    "id": "carrack",
+    "id": "anvl-carrack-bis2950",
     "name": "Carrack",
     "roles": [
       "multi-crew"
@@ -567,7 +567,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 456
   },
   {
-    "id": "carrack-expedition",
+    "id": "anvl-carrack-expedition",
     "name": "Carrack Expedition",
     "roles": [
       "multi-crew"
@@ -581,7 +581,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 456
   },
   {
-    "id": "f7a-hornet-mk-i",
+    "id": "anvl-hornet-f7a-mk1",
     "name": "F7A Hornet Mk I",
     "roles": [
       "combat"
@@ -595,7 +595,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "f7a-hornet-mk-ii",
+    "id": "anvl-hornet-f7a-mk2",
     "name": "F7A Hornet Mk II",
     "roles": [
       "combat"
@@ -609,7 +609,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "f7c-hornet-mk-i",
+    "id": "anvl-hornet-f7c",
     "name": "F7C Hornet Mk I",
     "roles": [
       "combat"
@@ -623,7 +623,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "f7c-hornet-mk-ii",
+    "id": "anvl-hornet-f7c-mk2",
     "name": "F7C Hornet Mk II",
     "roles": [
       "combat"
@@ -637,7 +637,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 2
   },
   {
-    "id": "f7c-hornet-wildfire-mk-i",
+    "id": "anvl-hornet-f7c-wildfire",
     "name": "F7C Hornet Wildfire Mk I",
     "roles": [
       "combat"
@@ -651,7 +651,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "f7c-m-hornet-heartseeker-mk-i",
+    "id": "anvl-hornet-f7cm-heartseeker",
     "name": "F7C-M Hornet Heartseeker Mk I",
     "roles": [
       "combat"
@@ -665,7 +665,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "f7c-m-hornet-heartseeker-mk-ii",
+    "id": "anvl-hornet-f7cm-mk2-heartseeker",
     "name": "F7C-M Hornet Heartseeker Mk II",
     "roles": [
       "combat",
@@ -680,7 +680,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "f7c-m-super-hornet-mk-i",
+    "id": "anvl-hornet-f7cm",
     "name": "F7C-M Super Hornet Mk I",
     "roles": [
       "combat"
@@ -694,7 +694,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "f7c-m-super-hornet-mk-ii",
+    "id": "anvl-hornet-f7cm-mk2",
     "name": "F7C-M Super Hornet Mk II",
     "roles": [
       "combat",
@@ -709,7 +709,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "f7c-r-hornet-tracker-mk-i",
+    "id": "anvl-hornet-f7cr",
     "name": "F7C-R Hornet Tracker Mk I",
     "roles": [
       "combat"
@@ -723,7 +723,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "f7c-r-hornet-tracker-mk-ii",
+    "id": "anvl-hornet-f7cr-mk2",
     "name": "F7C-R Hornet Tracker Mk II",
     "roles": [
       "combat"
@@ -737,7 +737,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "f7c-s-hornet-ghost-mk-i",
+    "id": "anvl-hornet-f7cs",
     "name": "F7C-S Hornet Ghost Mk I",
     "roles": [
       "combat"
@@ -751,7 +751,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "f7c-s-hornet-ghost-mk-ii",
+    "id": "anvl-hornet-f7cs-mk2",
     "name": "F7C-S Hornet Ghost Mk II",
     "roles": [
       "combat"
@@ -765,7 +765,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "f8a-lightning",
+    "id": "anvl-lightning-f8",
     "name": "F8A Lightning",
     "roles": [
       "combat"
@@ -779,7 +779,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "f8c-lightning",
+    "id": "anvl-lightning-f8c",
     "name": "F8C Lightning",
     "roles": [
       "combat"
@@ -793,7 +793,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "f8c-lightning",
+    "id": "anvl-lightning-f8c-plat",
     "name": "F8C Lightning",
     "roles": [
       "combat"
@@ -807,7 +807,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "f8c-lightning-executive-edition",
+    "id": "anvl-lightning-f8c-exec",
     "name": "F8C Lightning Executive Edition",
     "roles": [
       "combat"
@@ -821,7 +821,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "f8c-lightning-wikelo-sneak-special",
+    "id": "anvl-lightning-f8c-collector-stealth",
     "name": "F8C Lightning Wikelo Sneak Special",
     "roles": [
       "combat"
@@ -835,7 +835,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "f8c-lightning-wikelo-war-special",
+    "id": "anvl-lightning-f8c-collector-military",
     "name": "F8C Lightning Wikelo War Special",
     "roles": [
       "combat"
@@ -849,7 +849,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "gladiator",
+    "id": "anvl-gladiator",
     "name": "Gladiator",
     "roles": [
       "combat"
@@ -863,7 +863,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "hawk",
+    "id": "anvl-hawk",
     "name": "Hawk",
     "roles": [
       "combat"
@@ -877,7 +877,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "hurricane",
+    "id": "anvl-hurricane",
     "name": "Hurricane",
     "roles": [
       "combat"
@@ -891,7 +891,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "paladin",
+    "id": "anvl-paladin",
     "name": "Paladin",
     "roles": [
       "combat",
@@ -906,7 +906,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 4
   },
   {
-    "id": "terrapin",
+    "id": "anvl-terrapin",
     "name": "Terrapin",
     "roles": [
       "cargo"
@@ -920,7 +920,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "terrapin-medic",
+    "id": "anvl-terrapin-medic",
     "name": "Terrapin Medic",
     "roles": [
       "medical"
@@ -934,7 +934,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "terrapin-medic-wikelo-savior-special",
+    "id": "anvl-terrapin-medic-collector-medic",
     "name": "Terrapin Medic Wikelo Savior Special",
     "roles": [
       "medical"
@@ -948,7 +948,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "valkyrie",
+    "id": "anvl-valkyrie-bis2950",
     "name": "Valkyrie",
     "roles": [
       "combat"
@@ -962,7 +962,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 90
   },
   {
-    "id": "valkyrie",
+    "id": "anvl-valkyrie",
     "name": "Valkyrie",
     "roles": [
       "combat"
@@ -976,7 +976,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 90
   },
   {
-    "id": "khartu-al",
+    "id": "xian-scout",
     "name": "Khartu-al",
     "roles": [
       "combat"
@@ -990,7 +990,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "santokyai",
+    "id": "xnaa-santokyai",
     "name": "San'tok.yāi",
     "roles": [
       "combat"
@@ -1004,7 +1004,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "mole",
+    "id": "argo-mole",
     "name": "MOLE",
     "roles": [
       "multi-crew"
@@ -1018,35 +1018,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "mole-carbon",
-    "name": "MOLE Carbon",
-    "roles": [
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Argo Astronautics",
-    "size": "medium",
-    "status": "flight-ready",
-    "crewMin": 5,
-    "crewMax": 5,
-    "cargoScu": 96
-  },
-  {
-    "id": "mole-talus",
-    "name": "MOLE Talus",
-    "roles": [
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Argo Astronautics",
-    "size": "medium",
-    "status": "flight-ready",
-    "crewMin": 5,
-    "crewMax": 5,
-    "cargoScu": 96
-  },
-  {
-    "id": "mole-teachs-special",
+    "id": "argo-mole-teach",
     "name": "MOLE Teach's Special",
     "roles": [
       "multi-crew"
@@ -1060,7 +1032,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "moth",
+    "id": "argo-moth",
     "name": "MOTH",
     "roles": [
       "multi-crew"
@@ -1074,7 +1046,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 224
   },
   {
-    "id": "mpuv-cargo",
+    "id": "argo-mpuv",
     "name": "MPUV Cargo",
     "roles": [
       "cargo"
@@ -1087,7 +1059,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 2
   },
   {
-    "id": "mpuv-personnel",
+    "id": "argo-mpuv-transport",
     "name": "MPUV Personnel",
     "roles": [
       "cargo"
@@ -1100,7 +1072,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 2
   },
   {
-    "id": "mpuv-tractor",
+    "id": "argo-mpuv-1t",
     "name": "MPUV Tractor",
     "roles": [
       "cargo"
@@ -1113,7 +1085,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 16
   },
   {
-    "id": "raft",
+    "id": "argo-raft",
     "name": "RAFT",
     "roles": [
       "cargo",
@@ -1128,7 +1100,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 192
   },
   {
-    "id": "raft-wikelo-work-special",
+    "id": "argo-raft-collector-indust",
     "name": "RAFT Wikelo Work Special",
     "roles": [
       "cargo",
@@ -1143,7 +1115,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 192
   },
   {
-    "id": "srv",
+    "id": "argo-srv",
     "name": "SRV",
     "roles": [
       "cargo"
@@ -1157,7 +1129,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "defender",
+    "id": "banu-defender",
     "name": "Defender",
     "roles": [
       "combat"
@@ -1171,7 +1143,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "mustang-alpha",
+    "id": "cnou-mustang-alpha",
     "name": "Mustang Alpha",
     "roles": [
       "cargo"
@@ -1185,7 +1157,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 4
   },
   {
-    "id": "mustang-beta",
+    "id": "cnou-mustang-beta",
     "name": "Mustang Beta",
     "roles": [
       "cargo"
@@ -1199,7 +1171,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 4
   },
   {
-    "id": "mustang-citizencon-2948-edition",
+    "id": "cnou-mustang-alpha-citizencon2018",
     "name": "Mustang CitizenCon 2948 Edition",
     "roles": [
       "cargo"
@@ -1213,7 +1185,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 4
   },
   {
-    "id": "mustang-delta",
+    "id": "cnou-mustang-delta",
     "name": "Mustang Delta",
     "roles": [
       "combat"
@@ -1227,7 +1199,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 4
   },
   {
-    "id": "mustang-gamma",
+    "id": "cnou-mustang-gamma",
     "name": "Mustang Gamma",
     "roles": [
       "cargo"
@@ -1241,7 +1213,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 4
   },
   {
-    "id": "mustang-omega",
+    "id": "cnou-mustang-omega",
     "name": "Mustang Omega",
     "roles": [
       "cargo"
@@ -1255,7 +1227,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 4
   },
   {
-    "id": "nomad",
+    "id": "cnou-nomad",
     "name": "Nomad",
     "roles": [
       "cargo"
@@ -1269,7 +1241,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 24
   },
   {
-    "id": "nomad-teachs-special",
+    "id": "cnou-nomad-teach",
     "name": "Nomad Teach's Special",
     "roles": [
       "cargo"
@@ -1283,7 +1255,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 24
   },
   {
-    "id": "corsair-pyam-exec",
+    "id": "drak-corsair-exec-military",
     "name": "Corsair PYAM Exec",
     "roles": [
       "multi-crew"
@@ -1297,7 +1269,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 72
   },
   {
-    "id": "corsair-pyam-exec",
+    "id": "drak-corsair-exec-stealthindustrial",
     "name": "Corsair PYAM Exec",
     "roles": [
       "multi-crew"
@@ -1311,7 +1283,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 72
   },
   {
-    "id": "a1-spirit",
+    "id": "crus-spirit-a1",
     "name": "A1 Spirit",
     "roles": [
       "combat",
@@ -1326,7 +1298,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "a2-hercules-starlifter",
+    "id": "crus-starlifter-a2",
     "name": "A2 Hercules Starlifter",
     "roles": [
       "combat",
@@ -1341,7 +1313,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 1434
   },
   {
-    "id": "ares-star-fighter-inferno",
+    "id": "crus-starfighter-inferno",
     "name": "Ares Star Fighter Inferno",
     "roles": [
       "combat"
@@ -1355,7 +1327,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "ares-star-fighter-ion",
+    "id": "crus-starfighter-ion",
     "name": "Ares Star Fighter Ion",
     "roles": [
       "combat"
@@ -1369,7 +1341,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "c1-spirit",
+    "id": "crus-spirit-c1",
     "name": "C1 Spirit",
     "roles": [
       "cargo",
@@ -1384,7 +1356,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 64
   },
   {
-    "id": "c1-spirit-wikelo-special",
+    "id": "crus-spirit-c1-civilian",
     "name": "C1 Spirit Wikelo Special",
     "roles": [
       "cargo",
@@ -1399,7 +1371,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 64
   },
   {
-    "id": "c2-hercules-starlifter",
+    "id": "crus-starlifter-c2",
     "name": "C2 Hercules Starlifter",
     "roles": [
       "cargo",
@@ -1414,7 +1386,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 1434
   },
   {
-    "id": "intrepid",
+    "id": "crus-intrepid",
     "name": "Intrepid",
     "roles": [
       "cargo"
@@ -1428,7 +1400,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 8
   },
   {
-    "id": "intrepid-wikelo-work-special",
+    "id": "crus-intrepid-collector-indust",
     "name": "Intrepid Wikelo Work Special",
     "roles": [
       "cargo"
@@ -1442,7 +1414,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 8
   },
   {
-    "id": "m2-hercules-starlifter",
+    "id": "crus-starlifter-m2",
     "name": "M2 Hercules Starlifter",
     "roles": [
       "cargo",
@@ -1458,7 +1430,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 1434
   },
   {
-    "id": "mercury-star-runner",
+    "id": "crus-star-runner",
     "name": "Mercury Star Runner",
     "roles": [
       "cargo"
@@ -1472,7 +1444,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 114
   },
   {
-    "id": "cutlass-black-pyam-exec",
+    "id": "drak-cutlass-black-exec-military",
     "name": "Cutlass Black PYAM Exec",
     "roles": [
       "cargo",
@@ -1488,7 +1460,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 46
   },
   {
-    "id": "cutlass-black-pyam-exec",
+    "id": "drak-cutlass-black-exec-stealth",
     "name": "Cutlass Black PYAM Exec",
     "roles": [
       "cargo",
@@ -1504,7 +1476,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 46
   },
   {
-    "id": "buccaneer",
+    "id": "drak-buccaneer",
     "name": "Buccaneer",
     "roles": [
       "combat"
@@ -1518,7 +1490,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "caterpillar",
+    "id": "drak-caterpillar",
     "name": "Caterpillar",
     "roles": [
       "cargo"
@@ -1532,7 +1504,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 576
   },
   {
-    "id": "caterpillar",
+    "id": "drak-caterpillar-boarded",
     "name": "Caterpillar",
     "roles": [
       "cargo"
@@ -1546,7 +1518,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 576
   },
   {
-    "id": "caterpillar-pirate",
+    "id": "drak-caterpillar-pirate",
     "name": "Caterpillar Pirate",
     "roles": [
       "cargo"
@@ -1560,7 +1532,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 576
   },
   {
-    "id": "clipper",
+    "id": "drak-clipper",
     "name": "Clipper",
     "roles": [
       "cargo"
@@ -1574,7 +1546,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "corsair",
+    "id": "drak-corsair",
     "name": "Corsair",
     "roles": [
       "multi-crew"
@@ -1588,7 +1560,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 72
   },
   {
-    "id": "cutlass-black",
+    "id": "drak-cutlass-black-bis2950",
     "name": "Cutlass Black",
     "roles": [
       "cargo",
@@ -1604,7 +1576,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 46
   },
   {
-    "id": "cutlass-black",
+    "id": "drak-cutlass-black",
     "name": "Cutlass Black",
     "roles": [
       "cargo",
@@ -1620,7 +1592,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 46
   },
   {
-    "id": "cutlass-blue",
+    "id": "drak-cutlass-blue",
     "name": "Cutlass Blue",
     "roles": [
       "combat",
@@ -1635,7 +1607,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "cutlass-blue",
+    "id": "drak-cutlass-blue-bis2950",
     "name": "Cutlass Blue",
     "roles": [
       "combat",
@@ -1650,7 +1622,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "cutlass-red",
+    "id": "drak-cutlass-red",
     "name": "Cutlass Red",
     "roles": [
       "medical",
@@ -1665,7 +1637,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "cutlass-red",
+    "id": "drak-cutlass-red-bis2950",
     "name": "Cutlass Red",
     "roles": [
       "medical",
@@ -1680,7 +1652,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "cutlass-steel",
+    "id": "drak-cutlass-steel",
     "name": "Cutlass Steel",
     "roles": [
       "combat",
@@ -1695,7 +1667,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 46
   },
   {
-    "id": "cutter",
+    "id": "drak-cutter",
     "name": "Cutter",
     "roles": [
       "cargo"
@@ -1709,7 +1681,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 6
   },
   {
-    "id": "cutter-rambler",
+    "id": "drak-cutter-rambler",
     "name": "Cutter Rambler",
     "roles": [
       "cargo"
@@ -1723,7 +1695,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 6
   },
   {
-    "id": "cutter-scout",
+    "id": "drak-cutter-scout",
     "name": "Cutter Scout",
     "roles": [
       "cargo"
@@ -1737,7 +1709,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 6
   },
   {
-    "id": "golem",
+    "id": "drak-golem",
     "name": "Golem",
     "roles": [
       "cargo"
@@ -1751,7 +1723,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "golem-ox",
+    "id": "drak-golem-ox",
     "name": "Golem OX",
     "roles": [
       "cargo"
@@ -1765,7 +1737,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 64
   },
   {
-    "id": "golem-teachs-special",
+    "id": "drak-golem-teach",
     "name": "Golem Teach's Special",
     "roles": [
       "cargo"
@@ -1779,7 +1751,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "golem-wikelo-work-special",
+    "id": "drak-golem-collector-indust",
     "name": "Golem Wikelo Work Special",
     "roles": [
       "cargo"
@@ -1793,7 +1765,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "herald",
+    "id": "drak-herald",
     "name": "Herald",
     "roles": [
       "cargo"
@@ -1807,7 +1779,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "vulture",
+    "id": "drak-vulture",
     "name": "Vulture",
     "roles": [
       "cargo"
@@ -1821,7 +1793,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "vulture-teachs-special",
+    "id": "drak-vulture-teach",
     "name": "Vulture Teach's Special",
     "roles": [
       "cargo"
@@ -1835,7 +1807,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "blade",
+    "id": "vncl-blade",
     "name": "Blade",
     "roles": [
       "combat"
@@ -1849,7 +1821,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "glaive",
+    "id": "vncl-glaive",
     "name": "Glaive",
     "roles": [
       "combat"
@@ -1863,7 +1835,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "prowler",
+    "id": "espr-prowler",
     "name": "Prowler",
     "roles": [
       "combat"
@@ -1877,7 +1849,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "prowler-utility",
+    "id": "espr-prowler-utility",
     "name": "Prowler Utility",
     "roles": [
       "cargo"
@@ -1891,7 +1863,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "prowler-utility-wikelo-work-special",
+    "id": "espr-prowler-utility-collector-indust",
     "name": "Prowler Utility Wikelo Work Special",
     "roles": [
       "cargo"
@@ -1905,7 +1877,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "esperia-stinger",
+    "id": "vncl-stinger",
     "name": "Esperia Stinger",
     "roles": [
       "combat"
@@ -1919,7 +1891,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0.9
   },
   {
-    "id": "talon",
+    "id": "espr-talon",
     "name": "Talon",
     "roles": [
       "combat"
@@ -1933,7 +1905,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "talon-shrike",
+    "id": "espr-talon-shrike",
     "name": "Talon Shrike",
     "roles": [
       "combat"
@@ -1947,7 +1919,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "f8c-lightning-pyam-exec",
+    "id": "anvl-lightning-f8c-exec-stealth",
     "name": "F8C Lightning PYAM Exec",
     "roles": [
       "combat"
@@ -1961,7 +1933,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "f8c-lightning-pyam-exec",
+    "id": "anvl-lightning-f8c-exec-military",
     "name": "F8C Lightning PYAM Exec",
     "roles": [
       "combat"
@@ -1975,7 +1947,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "syulen",
+    "id": "gama-syulen",
     "name": "Syulen",
     "roles": [
       "cargo"
@@ -1989,7 +1961,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 6
   },
   {
-    "id": "shiv",
+    "id": "glsn-shiv",
     "name": "Shiv",
     "roles": [
       "combat",
@@ -2004,7 +1976,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "l-21-wolf",
+    "id": "krig-l21-wolf",
     "name": "L-21 Wolf",
     "roles": [
       "combat"
@@ -2018,7 +1990,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0.65
   },
   {
-    "id": "l-21-wolf-wikelo-sneak-special",
+    "id": "krig-l21-wolf-collector-stealth",
     "name": "L-21 Wolf Wikelo Sneak Special",
     "roles": [
       "combat"
@@ -2032,7 +2004,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0.65
   },
   {
-    "id": "l-21-wolf-wikelo-war-special",
+    "id": "krig-l21-wolf-collector-military",
     "name": "L-21 Wolf Wikelo War Special",
     "roles": [
       "combat"
@@ -2046,7 +2018,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0.65
   },
   {
-    "id": "l-22-alpha-wolf",
+    "id": "krig-l22-alphawolf",
     "name": "L-22 Alpha Wolf",
     "roles": [
       "combat"
@@ -2060,7 +2032,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0.65
   },
   {
-    "id": "p-52-merlin",
+    "id": "krig-p52-merlin",
     "name": "P-52 Merlin",
     "roles": [
       "combat"
@@ -2073,7 +2045,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "p-72-archimedes",
+    "id": "krig-p72-archimedes",
     "name": "P-72 Archimedes",
     "roles": [
       "cargo"
@@ -2086,7 +2058,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "p-72-archimedes-emerald",
+    "id": "krig-p72-archimedes-emerald",
     "name": "P-72 Archimedes Emerald",
     "roles": [
       "cargo"
@@ -2099,7 +2071,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "fury",
+    "id": "misc-fury",
     "name": "Fury",
     "roles": [
       "combat"
@@ -2112,7 +2084,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "fury-lx",
+    "id": "misc-fury-lx",
     "name": "Fury LX",
     "roles": [
       "cargo"
@@ -2125,7 +2097,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "fury-mx",
+    "id": "misc-fury-miru",
     "name": "Fury MX",
     "roles": [
       "combat"
@@ -2138,7 +2110,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "guardian",
+    "id": "mrai-guardian",
     "name": "Guardian",
     "roles": [
       "combat"
@@ -2152,7 +2124,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0.65
   },
   {
-    "id": "guardian-mx",
+    "id": "mrai-guardian-mx",
     "name": "Guardian MX",
     "roles": [
       "combat"
@@ -2166,7 +2138,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0.65
   },
   {
-    "id": "guardian-mx-wikelo-war-special",
+    "id": "mrai-guardian-mx-collector-military",
     "name": "Guardian MX Wikelo War Special",
     "roles": [
       "combat"
@@ -2180,7 +2152,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0.65
   },
   {
-    "id": "guardian-qi",
+    "id": "mrai-guardian-qi",
     "name": "Guardian QI",
     "roles": [
       "combat"
@@ -2194,7 +2166,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0.65
   },
   {
-    "id": "guardian-qi-wikelo-special",
+    "id": "mrai-guardian-qi-collector-indust",
     "name": "Guardian QI Wikelo Special",
     "roles": [
       "combat"
@@ -2208,7 +2180,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0.65
   },
   {
-    "id": "guardian-wikelo-war-special",
+    "id": "mrai-guardian-military",
     "name": "Guardian Wikelo War Special",
     "roles": [
       "combat"
@@ -2222,7 +2194,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0.65
   },
   {
-    "id": "razor",
+    "id": "misc-razor",
     "name": "Razor",
     "roles": [
       "cargo"
@@ -2236,7 +2208,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "razor-ex",
+    "id": "misc-razor-ex",
     "name": "Razor EX",
     "roles": [
       "combat"
@@ -2250,7 +2222,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "razor-lx",
+    "id": "misc-razor-lx",
     "name": "Razor LX",
     "roles": [
       "cargo"
@@ -2264,7 +2236,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "fortune",
+    "id": "misc-fortune",
     "name": "Fortune",
     "roles": [
       "cargo"
@@ -2278,7 +2250,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 16
   },
   {
-    "id": "fortune-teachs-special",
+    "id": "misc-fortune-teach",
     "name": "Fortune Teach's Special",
     "roles": [
       "cargo"
@@ -2292,7 +2264,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 16
   },
   {
-    "id": "fortune-wikelo-special",
+    "id": "misc-fortune-collector-industrial",
     "name": "Fortune Wikelo Special",
     "roles": [
       "cargo"
@@ -2306,7 +2278,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 16
   },
   {
-    "id": "freelancer",
+    "id": "misc-freelancer",
     "name": "Freelancer",
     "roles": [
       "cargo"
@@ -2320,7 +2292,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 66
   },
   {
-    "id": "freelancer-dur",
+    "id": "misc-freelancer-dur",
     "name": "Freelancer DUR",
     "roles": [
       "cargo"
@@ -2334,7 +2306,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 36
   },
   {
-    "id": "freelancer-max",
+    "id": "misc-freelancer-max",
     "name": "Freelancer MAX",
     "roles": [
       "cargo"
@@ -2348,7 +2320,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 120
   },
   {
-    "id": "freelancer-mis",
+    "id": "misc-freelancer-mis",
     "name": "Freelancer MIS",
     "roles": [
       "combat"
@@ -2362,7 +2334,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 36
   },
   {
-    "id": "hull-a",
+    "id": "misc-hull-a",
     "name": "Hull A",
     "roles": [
       "cargo"
@@ -2376,7 +2348,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 64
   },
   {
-    "id": "hull-b",
+    "id": "misc-hull-b",
     "name": "Hull B",
     "roles": [
       "cargo",
@@ -2391,7 +2363,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 512
   },
   {
-    "id": "hull-c",
+    "id": "misc-hull-c",
     "name": "Hull C",
     "roles": [
       "cargo"
@@ -2405,7 +2377,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 4608
   },
   {
-    "id": "prospector",
+    "id": "misc-prospector",
     "name": "Prospector",
     "roles": [
       "cargo"
@@ -2419,7 +2391,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "prospector-wikelo-work-special",
+    "id": "misc-prospector-collector-indust",
     "name": "Prospector Wikelo Work Special",
     "roles": [
       "cargo"
@@ -2433,7 +2405,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "reliant-kore",
+    "id": "misc-reliant",
     "name": "Reliant Kore",
     "roles": [
       "cargo"
@@ -2447,7 +2419,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 6
   },
   {
-    "id": "reliant-mako",
+    "id": "misc-reliant-mako",
     "name": "Reliant Mako",
     "roles": [
       "cargo"
@@ -2461,7 +2433,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 4
   },
   {
-    "id": "reliant-sen",
+    "id": "misc-reliant-sen",
     "name": "Reliant Sen",
     "roles": [
       "cargo"
@@ -2475,7 +2447,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 4
   },
   {
-    "id": "reliant-tana",
+    "id": "misc-reliant-tana",
     "name": "Reliant Tana",
     "roles": [
       "combat"
@@ -2489,7 +2461,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 4
   },
   {
-    "id": "starfarer",
+    "id": "misc-starfarer",
     "name": "Starfarer",
     "roles": [
       "cargo"
@@ -2503,7 +2475,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 291
   },
   {
-    "id": "starfarer-gemini",
+    "id": "misc-starfarer-gemini",
     "name": "Starfarer Gemini",
     "roles": [
       "multi-crew"
@@ -2517,7 +2489,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 291
   },
   {
-    "id": "starfarer-teachs-special",
+    "id": "misc-starfarer-teach",
     "name": "Starfarer Teach's Special",
     "roles": [
       "cargo"
@@ -2531,7 +2503,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 291
   },
   {
-    "id": "starlancer-max",
+    "id": "misc-starlancer-max",
     "name": "Starlancer MAX",
     "roles": [
       "cargo"
@@ -2545,7 +2517,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 224
   },
   {
-    "id": "starlancer-max-wikelo-work-special",
+    "id": "misc-starlancer-max-collector-indust",
     "name": "Starlancer MAX Wikelo Work Special",
     "roles": [
       "cargo"
@@ -2559,7 +2531,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 224
   },
   {
-    "id": "starlancer-tac",
+    "id": "misc-starlancer-tac",
     "name": "Starlancer TAC",
     "roles": [
       "combat"
@@ -2573,7 +2545,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 96
   },
   {
-    "id": "starlancer-tac-wikelo-war-special",
+    "id": "misc-starlancer-tac-collector-military",
     "name": "Starlancer TAC Wikelo War Special",
     "roles": [
       "combat"
@@ -2587,7 +2559,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 96
   },
   {
-    "id": "100i",
+    "id": "orig-100i",
     "name": "100i",
     "roles": [
       "cargo"
@@ -2601,7 +2573,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 2
   },
   {
-    "id": "125a",
+    "id": "orig-125a",
     "name": "125a",
     "roles": [
       "combat"
@@ -2615,7 +2587,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 2
   },
   {
-    "id": "135c",
+    "id": "orig-135c",
     "name": "135c",
     "roles": [
       "cargo"
@@ -2629,7 +2601,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 6
   },
   {
-    "id": "300i",
+    "id": "orig-300i",
     "name": "300i",
     "roles": [
       "cargo"
@@ -2643,7 +2615,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 8
   },
   {
-    "id": "315p",
+    "id": "orig-315p",
     "name": "315p",
     "roles": [
       "cargo"
@@ -2657,7 +2629,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "325a",
+    "id": "orig-325a",
     "name": "325a",
     "roles": [
       "combat"
@@ -2671,7 +2643,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 4
   },
   {
-    "id": "350r",
+    "id": "orig-350r",
     "name": "350r",
     "roles": [
       "cargo"
@@ -2685,7 +2657,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 4
   },
   {
-    "id": "400i",
+    "id": "orig-400i",
     "name": "400i",
     "roles": [
       "multi-crew"
@@ -2699,7 +2671,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 42
   },
   {
-    "id": "600i",
+    "id": "orig-600i",
     "name": "600i",
     "roles": [
       "cargo"
@@ -2713,7 +2685,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 44
   },
   {
-    "id": "600i-2951-bis",
+    "id": "orig-600i-bis2951",
     "name": "600i 2951 BIS",
     "roles": [
       "cargo"
@@ -2727,7 +2699,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 44
   },
   {
-    "id": "600i-executive-edition",
+    "id": "orig-600i-executive-edition",
     "name": "600i Executive Edition",
     "roles": [
       "cargo"
@@ -2741,7 +2713,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 44
   },
   {
-    "id": "600i-touring",
+    "id": "orig-600i-touring",
     "name": "600i Touring",
     "roles": [
       "cargo"
@@ -2755,7 +2727,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 38
   },
   {
-    "id": "85x-limited",
+    "id": "orig-85x",
     "name": "85X Limited",
     "roles": [
       "cargo"
@@ -2768,7 +2740,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "890-jump",
+    "id": "orig-890jump",
     "name": "890 Jump",
     "roles": [
       "cargo"
@@ -2782,7 +2754,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 388
   },
   {
-    "id": "m50-interceptor",
+    "id": "orig-m50",
     "name": "M50 Interceptor",
     "roles": [
       "cargo"
@@ -2796,7 +2768,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "apollo-medivac",
+    "id": "rsi-apollo-medivac",
     "name": "Apollo Medivac",
     "roles": [
       "medical",
@@ -2811,7 +2783,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "apollo-medivac",
+    "id": "rsi-apollo-medivac-tier-3",
     "name": "Apollo Medivac",
     "roles": [
       "medical",
@@ -2826,7 +2798,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "apollo-medivac",
+    "id": "rsi-apollo-medivac-tier-1",
     "name": "Apollo Medivac",
     "roles": [
       "medical",
@@ -2841,7 +2813,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "apollo-medivac",
+    "id": "rsi-apollo-medivac-tier-2",
     "name": "Apollo Medivac",
     "roles": [
       "medical",
@@ -2856,7 +2828,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "apollo-triage",
+    "id": "rsi-apollo-triage",
     "name": "Apollo Triage",
     "roles": [
       "medical",
@@ -2871,7 +2843,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "apollo-triage",
+    "id": "rsi-apollo-triage-tier-1",
     "name": "Apollo Triage",
     "roles": [
       "medical",
@@ -2886,7 +2858,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "apollo-triage",
+    "id": "rsi-apollo-triage-tier-2",
     "name": "Apollo Triage",
     "roles": [
       "medical",
@@ -2901,7 +2873,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "apollo-triage",
+    "id": "rsi-apollo-triage-tier-3",
     "name": "Apollo Triage",
     "roles": [
       "medical",
@@ -2916,7 +2888,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "apollo-triage-wikelo-sneak-special",
+    "id": "rsi-apollo-triage-collector-stealth",
     "name": "Apollo Triage Wikelo Sneak Special",
     "roles": [
       "medical",
@@ -2931,7 +2903,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "aurora-mk-i-cl",
+    "id": "rsi-aurora-gs-cl",
     "name": "Aurora Mk I CL",
     "roles": [
       "cargo"
@@ -2945,7 +2917,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 6
   },
   {
-    "id": "aurora-mk-i-es",
+    "id": "rsi-aurora-gs-es",
     "name": "Aurora Mk I ES",
     "roles": [
       "cargo"
@@ -2959,7 +2931,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 3
   },
   {
-    "id": "aurora-mk-ii",
+    "id": "rsi-aurora-mk2",
     "name": "Aurora Mk II",
     "roles": [
       "cargo",
@@ -2974,7 +2946,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 2
   },
   {
-    "id": "aurora-mk-i-ln",
+    "id": "rsi-aurora-gs-ln",
     "name": "Aurora Mk I LN",
     "roles": [
       "cargo",
@@ -2989,7 +2961,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 3
   },
   {
-    "id": "aurora-mk-i-lx",
+    "id": "rsi-aurora-gs-lx",
     "name": "Aurora Mk I LX",
     "roles": [
       "cargo"
@@ -3003,7 +2975,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 3
   },
   {
-    "id": "aurora-mk-i-mr",
+    "id": "rsi-aurora-gs-mr",
     "name": "Aurora Mk I MR",
     "roles": [
       "cargo",
@@ -3018,7 +2990,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 3
   },
   {
-    "id": "aurora-mk-i-se",
+    "id": "rsi-aurora-gs-se",
     "name": "Aurora Mk I SE",
     "roles": [
       "cargo",
@@ -3033,7 +3005,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 6
   },
   {
-    "id": "constellation-andromeda",
+    "id": "rsi-constellation-andromeda",
     "name": "Constellation Andromeda",
     "roles": [
       "cargo",
@@ -3048,7 +3020,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 96
   },
   {
-    "id": "constellation-aquila",
+    "id": "rsi-constellation-aquila",
     "name": "Constellation Aquila",
     "roles": [
       "cargo"
@@ -3062,7 +3034,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 96
   },
   {
-    "id": "constellation-phoenix",
+    "id": "rsi-constellation-phoenix",
     "name": "Constellation Phoenix",
     "roles": [
       "cargo"
@@ -3076,7 +3048,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 80
   },
   {
-    "id": "constellation-phoenix-emerald",
+    "id": "rsi-constellation-phoenix-emerald",
     "name": "Constellation Phoenix Emerald",
     "roles": [
       "cargo"
@@ -3090,7 +3062,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 80
   },
   {
-    "id": "constellation-taurus",
+    "id": "rsi-constellation-taurus",
     "name": "Constellation Taurus",
     "roles": [
       "cargo"
@@ -3104,7 +3076,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 174
   },
   {
-    "id": "constellation-taurus-wikelo-war-special",
+    "id": "rsi-constellation-taurus-military",
     "name": "Constellation Taurus Wikelo War Special",
     "roles": [
       "cargo"
@@ -3118,7 +3090,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 174
   },
   {
-    "id": "hermes",
+    "id": "rsi-hermes",
     "name": "Hermes",
     "roles": [
       "cargo",
@@ -3133,7 +3105,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 288
   },
   {
-    "id": "mantis",
+    "id": "rsi-mantis",
     "name": "Mantis",
     "roles": [
       "combat"
@@ -3147,7 +3119,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "meteor",
+    "id": "rsi-meteor",
     "name": "Meteor",
     "roles": [
       "combat"
@@ -3161,7 +3133,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "meteor-pyam-exec",
+    "id": "rsi-meteor-collector-military",
     "name": "Meteor PYAM Exec",
     "roles": [
       "combat"
@@ -3175,7 +3147,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "meteor-wikelo-sneak-special",
+    "id": "rsi-meteor-collector-stealth",
     "name": "Meteor Wikelo Sneak Special",
     "roles": [
       "combat"
@@ -3189,7 +3161,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "perseus",
+    "id": "rsi-perseus",
     "name": "Perseus",
     "roles": [
       "combat",
@@ -3204,7 +3176,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 96
   },
   {
-    "id": "polaris",
+    "id": "rsi-polaris-collector-military",
     "name": "Polaris",
     "roles": [
       "combat",
@@ -3219,7 +3191,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 576
   },
   {
-    "id": "polaris",
+    "id": "rsi-polaris",
     "name": "Polaris",
     "roles": [
       "combat",
@@ -3234,7 +3206,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 576
   },
   {
-    "id": "salvation",
+    "id": "rsi-salvation",
     "name": "Salvation",
     "roles": [
       "cargo"
@@ -3248,7 +3220,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 6
   },
   {
-    "id": "scorpius",
+    "id": "rsi-scorpius",
     "name": "Scorpius",
     "roles": [
       "combat",
@@ -3263,7 +3235,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "scorpius-antares",
+    "id": "rsi-scorpius-antares",
     "name": "Scorpius Antares",
     "roles": [
       "combat",
@@ -3278,7 +3250,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "scorpius-wikelo-sneak-special",
+    "id": "rsi-scorpius-stealth",
     "name": "Scorpius Wikelo Sneak Special",
     "roles": [
       "combat",
@@ -3293,7 +3265,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "zeus-mk-ii-cl",
+    "id": "rsi-zeus-cl-collector-indust",
     "name": "Zeus Mk II CL",
     "roles": [
       "cargo",
@@ -3308,7 +3280,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 128
   },
   {
-    "id": "zeus-mk-ii-cl",
+    "id": "rsi-zeus-cl",
     "name": "Zeus Mk II CL",
     "roles": [
       "cargo",
@@ -3323,7 +3295,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 128
   },
   {
-    "id": "zeus-mk-ii-es",
+    "id": "rsi-zeus-es",
     "name": "Zeus Mk II ES",
     "roles": [
       "multi-crew"
@@ -3337,7 +3309,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "zeus-mk-ii-es-wikelo-work-special",
+    "id": "rsi-zeus-es-collector-indust",
     "name": "Zeus Mk II ES Wikelo Work Special",
     "roles": [
       "multi-crew"
@@ -3351,7 +3323,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "syulen-pyam-exec",
+    "id": "gama-syulen-exec-stealth",
     "name": "Syulen PYAM Exec",
     "roles": [
       "cargo"
@@ -3365,7 +3337,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 6
   },
   {
-    "id": "syulen-pyam-exec",
+    "id": "gama-syulen-exec-military",
     "name": "Syulen PYAM Exec",
     "roles": [
       "cargo"
@@ -3379,7 +3351,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 6
   },
   {
-    "id": "vanduul-scythe",
+    "id": "vncl-scythe",
     "name": "Vanduul Scythe",
     "roles": [
       "combat"
