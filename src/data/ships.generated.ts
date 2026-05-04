@@ -1560,22 +1560,6 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 72
   },
   {
-    "id": "drak-cutlass-black-bis2950",
-    "name": "Cutlass Black",
-    "roles": [
-      "cargo",
-      "combat",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Drake Interplanetary",
-    "size": "medium",
-    "status": "flight-ready",
-    "crewMin": 3,
-    "crewMax": 3,
-    "cargoScu": 46
-  },
-  {
     "id": "drak-cutlass-black",
     "name": "Cutlass Black",
     "roles": [
@@ -1592,7 +1576,23 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 46
   },
   {
-    "id": "drak-cutlass-blue",
+    "id": "drak-cutlass-black-bis2950",
+    "name": "Cutlass Black",
+    "roles": [
+      "cargo",
+      "combat",
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Drake Interplanetary",
+    "size": "medium",
+    "status": "flight-ready",
+    "crewMin": 3,
+    "crewMax": 3,
+    "cargoScu": 46
+  },
+  {
+    "id": "drak-cutlass-blue-bis2950",
     "name": "Cutlass Blue",
     "roles": [
       "combat",
@@ -1607,7 +1607,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "drak-cutlass-blue-bis2950",
+    "id": "drak-cutlass-blue",
     "name": "Cutlass Blue",
     "roles": [
       "combat",
@@ -1919,7 +1919,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "anvl-lightning-f8c-exec-stealth",
+    "id": "anvl-lightning-f8c-exec-military",
     "name": "F8C Lightning PYAM Exec",
     "roles": [
       "combat"
@@ -1933,7 +1933,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "anvl-lightning-f8c-exec-military",
+    "id": "anvl-lightning-f8c-exec-stealth",
     "name": "F8C Lightning PYAM Exec",
     "roles": [
       "combat"
@@ -2798,21 +2798,6 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "rsi-apollo-medivac-tier-1",
-    "name": "Apollo Medivac",
-    "roles": [
-      "medical",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Roberts Space Industries",
-    "size": "large",
-    "status": "flight-ready",
-    "crewMin": 2,
-    "crewMax": 2,
-    "cargoScu": 32
-  },
-  {
     "id": "rsi-apollo-medivac-tier-2",
     "name": "Apollo Medivac",
     "roles": [
@@ -2828,7 +2813,22 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "rsi-apollo-triage",
+    "id": "rsi-apollo-medivac-tier-1",
+    "name": "Apollo Medivac",
+    "roles": [
+      "medical",
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Roberts Space Industries",
+    "size": "large",
+    "status": "flight-ready",
+    "crewMin": 2,
+    "crewMax": 2,
+    "cargoScu": 32
+  },
+  {
+    "id": "rsi-apollo-triage-tier-2",
     "name": "Apollo Triage",
     "roles": [
       "medical",
@@ -2858,7 +2858,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "rsi-apollo-triage-tier-2",
+    "id": "rsi-apollo-triage",
     "name": "Apollo Triage",
     "roles": [
       "medical",
@@ -3176,7 +3176,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 96
   },
   {
-    "id": "rsi-polaris-collector-military",
+    "id": "rsi-polaris",
     "name": "Polaris",
     "roles": [
       "combat",
@@ -3191,7 +3191,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 576
   },
   {
-    "id": "rsi-polaris",
+    "id": "rsi-polaris-collector-military",
     "name": "Polaris",
     "roles": [
       "combat",
@@ -3265,7 +3265,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "rsi-zeus-cl-collector-indust",
+    "id": "rsi-zeus-cl",
     "name": "Zeus Mk II CL",
     "roles": [
       "cargo",
@@ -3280,7 +3280,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 128
   },
   {
-    "id": "rsi-zeus-cl",
+    "id": "rsi-zeus-cl-collector-indust",
     "name": "Zeus Mk II CL",
     "roles": [
       "cargo",
@@ -3323,7 +3323,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "gama-syulen-exec-stealth",
+    "id": "gama-syulen-exec-military",
     "name": "Syulen PYAM Exec",
     "roles": [
       "cargo"
@@ -3337,7 +3337,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 6
   },
   {
-    "id": "gama-syulen-exec-military",
+    "id": "gama-syulen-exec-stealth",
     "name": "Syulen PYAM Exec",
     "roles": [
       "cargo"
