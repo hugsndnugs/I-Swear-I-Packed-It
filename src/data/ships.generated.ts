@@ -15,7 +15,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 12
+    "cargoScu": 0
   },
   {
     "id": "aegs-avenger-titan",
@@ -57,7 +57,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 12
+    "cargoScu": 0
   },
   {
     "id": "aegs-eclipse-bis2950",
@@ -171,7 +171,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 2,
     "crewMax": 2,
-    "cargoScu": 40
+    "cargoScu": 0
   },
   {
     "id": "aegs-idris-m",
@@ -298,7 +298,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 8
+    "cargoScu": 0
   },
   {
     "id": "aegs-sabre",
@@ -1069,7 +1069,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 2
+    "cargoScu": 0
   },
   {
     "id": "argo-mpuv-1t",
@@ -1168,7 +1168,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 4
+    "cargoScu": 0
   },
   {
     "id": "cnou-mustang-alpha-citizencon2018",
@@ -1196,7 +1196,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 4
+    "cargoScu": 0
   },
   {
     "id": "cnou-mustang-gamma",
@@ -1210,7 +1210,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 4
+    "cargoScu": 0
   },
   {
     "id": "cnou-mustang-omega",
@@ -1224,7 +1224,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 4
+    "cargoScu": 0
   },
   {
     "id": "cnou-nomad",
@@ -1252,7 +1252,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 24
+    "cargoScu": 0
   },
   {
     "id": "drak-corsair-exec-military",
@@ -1310,7 +1310,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 8,
     "crewMax": 8,
-    "cargoScu": 1434
+    "cargoScu": 216
   },
   {
     "id": "crus-starfighter-inferno",
@@ -1383,7 +1383,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 2,
     "crewMax": 2,
-    "cargoScu": 1434
+    "cargoScu": 696
   },
   {
     "id": "crus-intrepid",
@@ -1427,7 +1427,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 3,
     "crewMax": 3,
-    "cargoScu": 1434
+    "cargoScu": 522
   },
   {
     "id": "crus-star-runner",
@@ -1444,7 +1444,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 114
   },
   {
-    "id": "drak-cutlass-black-exec-military",
+    "id": "drak-cutlass-black-exec-stealth",
     "name": "Cutlass Black PYAM Exec",
     "roles": [
       "cargo",
@@ -1460,7 +1460,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 46
   },
   {
-    "id": "drak-cutlass-black-exec-stealth",
+    "id": "drak-cutlass-black-exec-military",
     "name": "Cutlass Black PYAM Exec",
     "roles": [
       "cargo",
@@ -1560,22 +1560,6 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 72
   },
   {
-    "id": "drak-cutlass-black",
-    "name": "Cutlass Black",
-    "roles": [
-      "cargo",
-      "combat",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Drake Interplanetary",
-    "size": "medium",
-    "status": "flight-ready",
-    "crewMin": 3,
-    "crewMax": 3,
-    "cargoScu": 46
-  },
-  {
     "id": "drak-cutlass-black-bis2950",
     "name": "Cutlass Black",
     "roles": [
@@ -1592,9 +1576,10 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 46
   },
   {
-    "id": "drak-cutlass-blue-bis2950",
-    "name": "Cutlass Blue",
+    "id": "drak-cutlass-black",
+    "name": "Cutlass Black",
     "roles": [
+      "cargo",
       "combat",
       "multi-crew"
     ],
@@ -1604,7 +1589,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 3,
     "crewMax": 3,
-    "cargoScu": 12
+    "cargoScu": 46
   },
   {
     "id": "drak-cutlass-blue",
@@ -1622,7 +1607,22 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "drak-cutlass-red",
+    "id": "drak-cutlass-blue-bis2950",
+    "name": "Cutlass Blue",
+    "roles": [
+      "combat",
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Drake Interplanetary",
+    "size": "medium",
+    "status": "flight-ready",
+    "crewMin": 3,
+    "crewMax": 3,
+    "cargoScu": 12
+  },
+  {
+    "id": "drak-cutlass-red-bis2950",
     "name": "Cutlass Red",
     "roles": [
       "medical",
@@ -1637,7 +1637,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "drak-cutlass-red-bis2950",
+    "id": "drak-cutlass-red",
     "name": "Cutlass Red",
     "roles": [
       "medical",
@@ -1664,7 +1664,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 3,
     "crewMax": 3,
-    "cargoScu": 46
+    "cargoScu": 0
   },
   {
     "id": "drak-cutter",
@@ -1678,7 +1678,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 6
+    "cargoScu": 4
   },
   {
     "id": "drak-cutter-rambler",
@@ -1692,7 +1692,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 6
+    "cargoScu": 2
   },
   {
     "id": "drak-cutter-scout",
@@ -1706,7 +1706,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 6
+    "cargoScu": 2
   },
   {
     "id": "drak-golem",
@@ -1720,7 +1720,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 32
+    "cargoScu": 0
   },
   {
     "id": "drak-golem-ox",
@@ -1748,7 +1748,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 32
+    "cargoScu": 0
   },
   {
     "id": "drak-golem-collector-indust",
@@ -1762,7 +1762,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 32
+    "cargoScu": 0
   },
   {
     "id": "drak-herald",
@@ -1888,7 +1888,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 0.9
+    "cargoScu": 0
   },
   {
     "id": "espr-talon",
@@ -1919,7 +1919,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "anvl-lightning-f8c-exec-military",
+    "id": "anvl-lightning-f8c-exec-stealth",
     "name": "F8C Lightning PYAM Exec",
     "roles": [
       "combat"
@@ -1933,7 +1933,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "anvl-lightning-f8c-exec-stealth",
+    "id": "anvl-lightning-f8c-exec-military",
     "name": "F8C Lightning PYAM Exec",
     "roles": [
       "combat"
@@ -1987,7 +1987,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 0.65
+    "cargoScu": 0
   },
   {
     "id": "krig-l21-wolf-collector-stealth",
@@ -2001,7 +2001,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 0.65
+    "cargoScu": 0
   },
   {
     "id": "krig-l21-wolf-collector-military",
@@ -2015,7 +2015,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 0.65
+    "cargoScu": 0
   },
   {
     "id": "krig-l22-alphawolf",
@@ -2029,7 +2029,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 0.65
+    "cargoScu": 0
   },
   {
     "id": "krig-p52-merlin",
@@ -2121,7 +2121,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 0.65
+    "cargoScu": 0
   },
   {
     "id": "mrai-guardian-mx",
@@ -2135,7 +2135,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 0.65
+    "cargoScu": 0
   },
   {
     "id": "mrai-guardian-mx-collector-military",
@@ -2149,7 +2149,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 0.65
+    "cargoScu": 0
   },
   {
     "id": "mrai-guardian-qi",
@@ -2163,7 +2163,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 0.65
+    "cargoScu": 0
   },
   {
     "id": "mrai-guardian-qi-collector-indust",
@@ -2177,7 +2177,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 0.65
+    "cargoScu": 0
   },
   {
     "id": "mrai-guardian-military",
@@ -2191,7 +2191,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 0.65
+    "cargoScu": 0
   },
   {
     "id": "misc-razor",
@@ -2388,7 +2388,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 32
+    "cargoScu": 0
   },
   {
     "id": "misc-prospector-collector-indust",
@@ -2402,7 +2402,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 32
+    "cargoScu": 0
   },
   {
     "id": "misc-reliant",
@@ -2430,7 +2430,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 4
+    "cargoScu": 0
   },
   {
     "id": "misc-reliant-sen",
@@ -2444,7 +2444,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 4
+    "cargoScu": 0
   },
   {
     "id": "misc-reliant-tana",
@@ -2458,7 +2458,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 4
+    "cargoScu": 1
   },
   {
     "id": "misc-starfarer",
@@ -2724,7 +2724,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 38
+    "cargoScu": 20
   },
   {
     "id": "orig-85x",
@@ -2768,7 +2768,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "rsi-apollo-medivac",
+    "id": "rsi-apollo-medivac-tier-1",
     "name": "Apollo Medivac",
     "roles": [
       "medical",
@@ -2813,7 +2813,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "rsi-apollo-medivac-tier-1",
+    "id": "rsi-apollo-medivac",
     "name": "Apollo Medivac",
     "roles": [
       "medical",
@@ -3323,7 +3323,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "gama-syulen-exec-military",
+    "id": "gama-syulen-exec-stealth",
     "name": "Syulen PYAM Exec",
     "roles": [
       "cargo"
@@ -3337,7 +3337,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 6
   },
   {
-    "id": "gama-syulen-exec-stealth",
+    "id": "gama-syulen-exec-military",
     "name": "Syulen PYAM Exec",
     "roles": [
       "cargo"
