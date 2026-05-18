@@ -60,7 +60,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "aegs-eclipse-bis2950",
+    "id": "aegs-eclipse",
     "name": "Eclipse",
     "roles": [
       "combat"
@@ -74,7 +74,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "aegs-eclipse",
+    "id": "aegs-eclipse-bis2950",
     "name": "Eclipse",
     "roles": [
       "combat"
@@ -90,20 +90,6 @@ export const shipsGenerated: ShipProfile[] = [
   {
     "id": "aegs-gladius",
     "name": "Gladius",
-    "roles": [
-      "combat"
-    ],
-    "storageBehavior": "local",
-    "manufacturer": "Aegis Dynamics",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 0
-  },
-  {
-    "id": "aegs-gladius-dunlevy",
-    "name": "Gladius Dunlevy",
     "roles": [
       "combat"
     ],
@@ -142,6 +128,21 @@ export const shipsGenerated: ShipProfile[] = [
     "crewMin": 1,
     "crewMax": 1,
     "cargoScu": 0
+  },
+  {
+    "id": "aegs-hammerhead-gs",
+    "name": "Hammerhead",
+    "roles": [
+      "combat",
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Aegis Dynamics",
+    "size": "large",
+    "status": "flight-ready",
+    "crewMin": 8,
+    "crewMax": 8,
+    "cargoScu": 64
   },
   {
     "id": "aegs-hammerhead",
@@ -188,7 +189,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 1326
   },
   {
-    "id": "aegs-idris-p",
+    "id": "aegs-idris-p-tsg",
     "name": "Idris-P",
     "roles": [
       "combat"
@@ -203,6 +204,20 @@ export const shipsGenerated: ShipProfile[] = [
   },
   {
     "id": "aegs-idris-p-fw-25",
+    "name": "Idris-P",
+    "roles": [
+      "combat"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Aegis Dynamics",
+    "size": "capital",
+    "status": "flight-ready",
+    "crewMin": 1,
+    "crewMax": 1,
+    "cargoScu": 1374
+  },
+  {
+    "id": "aegs-idris-p",
     "name": "Idris-P",
     "roles": [
       "combat"
@@ -246,20 +261,6 @@ export const shipsGenerated: ShipProfile[] = [
   {
     "id": "aegs-reclaimer-showdown",
     "name": "Reclaimer 2949 Best In Show Edition",
-    "roles": [
-      "cargo"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Aegis Dynamics",
-    "size": "large",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 420
-  },
-  {
-    "id": "aegs-reclaimer-teach",
-    "name": "Reclaimer Teach's Special",
     "roles": [
       "cargo"
     ],
@@ -539,7 +540,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 4
   },
   {
-    "id": "anvl-carrack",
+    "id": "anvl-carrack-bis2950",
     "name": "Carrack",
     "roles": [
       "multi-crew"
@@ -553,7 +554,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 456
   },
   {
-    "id": "anvl-carrack-bis2950",
+    "id": "anvl-carrack",
     "name": "Carrack",
     "roles": [
       "multi-crew"
@@ -948,7 +949,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "anvl-valkyrie-bis2950",
+    "id": "anvl-valkyrie",
     "name": "Valkyrie",
     "roles": [
       "combat"
@@ -962,7 +963,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 90
   },
   {
-    "id": "anvl-valkyrie",
+    "id": "anvl-valkyrie-bis2950",
     "name": "Valkyrie",
     "roles": [
       "combat"
@@ -1006,20 +1007,6 @@ export const shipsGenerated: ShipProfile[] = [
   {
     "id": "argo-mole",
     "name": "MOLE",
-    "roles": [
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Argo Astronautics",
-    "size": "medium",
-    "status": "flight-ready",
-    "crewMin": 5,
-    "crewMax": 5,
-    "cargoScu": 32
-  },
-  {
-    "id": "argo-mole-teach",
-    "name": "MOLE Teach's Special",
     "roles": [
       "multi-crew"
     ],
@@ -1241,21 +1228,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 24
   },
   {
-    "id": "cnou-nomad-teach",
-    "name": "Nomad Teach's Special",
-    "roles": [
-      "cargo"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Consolidated Outland",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 0
-  },
-  {
-    "id": "drak-corsair-exec-military",
+    "id": "drak-corsair-exec-stealthindustrial",
     "name": "Corsair PYAM Exec",
     "roles": [
       "multi-crew"
@@ -1269,7 +1242,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 72
   },
   {
-    "id": "drak-corsair-exec-stealthindustrial",
+    "id": "drak-corsair-exec-military",
     "name": "Corsair PYAM Exec",
     "roles": [
       "multi-crew"
@@ -1444,7 +1417,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 114
   },
   {
-    "id": "drak-cutlass-black-exec-stealth",
+    "id": "drak-cutlass-black-exec-military",
     "name": "Cutlass Black PYAM Exec",
     "roles": [
       "cargo",
@@ -1460,7 +1433,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 46
   },
   {
-    "id": "drak-cutlass-black-exec-military",
+    "id": "drak-cutlass-black-exec-stealth",
     "name": "Cutlass Black PYAM Exec",
     "roles": [
       "cargo",
@@ -1491,20 +1464,6 @@ export const shipsGenerated: ShipProfile[] = [
   },
   {
     "id": "drak-caterpillar",
-    "name": "Caterpillar",
-    "roles": [
-      "cargo"
-    ],
-    "storageBehavior": "ship",
-    "manufacturer": "Drake Interplanetary",
-    "size": "large",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 576
-  },
-  {
-    "id": "drak-caterpillar-boarded",
     "name": "Caterpillar",
     "roles": [
       "cargo"
@@ -1560,22 +1519,6 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 72
   },
   {
-    "id": "drak-cutlass-black-bis2950",
-    "name": "Cutlass Black",
-    "roles": [
-      "cargo",
-      "combat",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Drake Interplanetary",
-    "size": "medium",
-    "status": "flight-ready",
-    "crewMin": 3,
-    "crewMax": 3,
-    "cargoScu": 46
-  },
-  {
     "id": "drak-cutlass-black",
     "name": "Cutlass Black",
     "roles": [
@@ -1592,7 +1535,23 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 46
   },
   {
-    "id": "drak-cutlass-blue",
+    "id": "drak-cutlass-black-bis2950",
+    "name": "Cutlass Black",
+    "roles": [
+      "cargo",
+      "combat",
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Drake Interplanetary",
+    "size": "medium",
+    "status": "flight-ready",
+    "crewMin": 3,
+    "crewMax": 3,
+    "cargoScu": 46
+  },
+  {
+    "id": "drak-cutlass-blue-bis2950",
     "name": "Cutlass Blue",
     "roles": [
       "combat",
@@ -1607,7 +1566,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "drak-cutlass-blue-bis2950",
+    "id": "drak-cutlass-blue",
     "name": "Cutlass Blue",
     "roles": [
       "combat",
@@ -1737,20 +1696,6 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 64
   },
   {
-    "id": "drak-golem-teach",
-    "name": "Golem Teach's Special",
-    "roles": [
-      "cargo"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Drake Interplanetary",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 0
-  },
-  {
     "id": "drak-golem-collector-indust",
     "name": "Golem Wikelo Work Special",
     "roles": [
@@ -1779,22 +1724,51 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "drak-vulture",
-    "name": "Vulture",
+    "id": "drak-ironclad",
+    "name": "Ironclad",
     "roles": [
-      "cargo"
+      "cargo",
+      "multi-crew"
+    ],
+    "storageBehavior": "ship",
+    "manufacturer": "Drake Interplanetary",
+    "size": "large",
+    "status": "flight-ready",
+    "crewMin": 7,
+    "crewMax": 7,
+    "cargoScu": 2200
+  },
+  {
+    "id": "drak-ironclad-assault",
+    "name": "Ironclad Assault",
+    "roles": [
+      "combat",
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Drake Interplanetary",
-    "size": "small",
+    "size": "large",
+    "status": "flight-ready",
+    "crewMin": 7,
+    "crewMax": 7,
+    "cargoScu": 1440
+  },
+  {
+    "id": "drak-pitbull",
+    "name": "Pitbull",
+    "roles": [
+      "combat"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Drake Interplanetary",
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
-    "cargoScu": 12
+    "cargoScu": 0
   },
   {
-    "id": "drak-vulture-teach",
-    "name": "Vulture Teach's Special",
+    "id": "drak-vulture",
+    "name": "Vulture",
     "roles": [
       "cargo"
     ],
@@ -1982,7 +1956,7 @@ export const shipsGenerated: ShipProfile[] = [
       "combat"
     ],
     "storageBehavior": "local",
-    "manufacturer": "Kruger Intergalatic",
+    "manufacturer": "Kruger Intergalactic",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
@@ -1996,7 +1970,7 @@ export const shipsGenerated: ShipProfile[] = [
       "combat"
     ],
     "storageBehavior": "local",
-    "manufacturer": "Kruger Intergalatic",
+    "manufacturer": "Kruger Intergalactic",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
@@ -2010,7 +1984,7 @@ export const shipsGenerated: ShipProfile[] = [
       "combat"
     ],
     "storageBehavior": "local",
-    "manufacturer": "Kruger Intergalatic",
+    "manufacturer": "Kruger Intergalactic",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
@@ -2024,7 +1998,21 @@ export const shipsGenerated: ShipProfile[] = [
       "combat"
     ],
     "storageBehavior": "local",
-    "manufacturer": "Kruger Intergalatic",
+    "manufacturer": "Kruger Intergalactic",
+    "size": "small",
+    "status": "flight-ready",
+    "crewMin": 1,
+    "crewMax": 1,
+    "cargoScu": 0
+  },
+  {
+    "id": "krig-l22-alphawolf-collector-military",
+    "name": "L-22 Alpha Wolf Wikelo War Special",
+    "roles": [
+      "combat"
+    ],
+    "storageBehavior": "local",
+    "manufacturer": "Kruger Intergalactic",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
@@ -2038,7 +2026,7 @@ export const shipsGenerated: ShipProfile[] = [
       "combat"
     ],
     "storageBehavior": "both",
-    "manufacturer": "Kruger Intergalatic",
+    "manufacturer": "Kruger Intergalactic",
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
@@ -2051,7 +2039,7 @@ export const shipsGenerated: ShipProfile[] = [
       "cargo"
     ],
     "storageBehavior": "both",
-    "manufacturer": "Kruger Intergalatic",
+    "manufacturer": "Kruger Intergalactic",
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
@@ -2064,7 +2052,7 @@ export const shipsGenerated: ShipProfile[] = [
       "cargo"
     ],
     "storageBehavior": "both",
-    "manufacturer": "Kruger Intergalatic",
+    "manufacturer": "Kruger Intergalactic",
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
@@ -2238,20 +2226,6 @@ export const shipsGenerated: ShipProfile[] = [
   {
     "id": "misc-fortune",
     "name": "Fortune",
-    "roles": [
-      "cargo"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 16
-  },
-  {
-    "id": "misc-fortune-teach",
-    "name": "Fortune Teach's Special",
     "roles": [
       "cargo"
     ],
@@ -2486,20 +2460,6 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 2,
     "crewMax": 2,
-    "cargoScu": 291
-  },
-  {
-    "id": "misc-starfarer-teach",
-    "name": "Starfarer Teach's Special",
-    "roles": [
-      "cargo"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
-    "size": "large",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
     "cargoScu": 291
   },
   {
@@ -2768,49 +2728,18 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "rsi-apollo-medivac-tier-1",
-    "name": "Apollo Medivac",
+    "id": "orig-m80",
+    "name": "M80",
     "roles": [
-      "medical",
-      "multi-crew"
+      "combat"
     ],
-    "storageBehavior": "both",
-    "manufacturer": "Roberts Space Industries",
-    "size": "large",
+    "storageBehavior": "local",
+    "manufacturer": "Origin Jumpworks",
+    "size": "small",
     "status": "flight-ready",
-    "crewMin": 2,
-    "crewMax": 2,
-    "cargoScu": 32
-  },
-  {
-    "id": "rsi-apollo-medivac-tier-3",
-    "name": "Apollo Medivac",
-    "roles": [
-      "medical",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Roberts Space Industries",
-    "size": "large",
-    "status": "flight-ready",
-    "crewMin": 2,
-    "crewMax": 2,
-    "cargoScu": 32
-  },
-  {
-    "id": "rsi-apollo-medivac-tier-2",
-    "name": "Apollo Medivac",
-    "roles": [
-      "medical",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Roberts Space Industries",
-    "size": "large",
-    "status": "flight-ready",
-    "crewMin": 2,
-    "crewMax": 2,
-    "cargoScu": 32
+    "crewMin": 1,
+    "crewMax": 1,
+    "cargoScu": 2
   },
   {
     "id": "rsi-apollo-medivac",
@@ -2828,52 +2757,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 32
   },
   {
-    "id": "rsi-apollo-triage-tier-2",
-    "name": "Apollo Triage",
-    "roles": [
-      "medical",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Roberts Space Industries",
-    "size": "large",
-    "status": "flight-ready",
-    "crewMin": 2,
-    "crewMax": 2,
-    "cargoScu": 32
-  },
-  {
-    "id": "rsi-apollo-triage-tier-1",
-    "name": "Apollo Triage",
-    "roles": [
-      "medical",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Roberts Space Industries",
-    "size": "large",
-    "status": "flight-ready",
-    "crewMin": 2,
-    "crewMax": 2,
-    "cargoScu": 32
-  },
-  {
     "id": "rsi-apollo-triage",
-    "name": "Apollo Triage",
-    "roles": [
-      "medical",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Roberts Space Industries",
-    "size": "large",
-    "status": "flight-ready",
-    "crewMin": 2,
-    "crewMax": 2,
-    "cargoScu": 32
-  },
-  {
-    "id": "rsi-apollo-triage-tier-3",
     "name": "Apollo Triage",
     "roles": [
       "medical",
@@ -3349,6 +3233,20 @@ export const shipsGenerated: ShipProfile[] = [
     "crewMin": 1,
     "crewMax": 1,
     "cargoScu": 6
+  },
+  {
+    "id": "vncl-mauler",
+    "name": "Mauler Destroyer",
+    "roles": [
+      "cargo",
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Vanduul",
+    "status": "flight-ready",
+    "crewMin": 19,
+    "crewMax": 19,
+    "cargoScu": 0
   },
   {
     "id": "vncl-scythe",
