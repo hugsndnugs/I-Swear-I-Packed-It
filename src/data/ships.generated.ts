@@ -3178,7 +3178,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "rsi-zeus-cl",
+    "id": "rsi-zeus-cl-collector-indust",
     "name": "Zeus Mk II CL",
     "roles": [
       "cargo",
@@ -3193,7 +3193,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 128
   },
   {
-    "id": "rsi-zeus-cl-collector-indust",
+    "id": "rsi-zeus-cl",
     "name": "Zeus Mk II CL",
     "roles": [
       "cargo",
