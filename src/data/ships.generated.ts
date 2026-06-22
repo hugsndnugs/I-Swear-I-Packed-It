@@ -60,7 +60,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "aegs-eclipse-bis2950",
+    "id": "aegs-eclipse",
     "name": "Eclipse",
     "roles": [
       "combat"
@@ -74,7 +74,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "aegs-eclipse",
+    "id": "aegs-eclipse-bis2950",
     "name": "Eclipse",
     "roles": [
       "combat"
@@ -156,7 +156,7 @@ export const shipsGenerated: ShipProfile[] = [
     "size": "large",
     "status": "flight-ready",
     "crewMin": 2,
-    "crewMax": 2,
+    "crewMax": 11,
     "cargoScu": 40
   },
   {
@@ -171,105 +171,95 @@ export const shipsGenerated: ShipProfile[] = [
     "size": "large",
     "status": "flight-ready",
     "crewMin": 2,
-    "crewMax": 2,
+    "crewMax": 11,
     "cargoScu": 0
   },
   {
     "id": "aegs-idris-m",
     "name": "Idris-M",
     "roles": [
-      "combat"
+      "combat",
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Aegis Dynamics",
     "size": "capital",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 22,
     "cargoScu": 1326
-  },
-  {
-    "id": "aegs-idris-p-fw-25",
-    "name": "Idris-P",
-    "roles": [
-      "combat"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Aegis Dynamics",
-    "size": "capital",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 1374
   },
   {
     "id": "aegs-idris-p-tsg",
     "name": "Idris-P",
     "roles": [
-      "combat"
+      "combat",
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Aegis Dynamics",
     "size": "capital",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 21,
+    "cargoScu": 1374
+  },
+  {
+    "id": "aegs-idris-p-fw-25",
+    "name": "Idris-P",
+    "roles": [
+      "combat",
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Aegis Dynamics",
+    "size": "capital",
+    "status": "flight-ready",
+    "crewMin": 1,
+    "crewMax": 22,
     "cargoScu": 1374
   },
   {
     "id": "aegs-idris-p",
     "name": "Idris-P",
     "roles": [
-      "combat"
+      "combat",
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Aegis Dynamics",
     "size": "capital",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 1374
-  },
-  {
-    "id": "aegs-idris-p-collector-military",
-    "name": "Idris-P Wikelo War Special",
-    "roles": [
-      "combat"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Aegis Dynamics",
-    "size": "capital",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 22,
     "cargoScu": 1374
   },
   {
     "id": "aegs-reclaimer",
     "name": "Reclaimer",
     "roles": [
-      "cargo"
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Aegis Dynamics",
     "size": "large",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 12,
     "cargoScu": 420
   },
   {
     "id": "aegs-reclaimer-showdown",
     "name": "Reclaimer 2949 Best In Show Edition",
     "roles": [
-      "cargo"
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Aegis Dynamics",
     "size": "large",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 12,
     "cargoScu": 420
   },
   {
@@ -284,21 +274,22 @@ export const shipsGenerated: ShipProfile[] = [
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 4,
-    "crewMax": 4,
+    "crewMax": 13,
     "cargoScu": 2
   },
   {
     "id": "aegs-retaliator",
     "name": "Retaliator",
     "roles": [
-      "combat"
+      "combat",
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Aegis Dynamics",
     "size": "large",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 12,
     "cargoScu": 0
   },
   {
@@ -344,36 +335,8 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "aegs-sabre-firebird-collector-milt",
-    "name": "Sabre Firebird Wikelo War Special",
-    "roles": [
-      "combat"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Aegis Dynamics",
-    "size": "medium",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 0
-  },
-  {
     "id": "aegs-sabre-peregrine",
     "name": "Sabre Peregrine",
-    "roles": [
-      "cargo"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Aegis Dynamics",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 0
-  },
-  {
-    "id": "aegs-sabre-peregrine-collector-competition",
-    "name": "Sabre Peregrine Wikelo Speedy Special",
     "roles": [
       "cargo"
     ],
@@ -410,64 +373,68 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Aegis Dynamics",
     "size": "large",
     "status": "flight-ready",
-    "crewMin": 8,
-    "crewMax": 8,
+    "crewMin": 7,
+    "crewMax": 7,
     "cargoScu": 64
   },
   {
     "id": "aegs-vanguard-harbinger",
     "name": "Vanguard Harbinger",
     "roles": [
-      "combat"
+      "combat",
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Aegis Dynamics",
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 4,
     "cargoScu": 0
   },
   {
     "id": "aegs-vanguard-hoplite",
     "name": "Vanguard Hoplite",
     "roles": [
-      "combat"
+      "combat",
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Aegis Dynamics",
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 2,
     "cargoScu": 0
   },
   {
     "id": "aegs-vanguard-sentinel",
     "name": "Vanguard Sentinel",
     "roles": [
-      "combat"
+      "combat",
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Aegis Dynamics",
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 5,
     "cargoScu": 0
   },
   {
     "id": "aegs-vanguard",
     "name": "Vanguard Warden",
     "roles": [
-      "combat"
+      "combat",
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Aegis Dynamics",
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 5,
     "cargoScu": 0
   },
   {
@@ -488,28 +455,15 @@ export const shipsGenerated: ShipProfile[] = [
     "id": "anvl-asgard",
     "name": "Asgard",
     "roles": [
-      "combat"
+      "combat",
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Anvil Aerospace",
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 180
-  },
-  {
-    "id": "anvl-asgard-collector-military",
-    "name": "Asgard Wikelo War Special",
-    "roles": [
-      "combat"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Anvil Aerospace",
-    "size": "medium",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 2,
     "cargoScu": 180
   },
   {
@@ -565,7 +519,7 @@ export const shipsGenerated: ShipProfile[] = [
     "size": "large",
     "status": "flight-ready",
     "crewMin": 6,
-    "crewMax": 6,
+    "crewMax": 12,
     "cargoScu": 456
   },
   {
@@ -579,7 +533,7 @@ export const shipsGenerated: ShipProfile[] = [
     "size": "large",
     "status": "flight-ready",
     "crewMin": 6,
-    "crewMax": 6,
+    "crewMax": 12,
     "cargoScu": 456
   },
   {
@@ -593,7 +547,7 @@ export const shipsGenerated: ShipProfile[] = [
     "size": "large",
     "status": "flight-ready",
     "crewMin": 6,
-    "crewMax": 6,
+    "crewMax": 12,
     "cargoScu": 456
   },
   {
@@ -670,14 +624,15 @@ export const shipsGenerated: ShipProfile[] = [
     "id": "anvl-hornet-f7cm-heartseeker",
     "name": "F7C-M Hornet Heartseeker Mk I",
     "roles": [
-      "combat"
+      "combat",
+      "multi-crew"
     ],
     "storageBehavior": "local",
     "manufacturer": "Anvil Aerospace",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 2,
     "cargoScu": 0
   },
   {
@@ -699,14 +654,15 @@ export const shipsGenerated: ShipProfile[] = [
     "id": "anvl-hornet-f7cm",
     "name": "F7C-M Super Hornet Mk I",
     "roles": [
-      "combat"
+      "combat",
+      "multi-crew"
     ],
     "storageBehavior": "local",
     "manufacturer": "Anvil Aerospace",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 2,
     "cargoScu": 0
   },
   {
@@ -837,45 +793,18 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "anvl-lightning-f8c-collector-stealth",
-    "name": "F8C Lightning Wikelo Sneak Special",
-    "roles": [
-      "combat"
-    ],
-    "storageBehavior": "local",
-    "manufacturer": "Anvil Aerospace",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 0
-  },
-  {
-    "id": "anvl-lightning-f8c-collector-military",
-    "name": "F8C Lightning Wikelo War Special",
-    "roles": [
-      "combat"
-    ],
-    "storageBehavior": "local",
-    "manufacturer": "Anvil Aerospace",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 0
-  },
-  {
     "id": "anvl-gladiator",
     "name": "Gladiator",
     "roles": [
-      "combat"
+      "combat",
+      "multi-crew"
     ],
     "storageBehavior": "local",
     "manufacturer": "Anvil Aerospace",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 2,
     "cargoScu": 0
   },
   {
@@ -896,14 +825,15 @@ export const shipsGenerated: ShipProfile[] = [
     "id": "anvl-hurricane",
     "name": "Hurricane",
     "roles": [
-      "combat"
+      "combat",
+      "multi-crew"
     ],
     "storageBehavior": "local",
     "manufacturer": "Anvil Aerospace",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 2,
     "cargoScu": 0
   },
   {
@@ -925,14 +855,14 @@ export const shipsGenerated: ShipProfile[] = [
     "id": "anvl-terrapin",
     "name": "Terrapin",
     "roles": [
-      "cargo"
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Anvil Aerospace",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 2,
     "cargoScu": 0
   },
   {
@@ -950,45 +880,33 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "anvl-terrapin-medic-collector-medic",
-    "name": "Terrapin Medic Wikelo Savior Special",
+    "id": "anvl-valkyrie",
+    "name": "Valkyrie",
     "roles": [
-      "medical"
+      "combat",
+      "multi-crew"
     ],
-    "storageBehavior": "both",
+    "storageBehavior": "local",
     "manufacturer": "Anvil Aerospace",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 0
+    "crewMax": 5,
+    "cargoScu": 90
   },
   {
     "id": "anvl-valkyrie-bis2950",
     "name": "Valkyrie",
     "roles": [
-      "combat"
+      "combat",
+      "multi-crew"
     ],
     "storageBehavior": "local",
     "manufacturer": "Anvil Aerospace",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 90
-  },
-  {
-    "id": "anvl-valkyrie",
-    "name": "Valkyrie",
-    "roles": [
-      "combat"
-    ],
-    "storageBehavior": "local",
-    "manufacturer": "Anvil Aerospace",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 5,
     "cargoScu": 90
   },
   {
@@ -1030,7 +948,7 @@ export const shipsGenerated: ShipProfile[] = [
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 5,
-    "crewMax": 5,
+    "crewMax": 2,
     "cargoScu": 32
   },
   {
@@ -1044,7 +962,7 @@ export const shipsGenerated: ShipProfile[] = [
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 3,
-    "crewMax": 3,
+    "crewMax": 2,
     "cargoScu": 224
   },
   {
@@ -1098,22 +1016,7 @@ export const shipsGenerated: ShipProfile[] = [
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 2,
-    "crewMax": 2,
-    "cargoScu": 192
-  },
-  {
-    "id": "argo-raft-collector-indust",
-    "name": "RAFT Wikelo Work Special",
-    "roles": [
-      "cargo",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Argo Astronautics",
-    "size": "medium",
-    "status": "flight-ready",
-    "crewMin": 2,
-    "crewMax": 2,
+    "crewMax": 3,
     "cargoScu": 192
   },
   {
@@ -1134,14 +1037,15 @@ export const shipsGenerated: ShipProfile[] = [
     "id": "banu-defender",
     "name": "Defender",
     "roles": [
-      "combat"
+      "combat",
+      "multi-crew"
     ],
     "storageBehavior": "local",
-    "manufacturer": "Banu",
+    "manufacturer": "Banu Souli",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 2,
     "cargoScu": 0
   },
   {
@@ -1243,34 +1147,6 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 24
   },
   {
-    "id": "drak-corsair-exec-stealthindustrial",
-    "name": "Corsair PYAM Exec",
-    "roles": [
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Drake Interplanetary",
-    "size": "large",
-    "status": "flight-ready",
-    "crewMin": 4,
-    "crewMax": 4,
-    "cargoScu": 72
-  },
-  {
-    "id": "drak-corsair-exec-military",
-    "name": "Corsair PYAM Exec",
-    "roles": [
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Drake Interplanetary",
-    "size": "large",
-    "status": "flight-ready",
-    "crewMin": 4,
-    "crewMax": 4,
-    "cargoScu": 72
-  },
-  {
     "id": "crus-spirit-a1",
     "name": "A1 Spirit",
     "roles": [
@@ -1344,21 +1220,6 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 64
   },
   {
-    "id": "crus-spirit-c1-civilian",
-    "name": "C1 Spirit Wikelo Special",
-    "roles": [
-      "cargo",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Crusader Industries",
-    "size": "medium",
-    "status": "flight-ready",
-    "crewMin": 2,
-    "crewMax": 2,
-    "cargoScu": 64
-  },
-  {
     "id": "crus-starlifter-c2",
     "name": "C2 Hercules Starlifter",
     "roles": [
@@ -1376,20 +1237,6 @@ export const shipsGenerated: ShipProfile[] = [
   {
     "id": "crus-intrepid",
     "name": "Intrepid",
-    "roles": [
-      "cargo"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Crusader Industries",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 8
-  },
-  {
-    "id": "crus-intrepid-collector-indust",
-    "name": "Intrepid Wikelo Work Special",
     "roles": [
       "cargo"
     ],
@@ -1421,47 +1268,16 @@ export const shipsGenerated: ShipProfile[] = [
     "id": "crus-star-runner",
     "name": "Mercury Star Runner",
     "roles": [
-      "cargo"
+      "cargo",
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Crusader Industries",
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 5,
     "cargoScu": 114
-  },
-  {
-    "id": "drak-cutlass-black-exec-military",
-    "name": "Cutlass Black PYAM Exec",
-    "roles": [
-      "cargo",
-      "combat",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Drake Interplanetary",
-    "size": "medium",
-    "status": "flight-ready",
-    "crewMin": 3,
-    "crewMax": 3,
-    "cargoScu": 46
-  },
-  {
-    "id": "drak-cutlass-black-exec-stealth",
-    "name": "Cutlass Black PYAM Exec",
-    "roles": [
-      "cargo",
-      "combat",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Drake Interplanetary",
-    "size": "medium",
-    "status": "flight-ready",
-    "crewMin": 3,
-    "crewMax": 3,
-    "cargoScu": 46
   },
   {
     "id": "drak-buccaneer",
@@ -1481,28 +1297,30 @@ export const shipsGenerated: ShipProfile[] = [
     "id": "drak-caterpillar",
     "name": "Caterpillar",
     "roles": [
-      "cargo"
+      "cargo",
+      "multi-crew"
     ],
     "storageBehavior": "ship",
     "manufacturer": "Drake Interplanetary",
     "size": "large",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 4,
     "cargoScu": 576
   },
   {
     "id": "drak-caterpillar-pirate",
     "name": "Caterpillar Pirate",
     "roles": [
-      "cargo"
+      "cargo",
+      "multi-crew"
     ],
     "storageBehavior": "ship",
     "manufacturer": "Drake Interplanetary",
     "size": "large",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 4,
     "cargoScu": 576
   },
   {
@@ -1566,21 +1384,6 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 46
   },
   {
-    "id": "drak-cutlass-blue",
-    "name": "Cutlass Blue",
-    "roles": [
-      "combat",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Drake Interplanetary",
-    "size": "medium",
-    "status": "flight-ready",
-    "crewMin": 3,
-    "crewMax": 3,
-    "cargoScu": 12
-  },
-  {
     "id": "drak-cutlass-blue-bis2950",
     "name": "Cutlass Blue",
     "roles": [
@@ -1596,18 +1399,18 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "drak-cutlass-red-bis2950",
-    "name": "Cutlass Red",
+    "id": "drak-cutlass-blue",
+    "name": "Cutlass Blue",
     "roles": [
-      "medical",
+      "combat",
       "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Drake Interplanetary",
     "size": "medium",
     "status": "flight-ready",
-    "crewMin": 2,
-    "crewMax": 2,
+    "crewMin": 3,
+    "crewMax": 3,
     "cargoScu": 12
   },
   {
@@ -1622,7 +1425,22 @@ export const shipsGenerated: ShipProfile[] = [
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 2,
-    "crewMax": 2,
+    "crewMax": 3,
+    "cargoScu": 12
+  },
+  {
+    "id": "drak-cutlass-red-bis2950",
+    "name": "Cutlass Red",
+    "roles": [
+      "medical",
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Drake Interplanetary",
+    "size": "medium",
+    "status": "flight-ready",
+    "crewMin": 2,
+    "crewMax": 3,
     "cargoScu": 12
   },
   {
@@ -1672,14 +1490,14 @@ export const shipsGenerated: ShipProfile[] = [
     "id": "drak-cutter-scout",
     "name": "Cutter Scout",
     "roles": [
-      "cargo"
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Drake Interplanetary",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 2,
     "cargoScu": 2
   },
   {
@@ -1711,31 +1529,18 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 64
   },
   {
-    "id": "drak-golem-collector-indust",
-    "name": "Golem Wikelo Work Special",
-    "roles": [
-      "cargo"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Drake Interplanetary",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 0
-  },
-  {
     "id": "drak-herald",
     "name": "Herald",
     "roles": [
-      "cargo"
+      "cargo",
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Drake Interplanetary",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 2,
     "cargoScu": 0
   },
   {
@@ -1750,7 +1555,7 @@ export const shipsGenerated: ShipProfile[] = [
     "size": "large",
     "status": "flight-ready",
     "crewMin": 7,
-    "crewMax": 7,
+    "crewMax": 6,
     "cargoScu": 2200
   },
   {
@@ -1765,7 +1570,7 @@ export const shipsGenerated: ShipProfile[] = [
     "size": "large",
     "status": "flight-ready",
     "crewMin": 7,
-    "crewMax": 7,
+    "crewMax": 8,
     "cargoScu": 1440
   },
   {
@@ -1827,52 +1632,40 @@ export const shipsGenerated: ShipProfile[] = [
     "id": "espr-prowler",
     "name": "Prowler",
     "roles": [
-      "combat"
+      "combat",
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Esperia",
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 2,
     "cargoScu": 0
   },
   {
     "id": "espr-prowler-utility",
     "name": "Prowler Utility",
     "roles": [
-      "cargo"
+      "cargo",
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Esperia",
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 32
-  },
-  {
-    "id": "espr-prowler-utility-collector-indust",
-    "name": "Prowler Utility Wikelo Work Special",
-    "roles": [
-      "cargo"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Esperia",
-    "size": "medium",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 2,
     "cargoScu": 32
   },
   {
     "id": "vncl-stinger",
-    "name": "Esperia Stinger",
+    "name": "Stinger",
     "roles": [
       "combat"
     ],
     "storageBehavior": "both",
-    "manufacturer": "Vanduul",
+    "manufacturer": "Esperia",
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 1,
@@ -1908,32 +1701,19 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "anvl-lightning-f8c-exec-military",
-    "name": "F8C Lightning PYAM Exec",
+    "id": "gama-railen",
+    "name": "Railen",
     "roles": [
-      "combat"
+      "cargo",
+      "multi-crew"
     ],
-    "storageBehavior": "local",
-    "manufacturer": "Anvil Aerospace",
-    "size": "small",
+    "storageBehavior": "both",
+    "manufacturer": "Gatac Manufacture",
+    "size": "medium",
     "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 0
-  },
-  {
-    "id": "anvl-lightning-f8c-exec-stealth",
-    "name": "F8C Lightning PYAM Exec",
-    "roles": [
-      "combat"
-    ],
-    "storageBehavior": "local",
-    "manufacturer": "Anvil Aerospace",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 0
+    "crewMin": 4,
+    "crewMax": 6,
+    "cargoScu": 640
   },
   {
     "id": "gama-syulen",
@@ -1948,6 +1728,21 @@ export const shipsGenerated: ShipProfile[] = [
     "crewMin": 1,
     "crewMax": 1,
     "cargoScu": 6
+  },
+  {
+    "id": "gama-tyilui",
+    "name": "Tyilui",
+    "roles": [
+      "cargo",
+      "multi-crew"
+    ],
+    "storageBehavior": "ship",
+    "manufacturer": "Gatac Manufacture",
+    "size": "large",
+    "status": "flight-ready",
+    "crewMin": 4,
+    "crewMax": 6,
+    "cargoScu": 96
   },
   {
     "id": "glsn-shiv",
@@ -1979,50 +1774,8 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "krig-l21-wolf-collector-stealth",
-    "name": "L-21 Wolf Wikelo Sneak Special",
-    "roles": [
-      "combat"
-    ],
-    "storageBehavior": "local",
-    "manufacturer": "Kruger Intergalactic",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 0
-  },
-  {
-    "id": "krig-l21-wolf-collector-military",
-    "name": "L-21 Wolf Wikelo War Special",
-    "roles": [
-      "combat"
-    ],
-    "storageBehavior": "local",
-    "manufacturer": "Kruger Intergalactic",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 0
-  },
-  {
     "id": "krig-l22-alphawolf",
     "name": "L-22 Alpha Wolf",
-    "roles": [
-      "combat"
-    ],
-    "storageBehavior": "local",
-    "manufacturer": "Kruger Intergalactic",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 0
-  },
-  {
-    "id": "krig-l22-alphawolf-collector-military",
-    "name": "L-22 Alpha Wolf Wikelo War Special",
     "roles": [
       "combat"
     ],
@@ -2141,50 +1894,8 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "mrai-guardian-mx-collector-military",
-    "name": "Guardian MX Wikelo War Special",
-    "roles": [
-      "combat"
-    ],
-    "storageBehavior": "local",
-    "manufacturer": "Mirai",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 0
-  },
-  {
     "id": "mrai-guardian-qi",
     "name": "Guardian QI",
-    "roles": [
-      "combat"
-    ],
-    "storageBehavior": "local",
-    "manufacturer": "Mirai",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 0
-  },
-  {
-    "id": "mrai-guardian-qi-collector-indust",
-    "name": "Guardian QI Wikelo Special",
-    "roles": [
-      "combat"
-    ],
-    "storageBehavior": "local",
-    "manufacturer": "Mirai",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 0
-  },
-  {
-    "id": "mrai-guardian-military",
-    "name": "Guardian Wikelo War Special",
     "roles": [
       "combat"
     ],
@@ -2240,26 +1951,12 @@ export const shipsGenerated: ShipProfile[] = [
   },
   {
     "id": "misc-fortune",
-    "name": "Fortune",
+    "name": "MISC Fortune",
     "roles": [
       "cargo"
     ],
     "storageBehavior": "both",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 16
-  },
-  {
-    "id": "misc-fortune-collector-industrial",
-    "name": "Fortune Wikelo Special",
-    "roles": [
-      "cargo"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
+    "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
@@ -2268,68 +1965,71 @@ export const shipsGenerated: ShipProfile[] = [
   },
   {
     "id": "misc-freelancer",
-    "name": "Freelancer",
+    "name": "MISC Freelancer",
     "roles": [
-      "cargo"
+      "cargo",
+      "multi-crew"
     ],
     "storageBehavior": "both",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
+    "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 9,
     "cargoScu": 66
   },
   {
     "id": "misc-freelancer-dur",
-    "name": "Freelancer DUR",
+    "name": "MISC Freelancer DUR",
     "roles": [
-      "cargo"
+      "multi-crew"
     ],
     "storageBehavior": "both",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
+    "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 9,
     "cargoScu": 36
   },
   {
     "id": "misc-freelancer-max",
-    "name": "Freelancer MAX",
+    "name": "MISC Freelancer MAX",
     "roles": [
-      "cargo"
+      "cargo",
+      "multi-crew"
     ],
     "storageBehavior": "both",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
+    "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 9,
     "cargoScu": 120
   },
   {
     "id": "misc-freelancer-mis",
-    "name": "Freelancer MIS",
+    "name": "MISC Freelancer MIS",
     "roles": [
-      "combat"
+      "combat",
+      "multi-crew"
     ],
     "storageBehavior": "both",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
+    "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 9,
     "cargoScu": 36
   },
   {
     "id": "misc-hull-a",
-    "name": "Hull A",
+    "name": "MISC Hull A",
     "roles": [
       "cargo"
     ],
     "storageBehavior": "both",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
+    "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
@@ -2338,13 +2038,13 @@ export const shipsGenerated: ShipProfile[] = [
   },
   {
     "id": "misc-hull-b",
-    "name": "Hull B",
+    "name": "MISC Hull B",
     "roles": [
       "cargo",
       "multi-crew"
     ],
     "storageBehavior": "both",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
+    "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 2,
@@ -2353,40 +2053,27 @@ export const shipsGenerated: ShipProfile[] = [
   },
   {
     "id": "misc-hull-c",
-    "name": "Hull C",
+    "name": "MISC Hull C",
     "roles": [
-      "cargo"
+      "cargo",
+      "multi-crew"
     ],
     "storageBehavior": "ship",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
+    "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "large",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 5,
     "cargoScu": 4608
   },
   {
     "id": "misc-prospector",
-    "name": "Prospector",
+    "name": "MISC Prospector",
     "roles": [
       "cargo"
     ],
     "storageBehavior": "both",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 0
-  },
-  {
-    "id": "misc-prospector-collector-indust",
-    "name": "Prospector Wikelo Work Special",
-    "roles": [
-      "cargo"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
+    "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
@@ -2395,152 +2082,128 @@ export const shipsGenerated: ShipProfile[] = [
   },
   {
     "id": "misc-reliant",
-    "name": "Reliant Kore",
+    "name": "MISC Reliant Kore",
     "roles": [
-      "cargo"
+      "cargo",
+      "multi-crew"
     ],
     "storageBehavior": "both",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
+    "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 2,
     "cargoScu": 6
   },
   {
     "id": "misc-reliant-mako",
-    "name": "Reliant Mako",
-    "roles": [
-      "cargo"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 0
-  },
-  {
-    "id": "misc-reliant-sen",
-    "name": "Reliant Sen",
-    "roles": [
-      "cargo"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 0
-  },
-  {
-    "id": "misc-reliant-tana",
-    "name": "Reliant Tana",
-    "roles": [
-      "combat"
-    ],
-    "storageBehavior": "local",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 1
-  },
-  {
-    "id": "misc-starfarer",
-    "name": "Starfarer",
-    "roles": [
-      "cargo"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
-    "size": "large",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 291
-  },
-  {
-    "id": "misc-starfarer-gemini",
-    "name": "Starfarer Gemini",
+    "name": "MISC Reliant Mako",
     "roles": [
       "multi-crew"
     ],
     "storageBehavior": "both",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
+    "manufacturer": "Musashi Industrial and Starflight Concern",
+    "size": "small",
+    "status": "flight-ready",
+    "crewMin": 1,
+    "crewMax": 5,
+    "cargoScu": 0
+  },
+  {
+    "id": "misc-reliant-sen",
+    "name": "MISC Reliant Sen",
+    "roles": [
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Musashi Industrial and Starflight Concern",
+    "size": "small",
+    "status": "flight-ready",
+    "crewMin": 1,
+    "crewMax": 5,
+    "cargoScu": 0
+  },
+  {
+    "id": "misc-reliant-tana",
+    "name": "MISC Reliant Tana",
+    "roles": [
+      "combat",
+      "multi-crew"
+    ],
+    "storageBehavior": "local",
+    "manufacturer": "Musashi Industrial and Starflight Concern",
+    "size": "small",
+    "status": "flight-ready",
+    "crewMin": 1,
+    "crewMax": 4,
+    "cargoScu": 1
+  },
+  {
+    "id": "misc-starfarer",
+    "name": "MISC Starfarer",
+    "roles": [
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Musashi Industrial and Starflight Concern",
+    "size": "large",
+    "status": "flight-ready",
+    "crewMin": 1,
+    "crewMax": 7,
+    "cargoScu": 291
+  },
+  {
+    "id": "misc-starfarer-gemini",
+    "name": "MISC Starfarer Gemini",
+    "roles": [
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "large",
     "status": "flight-ready",
     "crewMin": 2,
-    "crewMax": 2,
+    "crewMax": 7,
     "cargoScu": 291
   },
   {
     "id": "misc-starlancer-max",
-    "name": "Starlancer MAX",
+    "name": "MISC Starlancer MAX",
     "roles": [
-      "cargo"
+      "cargo",
+      "multi-crew"
     ],
     "storageBehavior": "both",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
+    "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 224
-  },
-  {
-    "id": "misc-starlancer-max-collector-indust",
-    "name": "Starlancer MAX Wikelo Work Special",
-    "roles": [
-      "cargo"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
-    "size": "medium",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 4,
     "cargoScu": 224
   },
   {
     "id": "misc-starlancer-tac",
-    "name": "Starlancer TAC",
+    "name": "MISC Starlancer TAC",
     "roles": [
-      "combat"
+      "combat",
+      "multi-crew"
     ],
     "storageBehavior": "both",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
+    "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 96
-  },
-  {
-    "id": "misc-starlancer-tac-collector-military",
-    "name": "Starlancer TAC Wikelo War Special",
-    "roles": [
-      "combat"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
-    "size": "medium",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 6,
     "cargoScu": 96
   },
   {
     "id": "misc-starlite",
-    "name": "Starlite",
+    "name": "MISC Starlite",
     "roles": [
       "cargo"
     ],
     "storageBehavior": "both",
-    "manufacturer": "Musashi Industrial & Starflight Concern",
+    "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
@@ -2593,56 +2256,57 @@ export const shipsGenerated: ShipProfile[] = [
     "id": "orig-300i",
     "name": "300i",
     "roles": [
-      "cargo"
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Origin Jumpworks",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 3,
     "cargoScu": 8
   },
   {
     "id": "orig-315p",
     "name": "315p",
     "roles": [
-      "cargo"
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Origin Jumpworks",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 3,
     "cargoScu": 12
   },
   {
     "id": "orig-325a",
     "name": "325a",
     "roles": [
-      "combat"
+      "combat",
+      "multi-crew"
     ],
     "storageBehavior": "local",
     "manufacturer": "Origin Jumpworks",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 3,
     "cargoScu": 4
   },
   {
     "id": "orig-350r",
     "name": "350r",
     "roles": [
-      "cargo"
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Origin Jumpworks",
     "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 2,
     "cargoScu": 4
   },
   {
@@ -2656,90 +2320,76 @@ export const shipsGenerated: ShipProfile[] = [
     "size": "large",
     "status": "flight-ready",
     "crewMin": 3,
-    "crewMax": 3,
+    "crewMax": 4,
     "cargoScu": 42
   },
   {
     "id": "orig-600i",
     "name": "600i",
     "roles": [
-      "cargo"
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Origin Jumpworks",
     "size": "large",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 5,
     "cargoScu": 44
   },
   {
     "id": "orig-600i-bis2951",
     "name": "600i 2951 BIS",
     "roles": [
-      "cargo"
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Origin Jumpworks",
     "size": "large",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 44
-  },
-  {
-    "id": "orig-600i-executive-edition",
-    "name": "600i Executive Edition",
-    "roles": [
-      "cargo"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Origin Jumpworks",
-    "size": "large",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 5,
     "cargoScu": 44
   },
   {
     "id": "orig-600i-touring",
     "name": "600i Touring",
     "roles": [
-      "cargo"
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Origin Jumpworks",
     "size": "large",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 3,
     "cargoScu": 20
   },
   {
     "id": "orig-85x",
     "name": "85X Limited",
     "roles": [
-      "cargo"
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Origin Jumpworks",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 2,
     "cargoScu": 0
   },
   {
     "id": "orig-890jump",
     "name": "890 Jump",
     "roles": [
-      "cargo"
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Origin Jumpworks",
     "size": "capital",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 8,
     "cargoScu": 388
   },
   {
@@ -2788,21 +2438,6 @@ export const shipsGenerated: ShipProfile[] = [
   {
     "id": "rsi-apollo-triage",
     "name": "Apollo Triage",
-    "roles": [
-      "medical",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Roberts Space Industries",
-    "size": "large",
-    "status": "flight-ready",
-    "crewMin": 2,
-    "crewMax": 2,
-    "cargoScu": 32
-  },
-  {
-    "id": "rsi-apollo-triage-collector-stealth",
-    "name": "Apollo Triage Wikelo Sneak Special",
     "roles": [
       "medical",
       "multi-crew"
@@ -2922,84 +2557,72 @@ export const shipsGenerated: ShipProfile[] = [
     "name": "Constellation Andromeda",
     "roles": [
       "cargo",
-      "combat"
+      "combat",
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Roberts Space Industries",
     "size": "large",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 5,
     "cargoScu": 96
   },
   {
     "id": "rsi-constellation-aquila",
     "name": "Constellation Aquila",
     "roles": [
-      "cargo"
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Roberts Space Industries",
     "size": "large",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 5,
     "cargoScu": 96
   },
   {
     "id": "rsi-constellation-phoenix",
     "name": "Constellation Phoenix",
     "roles": [
-      "cargo"
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Roberts Space Industries",
     "size": "large",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 5,
     "cargoScu": 80
   },
   {
     "id": "rsi-constellation-phoenix-emerald",
     "name": "Constellation Phoenix Emerald",
     "roles": [
-      "cargo"
+      "multi-crew"
     ],
     "storageBehavior": "both",
     "manufacturer": "Roberts Space Industries",
     "size": "large",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 5,
     "cargoScu": 80
   },
   {
     "id": "rsi-constellation-taurus",
     "name": "Constellation Taurus",
     "roles": [
-      "cargo"
+      "cargo",
+      "multi-crew"
     ],
     "storageBehavior": "ship",
     "manufacturer": "Roberts Space Industries",
     "size": "large",
     "status": "flight-ready",
     "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 174
-  },
-  {
-    "id": "rsi-constellation-taurus-military",
-    "name": "Constellation Taurus Wikelo War Special",
-    "roles": [
-      "cargo"
-    ],
-    "storageBehavior": "ship",
-    "manufacturer": "Roberts Space Industries",
-    "size": "large",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
+    "crewMax": 5,
     "cargoScu": 174
   },
   {
@@ -3014,7 +2637,7 @@ export const shipsGenerated: ShipProfile[] = [
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 2,
-    "crewMax": 2,
+    "crewMax": 3,
     "cargoScu": 288
   },
   {
@@ -3034,34 +2657,6 @@ export const shipsGenerated: ShipProfile[] = [
   {
     "id": "rsi-meteor",
     "name": "Meteor",
-    "roles": [
-      "combat"
-    ],
-    "storageBehavior": "local",
-    "manufacturer": "Roberts Space Industries",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 0
-  },
-  {
-    "id": "rsi-meteor-collector-military",
-    "name": "Meteor PYAM Exec",
-    "roles": [
-      "combat"
-    ],
-    "storageBehavior": "local",
-    "manufacturer": "Roberts Space Industries",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 0
-  },
-  {
-    "id": "rsi-meteor-collector-stealth",
-    "name": "Meteor Wikelo Sneak Special",
     "roles": [
       "combat"
     ],
@@ -3163,21 +2758,6 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "rsi-scorpius-stealth",
-    "name": "Scorpius Wikelo Sneak Special",
-    "roles": [
-      "combat",
-      "multi-crew"
-    ],
-    "storageBehavior": "local",
-    "manufacturer": "Roberts Space Industries",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 2,
-    "crewMax": 2,
-    "cargoScu": 0
-  },
-  {
     "id": "rsi-zeus-cl-collector-indust",
     "name": "Zeus Mk II CL",
     "roles": [
@@ -3189,7 +2769,7 @@ export const shipsGenerated: ShipProfile[] = [
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 3,
-    "crewMax": 3,
+    "crewMax": 9,
     "cargoScu": 128
   },
   {
@@ -3204,7 +2784,7 @@ export const shipsGenerated: ShipProfile[] = [
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 3,
-    "crewMax": 3,
+    "crewMax": 9,
     "cargoScu": 128
   },
   {
@@ -3218,64 +2798,8 @@ export const shipsGenerated: ShipProfile[] = [
     "size": "medium",
     "status": "flight-ready",
     "crewMin": 3,
-    "crewMax": 3,
+    "crewMax": 9,
     "cargoScu": 32
-  },
-  {
-    "id": "rsi-zeus-es-collector-indust",
-    "name": "Zeus Mk II ES Wikelo Work Special",
-    "roles": [
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Roberts Space Industries",
-    "size": "medium",
-    "status": "flight-ready",
-    "crewMin": 3,
-    "crewMax": 3,
-    "cargoScu": 32
-  },
-  {
-    "id": "gama-syulen-exec-military",
-    "name": "Syulen PYAM Exec",
-    "roles": [
-      "cargo"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Gatac Manufacture",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 6
-  },
-  {
-    "id": "gama-syulen-exec-stealth",
-    "name": "Syulen PYAM Exec",
-    "roles": [
-      "cargo"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Gatac Manufacture",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 1,
-    "cargoScu": 6
-  },
-  {
-    "id": "vncl-mauler",
-    "name": "Mauler Destroyer",
-    "roles": [
-      "cargo",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Vanduul",
-    "status": "flight-ready",
-    "crewMin": 19,
-    "crewMax": 19,
-    "cargoScu": 0
   },
   {
     "id": "vncl-scythe",
