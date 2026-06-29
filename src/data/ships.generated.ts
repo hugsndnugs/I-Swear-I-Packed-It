@@ -60,7 +60,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "aegs-eclipse",
+    "id": "aegs-eclipse-bis2950",
     "name": "Eclipse",
     "roles": [
       "combat"
@@ -74,7 +74,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "aegs-eclipse-bis2950",
+    "id": "aegs-eclipse",
     "name": "Eclipse",
     "roles": [
       "combat"
@@ -130,21 +130,6 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "aegs-hammerhead-gs",
-    "name": "Hammerhead",
-    "roles": [
-      "combat",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Aegis Dynamics",
-    "size": "large",
-    "status": "flight-ready",
-    "crewMin": 8,
-    "crewMax": 8,
-    "cargoScu": 64
-  },
-  {
     "id": "aegs-hammerhead",
     "name": "Hammerhead",
     "roles": [
@@ -158,6 +143,21 @@ export const shipsGenerated: ShipProfile[] = [
     "crewMin": 2,
     "crewMax": 11,
     "cargoScu": 40
+  },
+  {
+    "id": "aegs-hammerhead-gs",
+    "name": "Hammerhead",
+    "roles": [
+      "combat",
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Aegis Dynamics",
+    "size": "large",
+    "status": "flight-ready",
+    "crewMin": 8,
+    "crewMax": 8,
+    "cargoScu": 64
   },
   {
     "id": "aegs-hammerhead-showdown",
@@ -190,6 +190,21 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 1326
   },
   {
+    "id": "aegs-idris-p",
+    "name": "Idris-P",
+    "roles": [
+      "combat",
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Aegis Dynamics",
+    "size": "capital",
+    "status": "flight-ready",
+    "crewMin": 1,
+    "crewMax": 22,
+    "cargoScu": 1374
+  },
+  {
     "id": "aegs-idris-p-tsg",
     "name": "Idris-P",
     "roles": [
@@ -206,21 +221,6 @@ export const shipsGenerated: ShipProfile[] = [
   },
   {
     "id": "aegs-idris-p-fw-25",
-    "name": "Idris-P",
-    "roles": [
-      "combat",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Aegis Dynamics",
-    "size": "capital",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 22,
-    "cargoScu": 1374
-  },
-  {
-    "id": "aegs-idris-p",
     "name": "Idris-P",
     "roles": [
       "combat",
@@ -509,7 +509,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 4
   },
   {
-    "id": "anvl-carrack",
+    "id": "anvl-carrack-bis2950",
     "name": "Carrack",
     "roles": [
       "multi-crew"
@@ -523,7 +523,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 456
   },
   {
-    "id": "anvl-carrack-bis2950",
+    "id": "anvl-carrack",
     "name": "Carrack",
     "roles": [
       "multi-crew"
@@ -880,7 +880,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "anvl-valkyrie",
+    "id": "anvl-valkyrie-bis2950",
     "name": "Valkyrie",
     "roles": [
       "combat",
@@ -895,7 +895,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 90
   },
   {
-    "id": "anvl-valkyrie-bis2950",
+    "id": "anvl-valkyrie",
     "name": "Valkyrie",
     "roles": [
       "combat",
@@ -1384,7 +1384,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 46
   },
   {
-    "id": "drak-cutlass-blue-bis2950",
+    "id": "drak-cutlass-blue",
     "name": "Cutlass Blue",
     "roles": [
       "combat",
@@ -1399,7 +1399,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "drak-cutlass-blue",
+    "id": "drak-cutlass-blue-bis2950",
     "name": "Cutlass Blue",
     "roles": [
       "combat",
@@ -2684,7 +2684,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 96
   },
   {
-    "id": "rsi-polaris-collector-military",
+    "id": "rsi-polaris",
     "name": "Polaris",
     "roles": [
       "combat",
@@ -2699,7 +2699,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 576
   },
   {
-    "id": "rsi-polaris",
+    "id": "rsi-polaris-collector-military",
     "name": "Polaris",
     "roles": [
       "combat",
