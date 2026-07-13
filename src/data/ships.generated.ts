@@ -1384,7 +1384,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 46
   },
   {
-    "id": "drak-cutlass-blue-bis2950",
+    "id": "drak-cutlass-blue",
     "name": "Cutlass Blue",
     "roles": [
       "combat",
@@ -1399,7 +1399,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "drak-cutlass-blue",
+    "id": "drak-cutlass-blue-bis2950",
     "name": "Cutlass Blue",
     "roles": [
       "combat",
