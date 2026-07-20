@@ -130,6 +130,21 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
+    "id": "aegs-hammerhead",
+    "name": "Hammerhead",
+    "roles": [
+      "combat",
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Aegis Dynamics",
+    "size": "large",
+    "status": "flight-ready",
+    "crewMin": 9,
+    "crewMax": 11,
+    "cargoScu": 40
+  },
+  {
     "id": "aegs-hammerhead-gs",
     "name": "Hammerhead",
     "roles": [
@@ -145,21 +160,6 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 64
   },
   {
-    "id": "aegs-hammerhead",
-    "name": "Hammerhead",
-    "roles": [
-      "combat",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Aegis Dynamics",
-    "size": "large",
-    "status": "flight-ready",
-    "crewMin": 2,
-    "crewMax": 11,
-    "cargoScu": 40
-  },
-  {
     "id": "aegs-hammerhead-showdown",
     "name": "Hammerhead 2949 Best In Show Edition",
     "roles": [
@@ -170,7 +170,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Aegis Dynamics",
     "size": "large",
     "status": "flight-ready",
-    "crewMin": 2,
+    "crewMin": 9,
     "crewMax": 11,
     "cargoScu": 0
   },
@@ -185,24 +185,9 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Aegis Dynamics",
     "size": "capital",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 28,
     "crewMax": 22,
     "cargoScu": 1326
-  },
-  {
-    "id": "aegs-idris-p-fw-25",
-    "name": "Idris-P",
-    "roles": [
-      "combat",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Aegis Dynamics",
-    "size": "capital",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 22,
-    "cargoScu": 1374
   },
   {
     "id": "aegs-idris-p",
@@ -215,7 +200,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Aegis Dynamics",
     "size": "capital",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 28,
     "crewMax": 22,
     "cargoScu": 1374
   },
@@ -230,8 +215,23 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Aegis Dynamics",
     "size": "capital",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 28,
     "crewMax": 21,
+    "cargoScu": 1374
+  },
+  {
+    "id": "aegs-idris-p-fw-25",
+    "name": "Idris-P",
+    "roles": [
+      "combat",
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Aegis Dynamics",
+    "size": "capital",
+    "status": "flight-ready",
+    "crewMin": 28,
+    "crewMax": 22,
     "cargoScu": 1374
   },
   {
@@ -244,7 +244,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Aegis Dynamics",
     "size": "large",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 5,
     "crewMax": 12,
     "cargoScu": 420
   },
@@ -258,7 +258,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Aegis Dynamics",
     "size": "large",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 5,
     "crewMax": 12,
     "cargoScu": 420
   },
@@ -288,7 +288,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Aegis Dynamics",
     "size": "large",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 7,
     "crewMax": 12,
     "cargoScu": 0
   },
@@ -388,7 +388,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Aegis Dynamics",
     "size": "medium",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 2,
     "crewMax": 4,
     "cargoScu": 0
   },
@@ -403,7 +403,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Aegis Dynamics",
     "size": "medium",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 2,
     "crewMax": 2,
     "cargoScu": 0
   },
@@ -418,7 +418,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Aegis Dynamics",
     "size": "medium",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 2,
     "crewMax": 5,
     "cargoScu": 0
   },
@@ -433,7 +433,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Aegis Dynamics",
     "size": "medium",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 2,
     "crewMax": 5,
     "cargoScu": 0
   },
@@ -462,7 +462,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Anvil Aerospace",
     "size": "medium",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 2,
     "crewMax": 2,
     "cargoScu": 180
   },
@@ -509,7 +509,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 4
   },
   {
-    "id": "anvl-carrack",
+    "id": "anvl-carrack-bis2950",
     "name": "Carrack",
     "roles": [
       "multi-crew"
@@ -523,7 +523,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 456
   },
   {
-    "id": "anvl-carrack-bis2950",
+    "id": "anvl-carrack",
     "name": "Carrack",
     "roles": [
       "multi-crew"
@@ -631,7 +631,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Anvil Aerospace",
     "size": "small",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 2,
     "crewMax": 2,
     "cargoScu": 0
   },
@@ -661,7 +661,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Anvil Aerospace",
     "size": "small",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 2,
     "crewMax": 2,
     "cargoScu": 0
   },
@@ -803,7 +803,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Anvil Aerospace",
     "size": "small",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 2,
     "crewMax": 2,
     "cargoScu": 0
   },
@@ -832,7 +832,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Anvil Aerospace",
     "size": "small",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 2,
     "crewMax": 2,
     "cargoScu": 0
   },
@@ -880,21 +880,6 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "anvl-valkyrie-bis2950",
-    "name": "Valkyrie",
-    "roles": [
-      "combat",
-      "multi-crew"
-    ],
-    "storageBehavior": "local",
-    "manufacturer": "Anvil Aerospace",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 1,
-    "crewMax": 5,
-    "cargoScu": 90
-  },
-  {
     "id": "anvl-valkyrie",
     "name": "Valkyrie",
     "roles": [
@@ -905,7 +890,22 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Anvil Aerospace",
     "size": "small",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 5,
+    "crewMax": 5,
+    "cargoScu": 90
+  },
+  {
+    "id": "anvl-valkyrie-bis2950",
+    "name": "Valkyrie",
+    "roles": [
+      "combat",
+      "multi-crew"
+    ],
+    "storageBehavior": "local",
+    "manufacturer": "Anvil Aerospace",
+    "size": "small",
+    "status": "flight-ready",
+    "crewMin": 5,
     "crewMax": 5,
     "cargoScu": 90
   },
@@ -947,7 +947,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Argo Astronautics",
     "size": "medium",
     "status": "flight-ready",
-    "crewMin": 5,
+    "crewMin": 4,
     "crewMax": 2,
     "cargoScu": 32
   },
@@ -961,7 +961,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Argo Astronautics",
     "size": "medium",
     "status": "flight-ready",
-    "crewMin": 3,
+    "crewMin": 4,
     "crewMax": 2,
     "cargoScu": 224
   },
@@ -1044,7 +1044,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Banu Souli",
     "size": "small",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 2,
     "crewMax": 2,
     "cargoScu": 0
   },
@@ -1275,7 +1275,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Crusader Industries",
     "size": "medium",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 3,
     "crewMax": 5,
     "cargoScu": 114
   },
@@ -1304,7 +1304,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Drake Interplanetary",
     "size": "large",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 4,
     "crewMax": 4,
     "cargoScu": 576
   },
@@ -1319,7 +1319,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Drake Interplanetary",
     "size": "large",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 4,
     "crewMax": 4,
     "cargoScu": 576
   },
@@ -1352,22 +1352,6 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 72
   },
   {
-    "id": "drak-cutlass-black",
-    "name": "Cutlass Black",
-    "roles": [
-      "cargo",
-      "combat",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Drake Interplanetary",
-    "size": "medium",
-    "status": "flight-ready",
-    "crewMin": 3,
-    "crewMax": 3,
-    "cargoScu": 46
-  },
-  {
     "id": "drak-cutlass-black-bis2950",
     "name": "Cutlass Black",
     "roles": [
@@ -1384,7 +1368,23 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 46
   },
   {
-    "id": "drak-cutlass-blue",
+    "id": "drak-cutlass-black",
+    "name": "Cutlass Black",
+    "roles": [
+      "cargo",
+      "combat",
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Drake Interplanetary",
+    "size": "medium",
+    "status": "flight-ready",
+    "crewMin": 3,
+    "crewMax": 3,
+    "cargoScu": 46
+  },
+  {
+    "id": "drak-cutlass-blue-bis2950",
     "name": "Cutlass Blue",
     "roles": [
       "combat",
@@ -1399,7 +1399,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "drak-cutlass-blue-bis2950",
+    "id": "drak-cutlass-blue",
     "name": "Cutlass Blue",
     "roles": [
       "combat",
@@ -1639,7 +1639,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Esperia",
     "size": "medium",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 2,
     "crewMax": 2,
     "cargoScu": 0
   },
@@ -1654,7 +1654,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Esperia",
     "size": "medium",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 2,
     "crewMax": 2,
     "cargoScu": 32
   },
@@ -1974,7 +1974,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "medium",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 4,
     "crewMax": 9,
     "cargoScu": 66
   },
@@ -1988,7 +1988,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "medium",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 4,
     "crewMax": 9,
     "cargoScu": 36
   },
@@ -2003,7 +2003,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "medium",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 4,
     "crewMax": 9,
     "cargoScu": 120
   },
@@ -2018,7 +2018,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "medium",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 4,
     "crewMax": 9,
     "cargoScu": 36
   },
@@ -2062,7 +2062,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "large",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 4,
     "crewMax": 5,
     "cargoScu": 4608
   },
@@ -2091,7 +2091,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "small",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 2,
     "crewMax": 2,
     "cargoScu": 6
   },
@@ -2105,7 +2105,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "small",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 2,
     "crewMax": 5,
     "cargoScu": 0
   },
@@ -2119,7 +2119,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "small",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 2,
     "crewMax": 5,
     "cargoScu": 0
   },
@@ -2134,7 +2134,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "small",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 2,
     "crewMax": 4,
     "cargoScu": 1
   },
@@ -2148,7 +2148,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "large",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 8,
     "crewMax": 7,
     "cargoScu": 291
   },
@@ -2177,7 +2177,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "medium",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 4,
     "crewMax": 4,
     "cargoScu": 224
   },
@@ -2192,7 +2192,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "medium",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 8,
     "crewMax": 6,
     "cargoScu": 96
   },
@@ -2333,7 +2333,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Origin Jumpworks",
     "size": "large",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 5,
     "crewMax": 5,
     "cargoScu": 44
   },
@@ -2347,7 +2347,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Origin Jumpworks",
     "size": "large",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 5,
     "crewMax": 5,
     "cargoScu": 44
   },
@@ -2361,7 +2361,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Origin Jumpworks",
     "size": "large",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 5,
     "crewMax": 3,
     "cargoScu": 20
   },
@@ -2374,7 +2374,7 @@ export const shipsGenerated: ShipProfile[] = [
     "storageBehavior": "both",
     "manufacturer": "Origin Jumpworks",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 2,
     "crewMax": 2,
     "cargoScu": 0
   },
@@ -2388,7 +2388,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Origin Jumpworks",
     "size": "capital",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 8,
     "crewMax": 8,
     "cargoScu": 388
   },
@@ -2564,7 +2564,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Roberts Space Industries",
     "size": "large",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 4,
     "crewMax": 5,
     "cargoScu": 96
   },
@@ -2578,7 +2578,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Roberts Space Industries",
     "size": "large",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 4,
     "crewMax": 5,
     "cargoScu": 96
   },
@@ -2592,7 +2592,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Roberts Space Industries",
     "size": "large",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 4,
     "crewMax": 5,
     "cargoScu": 80
   },
@@ -2606,7 +2606,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Roberts Space Industries",
     "size": "large",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 4,
     "crewMax": 5,
     "cargoScu": 80
   },
@@ -2621,7 +2621,7 @@ export const shipsGenerated: ShipProfile[] = [
     "manufacturer": "Roberts Space Industries",
     "size": "large",
     "status": "flight-ready",
-    "crewMin": 1,
+    "crewMin": 4,
     "crewMax": 5,
     "cargoScu": 174
   },
@@ -2684,7 +2684,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 96
   },
   {
-    "id": "rsi-polaris",
+    "id": "rsi-polaris-collector-military",
     "name": "Polaris",
     "roles": [
       "combat",
@@ -2699,7 +2699,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 576
   },
   {
-    "id": "rsi-polaris-collector-military",
+    "id": "rsi-polaris",
     "name": "Polaris",
     "roles": [
       "combat",
@@ -2758,7 +2758,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "rsi-zeus-cl",
+    "id": "rsi-zeus-cl-collector-indust",
     "name": "Zeus Mk II CL",
     "roles": [
       "cargo",
@@ -2773,7 +2773,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 128
   },
   {
-    "id": "rsi-zeus-cl-collector-indust",
+    "id": "rsi-zeus-cl",
     "name": "Zeus Mk II CL",
     "roles": [
       "cargo",
