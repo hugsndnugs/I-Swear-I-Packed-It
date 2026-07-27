@@ -60,28 +60,28 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "aegs-eclipse-bis2950",
+    "id": "aegs-eclipse",
     "name": "Eclipse",
     "roles": [
       "combat"
     ],
-    "storageBehavior": "both",
+    "storageBehavior": "local",
     "manufacturer": "Aegis Dynamics",
-    "size": "medium",
+    "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
     "cargoScu": 0
   },
   {
-    "id": "aegs-eclipse",
+    "id": "aegs-eclipse-bis2950",
     "name": "Eclipse",
     "roles": [
       "combat"
     ],
-    "storageBehavior": "both",
+    "storageBehavior": "local",
     "manufacturer": "Aegis Dynamics",
-    "size": "medium",
+    "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
@@ -130,21 +130,6 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "aegs-hammerhead",
-    "name": "Hammerhead",
-    "roles": [
-      "combat",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Aegis Dynamics",
-    "size": "large",
-    "status": "flight-ready",
-    "crewMin": 9,
-    "crewMax": 11,
-    "cargoScu": 40
-  },
-  {
     "id": "aegs-hammerhead-gs",
     "name": "Hammerhead",
     "roles": [
@@ -158,6 +143,21 @@ export const shipsGenerated: ShipProfile[] = [
     "crewMin": 8,
     "crewMax": 8,
     "cargoScu": 64
+  },
+  {
+    "id": "aegs-hammerhead",
+    "name": "Hammerhead",
+    "roles": [
+      "combat",
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Aegis Dynamics",
+    "size": "large",
+    "status": "flight-ready",
+    "crewMin": 9,
+    "crewMax": 11,
+    "cargoScu": 40
   },
   {
     "id": "aegs-hammerhead-showdown",
@@ -190,21 +190,6 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 1326
   },
   {
-    "id": "aegs-idris-p",
-    "name": "Idris-P",
-    "roles": [
-      "combat",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Aegis Dynamics",
-    "size": "capital",
-    "status": "flight-ready",
-    "crewMin": 28,
-    "crewMax": 22,
-    "cargoScu": 1374
-  },
-  {
     "id": "aegs-idris-p-tsg",
     "name": "Idris-P",
     "roles": [
@@ -235,6 +220,21 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 1374
   },
   {
+    "id": "aegs-idris-p",
+    "name": "Idris-P",
+    "roles": [
+      "combat",
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Aegis Dynamics",
+    "size": "capital",
+    "status": "flight-ready",
+    "crewMin": 28,
+    "crewMax": 22,
+    "cargoScu": 1374
+  },
+  {
     "id": "aegs-reclaimer",
     "name": "Reclaimer",
     "roles": [
@@ -242,7 +242,7 @@ export const shipsGenerated: ShipProfile[] = [
     ],
     "storageBehavior": "both",
     "manufacturer": "Aegis Dynamics",
-    "size": "large",
+    "size": "capital",
     "status": "flight-ready",
     "crewMin": 5,
     "crewMax": 12,
@@ -271,7 +271,7 @@ export const shipsGenerated: ShipProfile[] = [
     ],
     "storageBehavior": "both",
     "manufacturer": "Aegis Dynamics",
-    "size": "medium",
+    "size": "large",
     "status": "flight-ready",
     "crewMin": 4,
     "crewMax": 13,
@@ -326,9 +326,9 @@ export const shipsGenerated: ShipProfile[] = [
     "roles": [
       "combat"
     ],
-    "storageBehavior": "both",
+    "storageBehavior": "local",
     "manufacturer": "Aegis Dynamics",
-    "size": "medium",
+    "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
@@ -460,7 +460,7 @@ export const shipsGenerated: ShipProfile[] = [
     ],
     "storageBehavior": "both",
     "manufacturer": "Anvil Aerospace",
-    "size": "medium",
+    "size": "large",
     "status": "flight-ready",
     "crewMin": 2,
     "crewMax": 2,
@@ -684,9 +684,9 @@ export const shipsGenerated: ShipProfile[] = [
     "id": "anvl-hornet-f7cr",
     "name": "F7C-R Hornet Tracker Mk I",
     "roles": [
-      "combat"
+      "cargo"
     ],
-    "storageBehavior": "local",
+    "storageBehavior": "both",
     "manufacturer": "Anvil Aerospace",
     "size": "small",
     "status": "flight-ready",
@@ -886,9 +886,9 @@ export const shipsGenerated: ShipProfile[] = [
       "combat",
       "multi-crew"
     ],
-    "storageBehavior": "local",
+    "storageBehavior": "both",
     "manufacturer": "Anvil Aerospace",
-    "size": "small",
+    "size": "large",
     "status": "flight-ready",
     "crewMin": 5,
     "crewMax": 5,
@@ -901,9 +901,9 @@ export const shipsGenerated: ShipProfile[] = [
       "combat",
       "multi-crew"
     ],
-    "storageBehavior": "local",
+    "storageBehavior": "both",
     "manufacturer": "Anvil Aerospace",
-    "size": "small",
+    "size": "large",
     "status": "flight-ready",
     "crewMin": 5,
     "crewMax": 5,
@@ -915,9 +915,9 @@ export const shipsGenerated: ShipProfile[] = [
     "roles": [
       "combat"
     ],
-    "storageBehavior": "local",
+    "storageBehavior": "both",
     "manufacturer": "Aopoa",
-    "size": "small",
+    "size": "medium",
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
@@ -929,9 +929,9 @@ export const shipsGenerated: ShipProfile[] = [
     "roles": [
       "combat"
     ],
-    "storageBehavior": "both",
+    "storageBehavior": "local",
     "manufacturer": "Aopoa",
-    "size": "medium",
+    "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
@@ -973,6 +973,7 @@ export const shipsGenerated: ShipProfile[] = [
     ],
     "storageBehavior": "both",
     "manufacturer": "Argo Astronautics",
+    "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
@@ -986,6 +987,7 @@ export const shipsGenerated: ShipProfile[] = [
     ],
     "storageBehavior": "both",
     "manufacturer": "Argo Astronautics",
+    "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
@@ -999,6 +1001,7 @@ export const shipsGenerated: ShipProfile[] = [
     ],
     "storageBehavior": "both",
     "manufacturer": "Argo Astronautics",
+    "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
@@ -1027,7 +1030,7 @@ export const shipsGenerated: ShipProfile[] = [
     ],
     "storageBehavior": "both",
     "manufacturer": "Argo Astronautics",
-    "size": "small",
+    "size": "medium",
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
@@ -1196,9 +1199,9 @@ export const shipsGenerated: ShipProfile[] = [
     "roles": [
       "combat"
     ],
-    "storageBehavior": "local",
+    "storageBehavior": "both",
     "manufacturer": "Crusader Industries",
-    "size": "small",
+    "size": "medium",
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
@@ -1226,7 +1229,7 @@ export const shipsGenerated: ShipProfile[] = [
       "cargo",
       "multi-crew"
     ],
-    "storageBehavior": "ship",
+    "storageBehavior": "both",
     "manufacturer": "Crusader Industries",
     "size": "large",
     "status": "flight-ready",
@@ -1253,7 +1256,6 @@ export const shipsGenerated: ShipProfile[] = [
     "name": "M2 Hercules Starlifter",
     "roles": [
       "cargo",
-      "combat",
       "multi-crew"
     ],
     "storageBehavior": "both",
@@ -1273,7 +1275,7 @@ export const shipsGenerated: ShipProfile[] = [
     ],
     "storageBehavior": "both",
     "manufacturer": "Crusader Industries",
-    "size": "medium",
+    "size": "large",
     "status": "flight-ready",
     "crewMin": 3,
     "crewMax": 5,
@@ -1300,7 +1302,7 @@ export const shipsGenerated: ShipProfile[] = [
       "cargo",
       "multi-crew"
     ],
-    "storageBehavior": "ship",
+    "storageBehavior": "both",
     "manufacturer": "Drake Interplanetary",
     "size": "large",
     "status": "flight-ready",
@@ -1352,22 +1354,6 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 72
   },
   {
-    "id": "drak-cutlass-black-bis2950",
-    "name": "Cutlass Black",
-    "roles": [
-      "cargo",
-      "combat",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Drake Interplanetary",
-    "size": "medium",
-    "status": "flight-ready",
-    "crewMin": 3,
-    "crewMax": 3,
-    "cargoScu": 46
-  },
-  {
     "id": "drak-cutlass-black",
     "name": "Cutlass Black",
     "roles": [
@@ -1384,9 +1370,10 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 46
   },
   {
-    "id": "drak-cutlass-blue-bis2950",
-    "name": "Cutlass Blue",
+    "id": "drak-cutlass-black-bis2950",
+    "name": "Cutlass Black",
     "roles": [
+      "cargo",
       "combat",
       "multi-crew"
     ],
@@ -1396,7 +1383,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 3,
     "crewMax": 3,
-    "cargoScu": 12
+    "cargoScu": 46
   },
   {
     "id": "drak-cutlass-blue",
@@ -1414,7 +1401,22 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "drak-cutlass-red-bis2950",
+    "id": "drak-cutlass-blue-bis2950",
+    "name": "Cutlass Blue",
+    "roles": [
+      "combat",
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Drake Interplanetary",
+    "size": "medium",
+    "status": "flight-ready",
+    "crewMin": 3,
+    "crewMax": 3,
+    "cargoScu": 12
+  },
+  {
+    "id": "drak-cutlass-red",
     "name": "Cutlass Red",
     "roles": [
       "medical",
@@ -1429,7 +1431,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "drak-cutlass-red",
+    "id": "drak-cutlass-red-bis2950",
     "name": "Cutlass Red",
     "roles": [
       "medical",
@@ -1532,7 +1534,6 @@ export const shipsGenerated: ShipProfile[] = [
     "id": "drak-herald",
     "name": "Herald",
     "roles": [
-      "cargo",
       "multi-crew"
     ],
     "storageBehavior": "both",
@@ -1550,7 +1551,7 @@ export const shipsGenerated: ShipProfile[] = [
       "cargo",
       "multi-crew"
     ],
-    "storageBehavior": "ship",
+    "storageBehavior": "both",
     "manufacturer": "Drake Interplanetary",
     "size": "large",
     "status": "flight-ready",
@@ -1579,8 +1580,9 @@ export const shipsGenerated: ShipProfile[] = [
     "roles": [
       "combat"
     ],
-    "storageBehavior": "both",
+    "storageBehavior": "local",
     "manufacturer": "Drake Interplanetary",
+    "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
@@ -1709,7 +1711,7 @@ export const shipsGenerated: ShipProfile[] = [
     ],
     "storageBehavior": "both",
     "manufacturer": "Gatac Manufacture",
-    "size": "medium",
+    "size": "large",
     "status": "flight-ready",
     "crewMin": 4,
     "crewMax": 6,
@@ -1723,7 +1725,7 @@ export const shipsGenerated: ShipProfile[] = [
     ],
     "storageBehavior": "both",
     "manufacturer": "Gatac Manufacture",
-    "size": "small",
+    "size": "medium",
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
@@ -1733,10 +1735,9 @@ export const shipsGenerated: ShipProfile[] = [
     "id": "gama-tyilui",
     "name": "Tyilui",
     "roles": [
-      "cargo",
       "multi-crew"
     ],
-    "storageBehavior": "ship",
+    "storageBehavior": "both",
     "manufacturer": "Gatac Manufacture",
     "size": "large",
     "status": "flight-ready",
@@ -1751,9 +1752,9 @@ export const shipsGenerated: ShipProfile[] = [
       "combat",
       "multi-crew"
     ],
-    "storageBehavior": "local",
+    "storageBehavior": "both",
     "manufacturer": "Grey's Market",
-    "size": "small",
+    "size": "medium",
     "status": "flight-ready",
     "crewMin": 2,
     "crewMax": 2,
@@ -1793,8 +1794,9 @@ export const shipsGenerated: ShipProfile[] = [
     "roles": [
       "combat"
     ],
-    "storageBehavior": "both",
+    "storageBehavior": "local",
     "manufacturer": "Kruger Intergalactic",
+    "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
@@ -1808,6 +1810,7 @@ export const shipsGenerated: ShipProfile[] = [
     ],
     "storageBehavior": "both",
     "manufacturer": "Kruger Intergalactic",
+    "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
@@ -1821,6 +1824,7 @@ export const shipsGenerated: ShipProfile[] = [
     ],
     "storageBehavior": "both",
     "manufacturer": "Kruger Intergalactic",
+    "size": "small",
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
@@ -1927,7 +1931,7 @@ export const shipsGenerated: ShipProfile[] = [
     "roles": [
       "combat"
     ],
-    "storageBehavior": "both",
+    "storageBehavior": "local",
     "manufacturer": "Mirai",
     "size": "small",
     "status": "flight-ready",
@@ -2045,7 +2049,7 @@ export const shipsGenerated: ShipProfile[] = [
     ],
     "storageBehavior": "both",
     "manufacturer": "Musashi Industrial and Starflight Concern",
-    "size": "medium",
+    "size": "large",
     "status": "flight-ready",
     "crewMin": 2,
     "crewMax": 2,
@@ -2058,7 +2062,7 @@ export const shipsGenerated: ShipProfile[] = [
       "cargo",
       "multi-crew"
     ],
-    "storageBehavior": "ship",
+    "storageBehavior": "both",
     "manufacturer": "Musashi Industrial and Starflight Concern",
     "size": "large",
     "status": "flight-ready",
@@ -2089,7 +2093,7 @@ export const shipsGenerated: ShipProfile[] = [
     ],
     "storageBehavior": "both",
     "manufacturer": "Musashi Industrial and Starflight Concern",
-    "size": "small",
+    "size": "medium",
     "status": "flight-ready",
     "crewMin": 2,
     "crewMax": 2,
@@ -2103,7 +2107,7 @@ export const shipsGenerated: ShipProfile[] = [
     ],
     "storageBehavior": "both",
     "manufacturer": "Musashi Industrial and Starflight Concern",
-    "size": "small",
+    "size": "medium",
     "status": "flight-ready",
     "crewMin": 2,
     "crewMax": 5,
@@ -2117,7 +2121,7 @@ export const shipsGenerated: ShipProfile[] = [
     ],
     "storageBehavior": "both",
     "manufacturer": "Musashi Industrial and Starflight Concern",
-    "size": "small",
+    "size": "medium",
     "status": "flight-ready",
     "crewMin": 2,
     "crewMax": 5,
@@ -2130,9 +2134,9 @@ export const shipsGenerated: ShipProfile[] = [
       "combat",
       "multi-crew"
     ],
-    "storageBehavior": "local",
+    "storageBehavior": "both",
     "manufacturer": "Musashi Industrial and Starflight Concern",
-    "size": "small",
+    "size": "medium",
     "status": "flight-ready",
     "crewMin": 2,
     "crewMax": 4,
@@ -2190,7 +2194,7 @@ export const shipsGenerated: ShipProfile[] = [
     ],
     "storageBehavior": "both",
     "manufacturer": "Musashi Industrial and Starflight Concern",
-    "size": "medium",
+    "size": "large",
     "status": "flight-ready",
     "crewMin": 8,
     "crewMax": 6,
@@ -2230,7 +2234,7 @@ export const shipsGenerated: ShipProfile[] = [
     "roles": [
       "combat"
     ],
-    "storageBehavior": "both",
+    "storageBehavior": "local",
     "manufacturer": "Origin Jumpworks",
     "size": "small",
     "status": "flight-ready",
@@ -2373,6 +2377,7 @@ export const shipsGenerated: ShipProfile[] = [
     ],
     "storageBehavior": "both",
     "manufacturer": "Origin Jumpworks",
+    "size": "small",
     "status": "flight-ready",
     "crewMin": 2,
     "crewMax": 2,
@@ -2482,7 +2487,6 @@ export const shipsGenerated: ShipProfile[] = [
     "id": "rsi-aurora-mk2",
     "name": "Aurora Mk II",
     "roles": [
-      "cargo",
       "combat"
     ],
     "storageBehavior": "both",
@@ -2497,10 +2501,9 @@ export const shipsGenerated: ShipProfile[] = [
     "id": "rsi-aurora-gs-ln",
     "name": "Aurora Mk I LN",
     "roles": [
-      "cargo",
       "combat"
     ],
-    "storageBehavior": "both",
+    "storageBehavior": "local",
     "manufacturer": "Roberts Space Industries",
     "size": "small",
     "status": "flight-ready",
@@ -2526,10 +2529,9 @@ export const shipsGenerated: ShipProfile[] = [
     "id": "rsi-aurora-gs-mr",
     "name": "Aurora Mk I MR",
     "roles": [
-      "cargo",
       "combat"
     ],
-    "storageBehavior": "both",
+    "storageBehavior": "local",
     "manufacturer": "Roberts Space Industries",
     "size": "small",
     "status": "flight-ready",
@@ -2541,10 +2543,9 @@ export const shipsGenerated: ShipProfile[] = [
     "id": "rsi-aurora-gs-se",
     "name": "Aurora Mk I SE",
     "roles": [
-      "cargo",
       "combat"
     ],
-    "storageBehavior": "both",
+    "storageBehavior": "local",
     "manufacturer": "Roberts Space Industries",
     "size": "small",
     "status": "flight-ready",
@@ -2617,7 +2618,7 @@ export const shipsGenerated: ShipProfile[] = [
       "cargo",
       "multi-crew"
     ],
-    "storageBehavior": "ship",
+    "storageBehavior": "both",
     "manufacturer": "Roberts Space Industries",
     "size": "large",
     "status": "flight-ready",
@@ -2634,7 +2635,7 @@ export const shipsGenerated: ShipProfile[] = [
     ],
     "storageBehavior": "both",
     "manufacturer": "Roberts Space Industries",
-    "size": "medium",
+    "size": "large",
     "status": "flight-ready",
     "crewMin": 2,
     "crewMax": 3,
@@ -2807,9 +2808,9 @@ export const shipsGenerated: ShipProfile[] = [
     "roles": [
       "combat"
     ],
-    "storageBehavior": "local",
+    "storageBehavior": "both",
     "manufacturer": "Esperia",
-    "size": "small",
+    "size": "medium",
     "status": "flight-ready",
     "crewMin": 1,
     "crewMax": 1,
