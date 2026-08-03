@@ -60,7 +60,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "aegs-eclipse",
+    "id": "aegs-eclipse-bis2950",
     "name": "Eclipse",
     "roles": [
       "combat"
@@ -74,7 +74,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "aegs-eclipse-bis2950",
+    "id": "aegs-eclipse",
     "name": "Eclipse",
     "roles": [
       "combat"
@@ -509,7 +509,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 4
   },
   {
-    "id": "anvl-carrack-bis2950",
+    "id": "anvl-carrack",
     "name": "Carrack",
     "roles": [
       "multi-crew"
@@ -523,7 +523,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 456
   },
   {
-    "id": "anvl-carrack",
+    "id": "anvl-carrack-bis2950",
     "name": "Carrack",
     "roles": [
       "multi-crew"
@@ -751,7 +751,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "anvl-lightning-f8c",
+    "id": "anvl-lightning-f8c-plat",
     "name": "F8C Lightning",
     "roles": [
       "combat"
@@ -765,7 +765,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "anvl-lightning-f8c-plat",
+    "id": "anvl-lightning-f8c",
     "name": "F8C Lightning",
     "roles": [
       "combat"
@@ -880,7 +880,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "anvl-valkyrie",
+    "id": "anvl-valkyrie-bis2950",
     "name": "Valkyrie",
     "roles": [
       "combat",
@@ -895,7 +895,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 90
   },
   {
-    "id": "anvl-valkyrie-bis2950",
+    "id": "anvl-valkyrie",
     "name": "Valkyrie",
     "roles": [
       "combat",
@@ -1354,7 +1354,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 72
   },
   {
-    "id": "drak-cutlass-black",
+    "id": "drak-cutlass-black-bis2950",
     "name": "Cutlass Black",
     "roles": [
       "cargo",
@@ -1370,7 +1370,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 46
   },
   {
-    "id": "drak-cutlass-black-bis2950",
+    "id": "drak-cutlass-black",
     "name": "Cutlass Black",
     "roles": [
       "cargo",
