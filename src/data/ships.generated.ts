@@ -205,21 +205,6 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 1374
   },
   {
-    "id": "aegs-idris-p-tsg",
-    "name": "Idris-P",
-    "roles": [
-      "combat",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Aegis Dynamics",
-    "size": "capital",
-    "status": "flight-ready",
-    "crewMin": 28,
-    "crewMax": 21,
-    "cargoScu": 1374
-  },
-  {
     "id": "aegs-idris-p",
     "name": "Idris-P",
     "roles": [
@@ -232,6 +217,21 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 28,
     "crewMax": 22,
+    "cargoScu": 1374
+  },
+  {
+    "id": "aegs-idris-p-tsg",
+    "name": "Idris-P",
+    "roles": [
+      "combat",
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Aegis Dynamics",
+    "size": "capital",
+    "status": "flight-ready",
+    "crewMin": 28,
+    "crewMax": 21,
     "cargoScu": 1374
   },
   {
@@ -1386,7 +1386,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 46
   },
   {
-    "id": "drak-cutlass-blue-bis2950",
+    "id": "drak-cutlass-blue",
     "name": "Cutlass Blue",
     "roles": [
       "combat",
@@ -1401,7 +1401,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "drak-cutlass-blue",
+    "id": "drak-cutlass-blue-bis2950",
     "name": "Cutlass Blue",
     "roles": [
       "combat",
@@ -2685,7 +2685,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 96
   },
   {
-    "id": "rsi-polaris-collector-military",
+    "id": "rsi-polaris",
     "name": "Polaris",
     "roles": [
       "combat",
@@ -2700,7 +2700,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 576
   },
   {
-    "id": "rsi-polaris",
+    "id": "rsi-polaris-collector-military",
     "name": "Polaris",
     "roles": [
       "combat",
@@ -2759,7 +2759,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "rsi-zeus-cl",
+    "id": "rsi-zeus-cl-collector-indust",
     "name": "Zeus Mk II CL",
     "roles": [
       "cargo",
@@ -2774,7 +2774,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 128
   },
   {
-    "id": "rsi-zeus-cl-collector-indust",
+    "id": "rsi-zeus-cl",
     "name": "Zeus Mk II CL",
     "roles": [
       "cargo",
