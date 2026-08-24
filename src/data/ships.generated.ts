@@ -509,7 +509,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 4
   },
   {
-    "id": "anvl-carrack-bis2950",
+    "id": "anvl-carrack",
     "name": "Carrack",
     "roles": [
       "multi-crew"
@@ -523,7 +523,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 456
   },
   {
-    "id": "anvl-carrack",
+    "id": "anvl-carrack-bis2950",
     "name": "Carrack",
     "roles": [
       "multi-crew"
@@ -1354,22 +1354,6 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 72
   },
   {
-    "id": "drak-cutlass-black",
-    "name": "Cutlass Black",
-    "roles": [
-      "cargo",
-      "combat",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Drake Interplanetary",
-    "size": "medium",
-    "status": "flight-ready",
-    "crewMin": 3,
-    "crewMax": 3,
-    "cargoScu": 46
-  },
-  {
     "id": "drak-cutlass-black-bis2950",
     "name": "Cutlass Black",
     "roles": [
@@ -1386,9 +1370,10 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 46
   },
   {
-    "id": "drak-cutlass-blue",
-    "name": "Cutlass Blue",
+    "id": "drak-cutlass-black",
+    "name": "Cutlass Black",
     "roles": [
+      "cargo",
       "combat",
       "multi-crew"
     ],
@@ -1398,7 +1383,7 @@ export const shipsGenerated: ShipProfile[] = [
     "status": "flight-ready",
     "crewMin": 3,
     "crewMax": 3,
-    "cargoScu": 12
+    "cargoScu": 46
   },
   {
     "id": "drak-cutlass-blue-bis2950",
@@ -1416,7 +1401,22 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "drak-cutlass-red-bis2950",
+    "id": "drak-cutlass-blue",
+    "name": "Cutlass Blue",
+    "roles": [
+      "combat",
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Drake Interplanetary",
+    "size": "medium",
+    "status": "flight-ready",
+    "crewMin": 3,
+    "crewMax": 3,
+    "cargoScu": 12
+  },
+  {
+    "id": "drak-cutlass-red",
     "name": "Cutlass Red",
     "roles": [
       "medical",
@@ -1431,7 +1431,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 12
   },
   {
-    "id": "drak-cutlass-red",
+    "id": "drak-cutlass-red-bis2950",
     "name": "Cutlass Red",
     "roles": [
       "medical",
@@ -2685,7 +2685,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 96
   },
   {
-    "id": "rsi-polaris",
+    "id": "rsi-polaris-collector-military",
     "name": "Polaris",
     "roles": [
       "combat",
@@ -2700,7 +2700,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 576
   },
   {
-    "id": "rsi-polaris-collector-military",
+    "id": "rsi-polaris",
     "name": "Polaris",
     "roles": [
       "combat",
@@ -2759,7 +2759,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "rsi-zeus-cl-collector-indust",
+    "id": "rsi-zeus-cl",
     "name": "Zeus Mk II CL",
     "roles": [
       "cargo",
@@ -2774,7 +2774,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 128
   },
   {
-    "id": "rsi-zeus-cl",
+    "id": "rsi-zeus-cl-collector-indust",
     "name": "Zeus Mk II CL",
     "roles": [
       "cargo",
