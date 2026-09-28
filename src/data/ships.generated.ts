@@ -60,7 +60,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "aegs-eclipse-bis2950",
+    "id": "aegs-eclipse",
     "name": "Eclipse",
     "roles": [
       "combat"
@@ -74,7 +74,7 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "aegs-eclipse",
+    "id": "aegs-eclipse-bis2950",
     "name": "Eclipse",
     "roles": [
       "combat"
@@ -130,21 +130,6 @@ export const shipsGenerated: ShipProfile[] = [
     "cargoScu": 0
   },
   {
-    "id": "aegs-hammerhead",
-    "name": "Hammerhead",
-    "roles": [
-      "combat",
-      "multi-crew"
-    ],
-    "storageBehavior": "both",
-    "manufacturer": "Aegis Dynamics",
-    "size": "large",
-    "status": "flight-ready",
-    "crewMin": 9,
-    "crewMax": 11,
-    "cargoScu": 40
-  },
-  {
     "id": "aegs-hammerhead-gs",
     "name": "Hammerhead",
     "roles": [
@@ -158,6 +143,21 @@ export const shipsGenerated: ShipProfile[] = [
     "crewMin": 8,
     "crewMax": 8,
     "cargoScu": 64
+  },
+  {
+    "id": "aegs-hammerhead",
+    "name": "Hammerhead",
+    "roles": [
+      "combat",
+      "multi-crew"
+    ],
+    "storageBehavior": "both",
+    "manufacturer": "Aegis Dynamics",
+    "size": "large",
+    "status": "flight-ready",
+    "crewMin": 9,
+    "crewMax": 11,
+    "cargoScu": 40
   },
   {
     "id": "aegs-hammerhead-showdown",
@@ -351,6 +351,20 @@ export const shipsGenerated: ShipProfile[] = [
   {
     "id": "aegs-sabre-raven",
     "name": "Sabre Raven",
+    "roles": [
+      "combat"
+    ],
+    "storageBehavior": "local",
+    "manufacturer": "Aegis Dynamics",
+    "size": "small",
+    "status": "flight-ready",
+    "crewMin": 1,
+    "crewMax": 1,
+    "cargoScu": 0
+  },
+  {
+    "id": "aegs-sabre-raven-ex",
+    "name": "Sabre Raven EX",
     "roles": [
       "combat"
     ],
@@ -623,21 +637,6 @@ export const shipsGenerated: ShipProfile[] = [
   {
     "id": "anvl-hornet-f7cm-heartseeker",
     "name": "F7C-M Hornet Heartseeker Mk I",
-    "roles": [
-      "combat",
-      "multi-crew"
-    ],
-    "storageBehavior": "local",
-    "manufacturer": "Anvil Aerospace",
-    "size": "small",
-    "status": "flight-ready",
-    "crewMin": 2,
-    "crewMax": 2,
-    "cargoScu": 0
-  },
-  {
-    "id": "anvl-hornet-f7cm-mk2-heartseeker",
-    "name": "F7C-M Hornet Heartseeker Mk II",
     "roles": [
       "combat",
       "multi-crew"
